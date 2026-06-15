@@ -199,7 +199,7 @@ function fail(m){ clearInterval(poll); $('#progress').style.display='none'; $('#
 async function check(id){
   let j; try { j = await (await fetch('/api/job/'+id)).json(); } catch(e){ return; }
   if(j.status==='error'){ return fail(j.message || t('js_processing_failed')); }
-  setProg(j.progress||5, j.message||t('js_working'));
+  setProg(j.progress||5, j.msg_key ? t(j.msg_key) : (j.message||t('js_working')));
   if(j.status==='done'){
     clearInterval(poll);
     $('#progress').style.display='none';

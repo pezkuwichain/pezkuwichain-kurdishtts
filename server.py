@@ -79,10 +79,10 @@ def _worker():
             _q.task_done()
             continue
         try:
-            _set(job_id, status="processing", progress=2, message="Starting…")
+            _set(job_id, status="processing", progress=2, message="Starting…", msg_key="p_starting")
 
-            def progress(msg: str, pct: int, job_id: str = job_id):
-                _set(job_id, message=msg, progress=pct)
+            def progress(msg: str, pct: int, key: str = "", job_id: str = job_id):
+                _set(job_id, message=msg, progress=pct, msg_key=key)
 
             result = dub_pipeline.dub(
                 job["input"], job["dialect"], str(JOBS_DIR / job_id), progress
@@ -92,6 +92,7 @@ def _worker():
                 status="done",
                 progress=100,
                 message="Done.",
+                msg_key="p_done",
                 output=result["output"],
                 language=result["language"],
                 segments=result["segments"],
@@ -131,11 +132,11 @@ def _video_worker():
             _vq.task_done()
             continue
         try:
-            _vset(jid, status="processing", progress=8, message="Sending to Veo…")
+            _vset(jid, status="processing", progress=8, message="Sending to Veo…", msg_key="p_sending_veo")
             op = gemini_video.start_video(
                 job["image_b64"], job["mime"], job["prompt"], job["aspect"]
             )
-            _vset(jid, status="processing", progress=20, message="Generating video…")
+            _vset(jid, status="processing", progress=20, message="Generating video…", msg_key="p_generating")
             uri, waited = None, 0
             while True:
                 time.sleep(10)
@@ -147,13 +148,13 @@ def _video_worker():
                     uri = res["uri"]
                     break
                 pct = min(85, 20 + waited // 4)
-                _vset(jid, progress=pct, message="Generating video…")
+                _vset(jid, progress=pct, message="Generating video…", msg_key="p_generating")
                 if waited > 600:  # 10 min safety cap
                     raise RuntimeError("Generation timed out.")
-            _vset(jid, progress=90, message="Downloading…")
+            _vset(jid, progress=90, message="Downloading…", msg_key="p_downloading")
             out = JOBS_DIR / f"vid_{jid}.mp4"
             gemini_video.download_video(uri, str(out))
-            _vset(jid, status="done", progress=100, message="Done.", output=str(out))
+            _vset(jid, status="done", progress=100, message="Done.", msg_key="p_done", output=str(out))
         except Exception as e:
             _vset(jid, status="error", message=str(e)[:300])
         finally:
@@ -247,7 +248,7 @@ async def create_video(
 
     jid = uuid.uuid4().hex[:12]
     _vset(
-        jid, status="queued", progress=0, message="Queued…",
+        jid, status="queued", progress=0, message="Queued…", msg_key="p_queued",
         prompt=prompt[:1000], aspect=aspect, image_b64=image_b64, mime=mime,
         created=time.time(),
     )
@@ -264,6 +265,7 @@ async def create_status(jid: str):
         "status": j.get("status"),
         "progress": j.get("progress", 0),
         "message": j.get("message", ""),
+        "msg_key": j.get("msg_key", ""),
     })
 
 
@@ -331,6 +333,7 @@ async def job_status(job_id: str):
         "status": j.get("status"),
         "progress": j.get("progress", 0),
         "message": j.get("message", ""),
+        "msg_key": j.get("msg_key", ""),
         "language": j.get("language"),
         "is_video": j.get("is_video"),
         "segments": j.get("segments") if j.get("status") == "done" else None,

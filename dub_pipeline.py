@@ -45,10 +45,10 @@ WHISPER_TO_NLLB = {
 
 MAX_ATEMPO = 1.8   # cap clip speed-up so speech stays intelligible
 
-ProgressCb = Callable[[str, int], None]   # (message, percent 0-100)
+ProgressCb = Callable[..., None]   # (message, percent 0-100, msg_key)
 
 
-def _noop(_msg: str, _pct: int) -> None:
+def _noop(_msg: str, _pct: int, _key: str = "") -> None:
     pass
 
 
@@ -232,19 +232,19 @@ def dub(
     is_video = _has_video(input_path)
     total_dur = _probe_duration(input_path)
 
-    progress("Extracting audio…", 5)
+    progress("Extracting audio…", 5, "p_extracting")
     wav = str(work / "source.wav")
     extract_audio(input_path, wav)
 
-    progress("Transcribing (speech-to-text)…", 20)
+    progress("Transcribing (speech-to-text)…", 20, "p_transcribing")
     segs, src_lang = transcribe(wav)
     if not segs:
         raise RuntimeError("No speech detected in the file.")
 
-    progress(f"Translating to Kurdish ({dialect})…", 45)
+    progress(f"Translating to Kurdish ({dialect})…", 45, "p_translating")
     kurdish = translate_segments(segs, src_lang, dialect)
 
-    progress("Synthesizing Kurdish voice…", 65)
+    progress("Synthesizing Kurdish voice…", 65, "p_synthesizing")
     clips: List[str] = []
     for i, txt in enumerate(kurdish):
         clip = str(work / f"clip_{i:04d}.wav")
@@ -254,11 +254,11 @@ def dub(
         except Exception:
             clips.append("")
 
-    progress("Aligning & mixing audio…", 85)
+    progress("Aligning & mixing audio…", 85, "p_aligning")
     dub_wav = str(work / "dub.wav")
     build_dub_track(segs, clips, total_dur, dub_wav)
 
-    progress("Rendering final video…", 92)
+    progress("Rendering final video…", 92, "p_rendering")
     ext = ".mp4" if is_video else ".m4a"
     out_path = str(work / f"dubbed{ext}")
     if is_video:
@@ -266,7 +266,7 @@ def dub(
     else:
         _run(["ffmpeg", "-y", "-i", dub_wav, "-c:a", "aac", out_path])
 
-    progress("Done.", 100)
+    progress("Done.", 100, "p_done")
     return {
         "output": out_path,
         "language": src_lang,
