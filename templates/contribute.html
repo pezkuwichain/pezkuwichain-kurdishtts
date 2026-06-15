@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Contribute — KurdîTV</title>
+<meta name="description" content="Help build Kurdish AI: donate your voice for TTS training or support development with HEZ." />
+<style>
+  :root{--kesk:#009639;--kesk7:#017A2F;--pos:#2FC864;--fire:#FF7A00;--sor:#E2231A;--zer:#FDB813;
+        --screen:#08090E;--card:#14161F;--elev:#1C1F2E;--peri:#999EC7;--txt:#E6EEF5;--txt2:#9AA3B2;--txt3:#5b6472;--line:#2A2F45;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:radial-gradient(1100px 520px at 50% -8%,#0d1b14 0%,var(--screen) 55%);color:var(--txt);
+        font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Inter,system-ui,sans-serif;min-height:100vh}
+  .wrap{max-width:760px;margin:0 auto;padding:40px 20px 80px}
+  header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:34px}
+  .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
+  .flame{width:40px;height:40px}
+  header h1{font-size:20px;font-weight:800;letter-spacing:-.3px}
+  header .by{color:var(--txt3);font-size:12px}
+  nav{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+  nav a{color:var(--txt2);font-size:13px;font-weight:600;text-decoration:none;padding:8px 12px;border-radius:10px;transition:.15s;white-space:nowrap}
+  nav a:hover{color:var(--txt);background:#0f111a}
+  nav a.active{color:var(--txt)}
+  nav a.cta{color:#fff;background:var(--kesk)}
+  nav a.cta:hover{background:var(--kesk7);color:#fff}
+  .hero{text-align:center;margin-bottom:30px}
+  .hero h2{font-size:30px;font-weight:800;letter-spacing:-.6px;margin-bottom:10px;line-height:1.15}
+  .hero h2 span{color:var(--pos)}
+  .hero p{color:var(--txt2);font-size:15px;max-width:540px;margin:0 auto;line-height:1.55}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px;margin-bottom:18px}
+  .card h3{font-size:18px;font-weight:800;margin-bottom:6px;display:flex;align-items:center;gap:9px}
+  .card .sub{color:var(--txt2);font-size:14px;line-height:1.5;margin-bottom:18px}
+  .badge{font-size:11px;font-weight:700;border-radius:999px;padding:3px 9px}
+  .badge.voice{color:var(--pos);background:rgba(47,200,100,.12);border:1px solid rgba(47,200,100,.3)}
+  .badge.hez{color:var(--zer);background:rgba(253,184,19,.12);border:1px solid rgba(253,184,19,.3)}
+  .label{font-size:13px;font-weight:700;color:var(--txt2);margin-bottom:8px}
+  .read{background:#0f111a;border:1px solid var(--line);border-left:3px solid var(--kesk);border-radius:12px;padding:18px 18px;margin-bottom:14px}
+  .read .txt{font-size:19px;line-height:1.5;font-weight:600}
+  .read .n{color:var(--txt3);font-size:12px;margin-top:8px}
+  .mini{background:transparent;border:1px solid var(--line);color:var(--txt2);font-size:12px;font-weight:600;
+        border-radius:9px;padding:7px 12px;cursor:pointer;transition:.15s}
+  .mini:hover{border-color:var(--kesk);color:var(--txt)}
+  input[type=text]{width:100%;background:#0f111a;border:1px solid var(--line);border-radius:11px;color:var(--txt);
+        padding:12px 14px;font-size:14px;margin-bottom:14px;font-family:inherit}
+  input[type=text]:focus{outline:none;border-color:var(--kesk)}
+  .rec{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+  .rbtn{display:inline-flex;align-items:center;gap:8px;background:#0f111a;border:1px solid var(--line);color:var(--txt);
+        font-weight:700;font-size:14px;border-radius:12px;padding:12px 18px;cursor:pointer;transition:.15s}
+  .rbtn:hover{border-color:var(--kesk)}
+  .rbtn.live{border-color:var(--sor);color:#ffb4ad;background:rgba(226,35,26,.08)}
+  .dot{width:10px;height:10px;border-radius:50%;background:var(--sor);animation:pulse 1s infinite}
+  @keyframes pulse{50%{opacity:.3}}
+  .or{color:var(--txt3);font-size:13px}
+  audio{width:100%;border-radius:12px;margin:6px 0 14px;background:#000}
+  .btn{width:100%;background:var(--kesk);color:#fff;font-weight:700;font-size:15px;border:none;border-radius:13px;
+        padding:15px;cursor:pointer;transition:.15s;box-shadow:0 8px 28px rgba(0,150,57,.3)}
+  .btn:hover:not(:disabled){background:var(--kesk7);transform:translateY(-1px)}
+  .btn:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
+  .ok{display:none;color:#bff2d0;background:rgba(47,200,100,.1);border:1px solid rgba(47,200,100,.35);border-radius:12px;padding:14px;font-size:14px;margin-top:14px}
+  .err{display:none;color:#ffb4ad;background:rgba(226,35,26,.1);border:1px solid rgba(226,35,26,.35);border-radius:12px;padding:14px;font-size:14px;margin-top:14px}
+  .addr{display:flex;align-items:center;gap:10px;background:#0f111a;border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:6px}
+  .addr code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;word-break:break-all;color:var(--zer);flex:1;line-height:1.5}
+  .copy{flex-shrink:0;background:var(--zer);color:#1a1400;border:none;font-weight:800;font-size:13px;border-radius:9px;padding:9px 14px;cursor:pointer;transition:.15s}
+  .copy:hover{filter:brightness(1.08)}
+  .net{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+  .net span{font-size:12px;color:var(--txt3);background:#0f111a;border:1px solid var(--line);border-radius:8px;padding:6px 10px}
+  .wallet{display:flex;align-items:center;gap:14px;margin-top:18px;background:#0f111a;border:1px solid var(--line);
+        border-radius:14px;padding:14px 16px;text-decoration:none;transition:.15s}
+  .wallet:hover{border-color:var(--zer);background:rgba(253,184,19,.05)}
+  .wallet svg{flex-shrink:0}
+  .wallet span{display:flex;flex-direction:column}
+  .wallet b{color:var(--txt);font-size:15px}
+  .wallet small{color:var(--txt3);font-size:12px;margin-top:2px}
+  .foot{text-align:center;color:var(--txt3);font-size:12px;margin-top:30px;line-height:1.6}
+  .foot a{color:var(--txt2);text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="brand" href="/">
+      <svg class="flame" viewBox="0 0 512 512"><defs><linearGradient id="f" x1="0%" y1="100%" x2="0%" y2="0%">
+        <stop offset="0%" stop-color="#1B5E20"/><stop offset="32%" stop-color="#FF6F00"/><stop offset="62%" stop-color="#FFD600"/><stop offset="100%" stop-color="#D32F2F"/></linearGradient></defs>
+        <path d="M256 40C190 120 150 175 150 250c0 75 47 132 106 132s106-57 106-132c0-75-40-130-106-210z" fill="url(#f)"/>
+        <ellipse cx="256" cy="312" rx="46" ry="74" fill="#FFF8E1" opacity=".9"/></svg>
+      <div><h1>KurdîTV</h1><div class="by" data-i18n="brand_sub">Kurdish Auto-Dubbing</div></div>
+    </a>
+    <nav>
+      <a href="/create" data-i18n="nav_create">Create videos</a>
+      <a href="/contribute" class="active" data-i18n="nav_contribute">Contribute</a>
+      <a class="cta" href="{{ apps_url }}" target="_blank" rel="noopener"><span data-i18n="nav_apps">Go to apps</span> ↗</a>
+      <div id="langsel"></div>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <h2><span data-i18n="c_hero_1">Build Kurdish AI</span> <span data-i18n="c_hero_hl">together</span></h2>
+    <p data-i18n="c_hero_p">This is a non-profit, community project for the Kurdish language. Lend your voice to train the
+       text-to-speech engine, or support development with HEZ.</p>
+  </div>
+
+  <!-- ── Voice donation ─────────────────────────────────────────── -->
+  <div class="card">
+    <h3><span class="badge voice" data-i18n="c_voice_badge">VOICE</span> <span data-i18n="c_voice_title">Donate your voice</span></h3>
+    <div class="sub" data-i18n="c_voice_sub">Read the Kurdish sentence below out loud and record (or upload) it. Your recordings help us
+       build better, more natural Kurdish voices. By submitting you allow us to use the recording to train and
+       improve the TTS models.</div>
+
+    <div class="label" data-i18n="c_read_label">Read this aloud</div>
+    <div class="read">
+      <div class="txt" id="sentence">{{ sentences[0] }}</div>
+      <div class="n" id="snum"></div>
+    </div>
+    <button class="mini" id="next" data-i18n="c_another">↻ Another sentence</button>
+
+    <div style="height:18px"></div>
+    <div class="label"><span data-i18n="c_name_label">Your name or alias</span> <span style="color:var(--txt3);font-weight:400" data-i18n="c_optional">(optional)</span></div>
+    <input type="text" id="name" data-i18n-ph="c_name_ph" placeholder="e.g. Azad from Amed" maxlength="60" />
+
+    <div class="label" data-i18n="c_rec_label">Record or upload</div>
+    <div class="rec">
+      <button class="rbtn" id="rec"><span id="recic">●</span><span id="rectxt" data-i18n="c_record">Record</span></button>
+      <span class="or" data-i18n="c_or">or</span>
+      <button class="rbtn" id="pick" data-i18n="c_upload">⬆ Upload audio</button>
+      <input type="file" id="fileIn" accept="audio/*" style="display:none" />
+    </div>
+    <audio id="preview" controls style="display:none"></audio>
+
+    <button class="btn" id="send" disabled data-i18n="c_submit">Submit recording</button>
+    <div class="ok" id="vok" data-i18n="c_ok">🙏 Spas! Your voice was received. Record another sentence to help even more.</div>
+    <div class="err" id="verr"></div>
+  </div>
+
+  <!-- ── HEZ donation ───────────────────────────────────────────── -->
+  <div class="card">
+    <h3><span class="badge hez">HEZ</span> <span data-i18n="c_hez_title">Support development</span></h3>
+    <div class="sub" data-i18n="c_hez_sub">Servers, GPUs and model training cost money. Send HEZ to help keep KurdîTV free and growing.
+       This address belongs to the project development fund.</div>
+
+    <div class="label" data-i18n="c_hez_label">HEZ / Pezkuwichain address</div>
+    <div class="addr">
+      <code id="hez">{{ hez }}</code>
+      <button class="copy" id="chez" data-i18n="c_copy">Copy</button>
+    </div>
+    <div class="net">
+      <span data-i18n="c_net1">Network: Pezkuwichain (SS58)</span>
+      <span data-i18n="c_net2">Token: HEZ</span>
+      <span data-i18n="c_net3">Every contribution funds free Kurdish AI</span>
+    </div>
+
+    <a class="wallet" href="https://play.google.com/store/apps/details?id=io.pezkuwichain.wallet" target="_blank" rel="noopener">
+      <svg viewBox="0 0 512 512" width="26" height="26" aria-hidden="true">
+        <path fill="#34A853" d="M67 64c-7 4-11 12-11 22v340c0 10 4 18 11 22l199-192z"/>
+        <path fill="#FBBC04" d="M337 198l-71-41L74 472c8 4 18 3 28-3z"/>
+        <path fill="#EA4335" d="M337 198L102 65c-10-6-20-7-28-3l192 195z"/>
+        <path fill="#4285F4" d="M337 198l66 38c18 11 18 31 0 42l-66 38-71-79z"/>
+      </svg>
+      <span><b data-i18n="c_wallet">Download Pezkuwi Wallet</b><small data-i18n="c_wallet_sub">Hold HEZ on your phone — on Google Play</small></span>
+    </a>
+  </div>
+
+  <div class="foot">
+    KurdîTV · pezkuwichain · <a href="/">← Back to dubbing</a>
+  </div>
+</div>
+
+<script src="/static/i18n.js"></script>
+<script>
+const SENTENCES = {{ sentences|tojson }};
+let idx = 0, blob = null, mediaRec = null, chunks = [], recording = false;
+
+const $ = id => document.getElementById(id);
+function renderSnum(){
+  $('snum').textContent = t('c_snum').replace('{n}', idx+1).replace('{total}', SENTENCES.length);
+}
+document.addEventListener('langchange', renderSnum);
+renderSnum();
+$('next').onclick = () => {
+  idx = (idx + 1) % SENTENCES.length;
+  $('sentence').textContent = SENTENCES[idx];
+  renderSnum();
+};
+
+function setBlob(b, mime){
+  blob = b;
+  const url = URL.createObjectURL(b);
+  $('preview').src = url; $('preview').style.display = 'block';
+  $('send').disabled = false;
+  blob._mime = mime;
+}
+
+// Upload path
+$('pick').onclick = () => $('fileIn').click();
+$('fileIn').onchange = e => { const f = e.target.files[0]; if(f) setBlob(f, f.type || 'audio/mpeg'); };
+
+// Record path
+$('rec').onclick = async () => {
+  if(recording){ mediaRec.stop(); return; }
+  try{
+    const stream = await navigator.mediaDevices.getUserMedia({audio:true});
+    mediaRec = new MediaRecorder(stream);
+    chunks = [];
+    mediaRec.ondataavailable = e => chunks.push(e.data);
+    mediaRec.onstop = () => {
+      stream.getTracks().forEach(t=>t.stop());
+      setBlob(new Blob(chunks, {type:'audio/webm'}), 'audio/webm');
+      $('rec').classList.remove('live'); $('rectxt').textContent='Record'; $('recic').textContent='●'; recording=false;
+    };
+    mediaRec.start();
+    recording = true;
+    $('rec').classList.add('live'); $('rectxt').textContent='Stop'; $('recic').innerHTML='<span class="dot"></span>';
+  }catch(err){ $('verr').style.display='block'; $('verr').textContent=t('c_mic_denied'); }
+};
+
+// Submit
+$('send').onclick = async () => {
+  if(!blob) return;
+  $('send').disabled = true; $('send').textContent = t('c_uploading');
+  $('vok').style.display='none'; $('verr').style.display='none';
+  const ext = (blob._mime||'').includes('webm') ? 'webm' : (blob._mime||'').includes('wav') ? 'wav'
+            : (blob._mime||'').includes('ogg') ? 'ogg' : (blob._mime||'').includes('mp4')||(blob._mime||'').includes('m4a') ? 'm4a' : 'mp3';
+  const fd = new FormData();
+  fd.append('file', blob, 'voice.'+ext);
+  fd.append('sentence', SENTENCES[idx]);
+  fd.append('name', $('name').value);
+  try{
+    const r = await fetch('/api/contribute/voice', {method:'POST', body:fd});
+    if(!r.ok){ const j = await r.json().catch(()=>({})); throw new Error(j.detail||t('c_upload_failed')); }
+    $('vok').style.display='block';
+    blob=null; $('preview').style.display='none'; $('preview').src='';
+    $('send').textContent=t('c_submit');
+  }catch(e){
+    $('verr').style.display='block'; $('verr').textContent = e.message;
+    $('send').disabled=false; $('send').textContent=t('c_submit');
+  }
+};
+
+// Copy HEZ
+$('chez').onclick = () => {
+  navigator.clipboard.writeText($('hez').textContent.trim()).then(()=>{
+    $('chez').textContent=t('c_copied'); setTimeout(()=>$('chez').textContent=t('c_copy'), 1600);
+  });
+};
+</script>
+</body>
+</html>

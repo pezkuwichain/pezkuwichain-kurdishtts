@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Create videos — KurdîTV</title>
+<meta name="description" content="Turn an image and a prompt into a short AI video, powered by Google Veo." />
+<style>
+  :root{--kesk:#009639;--kesk7:#017A2F;--pos:#2FC864;--fire:#FF7A00;--sor:#E2231A;--zer:#FDB813;
+        --screen:#08090E;--card:#14161F;--elev:#1C1F2E;--peri:#999EC7;--txt:#E6EEF5;--txt2:#9AA3B2;--txt3:#5b6472;--line:#2A2F45;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:radial-gradient(1100px 520px at 50% -8%,#0d1b14 0%,var(--screen) 55%);color:var(--txt);
+        font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Inter,system-ui,sans-serif;min-height:100vh}
+  .wrap{max-width:760px;margin:0 auto;padding:40px 20px 80px}
+  header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:34px}
+  .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
+  .flame{width:40px;height:40px}
+  header h1{font-size:20px;font-weight:800;letter-spacing:-.3px}
+  header .by{color:var(--txt3);font-size:12px}
+  nav{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+  nav a{color:var(--txt2);font-size:13px;font-weight:600;text-decoration:none;padding:8px 12px;border-radius:10px;transition:.15s;white-space:nowrap}
+  nav a:hover{color:var(--txt);background:#0f111a}
+  nav a.active{color:var(--txt)}
+  nav a.cta{color:#fff;background:var(--kesk)}
+  nav a.cta:hover{background:var(--kesk7);color:#fff}
+  .hero{text-align:center;margin-bottom:30px}
+  .hero h2{font-size:30px;font-weight:800;letter-spacing:-.6px;margin-bottom:10px;line-height:1.15}
+  .hero h2 span{color:var(--zer)}
+  .hero p{color:var(--txt2);font-size:15px;max-width:520px;margin:0 auto;line-height:1.55}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px;margin-bottom:18px}
+  .label{font-size:13px;font-weight:700;color:var(--txt2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px}
+  .drop{border:2px dashed #333a52;border-radius:16px;padding:26px 20px;text-align:center;cursor:pointer;transition:.15s;background:#0f111a}
+  .drop:hover,.drop.over{border-color:var(--zer);background:rgba(253,184,19,.06)}
+  .drop .ic{font-size:30px;margin-bottom:8px}
+  .drop b{color:var(--txt)}
+  .drop small{display:block;color:var(--txt3);margin-top:6px;font-size:12px}
+  .preview{display:none;margin-top:14px;position:relative}
+  .preview img{width:100%;border-radius:14px;max-height:320px;object-fit:contain;background:#000}
+  .preview .x{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.6);color:#fff;border:none;border-radius:8px;
+        width:30px;height:30px;cursor:pointer;font-size:16px}
+  textarea{width:100%;background:#0f111a;border:1px solid var(--line);border-radius:13px;color:var(--txt);
+        padding:14px;font-size:15px;font-family:inherit;line-height:1.5;resize:vertical;min-height:96px}
+  textarea:focus{outline:none;border-color:var(--zer)}
+  .ratios{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+  .ratio{border:1px solid var(--line);border-radius:14px;padding:14px;cursor:pointer;transition:.15s;background:#0f111a;text-align:center}
+  .ratio:hover{border-color:#3a4360}
+  .ratio.sel{border-color:var(--zer);background:rgba(253,184,19,.08)}
+  .ratio .t{font-weight:700}
+  .ratio .s{color:var(--txt3);font-size:12px}
+  .btn{width:100%;background:var(--zer);color:#1a1400;font-weight:800;font-size:16px;border:none;border-radius:14px;
+        padding:16px;cursor:pointer;transition:.15s;box-shadow:0 8px 28px rgba(253,184,19,.28);margin-top:18px}
+  .btn:hover:not(:disabled){filter:brightness(1.07);transform:translateY(-1px)}
+  .btn:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
+  .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--txt);box-shadow:none;font-weight:700}
+  .btn.ghost:hover{background:#0f111a;border-color:var(--zer);filter:none}
+  #progress{display:none}
+  .bar{height:10px;background:#0f111a;border-radius:999px;overflow:hidden;border:1px solid var(--line)}
+  .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--fire),var(--zer));transition:width .5s}
+  .pmsg{margin-top:12px;color:var(--txt2);font-size:14px;display:flex;align-items:center;gap:8px}
+  .spin{width:14px;height:14px;border:2px solid #2a2f45;border-top-color:var(--zer);border-radius:50%;animation:sp .8s linear infinite}
+  @keyframes sp{to{transform:rotate(360deg)}}
+  .hint{color:var(--txt3);font-size:12px;margin-top:8px;line-height:1.5}
+  #result{display:none}
+  video{width:100%;border-radius:14px;background:#000;margin-bottom:14px}
+  .row{display:flex;gap:10px}
+  .err{display:none;color:#ffb4ad;background:rgba(226,35,26,.1);border:1px solid rgba(226,35,26,.35);border-radius:12px;padding:14px;font-size:14px;margin-top:14px}
+  .foot{text-align:center;color:var(--txt3);font-size:12px;margin-top:30px;line-height:1.6}
+  .foot a{color:var(--txt2);text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="brand" href="/">
+      <svg class="flame" viewBox="0 0 512 512"><defs><linearGradient id="f" x1="0%" y1="100%" x2="0%" y2="0%">
+        <stop offset="0%" stop-color="#1B5E20"/><stop offset="32%" stop-color="#FF6F00"/><stop offset="62%" stop-color="#FFD600"/><stop offset="100%" stop-color="#D32F2F"/></linearGradient></defs>
+        <path d="M256 40C190 120 150 175 150 250c0 75 47 132 106 132s106-57 106-132c0-75-40-130-106-210z" fill="url(#f)"/>
+        <ellipse cx="256" cy="312" rx="46" ry="74" fill="#FFF8E1" opacity=".9"/></svg>
+      <div><h1>KurdîTV</h1><div class="by" data-i18n="brand_sub">Kurdish Auto-Dubbing</div></div>
+    </a>
+    <nav>
+      <a href="/create" class="active" data-i18n="nav_create">Create videos</a>
+      <a href="/contribute" data-i18n="nav_contribute">Contribute</a>
+      <a class="cta" href="{{ apps_url }}" target="_blank" rel="noopener"><span data-i18n="nav_apps">Go to apps</span> ↗</a>
+      <div id="langsel"></div>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <h2><span data-i18n="v_hero_1">Create a video from an</span> <span data-i18n="v_hero_hl">image + prompt</span></h2>
+    <p data-i18n="v_hero_p">Upload a picture (optional) and describe the scene. Our AI turns it into a short video for you.
+       Generation usually takes 1–3 minutes.</p>
+  </div>
+
+  <div class="card" id="form">
+    <div class="label"><span data-i18n="v_img_label">Image</span> <span style="color:var(--txt3);font-weight:400;text-transform:none" data-i18n="v_img_opt">(optional — animates your picture)</span></div>
+    <div class="drop" id="drop">
+      <div class="ic">🖼️</div>
+      <b data-i18n="v_drop_b">Drop an image or click to browse</b>
+      <small data-i18n="v_drop_s">PNG, JPG or WEBP · up to 12 MB</small>
+    </div>
+    <input type="file" id="fileIn" accept="image/png,image/jpeg,image/webp" style="display:none" />
+    <div class="preview" id="preview"><button class="x" id="rm">✕</button><img id="pimg" alt="" /></div>
+
+    <div style="height:20px"></div>
+    <div class="label" data-i18n="v_prompt_label">Prompt</div>
+    <textarea id="prompt" data-i18n-ph="v_prompt_ph" placeholder="Describe the video — e.g. 'A Kurdish shepherd walking through green mountains at sunrise, camera slowly panning, cinematic.'" maxlength="1000"></textarea>
+    <div class="hint" data-i18n="v_hint">Tip: mention motion, camera movement, lighting and mood for the best results.</div>
+
+    <div class="label" style="margin-top:18px" data-i18n="v_aspect_label">Aspect ratio</div>
+    <div class="ratios">
+      <div class="ratio sel" data-r="16:9"><div class="t">16:9</div><div class="s" data-i18n="v_land">Landscape</div></div>
+      <div class="ratio" data-r="9:16"><div class="t">9:16</div><div class="s" data-i18n="v_vert">Vertical / Reels</div></div>
+    </div>
+
+    <button class="btn" id="go" data-i18n="v_go">✨ Generate video</button>
+  </div>
+
+  <div class="card" id="progress">
+    <div class="bar"><i id="pbar"></i></div>
+    <div class="pmsg"><span class="spin"></span><span id="pmsg">Starting…</span></div>
+    <div class="hint" data-i18n="v_render_note">Veo is rendering your video. You can keep this tab open — it takes a couple of minutes.</div>
+  </div>
+
+  <div class="card" id="result">
+    <video id="vid" controls playsinline></video>
+    <div class="row">
+      <a class="btn" id="dl" style="text-align:center;text-decoration:none;display:block" download data-i18n="v_dl">⬇ Download</a>
+      <button class="btn ghost" id="again" data-i18n="v_again">Create another</button>
+    </div>
+  </div>
+
+  <div class="err" id="err"></div>
+
+  <div class="foot">
+    Powered by Google Veo · KurdîTV · pezkuwichain · <a href="/">← Back to dubbing</a>
+  </div>
+</div>
+
+<script src="/static/i18n.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+let imgFile = null, aspect = '16:9', timer = null;
+
+// image picking
+$('drop').onclick = () => $('fileIn').click();
+['dragover','dragenter'].forEach(ev=>$('drop').addEventListener(ev,e=>{e.preventDefault();$('drop').classList.add('over')}));
+['dragleave','drop'].forEach(ev=>$('drop').addEventListener(ev,e=>{e.preventDefault();$('drop').classList.remove('over')}));
+$('drop').addEventListener('drop', e=>{ const f=e.dataTransfer.files[0]; if(f) setImg(f); });
+$('fileIn').onchange = e => { const f=e.target.files[0]; if(f) setImg(f); };
+$('rm').onclick = () => { imgFile=null; $('preview').style.display='none'; $('drop').style.display='block'; $('fileIn').value=''; };
+function setImg(f){
+  if(!/image\/(png|jpeg|jpg|webp)/.test(f.type)){ showErr(t('v_err_img')); return; }
+  imgFile = f;
+  $('pimg').src = URL.createObjectURL(f);
+  $('preview').style.display='block'; $('drop').style.display='none';
+}
+
+// ratio
+document.querySelectorAll('.ratio').forEach(el=>el.onclick=()=>{
+  document.querySelectorAll('.ratio').forEach(x=>x.classList.remove('sel'));
+  el.classList.add('sel'); aspect = el.dataset.r;
+});
+
+function showErr(m){ $('err').style.display='block'; $('err').textContent=m; }
+
+$('go').onclick = async () => {
+  const prompt = $('prompt').value.trim();
+  if(prompt.length < 3){ showErr(t('v_err_prompt')); return; }
+  $('err').style.display='none';
+  $('form').style.display='none'; $('progress').style.display='block';
+  $('pbar').style.width='8%'; $('pmsg').textContent=t('v_sending');
+
+  const fd = new FormData();
+  fd.append('prompt', prompt);
+  fd.append('aspect', aspect);
+  if(imgFile) fd.append('file', imgFile);
+  try{
+    const r = await fetch('/api/create/video', {method:'POST', body:fd});
+    if(!r.ok){ const j=await r.json().catch(()=>({})); throw new Error(j.detail||t('v_gen_failed')); }
+    const {job_id} = await r.json();
+    poll(job_id);
+  }catch(e){ fail(e.message); }
+};
+
+function poll(id){
+  timer = setInterval(async ()=>{
+    try{
+      const r = await fetch('/api/create/job/'+id);
+      if(!r.ok) throw new Error(t('v_lost'));
+      const j = await r.json();
+      $('pbar').style.width = (j.progress||0)+'%';
+      $('pmsg').textContent = j.message || t('v_working');
+      if(j.status==='done'){
+        clearInterval(timer);
+        $('progress').style.display='none'; $('result').style.display='block';
+        $('vid').src = '/api/create/result/'+id;
+        $('dl').href = '/api/create/result/'+id;
+      } else if(j.status==='error'){
+        clearInterval(timer); fail(j.message||t('v_gen_failed'));
+      }
+    }catch(e){ clearInterval(timer); fail(e.message); }
+  }, 3000);
+}
+
+function fail(m){
+  $('progress').style.display='none'; $('form').style.display='block';
+  showErr(m);
+}
+
+$('again').onclick = () => {
+  $('result').style.display='none'; $('form').style.display='block';
+  $('prompt').value=''; imgFile=null; $('preview').style.display='none'; $('drop').style.display='block'; $('fileIn').value='';
+  $('err').style.display='none';
+};
+</script>
+</body>
+</html>

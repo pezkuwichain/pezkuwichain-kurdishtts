@@ -1,0 +1,66 @@
+name: Deploy
+
+# Ships main to the KURDITV production host. The `production` environment should
+# require a manual reviewer approval, so merge-to-main → approve → deploy.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false   # never cancel a running deploy
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: Deploy to production
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://kurdishtts.pezkiwi.app
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure SSH
+        env:
+          KEY: ${{ secrets.VPS_SSH_KEY }}
+          HOST: ${{ secrets.VPS_HOST }}
+          PORT: ${{ secrets.VPS_SSH_PORT }}
+        run: |
+          set -euo pipefail
+          mkdir -p ~/.ssh
+          printf '%s\n' "$KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -p "$PORT" -H "$HOST" >> ~/.ssh/known_hosts 2>/dev/null
+
+      - name: Rsync application code
+        env:
+          HOST: ${{ secrets.VPS_HOST }}
+          PORT: ${{ secrets.VPS_SSH_PORT }}
+          USER: ${{ secrets.VPS_USER }}
+        run: |
+          set -euo pipefail
+          rsync -az \
+            --exclude venv --exclude jobs --exclude contributions \
+            --exclude '.git' --exclude '.github' --exclude '.env' \
+            -e "ssh -i ~/.ssh/deploy_key -p $PORT -o IdentitiesOnly=yes" \
+            ./ "$USER@$HOST:/root/kurdishtts/"
+
+      - name: Install deps & restart service
+        env:
+          HOST: ${{ secrets.VPS_HOST }}
+          PORT: ${{ secrets.VPS_SSH_PORT }}
+          USER: ${{ secrets.VPS_USER }}
+        run: |
+          set -euo pipefail
+          ssh -i ~/.ssh/deploy_key -p "$PORT" -o IdentitiesOnly=yes "$USER@$HOST" '
+            set -euo pipefail
+            cd /root/kurdishtts
+            venv/bin/pip install -q -r requirements.txt
+            systemctl restart kurdishtts
+            sleep 3
+            systemctl is-active kurdishtts
+          '

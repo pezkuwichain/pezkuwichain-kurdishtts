@@ -1,0 +1,30 @@
+version: 2
+
+updates:
+  # ── Python backend ────────────────────────────────────────────
+  - package-ecosystem: pip
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "08:00"
+      timezone: "Europe/Istanbul"
+    open-pull-requests-limit: 5
+    groups:
+      ml:
+        patterns: ["torch*", "transformers*", "faster-whisper*", "sentencepiece*", "sacremoses*"]
+      web:
+        patterns: ["fastapi*", "uvicorn*", "jinja2*", "python-multipart*"]
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+
+  # ── GitHub Actions ────────────────────────────────────────────
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "08:00"
+      timezone: "Europe/Istanbul"
+    open-pull-requests-limit: 3

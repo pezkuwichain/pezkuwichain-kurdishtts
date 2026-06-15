@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>KurdîTV — Kurdish Auto-Dubbing</title>
+<meta name="description" content="Upload audio or video in any language and get a Kurdish (Kurmancî / Soranî) voice-over — powered by Whisper, NLLB and Meta MMS." />
+<style>
+  :root{--kesk:#009639;--kesk7:#017A2F;--pos:#2FC864;--fire:#FF7A00;--sor:#E2231A;--zer:#FDB813;
+        --screen:#08090E;--card:#14161F;--elev:#1C1F2E;--peri:#999EC7;--txt:#E6EEF5;--txt2:#9AA3B2;--txt3:#5b6472;--line:#2A2F45;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:radial-gradient(1100px 520px at 50% -8%,#0d1b14 0%,var(--screen) 55%);color:var(--txt);
+        font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Inter,system-ui,sans-serif;min-height:100vh}
+  .wrap{max-width:760px;margin:0 auto;padding:40px 20px 80px}
+  header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:34px}
+  .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
+  .flame{width:40px;height:40px}
+  header h1{font-size:20px;font-weight:800;letter-spacing:-.3px}
+  header .by{color:var(--txt3);font-size:12px}
+  nav{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+  nav a{color:var(--txt2);font-size:13px;font-weight:600;text-decoration:none;padding:8px 12px;border-radius:10px;transition:.15s;white-space:nowrap}
+  nav a:hover{color:var(--txt);background:#0f111a}
+  nav a.cta{color:#fff;background:var(--kesk)}
+  nav a.cta:hover{background:var(--kesk7);color:#fff}
+  .hero{text-align:center;margin-bottom:30px}
+  .hero h2{font-size:30px;font-weight:800;letter-spacing:-.6px;margin-bottom:10px;line-height:1.15}
+  .hero h2 span{color:var(--pos)}
+  .hero p{color:var(--txt2);font-size:15px;max-width:520px;margin:0 auto;line-height:1.55}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px;margin-bottom:18px}
+  .label{font-size:13px;font-weight:700;color:var(--txt2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px}
+  /* drop zone */
+  .drop{border:2px dashed #333a52;border-radius:16px;padding:34px 20px;text-align:center;cursor:pointer;transition:.15s;background:#0f111a}
+  .drop:hover,.drop.over{border-color:var(--kesk);background:rgba(0,150,57,.06)}
+  .drop .ic{width:46px;height:46px;margin:0 auto 12px;color:var(--peri)}
+  .drop b{color:var(--txt)}
+  .drop small{display:block;color:var(--txt3);margin-top:6px;font-size:12px}
+  .file{display:none;margin-top:14px;background:#0f111a;border:1px solid var(--line);border-radius:12px;padding:12px 14px;align-items:center;gap:12px}
+  .file.show{display:flex}
+  .file .nm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .file .sz{color:var(--txt3);font-size:12px}
+  .file .x{color:var(--txt3);cursor:pointer;font-size:18px;line-height:1}
+  /* dialect */
+  .dialects{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .dia{border:1px solid var(--line);border-radius:14px;padding:16px;cursor:pointer;transition:.15s;background:#0f111a}
+  .dia:hover{border-color:#3a4360}
+  .dia.sel{border-color:var(--kesk);background:rgba(0,150,57,.08)}
+  .dia .t{font-weight:700;margin-bottom:2px}
+  .dia .s{color:var(--txt3);font-size:12px}
+  /* button */
+  .btn{width:100%;background:var(--kesk);color:#fff;font-weight:700;font-size:16px;border:none;border-radius:14px;
+        padding:16px;cursor:pointer;transition:.15s;box-shadow:0 8px 28px rgba(0,150,57,.32)}
+  .btn:hover:not(:disabled){background:var(--kesk7);transform:translateY(-1px)}
+  .btn:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
+  /* progress */
+  #progress{display:none}
+  .bar{height:10px;background:#0f111a;border-radius:999px;overflow:hidden;border:1px solid var(--line)}
+  .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--kesk),var(--pos));transition:width .4s}
+  .pmsg{margin-top:12px;color:var(--txt2);font-size:14px;display:flex;align-items:center;gap:8px}
+  .spin{width:14px;height:14px;border:2px solid #2a2f45;border-top-color:var(--pos);border-radius:50%;animation:sp .8s linear infinite}
+  @keyframes sp{to{transform:rotate(360deg)}}
+  /* result */
+  #result{display:none}
+  video,audio{width:100%;border-radius:14px;background:#000;margin-bottom:14px}
+  .row{display:flex;gap:10px}
+  .row .btn{margin:0}
+  .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--txt);box-shadow:none}
+  .btn.ghost:hover{background:#0f111a;border-color:var(--kesk)}
+  details{margin-top:16px;border-top:1px solid var(--line);padding-top:14px}
+  summary{cursor:pointer;color:var(--txt2);font-size:13px;font-weight:600}
+  .seg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;font-size:13px}
+  .seg>div{background:#0f111a;border:1px solid var(--line);border-radius:10px;padding:8px 10px}
+  .seg .src{color:var(--txt3)}
+  .err{display:none;color:#ffb4ad;background:rgba(226,35,26,.1);border:1px solid rgba(226,35,26,.35);border-radius:12px;padding:14px;font-size:14px}
+  .foot{text-align:center;color:var(--txt3);font-size:12px;margin-top:30px;line-height:1.6}
+  .pill{display:inline-block;font-size:11px;font-weight:700;color:var(--zer);background:rgba(253,184,19,.12);border:1px solid rgba(253,184,19,.3);border-radius:999px;padding:3px 9px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="brand" href="/">
+      <svg class="flame" viewBox="0 0 512 512"><defs><linearGradient id="f" x1="0%" y1="100%" x2="0%" y2="0%">
+        <stop offset="0%" stop-color="#1B5E20"/><stop offset="32%" stop-color="#FF6F00"/><stop offset="62%" stop-color="#FFD600"/><stop offset="100%" stop-color="#D32F2F"/></linearGradient></defs>
+        <path d="M256 40C190 120 150 175 150 250c0 75 47 132 106 132s106-57 106-132c0-75-40-130-106-210z" fill="url(#f)"/>
+        <ellipse cx="256" cy="312" rx="46" ry="74" fill="#FFF8E1" opacity=".9"/></svg>
+      <div><h1>KurdîTV</h1><div class="by" data-i18n="brand_sub">Kurdish Auto-Dubbing</div></div>
+    </a>
+    <nav>
+      <a href="/create" data-i18n="nav_create">Create videos</a>
+      <a href="/contribute" data-i18n="nav_contribute">Contribute</a>
+      <a class="cta" href="https://app.pezkuwichain.io" target="_blank" rel="noopener"><span data-i18n="nav_apps">Go to apps</span> ↗</a>
+      <div id="langsel"></div>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <h2><span data-i18n="dub_hero_1">Dub any video into</span> <span data-i18n="dub_hero_hl">Kurdish</span></h2>
+    <p data-i18n="dub_hero_p">Upload audio or video in any language and get a Kurdish voice-over — transcribed with Whisper, translated with NLLB and spoken with Meta&nbsp;MMS.</p>
+  </div>
+
+  <!-- Upload form -->
+  <div id="form">
+    <div class="card">
+      <div class="label" data-i18n="dub_step1">1 · Your file</div>
+      <label class="drop" id="drop" for="fileIn">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 16V4m0 0L8 8m4-4l4 4M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <b data-i18n="dub_drop_b">Drop a file or click to browse</b>
+        <small data-i18n="dub_drop_s" data-mb="{{ max_mb }}" data-sec="{{ max_sec }}">Video or audio, any language · max {{ max_mb }} MB · up to {{ max_sec }}s</small>
+      </label>
+      <input id="fileIn" type="file" accept="video/*,audio/*" hidden />
+      <div class="file" id="fileBox"><span class="nm" id="fileNm"></span><span class="sz" id="fileSz"></span><span class="x" id="fileX">&times;</span></div>
+    </div>
+
+    <div class="card">
+      <div class="label" data-i18n="dub_step2">2 · Kurdish dialect</div>
+      <div class="dialects">
+        <div class="dia sel" data-d="kmr"><div class="t" data-i18n="dia_kmr_t">Kurmancî</div><div class="s" data-i18n="dia_kmr_s">Northern · Latin script</div></div>
+        <div class="dia" data-d="ckb"><div class="t" data-i18n="dia_ckb_t">Soranî</div><div class="s" data-i18n="dia_ckb_s">Central · Arabic script</div></div>
+      </div>
+    </div>
+
+    <button class="btn" id="go" disabled data-i18n="dub_go">Dub into Kurdish</button>
+    <div class="err" id="err" style="margin-top:14px"></div>
+  </div>
+
+  <!-- Progress -->
+  <div class="card" id="progress">
+    <div class="label" data-i18n="dub_working">Working…</div>
+    <div class="bar"><i id="pbar"></i></div>
+    <div class="pmsg"><span class="spin"></span><span id="pmsg">Starting…</span></div>
+    <small style="display:block;color:var(--txt3);margin-top:10px" data-i18n="dub_cpu_note">CPU-only — this can take a few minutes for longer clips.</small>
+  </div>
+
+  <!-- Result -->
+  <div class="card" id="result">
+    <div class="label">✅ <span data-i18n="dub_result">Your Kurdish dub</span> <span class="pill" id="langPill"></span></div>
+    <div id="player"></div>
+    <div class="row">
+      <a class="btn" id="dl" download data-i18n="dub_dl">Download</a>
+      <button class="btn ghost" id="again" data-i18n="dub_again">Dub another</button>
+    </div>
+    <details><summary data-i18n="dub_transcript">Show transcript & translation</summary><div class="seg" id="segs"></div></details>
+  </div>
+
+  <div class="foot">
+    Powered by faster-whisper · NLLB-200 · Meta MMS-TTS<br/>
+    KurdîTV · pezkuwichain
+  </div>
+</div>
+
+<script src="/static/i18n.js"></script>
+<script>
+const $ = s => document.querySelector(s);
+let file = null, dialect = 'kmr', poll = null;
+
+// dialect select
+document.querySelectorAll('.dia').forEach(d => d.onclick = () => {
+  document.querySelectorAll('.dia').forEach(x => x.classList.remove('sel'));
+  d.classList.add('sel'); dialect = d.dataset.d;
+});
+
+// file pick / drag-drop
+const drop = $('#drop'), input = $('#fileIn');
+function setFile(f){
+  file = f;
+  $('#fileNm').textContent = f.name;
+  $('#fileSz').textContent = (f.size/1048576).toFixed(1)+' MB';
+  $('#fileBox').classList.add('show');
+  $('#go').disabled = false;
+}
+input.onchange = e => { if(e.target.files[0]) setFile(e.target.files[0]); };
+['dragover','dragenter'].forEach(ev => drop.addEventListener(ev, e=>{e.preventDefault();drop.classList.add('over');}));
+['dragleave','drop'].forEach(ev => drop.addEventListener(ev, e=>{e.preventDefault();drop.classList.remove('over');}));
+drop.addEventListener('drop', e => { if(e.dataTransfer.files[0]) setFile(e.dataTransfer.files[0]); });
+$('#fileX').onclick = e => { e.preventDefault(); file=null; $('#fileBox').classList.remove('show'); $('#go').disabled=true; input.value=''; };
+
+function showErr(m){ const el=$('#err'); el.textContent=m; el.style.display='block'; }
+
+// submit
+$('#go').onclick = async () => {
+  if(!file) return;
+  $('#err').style.display='none';
+  $('#form').style.display='none';
+  $('#progress').style.display='block';
+  setProg(2, t('js_uploading'));
+  const fd = new FormData(); fd.append('file', file); fd.append('dialect', dialect);
+  let r;
+  try { r = await fetch('/api/dub', {method:'POST', body:fd}); }
+  catch(e){ return fail(t('js_upload_failed')); }
+  if(!r.ok){ const j=await r.json().catch(()=>({})); return fail(j.detail || t('js_upload_rejected')); }
+  const {job_id} = await r.json();
+  poll = setInterval(() => check(job_id), 2000);
+  check(job_id);
+};
+
+function setProg(p,m){ $('#pbar').style.width=p+'%'; $('#pmsg').textContent=m; }
+function fail(m){ clearInterval(poll); $('#progress').style.display='none'; $('#form').style.display='block'; showErr(m); }
+
+async function check(id){
+  let j; try { j = await (await fetch('/api/job/'+id)).json(); } catch(e){ return; }
+  if(j.status==='error'){ return fail(j.message || t('js_processing_failed')); }
+  setProg(j.progress||5, j.message||t('js_working'));
+  if(j.status==='done'){
+    clearInterval(poll);
+    $('#progress').style.display='none';
+    $('#langPill').textContent = j.language ? (t('js_from')+' '+j.language) : '';
+    const tag = j.is_video ? 'video' : 'audio';
+    $('#player').innerHTML = `<${tag} src="/api/result/${id}" controls ${j.is_video?'playsinline':''}></${tag}>`;
+    $('#dl').href = '/api/result/'+id;
+    if(j.segments){
+      $('#segs').innerHTML = j.segments.map(s =>
+        `<div class="src">${esc(s.src)}</div><div>${esc(s.ku)}</div>`).join('');
+    }
+    $('#result').style.display='block';
+  }
+}
+function esc(s){ return (s||'').replace(/[&<>]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])); }
+$('#again').onclick = () => location.reload();
+</script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+extend-exclude = ["venv", "jobs", "contributions"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W", "B", "UP"]
+ignore = ["E501"]   # line length is handled by the formatter, not enforced hard
+
+[tool.ruff.lint.isort]
+known-first-party = ["server", "dub_pipeline", "gemini_video"]

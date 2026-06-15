@@ -1,0 +1,13 @@
+# Kurdish auto-dubbing service (CPU)
+torch            # install via: pip install torch --index-url https://download.pytorch.org/whl/cpu
+transformers==4.46.3
+faster-whisper
+fastapi
+uvicorn[standard]
+python-multipart
+jinja2
+scipy
+pydub
+numpy
+sentencepiece
+sacremoses

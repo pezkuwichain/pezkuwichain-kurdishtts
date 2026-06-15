@@ -1,0 +1,7 @@
+# Default owners for everything in this repo.
+* @SatoshiQaziMuhammed
+
+# Deployment & CI require owner review.
+/.github/        @SatoshiQaziMuhammed
+/LICENSE         @SatoshiQaziMuhammed
+/SECURITY.md     @SatoshiQaziMuhammed

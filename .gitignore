@@ -1,0 +1,38 @@
+# ── Python ─────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# ── Virtualenv ─────────────────────────────────────────
+venv/
+.venv/
+env/
+
+# ── Secrets / local config ─────────────────────────────
+.env
+.env.local
+*.pem
+*.key
+id_*
+
+# ── Runtime data (never commit user content) ───────────
+jobs/
+contributions/
+*.mp4
+*.mp3
+*.wav
+*.webm
+
+# ── Model cache ────────────────────────────────────────
+.cache/
+huggingface/
+
+# ── Editor / OS ────────────────────────────────────────
+.idea/
+.vscode/
+.DS_Store
+*.swp

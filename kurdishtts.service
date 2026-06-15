@@ -1,0 +1,18 @@
+[Unit]
+Description=KurdiTV — Kurdish auto-dubbing web service
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/root/kurdishtts
+Environment=HF_HOME=/root/.cache/huggingface
+Environment=DUB_MAX_SECONDS=180
+Environment=DUB_WHISPER_MODEL=small
+ExecStart=/root/kurdishtts/venv/bin/uvicorn server:app --host 127.0.0.1 --port 8000 --workers 1
+Restart=on-failure
+RestartSec=5
+# CPU box: cap memory so a runaway job can't kill the host (NLLB+Whisper+MMS ~5GB)
+MemoryMax=9G
+
+[Install]
+WantedBy=multi-user.target
