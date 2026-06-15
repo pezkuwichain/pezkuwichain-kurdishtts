@@ -1,6 +1,6 @@
 # Kurdish auto-dubbing service (CPU)
 torch            # install via: pip install torch --index-url https://download.pytorch.org/whl/cpu
-transformers==4.46.3
+transformers==4.57.6
 faster-whisper
 fastapi
 uvicorn[standard]
