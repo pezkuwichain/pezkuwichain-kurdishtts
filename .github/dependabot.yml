@@ -18,6 +18,10 @@ updates:
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
+      # transformers is pinned at 4.46.3 for Meta MMS VitsModel compatibility —
+      # do not bump automatically (breaks Kurdish TTS synthesis).
+      - dependency-name: "transformers"
+      - dependency-name: "torch"
 
   # ── GitHub Actions ────────────────────────────────────────────
   - package-ecosystem: github-actions
