@@ -9,3 +9,7 @@ ignore = ["E501"]   # line length is handled by the formatter, not enforced hard
 
 [tool.ruff.lint.isort]
 known-first-party = ["server", "dub_pipeline", "gemini_video"]
+
+[tool.ruff.lint.flake8-bugbear]
+# FastAPI uses these as argument defaults by design (not real mutable defaults).
+extend-immutable-calls = ["fastapi.File", "fastapi.Form", "fastapi.Depends", "fastapi.Query", "fastapi.Path"]
