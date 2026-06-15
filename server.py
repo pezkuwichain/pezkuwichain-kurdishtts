@@ -81,7 +81,7 @@ def _worker():
         try:
             _set(job_id, status="processing", progress=2, message="Starting…")
 
-            def progress(msg: str, pct: int):
+            def progress(msg: str, pct: int, job_id: str = job_id):
                 _set(job_id, message=msg, progress=pct)
 
             result = dub_pipeline.dub(

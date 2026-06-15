@@ -182,7 +182,7 @@ def build_dub_track(
     from pydub import AudioSegment
 
     base = AudioSegment.silent(duration=int(total_dur * 1000) + 500, frame_rate=16000)
-    for seg, clip in zip(segs, clips):
+    for seg, clip in zip(segs, clips, strict=False):
         if not clip or not os.path.exists(clip):
             continue
         a = AudioSegment.from_wav(clip)
@@ -272,7 +272,7 @@ def dub(
         "language": src_lang,
         "segments": [
             {"start": s.start, "end": s.end, "src": s.text, "ku": k}
-            for s, k in zip(segs, kurdish)
+            for s, k in zip(segs, kurdish, strict=False)
         ],
         "is_video": is_video,
     }
