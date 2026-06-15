@@ -1,10 +1,10 @@
 name: Deploy
 
-# Ships main to the KURDITV production host. The `production` environment should
-# require a manual reviewer approval, so merge-to-main → approve → deploy.
+# Ships main to the KURDITV production host. Manual, controlled deploys only —
+# run from the Actions tab (or `gh workflow run deploy.yml`) after merging to
+# main. The `production` environment gates it; deploys never run automatically
+# from external merges. Mirrors the Pezkuwi Exchange deploy model.
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 concurrency:
