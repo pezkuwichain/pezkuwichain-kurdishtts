@@ -99,8 +99,11 @@ class Engine:
         return h
 
     @staticmethod
-    def cache_path(key: str) -> Path:
-        return CACHE_DIR / key[:2] / f"{key}.mp3"
+    def cache_path(key: str, lane: str = "batch") -> Path:
+        """Two caches with two lifetimes (privacy policy rows 4 and 5): what a
+        visitor typed is kept at most 7 days, under public/; article audio
+        made for an API client is kept 90 days, under jobs/."""
+        return CACHE_DIR / ("public" if lane == "interactive" else "jobs") / key[:2] / f"{key}.mp3"
 
     def synthesize(self, text: str, dialect: str, lane: str = "interactive") -> tuple[Path, float]:
         """Clean, split, synthesise and encode. Returns the cached MP3 and its length in seconds."""
@@ -111,7 +114,7 @@ class Engine:
         if not sents:
             raise ValueError("nothing to read after cleaning")
         key = self.key(dialect, "\n".join(sents))
-        out = self.cache_path(key)
+        out = self.cache_path(key, lane)
         if out.exists():
             return out, _duration(out)
         parts = self.pools[lane].map(_synth_one, [(dialect, s) for s in sents], chunksize=1)
