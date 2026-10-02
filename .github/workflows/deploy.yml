@@ -1,66 +1,39 @@
 name: Deploy
 
-# Ships main to the KURDITV production host. Manual, controlled deploys only —
-# run from the Actions tab (or `gh workflow run deploy.yml`) after merging to
-# main. The `production` environment gates it; deploys never run automatically
-# from external merges. Mirrors the Pezkuwi Exchange deploy model.
+# Manual, after a merge to main. The runner holds a key that can do one thing
+# on the host -- `deploy <sha>` (a forced command, ops/deploy.sh) -- and the
+# host fetches that commit from this public repository itself, refuses it if
+# it is not on main, and switches only once the new tree starts healthy.
 on:
   workflow_dispatch:
 
 concurrency:
   group: deploy-production
-  cancel-in-progress: false   # never cancel a running deploy
+  cancel-in-progress: false
 
 permissions:
   contents: read
 
 jobs:
   deploy:
-    name: Deploy to production
+    name: Deploy to kurdishtts.dks.news
     runs-on: ubuntu-latest
     environment:
       name: production
-      url: https://kurdishtts.pezkiwi.app
+      url: https://kurdishtts.dks.news
     steps:
-      - uses: actions/checkout@v6
-
-      - name: Configure SSH
+      - name: Deploy ${{ github.sha }}
         env:
-          KEY: ${{ secrets.VPS_SSH_KEY }}
-          HOST: ${{ secrets.VPS_HOST }}
-          PORT: ${{ secrets.VPS_SSH_PORT }}
+          KEY: ${{ secrets.KTTS_DEPLOY_KEY }}
+          HOST_KEY: ${{ vars.KTTS_HOST_KEY }}
+          HOST: ${{ vars.KTTS_HOST }}
+          SHA: ${{ github.sha }}
         run: |
           set -euo pipefail
-          mkdir -p ~/.ssh
-          printf '%s\n' "$KEY" > ~/.ssh/deploy_key
-          chmod 600 ~/.ssh/deploy_key
-          ssh-keyscan -p "$PORT" -H "$HOST" >> ~/.ssh/known_hosts 2>/dev/null
-
-      - name: Rsync application code
-        env:
-          HOST: ${{ secrets.VPS_HOST }}
-          PORT: ${{ secrets.VPS_SSH_PORT }}
-          USER: ${{ secrets.VPS_USER }}
-        run: |
-          set -euo pipefail
-          rsync -az \
-            --exclude venv --exclude jobs --exclude contributions \
-            --exclude '.git' --exclude '.github' --exclude '.env' \
-            -e "ssh -i ~/.ssh/deploy_key -p $PORT -o IdentitiesOnly=yes" \
-            ./ "$USER@$HOST:/root/kurdishtts/"
-
-      - name: Install deps & restart service
-        env:
-          HOST: ${{ secrets.VPS_HOST }}
-          PORT: ${{ secrets.VPS_SSH_PORT }}
-          USER: ${{ secrets.VPS_USER }}
-        run: |
-          set -euo pipefail
-          ssh -i ~/.ssh/deploy_key -p "$PORT" -o IdentitiesOnly=yes "$USER@$HOST" '
-            set -euo pipefail
-            cd /root/kurdishtts
-            venv/bin/pip install -q -r requirements.txt
-            systemctl restart kurdishtts
-            sleep 3
-            systemctl is-active kurdishtts
-          '
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$KEY" > ~/.ssh/deploy && chmod 600 ~/.ssh/deploy
+          printf '%s %s\n' "$HOST" "$HOST_KEY" > ~/.ssh/known_hosts
+          ssh -i ~/.ssh/deploy -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes "root@$HOST" "deploy $SHA" | tee out.txt
+          grep -q "KTTS-DEPLOY-RESULT ok sha=$SHA" out.txt
+      - name: Public health
+        run: curl -sf https://kurdishtts.dks.news/api/tts/health

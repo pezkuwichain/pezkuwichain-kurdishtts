@@ -1,0 +1,14 @@
+{
+  "name": "kurdishtts-sigverify",
+  "private": true,
+  "type": "module",
+  "description": "Verifies a Pezkuwi wallet signature over a sign-in challenge (sr25519, bizinikiwi and substrate contexts).",
+  "dependencies": {
+    "@pezkuwi/util": "14.0.25",
+    "@pezkuwi/util-crypto": "14.0.25",
+    "@scure/sr25519": "2.4.0"
+  },
+  "devDependencies": {
+    "@pezkuwi/keyring": "^14.0.25"
+  }
+}

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="kmr" dir="ltr">
+<head>
+{% include "_head.html" %}
+<title>KurdishTTS — Dengê Kurdî</title>
+<meta name="description" content="Nivîsa Kurmancî û Soranî bi deng bixwîne. Read Kurdish text aloud — and donate your voice to build a Kurdish voice made by Kurds." />
+</head>
+<body data-page="speak">
+{% include "_header.html" %}
+<main class="wrap">
+  <section class="hero">
+    <h1 data-t="speakTitle">Nivîsa Kurdî bi deng bixwîne</h1>
+    <p data-t="speakLead"></p>
+  </section>
+  <section class="card">
+    <div class="row mb-14">
+      <span class="note" data-t="dialect">Zarava</span>
+      <div class="seg" role="radiogroup" data-dialect>
+        <button type="button" role="radio" aria-checked="true" data-v="kmr" data-t="kmr">Kurmancî</button>
+        <button type="button" role="radio" aria-checked="false" data-v="ckb" data-t="ckb">Soranî</button>
+      </div>
+    </div>
+    <label class="sr" for="txt">Text</label>
+    <textarea id="txt" maxlength="600"></textarea>
+    <div class="row mt-12">
+      <span class="note" id="count"></span><span class="spacer"></span>
+      <button type="button" class="btn" id="go" data-t="read">Bixwîne</button>
+    </div>
+    <audio id="out" controls hidden class="audio-full mt-14"></audio>
+    <p class="msg msg--bad" id="msg" hidden></p>
+  </section>
+  <section class="card mt-18 cta">
+    <p data-t="dLead" class="cta__text"></p>
+    <a class="btn" href="/bexsh" data-t="navDonate">Dengê xwe bexşîne</a>
+  </section>
+</main>
+{% include "_footer.html" %}
+</body>
+</html>

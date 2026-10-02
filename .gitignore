@@ -1,38 +1,39 @@
-# ── Python ─────────────────────────────────────────────
-__pycache__/
-*.py[cod]
-*.egg-info/
-.eggs/
-.pytest_cache/
-.ruff_cache/
-.mypy_cache/
-
-# ── Virtualenv ─────────────────────────────────────────
-venv/
-.venv/
-env/
-
-# ── Secrets / local config ─────────────────────────────
-.env
-.env.local
-*.pem
-*.key
-id_*
-
-# ── Runtime data (never commit user content) ───────────
-jobs/
-contributions/
-*.mp4
-*.mp3
-*.wav
-*.webm
-
-# ── Model cache ────────────────────────────────────────
-.cache/
-huggingface/
 
 # ── Editor / OS ────────────────────────────────────────
-.idea/
-.vscode/
-.DS_Store
+# ── Model cache ────────────────────────────────────────
+# ── Python ─────────────────────────────────────────────
+# ── Runtime data (never commit user content) ───────────
+# ── Secrets / local config ─────────────────────────────
+# ── Virtualenv ─────────────────────────────────────────
+*.egg-info/
+*.key
+*.mp3
+*.mp4
+*.pem
+*.py[cod]
+*.pyc
 *.swp
+*.wav
+*.webm
+.DS_Store
+.cache/
+.eggs/
+.env
+.env.local
+.idea/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.venv/
+.vscode/
+__pycache__/
+contributions/
+env/
+huggingface/
+id_*
+jobs/
+node_modules/
+venv/
+
+# ── Node ───────────────────────────────────────────────
+node_modules/

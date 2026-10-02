@@ -1,0 +1,25 @@
+{
+  "name": "@pezkuwichain/kurdishtts-chain",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "KurdishTTS chain adapter (from dks.news) — wallet connect, sign-in signatures, and the wUSDT subscription payment on Pezkuwi Asset Hub. Uses @pezkuwi tooling, never @polkadot.",
+  "license": "SEE LICENSE IN ../LICENSE",
+  "scripts": {
+    "build": "node build-web.mjs && node build-wc.mjs",
+    "build:web": "node build-web.mjs",
+    "build:wc": "node build-wc.mjs"
+  },
+  "dependencies": {
+    "@pezkuwi/api": "^16.5.36",
+    "@pezkuwi/extension-dapp": "^0.62.20",
+    "@pezkuwi/util": "^14.0.25",
+    "@walletconnect/sign-client": "^2.24.0",
+    "buffer": "^6.0.3",
+    "process": "^0.11.10",
+    "qrcode": "^1.5.4"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.1"
+  }
+}
