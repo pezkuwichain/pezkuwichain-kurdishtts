@@ -1,28 +1,67 @@
 <div align="center">
 
-# KurdîTV — Kurdish Auto-Dubbing & AI Studio
+# KurdishTTS — Kurdish speech, and the voice bank to make it ours
 
-**Dub any audio/video into Kurdish · Donate your voice · Create AI videos**
+**Read Kurmancî and Soranî aloud · Donate your voice (CC0) · Speech API for dks.news**
 
 [![CI](https://github.com/pezkuwichain/pezkuwichain-kurdishtts/actions/workflows/ci.yml/badge.svg)](https://github.com/pezkuwichain/pezkuwichain-kurdishtts/actions/workflows/ci.yml)
-&nbsp;·&nbsp; **Live:** [kurdishtts.pezkiwi.app](https://kurdishtts.pezkiwi.app)
+&nbsp;·&nbsp; **Live:** [kurdishtts.dks.news](https://kurdishtts.dks.news)
 
 </div>
 
 ---
 
-KurdîTV is a non-profit, community service for the Kurdish language. Upload audio
-or video in **any language** and get a Kurdish (Kurmancî / Soranî) voice-over,
-contribute your voice to train better Kurdish speech models, or generate short
-AI videos from an image and a prompt.
+## What it is (2026-10)
 
-The web UI is available in **6 languages** — English, Soranî (کوردیی سۆرانی),
-Kurmancî, Türkçe, فارسی and العربية — with full RTL support.
+| Page / API | What it does |
+|---|---|
+| **`/`** | Type Kurmancî or Soranî, hear it read. |
+| **`/bexsh`** | Donate your voice: sign in with a Pezkuwi wallet, accept the CC0 dedication once, read short sentences; check other donors' recordings. Two agreeing checks make a clip valid. |
+| `POST /api/tts` | Short text → MP3. Public, rate-limited. |
+| `POST /api/tts/jobs` | Up to an article → queued job → MP3. API key (`tools/apikey.py`). dks.news uses this. |
 
-## Features
+**The voice today is a stop-gap.** Meta's MMS-TTS models (CC-BY-NC 4.0) read
+until a voice trained on the donated recordings replaces them — a change of two
+values, `KTTS_MODEL_KMR` / `KTTS_MODEL_CKB` (`ktts/engine.py`).
 
-| Page | What it does |
-|------|--------------|
+**Data.** Donated recordings are CC0, kept as 48 kHz mono FLAC, trimmed and
+machine-checked (length, silence, clipping, a pace that fits the sentence).
+Sentences are CC0 too (`corpus/README.md`). Donors' wallet addresses never
+appear in published data.
+
+### Layout
+
+```
+app.py             FastAPI app: pages + routers
+ktts/normalize.py  Kurdish text → speakable text (numbers in words, per dialect)
+ktts/engine.py     MMS/VITS synthesis in worker processes, MP3, cache
+ktts/jobs.py       long-text jobs in SQLite (survive restarts)
+ktts/api.py        /api/tts...
+ktts/auth.py       wallet sign-in (same contract as dks.news)
+ktts/donate.py     voice donation + review
+sigverify/         sr25519 signature check (Node: Pezkuwi signs in `bizinikiwi`)
+web/chain/         wallet adapter source → static/kt-chain.js, kt-wc.js (npm run build)
+ops/               systemd unit, nginx, host-side deploy script
+tools/             corpus loader, API keys
+```
+
+### Performance (measured on the host: 6 vCPU EPYC, no GPU)
+
+MMS VITS runs fastest sentence by sentence at 2 torch threads per process
+(0.6× real time); more threads make it slower. Hence one interactive worker
+and two batch workers, 2 threads each.
+
+### Deploy
+
+Merge to `main`, then `gh workflow run deploy.yml`. The runner's key can only
+run `deploy <sha>` on the host (`ops/deploy.sh`), which fetches that commit
+itself, refuses it unless it is on `main`, and switches only once the new tree
+starts healthy.
+
+The earlier dubbing service (`server.py`, `dub_pipeline.py`, `/create`) is
+not deployed by this app; it stays in the tree until it is ported.
+
+------|--------------|
 | **`/`** Dubbing | Any-language audio/video → Kurdish dub. Whisper → NLLB → MMS-TTS pipeline. |
 | **`/contribute`** | Voice donation (read Kurdish, record/upload) + HEZ development fund + Pezkuwi Wallet. |
 | **`/create`** | Image + prompt → short AI video via Google Veo. |

@@ -10,33 +10,52 @@ concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
 
-# Minimal permissions (principle of least privilege)
 permissions:
   contents: read
 
 jobs:
   python:
-    name: Python — lint & syntax
+    name: Python — lint, normalisation, donation flow
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
       - uses: actions/setup-python@v6
         with:
-          python-version: "3.11"
-      - name: Install dev tools
-        run: pip install -r requirements-dev.txt
-      - name: Ruff lint
-        run: ruff check .
-      - name: Syntax check
-        run: python -m py_compile server.py dub_pipeline.py gemini_video.py
-
-  frontend:
-    name: Frontend — JS syntax
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
+          python-version: "3.12"
       - uses: actions/setup-node@v6
         with:
           node-version: "20"
-      - name: i18n.js syntax check
-        run: node --check static/i18n.js
+      - name: Tools
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+          pip install -q -r requirements-dev.txt
+          pip install -q fastapi==0.118.0 python-multipart==0.0.20 numpy==2.3.3 httpx pytest
+      - name: Ruff
+        run: ruff check .
+      - name: Syntax
+        run: python -m py_compile app.py ktts/*.py tools/*.py
+      # Real Pezkuwi signatures: the bizinikiwi context, the mobile wallet's
+      # substrate context, and five ways of being wrong.
+      - name: Signature verifier
+        run: |
+          npm ci --silent --no-audit --no-fund --prefix sigverify
+          node sigverify/test.mjs
+      - name: Normalisation and donation flow
+        run: python -m pytest -q tests
+
+  frontend:
+    name: Frontend — JS syntax and inline styles
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "20"
+      - run: node --check static/kt.js
+      # The CSP allows no inline style; one would silently not apply.
+      - name: No inline styles in pages
+        run: "! grep -n 'style=\"' templates/speak.html templates/bexsh.html templates/_*.html"
