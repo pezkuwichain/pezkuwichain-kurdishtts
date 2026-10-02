@@ -7,6 +7,11 @@
   'use strict';
 
   var LANGS = ['kmr', 'ckb', 'tr', 'en', 'fa', 'ar'];
+  // Where to get a wallet, for someone who has none. Both measured live (200).
+  var STORE = {
+    android: 'https://play.google.com/store/apps/details?id=io.pezkuwichain.wallet',
+    extension: 'https://chromewebstore.google.com/detail/pezkuwi%7Bjs%7D-extension/fbnboicjjeebjhgnapneaeccpgjcdibn'
+  };
   var RTL = { ckb: 1, fa: 1, ar: 1 };
   var T = {
     navSpeak:   { kmr: 'Bixwîne', ckb: 'بیخوێنەوە', tr: 'Seslendir', en: 'Read aloud', fa: 'خواندن', ar: 'اقرأ بصوت' },
@@ -15,12 +20,12 @@
     signOut:    { kmr: 'Derkeve', ckb: 'چوونەدەرەوە', tr: 'Çıkış', en: 'Sign out', fa: 'خروج', ar: 'خروج' },
     // read aloud
     speakTitle: { kmr: 'Nivîsa Kurdî bi deng bixwîne', ckb: 'دەقی کوردی بە دەنگ بخوێنەرەوە', tr: 'Kürtçe metni sesli oku', en: 'Read Kurdish text aloud', fa: 'متن کردی را با صدا بخوان', ar: 'اقرأ النص الكردي بصوت عالٍ' },
-    speakLead:  { kmr: 'Kurmancî an Soranî binivîse, em ê bixwînin. Ev deng hîn ne yê me ye: dema ku têra xwe deng bên bexşîn, dengê civaka Kurd dê bibe dengê vê malperê.',
-                  ckb: 'بە کورمانجی یان سۆرانی بنووسە، ئێمە دەیخوێنینەوە. ئەم دەنگە هێشتا هی ئێمە نییە: کاتێک دەنگی پێویست ببەخشرێت، دەنگی کۆمەڵگەی کورد دەبێتە دەنگی ئەم ماڵپەڕە.',
-                  tr: 'Kurmancî ya da Soranî yazın, okuyalım. Bu ses henüz bizim değil: yeterince ses bağışlandığında Kürt toplumunun sesi bu sitenin sesi olacak.',
-                  en: 'Write in Kurmancî or Soranî and we read it. This voice is not ours yet: once enough voices are donated, the Kurdish community’s own voice becomes this site’s voice.',
-                  fa: 'به کرمانجی یا سورانی بنویسید تا بخوانیم. این صدا هنوز از ما نیست: وقتی صدای کافی اهدا شود، صدای جامعه کرد صدای این سایت می‌شود.',
-                  ar: 'اكتب بالكرمانجية أو السورانية وسنقرؤه. هذا الصوت ليس صوتنا بعد: حين تُتبرَّع أصوات كافية يصبح صوت المجتمع الكردي صوت هذا الموقع.' },
+    speakLead:  { kmr: 'Kurmancî an Soranî binivîse, em ê bixwînin. Ev deng hîn ne yê me ye: dema ku têra xwe deng bên bexşîn, dengê neteweya Kurd dê bibe dengê vê malperê.',
+                  ckb: 'بە کورمانجی یان سۆرانی بنووسە، ئێمە دەیخوێنینەوە. ئەم دەنگە هێشتا هی ئێمە نییە: کاتێک دەنگی پێویست ببەخشرێت، دەنگی نەتەوەی کورد دەبێتە دەنگی ئەم ماڵپەڕە.',
+                  tr: 'Kurmancî ya da Soranî yazın, okuyalım. Bu ses henüz bizim değil: yeterince ses bağışlandığında Kürt ulusunun sesi bu sitenin sesi olacak.',
+                  en: 'Write in Kurmancî or Soranî and we read it. This voice is not ours yet: once enough voices are donated, the Kurdish nation’s own voice becomes this site’s voice.',
+                  fa: 'به کرمانجی یا سورانی بنویسید تا بخوانیم. این صدا هنوز از ما نیست: وقتی صدای کافی اهدا شود، صدای ملت کرد صدای این سایت می‌شود.',
+                  ar: 'اكتب بالكرمانجية أو السورانية وسنقرؤه. هذا الصوت ليس صوتنا بعد: حين تُتبرَّع أصوات كافية يصبح صوت الأمة الكردية صوت هذا الموقع.' },
     dialect:    { kmr: 'Zarava', ckb: 'زاراوە', tr: 'Lehçe', en: 'Dialect', fa: 'گویش', ar: 'اللهجة' },
     kmr:        { kmr: 'Kurmancî', ckb: 'کورمانجی', tr: 'Kurmancî', en: 'Kurmanji', fa: 'کرمانجی', ar: 'الكرمانجية' },
     ckb:        { kmr: 'Soranî', ckb: 'سۆرانی', tr: 'Soranî', en: 'Sorani', fa: 'سورانی', ar: 'السورانية' },
@@ -31,12 +36,12 @@
     sampleCkb:  { kmr: 'زمان ناسنامەی ئێمەیە. پێکەوە دەیپارێزین و گەشەی پێدەدەین.' },
     // donate
     dTitle:     { kmr: 'Dengê xwe bexşî zimanê xwe bike', ckb: 'دەنگت بە زمانەکەت ببەخشە', tr: 'Sesini diline bağışla', en: 'Give your voice to your language', fa: 'صدایت را به زبانت هدیه کن', ar: 'امنح صوتك للغتك' },
-    dLead:      { kmr: 'Hevokên kurt bi dengê xwe bixwîne. Her tomar dibe beşek ji dengê Kurdî yê pêşîn ku ji aliyê gelê Kurd ve hatiye çêkirin, û ji her kesî re azad e (CC0).',
-                  ckb: 'ڕستەی کورت بە دەنگی خۆت بخوێنەوە. هەر تۆمارێک دەبێتە بەشێک لە یەکەم دەنگی کوردی کە گەلی کورد خۆی دروستی دەکات، و بۆ هەمووان ئازادە (CC0).',
-                  tr: 'Kısa cümleleri kendi sesinle oku. Her kayıt, Kürt halkının kendi yaptığı ilk Kürtçe sesin parçası olur ve herkese açıktır (CC0).',
-                  en: 'Read short sentences in your own voice. Every recording becomes part of the first Kurdish voice made by the Kurdish people, free for everyone (CC0).',
-                  fa: 'جمله‌های کوتاه را با صدای خودت بخوان. هر ضبط بخشی از نخستین صدای کردی می‌شود که مردم کرد خود می‌سازند، و برای همه آزاد است (CC0).',
-                  ar: 'اقرأ جملًا قصيرة بصوتك. يصبح كل تسجيل جزءًا من أول صوت كردي يصنعه الشعب الكردي، حرًّا للجميع (CC0).' },
+    dLead:      { kmr: 'Hevokên kurt bi dengê xwe bixwîne. Her tomar dibe beşek ji dengê Kurdî yê pêşîn ku ji aliyê neteweya Kurd ve hatiye çêkirin, û ji her kesî re azad e (CC0).',
+                  ckb: 'ڕستەی کورت بە دەنگی خۆت بخوێنەوە. هەر تۆمارێک دەبێتە بەشێک لە یەکەم دەنگی کوردی کە نەتەوەی کورد خۆی دروستی دەکات، و بۆ هەمووان ئازادە (CC0).',
+                  tr: 'Kısa cümleleri kendi sesinle oku. Her kayıt, Kürt ulusunun kendi yaptığı ilk Kürtçe sesin parçası olur ve herkese açıktır (CC0).',
+                  en: 'Read short sentences in your own voice. Every recording becomes part of the first Kurdish voice made by the Kurdish nation, free for everyone (CC0).',
+                  fa: 'جمله‌های کوتاه را با صدای خودت بخوان. هر ضبط بخشی از نخستین صدای کردی می‌شود که ملت کرد خود می‌سازد، و برای همه آزاد است (CC0).',
+                  ar: 'اقرأ جملًا قصيرة بصوتك. يصبح كل تسجيل جزءًا من أول صوت كردي تصنعه الأمة الكردية، حرًّا للجميع (CC0).' },
     hours:      { kmr: 'saet hatin tomarkirin', ckb: 'کاتژمێر تۆمارکراوە', tr: 'saat kaydedildi', en: 'hours recorded', fa: 'ساعت ضبط شده', ar: 'ساعة مسجّلة' },
     validHours: { kmr: 'saet hatin pejirandin', ckb: 'کاتژمێر پەسەندکراوە', tr: 'saat doğrulandı', en: 'hours validated', fa: 'ساعت تأیید شده', ar: 'ساعة مُتحقَّق منها' },
     speakers:   { kmr: 'bexşkar', ckb: 'بەخشەر', tr: 'bağışçı', en: 'donors', fa: 'اهداکننده', ar: 'متبرّع' },
@@ -99,6 +104,12 @@
     wScan:      { kmr: 'Pezkuwi Wallet → WalletConnect → kodê bixwîne', ckb: 'Pezkuwi Wallet → WalletConnect → کۆدەکە بخوێنەوە', tr: 'Pezkuwi Wallet → WalletConnect → kodu okut', en: 'Pezkuwi Wallet → WalletConnect → scan the code', fa: 'Pezkuwi Wallet → WalletConnect → کد را اسکن کنید', ar: 'Pezkuwi Wallet ← WalletConnect ← امسح الرمز' },
     wOpenApp:   { kmr: 'Pezkuwi Wallet veke', ckb: 'Pezkuwi Wallet بکەرەوە', tr: 'Pezkuwi Wallet’ı aç', en: 'Open Pezkuwi Wallet', fa: 'Pezkuwi Wallet را باز کن', ar: 'افتح Pezkuwi Wallet' },
     wRejected:  { kmr: 'Te daxwaz red kir.', ckb: 'داواکارییەکەت ڕەتکردەوە.', tr: 'İsteği reddettin.', en: 'You declined the request.', fa: 'درخواست را رد کردید.', ar: 'رفضت الطلب.' },
+    needDialect:{ kmr: 'Zaravayê xwe hilbijêre.', ckb: 'زاراوەکەت هەڵبژێرە.', tr: 'Lehçeni seç.', en: 'Choose your dialect.', fa: 'گویش خود را انتخاب کنید.', ar: 'اختر لهجتك.' },
+    needConsent:{ kmr: 'Razîbûna CC0 bipejirîne.', ckb: 'ڕەزامەندیی CC0 پەسەند بکە.', tr: 'CC0 onayını işaretle.', en: 'Tick the CC0 consent.', fa: 'رضایت CC0 را تأیید کنید.', ar: 'وافق على إهداء CC0.' },
+    required:   { kmr: '(pêwîst)', ckb: '(پێویست)', tr: '(zorunlu)', en: '(required)', fa: '(الزامی)', ar: '(مطلوب)' },
+    getWallet:  { kmr: 'Cuzdana te tune? Belaş daxe:', ckb: 'جزدانت نییە؟ بەخۆڕایی دایبەزێنە:', tr: 'Cüzdanın yok mu? Ücretsiz indir:', en: 'No wallet yet? Get it free:', fa: 'کیف پول ندارید؟ رایگان دانلود کنید:', ar: 'لا تملك محفظة؟ نزّلها مجانًا:' },
+    dlAndroid:  { kmr: 'Pezkuwi Wallet — Android', ckb: 'Pezkuwi Wallet — ئەندرۆید', tr: 'Pezkuwi Wallet — Android', en: 'Pezkuwi Wallet — Android', fa: 'Pezkuwi Wallet — اندروید', ar: 'Pezkuwi Wallet — أندرويد' },
+    dlExt:      { kmr: 'Pezkuwi Extension — Chrome', ckb: 'Pezkuwi Extension — Chrome', tr: 'Pezkuwi Extension — Chrome', en: 'Pezkuwi Extension — Chrome', fa: 'Pezkuwi Extension — Chrome', ar: 'Pezkuwi Extension — Chrome' },
     close:      { kmr: 'Bigire', ckb: 'داخستن', tr: 'Kapat', en: 'Close', fa: 'بستن', ar: 'إغلاق' },
     footer:     { kmr: 'Projeyeke ne-bazirganî ya Dîjîtal Kurdistanê. Dane: CC0. Kod: vekirî.', ckb: 'پڕۆژەیەکی ناقازانجی کوردستانی دیجیتاڵ. داتا: CC0. کۆد: کراوە.', tr: 'Dijital Kurdistan’ın kâr amacı gütmeyen projesi. Veri: CC0. Kod: açık.', en: 'A non-profit project of Digital Kurdistan. Data: CC0. Code: open.', fa: 'پروژه‌ای غیرانتفاعی از کردستان دیجیتال. داده: CC0. کد: باز.', ar: 'مشروع غير ربحي من كردستان الرقمية. البيانات: CC0. الشيفرة: مفتوحة.' }
   };
@@ -160,6 +171,20 @@
     else b.appendChild(h('span', null, say('signIn')));
   }
 
+  /** "No wallet yet? Get it:" with the two store links, as a block. */
+  function storeLinks() {
+    var box = h('div', 'getwallet');
+    box.appendChild(h('span', 'note', say('getWallet')));
+    var row = h('div', 'row');
+    [['android', 'dlAndroid'], ['extension', 'dlExt']].forEach(function (x) {
+      var a = h('a', 'btn btn--ghost btn--sm', say(x[1]));
+      a.href = STORE[x[0]]; a.target = '_blank'; a.rel = 'noopener';
+      row.appendChild(a);
+    });
+    box.appendChild(row);
+    return box;
+  }
+
   var sheet = null;
   function openSheet() {
     if (!sheet) {
@@ -192,6 +217,7 @@
       var t2 = h('span'); t2.appendChild(h('b', null, say('wApp'))); t2.appendChild(h('small', null, say('wAppSub'))); app.appendChild(t2);
       app.onclick = function () { viaApp(); };
       box.appendChild(ext); box.appendChild(app);
+      box.appendChild(storeLinks());
       ext.focus();
     } else if (state === 'accounts') {
       data.forEach(function (a) {
@@ -208,7 +234,7 @@
       box.appendChild(h('p', null, say('wWaiting')));
     } else if (state === 'error') {
       box.appendChild(h('p', 'msg msg--bad', data.text));
-      if (data.install) { var i = h('a', 'btn', say('wInstall')); i.href = 'https://chromewebstore.google.com/search/pezkuwi'; i.target = '_blank'; i.rel = 'noopener'; box.appendChild(i); }
+      if (data.install) box.appendChild(storeLinks());
       var back = h('button', 'btn btn--ghost', '←'); back.onclick = function () { renderSheet('pick'); }; box.appendChild(back);
     }
   }
@@ -320,16 +346,30 @@
 
     // profile + consent
     var pdial = prof.querySelector('[data-dialect]'), pdialect = null;
+    var hint = document.getElementById('startHint');
+    function pick(v) {
+      pdialect = v;
+      pdial.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-checked', x.dataset.v === v ? 'true' : 'false'); });
+    }
+    // The dialect is required and was the one thing nobody saw they had to
+    // choose: Start stayed grey with nothing saying why. It now starts on the
+    // dialect of the page's language, and what is still missing is spelt out.
+    pick(lang === 'ckb' ? 'ckb' : 'kmr');
     pdial.querySelectorAll('button').forEach(function (b) {
-      b.addEventListener('click', function () {
-        pdialect = b.dataset.v;
-        pdial.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-checked', x === b ? 'true' : 'false'); });
-        check();
-      });
+      b.addEventListener('click', function () { pick(b.dataset.v); check(); });
     });
     var consent = document.getElementById('consent'), startBtn = document.getElementById('startBtn');
-    function check() { startBtn.disabled = !(pdialect && consent.checked); }
+    function check() {
+      var missing = [];
+      if (!pdialect) missing.push(say('needDialect'));
+      if (!consent.checked) missing.push(say('needConsent'));
+      startBtn.disabled = missing.length > 0;
+      hint.textContent = missing.join(' ');
+      hint.hidden = !missing.length;
+    }
     consent.addEventListener('change', check);
+    document.addEventListener('kt-lang', check);
+    check();
     startBtn.addEventListener('click', function () {
       api('POST', '/api/donate/profile', { dialect: pdialect, gender: document.getElementById('gender').value,
         age_band: document.getElementById('ageband').value, region: document.getElementById('region').value, consent: true })
