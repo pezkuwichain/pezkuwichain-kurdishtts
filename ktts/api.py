@@ -90,7 +90,14 @@ def _check(body: SpeakIn, limit: int) -> None:
 
 
 def _audio(path: Path) -> FileResponse:
-    return FileResponse(path, media_type="audio/mpeg",
+    # Every audio path is built from a SHA-256 hash, but the check is made here
+    # on the final path, not trusted to the caller: it must resolve inside the
+    # cache directory, whatever produced it.
+    root = os.path.realpath(eng.CACHE_DIR)
+    real = os.path.realpath(path)
+    if not real.startswith(root + os.sep) or not os.path.isfile(real):
+        raise HTTPException(404, "not found")
+    return FileResponse(real, media_type="audio/mpeg",
                         headers={"Cache-Control": "public, max-age=31536000, immutable"})
 
 
@@ -131,10 +138,7 @@ def status(jid: str, authorization: str | None = Header(None)):
 def audio(key: str):
     if not re.fullmatch(r"[0-9a-f]{64}", key):
         raise HTTPException(404, "not found")
-    path = eng.Engine.cache_path(key)
-    if not path.exists():
-        raise HTTPException(404, "not found")
-    return _audio(path)
+    return _audio(eng.Engine.cache_path(key))
 
 
 @router.get("/api/tts/health")
