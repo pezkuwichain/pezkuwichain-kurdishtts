@@ -1,6 +1,7 @@
 """Voice donation: read a sentence, record it, check others' recordings.
 
-A donor signs in with a wallet, accepts the CC0 dedication once, says which
+A donor signs in with a wallet, gives the five confirmations of
+legal/consent.md once (recordings train our own models only), says which
 dialect they speak, and reads sentences from a CC0 corpus (Common Voice's
 sentence collector). Every recording is checked here for what a machine can
 check — length, silence, clipping, a reading speed that fits the sentence —
@@ -27,7 +28,10 @@ from pydantic import BaseModel
 from . import auth
 
 CLIPS_DIR = Path(os.environ.get("KTTS_CLIPS", "/opt/kurdishtts/data/clips"))
-CONSENT_VERSION = "cc0-2026-10"
+# Bumped whenever the consent text changes; a donor who accepted an older text
+# is asked again before recording more. cc0-2026-10 (open data) was withdrawn
+# on 2026-10-03: recordings are for training our own models only.
+CONSENT_VERSION = "train-only-2026-10-03"   # must equal legal/consent.md
 DIALECTS = ("kmr", "ckb")
 SR = 48000
 MAX_UPLOAD = 6 * 1024 * 1024
@@ -104,7 +108,11 @@ class ProfileIn(BaseModel):
     gender: str = ""
     age_band: str = ""
     region: str = ""
-    consent: bool
+    # The five confirmations of legal/consent.md, in its order: 18+, own voice,
+    # explicit consent, deletion and its limit, model service/release. Every
+    # one must be true; they are never inferred from a single "I agree".
+    boxes: list[bool] = []
+    lang: str = "en"
 
 
 @router.post("/api/donate/profile")
@@ -112,12 +120,15 @@ def profile(body: ProfileIn, kt_ses: str | None = Cookie(None), x_csrf: str | No
     addr = auth.require(kt_ses, x_csrf)
     if body.dialect not in DIALECTS or body.gender not in GENDERS or body.age_band not in AGES:
         raise HTTPException(400, "profile")
-    if not body.consent:
+    if len(body.boxes) != 5 or not all(body.boxes):
         raise HTTPException(400, "consent")
+    now = int(time.time())
     with STATE["store"].db() as db:
+        db.execute("INSERT INTO consent_log (addr, version, lang, boxes, at) VALUES (?,?,?,?,?)",
+                   (addr, CONSENT_VERSION, body.lang[:5], "".join("1" if b else "0" for b in body.boxes), now))
         db.execute("UPDATE speaker SET dialect=?, gender=?, age_band=?, region=?, consent_version=?, consent_at=? "
                    "WHERE addr=?", (body.dialect, body.gender, body.age_band, body.region.strip()[:60],
-                                    CONSENT_VERSION, int(time.time()), addr))
+                                    CONSENT_VERSION, now, addr))
     return {"ok": True, "consent_version": CONSENT_VERSION}
 
 
@@ -195,17 +206,23 @@ def review(kt_ses: str | None = Cookie(None)):
           ORDER BY (c.up + c.down) DESC, c.created LIMIT 1""", (sp["dialect"], addr, addr)).fetchone()
     if not r:
         return {"clip": None}
+    # The recording is opened to this reviewer, for this clip, for 30 minutes,
+    # and to no one else: a signed-in wallet cannot walk the clip ids.
+    with STATE["store"].db() as db:
+        db.execute("INSERT OR REPLACE INTO review_grant (clip_id, addr, exp) VALUES (?,?,?)",
+                   (r["id"], addr, int(time.time()) + 1800))
     return {"clip": {**dict(r), "audio": f"/api/donate/audio/{r['id']}"}}
 
 
 @router.get("/api/donate/audio/{clip_id}")
 def clip_audio(clip_id: int, kt_ses: str | None = Cookie(None)):
-    auth.require(kt_ses, None, write=False)
+    addr = auth.require(kt_ses, None, write=False)
     with STATE["store"].db() as db:
-        r = db.execute("SELECT file FROM clip WHERE id=?", (clip_id,)).fetchone()
+        r = db.execute("""SELECT c.file FROM clip c JOIN review_grant g ON g.clip_id = c.id
+                          WHERE c.id=? AND g.addr=? AND g.exp > ?""", (clip_id, addr, int(time.time()))).fetchone()
     if not r:
         raise HTTPException(404, "clip")
-    return FileResponse(CLIPS_DIR / r["file"], media_type="audio/flac", headers={"Cache-Control": "private, max-age=3600"})
+    return FileResponse(CLIPS_DIR / r["file"], media_type="audio/flac", headers={"Cache-Control": "private, no-store"})
 
 
 class VoteIn(BaseModel):
@@ -243,6 +260,40 @@ def vote(body: VoteIn, kt_ses: str | None = Cookie(None), x_csrf: str | None = H
         if status != "pending" and c["status"] == "pending":
             db.execute("UPDATE clip SET status=? WHERE id=?", (status, body.clip_id))
     return {"ok": True, "status": status}
+
+
+@router.post("/api/donate/forget")
+def forget(kt_ses: str | None = Cookie(None), x_csrf: str | None = Header(None)):
+    """Delete everything this donor gave: recordings (files and rows), their
+    votes on others' recordings, their profile and sessions. The votes they
+    cast are taken back out of the counts, so a clip decided by their vote
+    goes back to pending."""
+    addr = auth.require(kt_ses, x_csrf)
+    store = STATE["store"]
+    import hashlib
+    with store.db() as db:
+        files = [r["file"] for r in db.execute("SELECT file FROM clip WHERE addr=?", (addr,))]
+        mine = [r["id"] for r in db.execute("SELECT id FROM clip WHERE addr=?", (addr,))]
+        for cid, val in db.execute("SELECT clip_id, val FROM vote WHERE addr=?", (addr,)).fetchall():
+            if val == 1:
+                db.execute("UPDATE clip SET up = up - 1 WHERE id=?", (cid,))
+            else:
+                db.execute("UPDATE clip SET down = down - 1 WHERE id=?", (cid,))
+            up, down = db.execute("SELECT up, down FROM clip WHERE id=?", (cid,)).fetchone()
+            status = "valid" if (up >= VOTES_TO_DECIDE and up > down) else \
+                     "invalid" if (down >= VOTES_TO_DECIDE and down > up) else "pending"
+            db.execute("UPDATE clip SET status=? WHERE id=?", (status, cid))
+        db.execute("DELETE FROM vote WHERE addr=?", (addr,))
+        db.executemany("DELETE FROM vote WHERE clip_id=?", [(c,) for c in mine])
+        db.execute("DELETE FROM clip WHERE addr=?", (addr,))
+        db.execute("DELETE FROM session WHERE addr=?", (addr,))
+        db.execute("DELETE FROM speaker WHERE addr=?", (addr,))
+        db.execute("DELETE FROM review_grant WHERE addr=?", (addr,))
+        db.execute("INSERT INTO deletion_log (addr_hash, clips, at) VALUES (?,?,?)",
+                   (hashlib.sha256(addr.encode()).hexdigest(), len(files), int(time.time())))
+    for f in files:
+        (CLIPS_DIR / f).unlink(missing_ok=True)
+    return {"ok": True, "deleted_recordings": len(files)}
 
 
 @router.get("/api/donate/stats")

@@ -36,12 +36,12 @@
     sampleCkb:  { kmr: 'زمان ناسنامەی ئێمەیە. پێکەوە دەیپارێزین و گەشەی پێدەدەین.' },
     // donate
     dTitle:     { kmr: 'Dengê xwe bexşî zimanê xwe bike', ckb: 'دەنگت بە زمانەکەت ببەخشە', tr: 'Sesini diline bağışla', en: 'Give your voice to your language', fa: 'صدایت را به زبانت هدیه کن', ar: 'امنح صوتك للغتك' },
-    dLead:      { kmr: 'Hevokên kurt bi dengê xwe bixwîne. Her tomar dibe beşek ji dengê Kurdî yê pêşîn ku ji aliyê neteweya Kurd ve hatiye çêkirin, û ji her kesî re azad e (CC0).',
-                  ckb: 'ڕستەی کورت بە دەنگی خۆت بخوێنەوە. هەر تۆمارێک دەبێتە بەشێک لە یەکەم دەنگی کوردی کە نەتەوەی کورد خۆی دروستی دەکات، و بۆ هەمووان ئازادە (CC0).',
-                  tr: 'Kısa cümleleri kendi sesinle oku. Her kayıt, Kürt ulusunun kendi yaptığı ilk Kürtçe sesin parçası olur ve herkese açıktır (CC0).',
-                  en: 'Read short sentences in your own voice. Every recording becomes part of the first Kurdish voice made by the Kurdish nation, free for everyone (CC0).',
-                  fa: 'جمله‌های کوتاه را با صدای خودت بخوان. هر ضبط بخشی از نخستین صدای کردی می‌شود که ملت کرد خود می‌سازد، و برای همه آزاد است (CC0).',
-                  ar: 'اقرأ جملًا قصيرة بصوتك. يصبح كل تسجيل جزءًا من أول صوت كردي تصنعه الأمة الكردية، حرًّا للجميع (CC0).' },
+    dLead:      { kmr: 'Hevokên kurt bi dengê xwe bixwîne. Her tomar dibe beşek ji dengê Kurdî yê pêşîn ku ji aliyê neteweya Kurd ve hatiye çêkirin, û tenê ji bo perwerdekirina dengê me yê Kurdî tê bikaranîn.',
+                  ckb: 'ڕستەی کورت بە دەنگی خۆت بخوێنەوە. هەر تۆمارێک دەبێتە بەشێک لە یەکەم دەنگی کوردی کە نەتەوەی کورد خۆی دروستی دەکات، و تەنها بۆ ڕاهێنانی دەنگی کوردیی ئێمە بەکار دێت.',
+                  tr: 'Kısa cümleleri kendi sesinle oku. Her kayıt, Kürt ulusunun kendi yaptığı ilk Kürtçe sesin parçası olur ve yalnızca Kürtçe sesimizi eğitmek için kullanılır.',
+                  en: 'Read short sentences in your own voice. Every recording becomes part of the first Kurdish voice made by the Kurdish nation, used only to train our Kurdish voice.',
+                  fa: 'جمله‌های کوتاه را با صدای خودت بخوان. هر ضبط بخشی از نخستین صدای کردی می‌شود که ملت کرد خود می‌سازد، و فقط برای آموزش صدای کردی ما به کار می‌رود.',
+                  ar: 'اقرأ جملًا قصيرة بصوتك. يصبح كل تسجيل جزءًا من أول صوت كردي تصنعه الأمة الكردية، ويُستخدم فقط لتدريب صوتنا الكردي.' },
     hours:      { kmr: 'saet hatin tomarkirin', ckb: 'کاتژمێر تۆمارکراوە', tr: 'saat kaydedildi', en: 'hours recorded', fa: 'ساعت ضبط شده', ar: 'ساعة مسجّلة' },
     validHours: { kmr: 'saet hatin pejirandin', ckb: 'کاتژمێر پەسەندکراوە', tr: 'saat doğrulandı', en: 'hours validated', fa: 'ساعت تأیید شده', ar: 'ساعة مُتحقَّق منها' },
     speakers:   { kmr: 'bexşkar', ckb: 'بەخشەر', tr: 'bağışçı', en: 'donors', fa: 'اهداکننده', ar: 'متبرّع' },
@@ -61,12 +61,6 @@
     none:       { kmr: '—', ckb: '—', tr: '—', en: '—', fa: '—', ar: '—' },
     age:        { kmr: 'Temen (ne mecbûrî)', ckb: 'تەمەن (ئارەزوومەندانە)', tr: 'Yaş (isteğe bağlı)', en: 'Age (optional)', fa: 'سن (اختیاری)', ar: 'العمر (اختياري)' },
     region:     { kmr: 'Herêm / bajar (ne mecbûrî)', ckb: 'ناوچە / شار (ئارەزوومەندانە)', tr: 'Bölge / şehir (isteğe bağlı)', en: 'Region / city (optional)', fa: 'منطقه / شهر (اختیاری)', ar: 'المنطقة / المدينة (اختياري)' },
-    consent:    { kmr: 'Ez 18 salî an mezintir im. Ev deng yê min e. Ez tomarên xwe di bin CC0 de (bêyî tu mafî, ji bo hemû karanînan) didim, û dizanim ku ew dikarin wekî daneyeke vekirî bên weşandin. Navnîşana cuzdana min tê veşartin.',
-                  ckb: 'من ١٨ ساڵ یان زیاترم. ئەم دەنگە هی خۆمە. تۆمارەکانم بەپێی CC0 دەبەخشم (بێ هیچ مافێک، بۆ هەموو بەکارهێنانێک) و دەزانم کە وەک داتای کراوە بڵاو دەکرێنەوە. ناونیشانی جزدانەکەم دەشاردرێتەوە.',
-                  tr: '18 yaşında ya da büyüğüm. Bu ses benim. Kayıtlarımı CC0 altında (hiçbir hak saklı tutmadan, her kullanım için) bağışlıyorum ve açık veri olarak yayımlanabileceklerini biliyorum. Cüzdan adresim gizlenir.',
-                  en: 'I am 18 or older. This voice is my own. I dedicate my recordings under CC0 (no rights reserved, for any use) and know they may be published as open data. My wallet address is kept hidden.',
-                  fa: 'من ۱۸ سال یا بیشتر دارم. این صدا از خودم است. ضبط‌هایم را تحت CC0 (بدون حفظ هیچ حقی، برای هر استفاده‌ای) اهدا می‌کنم و می‌دانم ممکن است به‌عنوان داده باز منتشر شوند. نشانی کیف پولم پنهان می‌ماند.',
-                  ar: 'عمري 18 عامًا أو أكثر. هذا صوتي. أهب تسجيلاتي بموجب CC0 (دون أي حقوق محفوظة، لأي استخدام) وأعلم أنها قد تُنشر بيانات مفتوحة. يبقى عنوان محفظتي مخفيًا.' },
     start:      { kmr: 'Dest pê bike', ckb: 'دەست پێبکە', tr: 'Başla', en: 'Start', fa: 'شروع', ar: 'ابدأ' },
     tabRecord:  { kmr: 'Tomar bike', ckb: 'تۆمار بکە', tr: 'Kaydet', en: 'Record', fa: 'ضبط', ar: 'سجّل' },
     tabReview:  { kmr: 'Guhdarî bike û bipejirîne', ckb: 'گوێ بگرە و پەسەندی بکە', tr: 'Dinle ve doğrula', en: 'Listen and check', fa: 'گوش بده و تأیید کن', ar: 'استمع وتحقّق' },
@@ -105,13 +99,23 @@
     wOpenApp:   { kmr: 'Pezkuwi Wallet veke', ckb: 'Pezkuwi Wallet بکەرەوە', tr: 'Pezkuwi Wallet’ı aç', en: 'Open Pezkuwi Wallet', fa: 'Pezkuwi Wallet را باز کن', ar: 'افتح Pezkuwi Wallet' },
     wRejected:  { kmr: 'Te daxwaz red kir.', ckb: 'داواکارییەکەت ڕەتکردەوە.', tr: 'İsteği reddettin.', en: 'You declined the request.', fa: 'درخواست را رد کردید.', ar: 'رفضت الطلب.' },
     needDialect:{ kmr: 'Zaravayê xwe hilbijêre.', ckb: 'زاراوەکەت هەڵبژێرە.', tr: 'Lehçeni seç.', en: 'Choose your dialect.', fa: 'گویش خود را انتخاب کنید.', ar: 'اختر لهجتك.' },
-    needConsent:{ kmr: 'Razîbûna CC0 bipejirîne.', ckb: 'ڕەزامەندیی CC0 پەسەند بکە.', tr: 'CC0 onayını işaretle.', en: 'Tick the CC0 consent.', fa: 'رضایت CC0 را تأیید کنید.', ar: 'وافق على إهداء CC0.' },
+    needConsent:{ kmr: 'Her pênc qutiyan nîşan bike.', ckb: 'هەر پێنج خانەکە نیشانە بکە.', tr: 'Beş kutunun hepsini işaretle.', en: 'Tick all five boxes.', fa: 'هر پنج گزینه را علامت بزنید.', ar: 'ضع علامة على الخانات الخمس.' },
     required:   { kmr: '(pêwîst)', ckb: '(پێویست)', tr: '(zorunlu)', en: '(required)', fa: '(الزامی)', ar: '(مطلوب)' },
     getWallet:  { kmr: 'Cuzdana te tune? Belaş daxe:', ckb: 'جزدانت نییە؟ بەخۆڕایی دایبەزێنە:', tr: 'Cüzdanın yok mu? Ücretsiz indir:', en: 'No wallet yet? Get it free:', fa: 'کیف پول ندارید؟ رایگان دانلود کنید:', ar: 'لا تملك محفظة؟ نزّلها مجانًا:' },
     dlAndroid:  { kmr: 'Pezkuwi Wallet — Android', ckb: 'Pezkuwi Wallet — ئەندرۆید', tr: 'Pezkuwi Wallet — Android', en: 'Pezkuwi Wallet — Android', fa: 'Pezkuwi Wallet — اندروید', ar: 'Pezkuwi Wallet — أندرويد' },
     dlExt:      { kmr: 'Pezkuwi Extension — Chrome', ckb: 'Pezkuwi Extension — Chrome', tr: 'Pezkuwi Extension — Chrome', en: 'Pezkuwi Extension — Chrome', fa: 'Pezkuwi Extension — Chrome', ar: 'Pezkuwi Extension — Chrome' },
+    forget:     { kmr: 'Tomarên min jê bibe', ckb: 'تۆمارەکانم بسڕەوە', tr: 'Kayıtlarımı sil', en: 'Delete my recordings', fa: 'ضبط‌هایم را حذف کن', ar: 'احذف تسجيلاتي' },
+    forgetAsk:  { kmr: 'Hemû tomar, nirxandin û profîla te dê bi temamî bên jêbirin. Ev nayê vegerandin. Bidomîne?',
+                  ckb: 'هەموو تۆمار، هەڵسەنگاندن و پرۆفایلەکەت بە تەواوی دەسڕدرێنەوە. ناگەڕێتەوە. بەردەوام دەبیت؟',
+                  tr: 'Tüm kayıtların, oyların ve profilin kalıcı olarak silinecek. Geri alınamaz. Devam edilsin mi?',
+                  en: 'All your recordings, checks and profile will be permanently deleted. This cannot be undone. Continue?',
+                  fa: 'همه ضبط‌ها، بررسی‌ها و نمایه شما برای همیشه حذف می‌شود. قابل بازگشت نیست. ادامه می‌دهید؟',
+                  ar: 'ستُحذف جميع تسجيلاتك وتقييماتك وملفك نهائيًا. لا يمكن التراجع. هل تتابع؟' },
+    forgotten:  { kmr: 'Hat jêbirin.', ckb: 'سڕایەوە.', tr: 'Silindi.', en: 'Deleted.', fa: 'حذف شد.', ar: 'تم الحذف.' },
+    terms:      { kmr: 'Mercên bikaranînê', ckb: 'مەرجەکانی بەکارهێنان', tr: 'Kullanım Koşulları', en: 'Terms of Use', fa: 'شرایط استفاده', ar: 'شروط الاستخدام' },
+    privacy:    { kmr: 'Nepenî', ckb: 'تایبەتمەندی', tr: 'Gizlilik', en: 'Privacy', fa: 'حریم خصوصی', ar: 'الخصوصية' },
     close:      { kmr: 'Bigire', ckb: 'داخستن', tr: 'Kapat', en: 'Close', fa: 'بستن', ar: 'إغلاق' },
-    footer:     { kmr: 'Projeyeke ne-bazirganî ya Dîjîtal Kurdistanê. Dane: CC0. Kod: vekirî.', ckb: 'پڕۆژەیەکی ناقازانجی کوردستانی دیجیتاڵ. داتا: CC0. کۆد: کراوە.', tr: 'Dijital Kurdistan’ın kâr amacı gütmeyen projesi. Veri: CC0. Kod: açık.', en: 'A non-profit project of Digital Kurdistan. Data: CC0. Code: open.', fa: 'پروژه‌ای غیرانتفاعی از کردستان دیجیتال. داده: CC0. کد: باز.', ar: 'مشروع غير ربحي من كردستان الرقمية. البيانات: CC0. الشيفرة: مفتوحة.' }
+    footer:     { kmr: 'Projeyeke ne-bazirganî ya Dîjîtal Kurdistanê. Deng: MMS (Meta, CC BY-NC 4.0).', ckb: 'پڕۆژەیەکی ناقازانجی کوردستانی دیجیتاڵ. دەنگ: MMS (Meta، CC BY-NC 4.0).', tr: 'Dijital Kurdistan’ın kâr amacı gütmeyen projesi. Ses: MMS (Meta, CC BY-NC 4.0).', en: 'A non-profit project of Digital Kurdistan. Voice: MMS (Meta, CC BY-NC 4.0).', fa: 'پروژه‌ای غیرانتفاعی از کردستان دیجیتال. صدا: MMS (Meta، CC BY-NC 4.0).', ar: 'مشروع غير ربحي من كردستان الرقمية. الصوت: MMS (Meta، CC BY-NC 4.0).' }
   };
 
   // ── language ──────────────────────────────────────────────────────────────
@@ -358,21 +362,48 @@
     pdial.querySelectorAll('button').forEach(function (b) {
       b.addEventListener('click', function () { pick(b.dataset.v); check(); });
     });
-    var consent = document.getElementById('consent'), startBtn = document.getElementById('startBtn');
+    // The consent text is legal/consent.md, sent with the page: a paragraph and
+    // five separate boxes, all unticked, every one required.
+    var CONSENT = JSON.parse(document.getElementById('consentData').textContent);
+    var startBtn = document.getElementById('startBtn'), boxes = [];
+    function inline(el, text) {
+      // **bold** and [Privacy Policy] are the only markup the text uses.
+      el.textContent = '';
+      text.split(/(\*\*[^*]+\*\*|\[[^\]]+\])/).forEach(function (part) {
+        if (/^\*\*/.test(part)) el.appendChild(h('b', null, part.slice(2, -2)));
+        else if (/^\[/.test(part)) { var a = h('a', null, part.slice(1, -1)); a.href = '/privacy' + (lang === 'tr' ? '?lang=tr' : ''); a.target = '_blank'; el.appendChild(a); }
+        else if (part) el.appendChild(document.createTextNode(part));
+      });
+    }
+    function paintConsent() {
+      var c = CONSENT[lang] || CONSENT.en, wrap = document.getElementById('consentBoxes');
+      var was = boxes.map(function (b) { return b.checked; });
+      document.getElementById('consentTitle').textContent = c.title;
+      inline(document.getElementById('consentPara'), c.para);
+      var t = document.getElementById('consentTerms'); t.textContent = c.terms; t.href = '/terms' + (lang === 'tr' ? '?lang=tr' : '');
+      wrap.textContent = ''; boxes = [];
+      c.boxes.forEach(function (text, i) {
+        var l = h('label', 'check'), cb = h('input'); cb.type = 'checkbox'; cb.checked = !!was[i];
+        cb.addEventListener('change', check);
+        l.appendChild(cb); l.appendChild(h('span', null, text)); wrap.appendChild(l); boxes.push(cb);
+      });
+      document.getElementById('consentBox').dir = RTL[lang] ? 'rtl' : 'ltr';
+    }
     function check() {
       var missing = [];
       if (!pdialect) missing.push(say('needDialect'));
-      if (!consent.checked) missing.push(say('needConsent'));
+      if (boxes.length !== 5 || boxes.some(function (b) { return !b.checked; })) missing.push(say('needConsent'));
       startBtn.disabled = missing.length > 0;
       hint.textContent = missing.join(' ');
       hint.hidden = !missing.length;
     }
-    consent.addEventListener('change', check);
-    document.addEventListener('kt-lang', check);
+    document.addEventListener('kt-lang', function () { paintConsent(); check(); });
+    paintConsent();
     check();
     startBtn.addEventListener('click', function () {
       api('POST', '/api/donate/profile', { dialect: pdialect, gender: document.getElementById('gender').value,
-        age_band: document.getElementById('ageband').value, region: document.getElementById('region').value, consent: true })
+        age_band: document.getElementById('ageband').value, region: document.getElementById('region').value,
+        boxes: boxes.map(function (b) { return b.checked; }), lang: lang })
         .then(function (r) { if (r.ok) refresh(); });
     });
 
@@ -467,6 +498,12 @@
     document.getElementById('yes').addEventListener('click', function () { vote(1); });
     document.getElementById('no').addEventListener('click', function () { vote(-1); });
     document.getElementById('vskip').addEventListener('click', nextReview);
+    document.getElementById('forget').addEventListener('click', function () {
+      if (!window.confirm(say('forgetAsk'))) return;
+      api('POST', '/api/donate/forget').then(function (r) {
+        if (r.ok) { window.alert(say('forgotten')); location.reload(); }
+      });
+    });
     show();
   }
 

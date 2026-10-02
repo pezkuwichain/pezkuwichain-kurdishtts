@@ -81,9 +81,8 @@ def login(body: LoginIn, response: Response):
                             (body.nonce, body.dem, int(time.time()) - NONCE_TTL_S)).rowcount
         if burned != 1:
             raise HTTPException(401, "nonce")
-        blocked = db.execute("SELECT blocked FROM speaker WHERE addr=?", (body.address,)).fetchone()
-        if blocked and blocked[0]:
-            raise HTTPException(403, "blocked")
+        # A blocked donor may still sign in: only to delete what they gave.
+        # Recording and voting check `blocked` themselves (donate._speaker).
         sid, csrf = secrets.token_hex(32), secrets.token_hex(32)
         db.execute("INSERT INTO session (id, addr, csrf, exp) VALUES (?,?,?,?)",
                    (sid, body.address, csrf, int(time.time()) + SESSION_TTL_S))

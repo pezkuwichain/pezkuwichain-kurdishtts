@@ -14,7 +14,7 @@ Environment=KTTS_CACHE=/opt/kurdishtts/cache
 Environment=KTTS_CLIPS=/opt/kurdishtts/data/clips
 Environment=KTTS_KEYS=/opt/kurdishtts/data/api_keys
 Environment=PYTHONUNBUFFERED=1
-ExecStart=/opt/kurdishtts/venv/bin/uvicorn app:app --host 127.0.0.1 --port 8000 --proxy-headers --forwarded-allow-ips=127.0.0.1 --no-server-header
+ExecStart=/opt/kurdishtts/venv/bin/uvicorn app:app --host 127.0.0.1 --port 8000 --proxy-headers --forwarded-allow-ips=127.0.0.1 --no-server-header --no-access-log
 Restart=on-failure
 RestartSec=5
 TimeoutStartSec=300

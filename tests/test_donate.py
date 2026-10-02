@@ -99,11 +99,18 @@ def test_flow():
 
     # nothing without consent; CSRF required
     assert a.get("/api/donate/next").status_code == 409
-    assert a.post("/api/donate/profile", json={"dialect": "kmr", "consent": True}).status_code == 403
-    assert a.post("/api/donate/profile", json={"dialect": "kmr", "consent": False},
+    assert a.post("/api/donate/profile", json={"dialect": "kmr", "boxes": [True, True, True, True, True]}).status_code == 403
+    # all five confirmations, each one: four are not consent
+    for missing in range(5):
+        boxes = [i != missing for i in range(5)]
+        assert a.post("/api/donate/profile", json={"dialect": "kmr", "boxes": boxes},
+                      headers={"X-CSRF": csrf_a}).status_code == 400
+    assert a.post("/api/donate/profile", json={"dialect": "kmr", "boxes": [True] * 4},
                   headers={"X-CSRF": csrf_a}).status_code == 400
-    assert a.post("/api/donate/profile", json={"dialect": "kmr", "consent": True, "gender": "female"},
+    assert a.post("/api/donate/profile", json={"dialect": "kmr", "boxes": [True, True, True, True, True], "gender": "female", "lang": "tr"},
                   headers={"X-CSRF": csrf_a}).status_code == 200
+    with store.db() as db:
+        assert [tuple(r) for r in db.execute("SELECT boxes, lang FROM consent_log")] == [("11111", "tr")]
     sents = a.get("/api/donate/next").json()["sentences"]
     assert len(sents) == 2
     sid = next(s["id"] for s in sents if s["text"].startswith("Ziman"))
@@ -125,11 +132,32 @@ def test_flow():
     assert a.post("/api/donate/vote", json={"clip_id": clip, "val": 1}, headers={"X-CSRF": csrf_a}).status_code == 403
     for c, uri in ((b, "//ktts-test-b"), (v, "//ktts-test-v")):
         csrf = login(c, uri)
-        c.post("/api/donate/profile", json={"dialect": "kmr", "consent": True}, headers={"X-CSRF": csrf})
+        c.post("/api/donate/profile", json={"dialect": "kmr", "boxes": [True, True, True, True, True]}, headers={"X-CSRF": csrf})
+        # a recording cannot be fetched by id; only the reviewer it was handed to can hear it
+        assert c.get(f"/api/donate/audio/{clip}").status_code == 404
         assert c.get("/api/donate/review").json()["clip"]["id"] == clip
+        assert c.get(f"/api/donate/audio/{clip}").status_code == 200
         r = c.post("/api/donate/vote", json={"clip_id": clip, "val": 1}, headers={"X-CSRF": csrf})
         assert r.status_code == 200
         assert c.post("/api/donate/vote", json={"clip_id": clip, "val": 1}, headers={"X-CSRF": csrf}).status_code == 409
     assert r.json()["status"] == "valid"
     st = a.get("/api/donate/stats").json()
     assert st["kmr"]["clips"] == 1 and st["kmr"]["valid_clips"] == 1 and st["me"]["clips"] == 1
+
+    # the right to be forgotten: a's recordings, profile and session go; the
+    # file is gone from disk; b's vote on it went with it
+    # the donor themself cannot fetch their own clip by id either, nor can a stranger
+    assert a.get(f"/api/donate/audio/{clip}").status_code == 404
+    files_before = list((TMP / "clips").rglob("*.flac"))
+    r = a.post("/api/donate/forget", headers={"X-CSRF": csrf_a})
+    assert r.status_code == 200 and r.json()["deleted_recordings"] == 1
+    assert not any(f.exists() for f in files_before)
+    assert a.get("/api/c/me").json()["addr"] is None
+    with store.db() as db:
+        (h, n), = [tuple(r) for r in db.execute("SELECT addr_hash, clips FROM deletion_log")]
+        assert n == 1 and len(h) == 64 and me["address"] not in h
+    st = b.get("/api/donate/stats").json()
+    assert st["kmr"]["clips"] == 0 and st["kmr"]["speakers"] == 0
+    # and a voter who leaves takes their votes back out of the counts
+    csrf_b = b.get("/api/c/me").json()["csrf"]
+    assert b.post("/api/donate/forget", headers={"X-CSRF": csrf_b}).json()["deleted_recordings"] == 0

@@ -2,7 +2,7 @@
 
 # KurdishTTS — Kurdish speech, and the voice bank to make it ours
 
-**Read Kurmancî and Soranî aloud · Donate your voice (CC0) · Speech API for dks.news**
+**Read Kurmancî and Soranî aloud · Donate your voice · Speech API for dks.news**
 
 [![CI](https://github.com/pezkuwichain/pezkuwichain-kurdishtts/actions/workflows/ci.yml/badge.svg)](https://github.com/pezkuwichain/pezkuwichain-kurdishtts/actions/workflows/ci.yml)
 &nbsp;·&nbsp; **Live:** [kurdishtts.dks.news](https://kurdishtts.dks.news)
@@ -16,7 +16,7 @@
 | Page / API | What it does |
 |---|---|
 | **`/`** | Type Kurmancî or Soranî, hear it read. |
-| **`/bexsh`** | Donate your voice: sign in with a Pezkuwi wallet, accept the CC0 dedication once, read short sentences; check other donors' recordings. Two agreeing checks make a clip valid. |
+| **`/bexsh`** | Donate your voice: sign in with a Pezkuwi wallet, give the five consent confirmations once, read short sentences; check other donors' recordings. Two agreeing checks make a clip valid. |
 | `POST /api/tts` | Short text → MP3. Public, rate-limited. |
 | `POST /api/tts/jobs` | Up to an article → queued job → MP3. API key (`tools/apikey.py`). dks.news uses this. |
 
@@ -24,10 +24,11 @@
 until a voice trained on the donated recordings replaces them — a change of two
 values, `KTTS_MODEL_KMR` / `KTTS_MODEL_CKB` (`ktts/engine.py`).
 
-**Data.** Donated recordings are CC0, kept as 48 kHz mono FLAC, trimmed and
+**Data.** Donated recordings are used only to train and test our own Kurdish
+speech models — never sold, shared or published (legal/consent.md, privacy).
+They are kept as 48 kHz mono FLAC, trimmed and
 machine-checked (length, silence, clipping, a pace that fits the sentence).
-Sentences are CC0 too (`corpus/README.md`). Donors' wallet addresses never
-appear in published data.
+The sentences donors read are Common Voice's CC0 corpus (`corpus/README.md`).
 
 ### Layout
 

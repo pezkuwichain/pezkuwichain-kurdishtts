@@ -3,7 +3,7 @@
 <head>
 {% include "_head.html" %}
 <title>Dengê xwe bexşîne — KurdishTTS</title>
-<meta name="description" content="Hevokên Kurdî bi dengê xwe bixwîne û dengê Kurdî yê pêşîn ê neteweya Kurd ava bike. Donate your voice to the first Kurdish voice built by the Kurdish nation (CC0)." />
+<meta name="description" content="Hevokên Kurdî bi dengê xwe bixwîne û dengê Kurdî yê pêşîn ê neteweya Kurd ava bike. Donate your voice to the first Kurdish voice built by the Kurdish nation ." />
 </head>
 <body data-page="donate">
 {% include "_header.html" %}
@@ -54,7 +54,13 @@
         <select class="field" id="ageband"><option value="">—</option><option>18-29</option><option>30-44</option><option>45-59</option><option>60+</option></select></label>
       <label class="field-row"><span data-t="region"></span><input type="text" id="region" maxlength="60" /></label>
     </div>
-    <label class="check"><input type="checkbox" id="consent" /> <span data-t="consent"></span></label>
+    <div class="consent" id="consentBox">
+      <h3 id="consentTitle"></h3>
+      <p id="consentPara"></p>
+      <div id="consentBoxes"></div>
+      <p class="note"><a href="/terms" id="consentTerms"></a></p>
+    </div>
+    <script type="application/json" id="consentData">{{ consent_json | safe }}</script>
     <div class="row mt-16"><button type="button" class="btn" id="startBtn" disabled data-t="start">Dest pê bike</button>
       <span class="note" id="startHint" aria-live="polite"></span></div>
   </section>
@@ -95,6 +101,8 @@
         </div>
       </div>
     </div>
+    <div class="row mt-18"><span class="spacer"></span>
+      <button type="button" class="btn btn--ghost btn--sm" id="forget" data-t="forget">Tomarên min jê bibe</button></div>
   </section>
 </main>
 {% include "_footer.html" %}

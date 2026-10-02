@@ -3,9 +3,10 @@
 One file, WAL mode. Kept apart from the job queue's database so that a long
 synthesis transaction and a donor's upload never wait on each other.
 
-Donors are identified by their wallet address. In anything published (the CC0
-dataset) an address appears only as a salted hash: the recordings are public,
-the link between a voice and an account is not.
+Donors are identified by their wallet address. Recordings are used only to
+train and test our own models (legal/consent.md); they are never published,
+and an address never leaves this database. A deletion leaves only a hash of
+the address, as proof that it was carried out.
 """
 from __future__ import annotations
 
@@ -59,6 +60,25 @@ CREATE TABLE IF NOT EXISTS clip (
   UNIQUE (addr, sentence_id)
 );
 CREATE INDEX IF NOT EXISTS clip_status ON clip(dialect, status, created);
+CREATE TABLE IF NOT EXISTS consent_log (
+  id        INTEGER PRIMARY KEY,
+  addr      TEXT NOT NULL,
+  version   TEXT NOT NULL,
+  lang      TEXT NOT NULL,
+  boxes     TEXT NOT NULL,          -- the five answers, as given, e.g. "11111"
+  at        INTEGER NOT NULL
+);
+CREATE TABLE IF NOT EXISTS deletion_log (
+  addr_hash TEXT NOT NULL,          -- sha256 of the address: proves a deletion happened, names no one
+  clips     INTEGER NOT NULL,
+  at        INTEGER NOT NULL
+);
+CREATE TABLE IF NOT EXISTS review_grant (
+  clip_id INTEGER NOT NULL,
+  addr    TEXT NOT NULL,
+  exp     INTEGER NOT NULL,
+  PRIMARY KEY (clip_id, addr)
+);
 CREATE TABLE IF NOT EXISTS vote (
   clip_id INTEGER NOT NULL REFERENCES clip(id),
   addr    TEXT NOT NULL,
@@ -88,6 +108,7 @@ class Store:
         with self.db() as db:
             db.execute("DELETE FROM nonce WHERE dem < ?", (now - 600,))
             db.execute("DELETE FROM session WHERE exp < ?", (now,))
+            db.execute("DELETE FROM review_grant WHERE exp < ?", (now,))
 
     def load_sentences(self, dialect: str, lines: list[str], source: str) -> int:
         with self.db() as db:

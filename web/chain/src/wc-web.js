@@ -43,6 +43,9 @@ async function init() {
   if (initP) return initP;
   initP = SignClient.init({
     projectId: PROJECT_ID,
+    // No usage events to WalletConnect's telemetry endpoint (pulse): the
+    // privacy policy says this site sends no analytics, and it means it.
+    telemetryEnabled: false,
     metadata: {
       name: 'KurdishTTS',
       description: 'Dengê Kurdî — bexşa deng',

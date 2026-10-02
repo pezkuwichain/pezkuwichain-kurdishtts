@@ -138,7 +138,7 @@ def status(jid: str, authorization: str | None = Header(None)):
 def audio(key: str):
     if not re.fullmatch(r"[0-9a-f]{64}", key):
         raise HTTPException(404, "not found")
-    return _audio(eng.Engine.cache_path(key))
+    return _audio(eng.Engine.cache_path(key, "batch"))
 
 
 @router.get("/api/tts/health")
