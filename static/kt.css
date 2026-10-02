@@ -86,7 +86,7 @@ textarea,input[type=text],select.field{width:100%; background:var(--bg-3); color
   border-radius:12px; padding:12px 14px; font:inherit;}
 textarea{min-height:150px; resize:vertical; line-height:1.7;}
 label.check{display:flex; gap:10px; align-items:flex-start; font-size:14px; color:var(--ink-2); cursor:pointer;}
-label.check input{margin-top:4px; width:18px; height:18px; accent-color:var(--kesk);}
+label.check input{margin-top:4px; width:18px; height:18px; flex:none; accent-color:var(--kesk);}
 .field-row{display:grid; gap:6px; margin-bottom:14px;}
 .field-row > span{font-size:13px; font-weight:700; color:var(--ink-2);}
 .note{font-size:13px; color:var(--ink-3);}
