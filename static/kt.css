@@ -134,3 +134,7 @@ label.check input{margin-top:4px; width:18px; height:18px; accent-color:var(--ke
 .audio-full{width:100%;}
 .cta{display:flex; gap:16px; align-items:center; flex-wrap:wrap;}
 .cta__text{margin:0; flex:1; min-width:240px;}
+
+.btn--sm{padding:9px 14px; font-size:13.5px; border-radius:10px;}
+.getwallet{display:grid; gap:8px; margin-top:6px;}
+.req{color:var(--sor-ink); font-weight:700; font-size:12px;}

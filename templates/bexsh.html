@@ -3,7 +3,7 @@
 <head>
 {% include "_head.html" %}
 <title>Dengê xwe bexşîne — KurdishTTS</title>
-<meta name="description" content="Hevokên Kurdî bi dengê xwe bixwîne û dengê Kurdî yê pêşîn ê gelê Kurd ava bike. Donate your voice to the first Kurdish voice built by Kurds (CC0)." />
+<meta name="description" content="Hevokên Kurdî bi dengê xwe bixwîne û dengê Kurdî yê pêşîn ê neteweya Kurd ava bike. Donate your voice to the first Kurdish voice built by the Kurdish nation (CC0)." />
 </head>
 <body data-page="donate">
 {% include "_header.html" %}
@@ -33,11 +33,16 @@
   <section class="card mt-18" id="gate">
     <p data-t="needSignIn" class="mt-0"></p>
     <button type="button" class="btn" id="gateBtn" data-t="signIn">Bi cuzdanê têkeve</button>
+    <div class="getwallet mt-16"><span class="note" data-t="getWallet"></span>
+      <div class="row">
+        <a class="btn btn--ghost btn--sm" href="https://play.google.com/store/apps/details?id=io.pezkuwichain.wallet" target="_blank" rel="noopener" data-t="dlAndroid">Pezkuwi Wallet — Android</a>
+        <a class="btn btn--ghost btn--sm" href="https://chromewebstore.google.com/detail/pezkuwi%7Bjs%7D-extension/fbnboicjjeebjhgnapneaeccpgjcdibn" target="_blank" rel="noopener" data-t="dlExt">Pezkuwi Extension — Chrome</a>
+      </div></div>
   </section>
 
   <section class="card mt-18" id="profile" data-consent="{{ consent_version }}" hidden>
     <h2 data-t="profTitle" class="mt-0"></h2>
-    <div class="field-row"><span data-t="myDialect"></span>
+    <div class="field-row"><span><span data-t="myDialect"></span> <span class="req" data-t="required"></span></span>
       <div class="seg" role="radiogroup" data-dialect>
         <button type="button" role="radio" aria-checked="false" data-v="kmr" data-t="kmr">Kurmancî</button>
         <button type="button" role="radio" aria-checked="false" data-v="ckb" data-t="ckb">Soranî</button>
@@ -50,7 +55,8 @@
       <label class="field-row"><span data-t="region"></span><input type="text" id="region" maxlength="60" /></label>
     </div>
     <label class="check"><input type="checkbox" id="consent" /> <span data-t="consent"></span></label>
-    <div class="row mt-16"><button type="button" class="btn" id="startBtn" disabled data-t="start">Dest pê bike</button></div>
+    <div class="row mt-16"><button type="button" class="btn" id="startBtn" disabled data-t="start">Dest pê bike</button>
+      <span class="note" id="startHint" aria-live="polite"></span></div>
   </section>
 
   <section class="card mt-18" id="work" hidden>
