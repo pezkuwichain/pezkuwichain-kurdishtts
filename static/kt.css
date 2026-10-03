@@ -171,7 +171,11 @@ label.check input{flex:none; width:20px; height:20px; margin-top:1px; accent-col
 .wave{width:min(420px,100%); height:56px; display:block;}
 .studio__hint{font-size:14px; color:var(--text-3); text-align:center; margin:0;}
 .actions{display:flex; gap:10px; justify-content:center; flex-wrap:wrap;}
-.keys{font-size:12.5px; color:var(--text-3);}
+.keys{display:flex; align-items:center; gap:6px; flex-wrap:wrap; justify-content:center; font-size:12.5px; color:var(--text-3); opacity:.8; margin:0;}
+.keys svg{margin-inline-end:4px;}
+/* Keyboard shortcuts are for keyboards: a phone or tablet does not show them,
+   and everywhere the buttons above do the same thing with a click or a tap. */
+@media (hover:none){ .keys{display:none;} }
 .keys kbd{font:600 11.5px/1 ui-monospace,monospace; padding:3px 6px; border:1px solid var(--line-2); border-bottom-width:2px; border-radius:6px; color:var(--text-2);}
 .vote{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:18px;}
 .forget-row{display:flex; justify-content:flex-end; margin-top:22px; padding-top:16px; border-top:1px solid var(--line);}
