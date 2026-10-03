@@ -4,12 +4,11 @@
 Sürüm: 2026-10-03 (taslak) · Yürürlük: [yayım tarihi] · Köşeli parantezli işaretler → `notes.md`.
 
 ## 1. Veri sorumlusu
-**[tüzel kişi adı — Q1]**, Georgia, Sagarejo Region, village Kvemo Lambalo, 4th street N2 · **privacy@dks.news**
-[AB temsilcisi — Q9] · [Türkiye veri sorumlusu temsilcisi / VERBİS — Q10]
+**Pez Kiwi Comp**, Georgia, Sagarejo Region, village Kvemo Lambalo, 4th street N2 · **privacy@dks.news**
 
 ## 2. Kısaca
 - **Sesli okuma:** yazdığın metni saklamayız. Üretilen sesi en çok 7 gün önbellekte tutarız.
-- **Ses bağışı:** kayıtlarını ve verdiğin profil bilgilerini cüzdan adresine bağlı olarak saklarız. **Yalnızca kendi Kürtçe konuşma modellerimizi eğitmek ve test etmek için** kullanırız. Satmayız, proje dışına vermeyiz, yayımlamayız; sesini taklit etmek, seni tanımlamak veya reklam için kullanmayız.
+- **Ses bağışı:** kayıtlarını ve seçtiğin lehçeyi cüzdan adresine bağlı olarak saklarız. **Yalnızca kendi Kürtçe konuşma modellerimizi eğitmek ve test etmek için** kullanırız. Satmayız, proje dışına vermeyiz, yayımlamayız; sesini taklit etmek, seni tanımlamak veya reklam için kullanmayız.
 - **"Kayıtlarımı sil"** düğmesiyle her an silebilirsin. **Önceden eğitilmiş bir model kayıtlarını "unutamaz"** (bkz. 5. bölüm).
 - Reklam, ölçümleme veya takip çerezi yok. Zincire hiçbir şey yazılmaz.
 
@@ -22,21 +21,21 @@ Sürüm: 2026-10-03 (taslak) · Yürürlük: [yayım tarihi] · Köşeli parante
 | Sesli okuma | Metin, lehçe; üretilen ses | Talep ettiğin hizmetin sunulması (GDPR 6/1-b; KVKK 5/2-c) | Metin saklanmaz; ses ≤7 gün |
 | dks.news haberlerini seslendirme | Yayımlanmış haber metni, iş kaydı | Meşru menfaat | Metin iş bitince silinir; kayıt 90 gün |
 | Cüzdanla giriş | Cüzdan adresi, tek kullanımlık mesaj, oturum | Hizmetin sunulması | Mesaj 10 dk; oturum 30 gün; adres hesap silinene dek |
-| Bağışçı profili | Lehçe; isteğe bağlı cinsiyet, yaş aralığı, bölge; 18+ beyanı | **Açık rıza** (GDPR 6/1-a + 9/2-a; KVKK 6) | Sen silene veya proje bitene dek |
+| Bağışçı profili | Yalnızca lehçe; 18+ beyanı | **Açık rıza** (GDPR 6/1-a + 9/2-a; KVKK 6) | Sen silene veya proje bitene dek |
 | Ses kayıtları | FLAC kayıt, cümle, süre, ses düzeyi, durum | **Açık rıza** | Sen silene veya proje bitene dek; geçersiz kayıtlar 90 gün |
 | Kayıt kontrolü (oylar) | Adres, kayıt, oy, zaman | Meşru menfaat (veri kalitesi) | Kayıt veya hesap durdukça |
-| Model eğitimi ve testi | Geçerli kayıtların kopyaları, lehçe, cinsiyet, yaş aralığı; **cüzdan adresi yok**, rastgele kod | **Açık rıza** | Eğitim bitince silinir, en çok 30 gün |
+| Model eğitimi ve testi | Geçerli kayıtların kopyaları ve lehçe; **cüzdan adresi yok**, rastgele kod | **Açık rıza** | Eğitim bitince silinir, en çok 30 gün |
 | Rıza ve silme kanıtı | Adres (silmeden sonra tek yönlü özet), rıza sürümü ve dili, onaylar, zamanlar | Hukuki yükümlülük / meşru menfaat | Hesap silindikten sonra 3 yıl |
 | Yedekler | — | — | **Şu an ayrı yedek tutulmuyor.** Eklenirse şifreli, AB'de ve en çok 35 gün |
 
 ## 4. Sesin neden "özel nitelikli" sayılıyor
-Ses kaydı seni tanımlar. Ses tanıma için işlenen ses biyometrik veridir. Biz bunu yapmıyoruz, ama konu tartışmalıdır. Ayrıca lehçe ve bölgeyle birlikte ses **etnik kökeni** açığa çıkarabilir. Bu yüzden en güvenli yolu seçtik: kayıtları ve profili özel nitelikli veri sayıyoruz ve **yalnızca açık rızanla** işliyoruz. **Diğer bağışçılar kayıtlarını kontrol için dinler, ama cüzdan adresini görmez.** Kayıtları satmayız, vermeyiz, yayımlamayız. Yalnızca sözleşmeyle bağlı barındırma ve hesaplama (GPU) sağlayıcıları bizim adımıza işler.
+Ses kaydı seni tanımlar. Ses tanıma için işlenen ses biyometrik veridir. Biz bunu yapmıyoruz, ama konu tartışmalıdır. Ayrıca lehçeyle birlikte ses **etnik kökeni** açığa çıkarabilir. Bu yüzden en güvenli yolu seçtik: kayıtları ve profili özel nitelikli veri sayıyoruz ve **yalnızca açık rızanla** işliyoruz. **Diğer bağışçılar kayıtlarını kontrol için dinler, ama cüzdan adresini görmez.** Kayıtları satmayız, vermeyiz, yayımlamayız. Yalnızca sözleşmeyle bağlı barındırma ve hesaplama (GPU) sağlayıcıları bizim adımıza işler.
 
 > **Önceki kayıtlar:** 3 Ekim 2026'nden önce bağış sayfası kayıtları açık veri (CC0) olarak tanımlıyordu. Bu plan geri alındı. Hiçbir kayıt yayımlanmadı ve yayımlanmayacak.
 
 ## 5. Silme — ve silmenin yapamadığı
 `/bexsh` sayfasında **"Kayıtlarımı sil"** düğmesine bas ya da bize yaz. Kimliğini cüzdanınla imza attırarak doğrularız.
-- **Hemen:** kayıtların, ölçümler, profilin, oyların ve oturumların sunucudan silinir. Talepten sonra başlayan hiçbir eğitim veya testte kullanılmaz.
+- **Hemen:** kayıtların, ölçümler, lehçe bilgin, oyların ve oturumların sunucudan silinir. Talepten sonra başlayan hiçbir eğitim veya testte kullanılmaz.
 - **En çok 35 gün içinde:** yedeklerdeki ve sürmekte olan eğitimdeki kopyalar da silinir.
 - **Silmenin yapamadığı:** bir model, kayıtları dosya olarak içermez. Ama **önceden eğitilmiş bir model bir kaydı pratikte "unutamaz"**; o modelden katkını çıkaramayız. Sonraki modeller kayıtlarını hiç kullanmaz. Bunu kayıttan önce söylüyoruz ki rızan bilgilendirilmiş olsun.
 

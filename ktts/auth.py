@@ -114,7 +114,7 @@ def me(kt_ses: str | None = Cookie(None)):
     if not s:
         return {"addr": None}
     with STATE["store"].db() as db:
-        sp = db.execute("SELECT dialect, gender, age_band, region, consent_version FROM speaker WHERE addr=?",
+        sp = db.execute("SELECT dialect, consent_version FROM speaker WHERE addr=?",
                         (s["addr"],)).fetchone()
     return {"addr": s["addr"], "csrf": s["csrf"], "speaker": dict(sp) if sp else None}
 

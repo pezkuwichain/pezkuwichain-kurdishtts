@@ -8,7 +8,7 @@
 
 ## 1. About these terms
 
-KurdishTTS (https://kurdishtts.dks.news, "the service") is a free, non-profit project of the Dijital Kurdistan (DKS) / PezkuwiChain initiative. Its goal is a Kurdish voice for the Kurdish nation. It is operated by **[legal entity name — Q1]**, Georgia, Sagarejo Region, village Kvemo Lambalo, 4th street N2 ("we", "us").
+KurdishTTS (https://kurdishtts.dks.news, "the service") is a free, non-profit project of the Dijital Kurdistan (DKS) / PezkuwiChain initiative. Its goal is a Kurdish voice for the Kurdish nation. It is operated by **Pez Kiwi Comp**, Georgia, Sagarejo Region, village Kvemo Lambalo, 4th street N2 ("we", "us").
 
 By using the service you agree to these terms. Our **Privacy Policy** explains how we handle personal data; it is not part of this contract. If you do not agree, please do not use the service.
 
@@ -136,5 +136,5 @@ If any part of these terms is invalid, the rest remains in force.
 
 ## 14. Contact
 
-**[legal entity name — Q1]**, Georgia, Sagarejo Region, village Kvemo Lambalo, 4th street N2.
-General and legal notices: **[contact e-mail — Q2]** (subject "Legal notice") · Privacy: **[privacy e-mail — Q2]** · Security: security@pex.mom.
+**Pez Kiwi Comp**, Georgia, Sagarejo Region, village Kvemo Lambalo, 4th street N2.
+General and legal notices: **privacy@dks.news** (subject "Legal notice") · Privacy: **privacy@dks.news** · Security: security@pex.mom.

@@ -107,10 +107,12 @@ def test_flow():
                       headers={"X-CSRF": csrf_a}).status_code == 400
     assert a.post("/api/donate/profile", json={"dialect": "kmr", "boxes": [True] * 4},
                   headers={"X-CSRF": csrf_a}).status_code == 400
-    assert a.post("/api/donate/profile", json={"dialect": "kmr", "boxes": [True, True, True, True, True], "gender": "female", "lang": "tr"},
+    assert a.post("/api/donate/profile", json={"dialect": "kmr", "boxes": [True, True, True, True, True], "lang": "tr"},
                   headers={"X-CSRF": csrf_a}).status_code == 200
     with store.db() as db:
         assert [tuple(r) for r in db.execute("SELECT boxes, lang FROM consent_log")] == [("11111", "tr")]
+        # nothing about the donor is kept but the dialect
+        assert tuple(db.execute("SELECT gender, age_band, region FROM speaker").fetchone()) == (None, None, None)
     sents = a.get("/api/donate/next").json()["sentences"]
     assert len(sents) == 2
     sid = next(s["id"] for s in sents if s["text"].startswith("Ziman"))
