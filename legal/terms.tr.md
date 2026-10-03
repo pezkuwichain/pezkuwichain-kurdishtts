@@ -4,7 +4,7 @@
 Sürüm: 2026-10-03 (taslak) · Yürürlük: [yayım tarihi] · Köşeli parantezli işaretler → `notes.md`.
 
 ## 1. Hizmet ve işleten
-KurdishTTS (https://kurdishtts.dks.news), Dijital Kurdistan (DKS) / PezkuwiChain girişiminin ücretsiz, kâr amacı gütmeyen projesidir. Amacı Kürt ulusu için bir Kürtçe sestir. İşleten: **[tüzel kişi adı — Q1]**, Georgia, Sagarejo Region, village Kvemo Lambalo, 4th street N2. Hizmeti kullanan bu koşulları kabul etmiş olur. Kişisel veriler için Gizlilik Politikası geçerlidir.
+KurdishTTS (https://kurdishtts.dks.news), Dijital Kurdistan (DKS) / PezkuwiChain girişiminin ücretsiz, kâr amacı gütmeyen projesidir. Amacı Kurd ulusu için bir Kürtçe sestir. İşleten: **[tüzel kişi adı — Q1]**, Georgia, Sagarejo Region, village Kvemo Lambalo, 4th street N2. Hizmeti kullanan bu koşulları kabul etmiş olur. Kişisel veriler için Gizlilik Politikası geçerlidir.
 
 ## 2. Ne sunuyoruz
 - **Sesli okuma:** Kurmancî veya Soranî metin (en çok 600 karakter) → ses.
