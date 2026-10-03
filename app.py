@@ -89,6 +89,11 @@ def bexsh(request: Request):
                                        "consent_json": json.dumps(CONSENT, ensure_ascii=False)})
 
 
+@app.get("/kurdai", response_class=HTMLResponse)
+def kurdai(request: Request):
+    return templates.TemplateResponse(request, "kurdai.html", {"v": V, "page": "kurdai"})
+
+
 LEGAL = BASE / "legal"
 _HEAD_LANG = {"English": "en", "Türkçe": "tr", "Kurmancî": "kmr", "سۆرانی": "ckb", "فارسی": "fa", "العربية": "ar"}
 
