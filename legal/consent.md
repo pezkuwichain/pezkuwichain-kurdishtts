@@ -1,6 +1,6 @@
 # KurdishTTS — Donor consent text
 
-**Consent version:** `train-only-2026-10-03` (equals `CONSENT_VERSION` in `ktts/donate.py`)
+**Consent version:** `train-only-2026-10-03-dialect` (equals `CONSENT_VERSION` in `ktts/donate.py`)
 **Shown:** on `/bexsh`, before the first recording, and again whenever the version changes.
 **Authoritative language:** English. Turkish, Kurmancî, Soranî, Persian and Arabic are translations.
 **Kurmancî, Soranî, Persian and Arabic: NEEDS NATIVE-SPEAKER AND LEGAL REVIEW before publication.** The Turkish text should be checked by Turkish counsel for KVKK *açık rıza* wording.
@@ -19,11 +19,11 @@
 
 **Before you record**
 
-Your voice recordings are personal data. We use them, with the profile details you give (dialect, gender, age band, region), **only to train and test our own Kurdish speech models**. We never sell, share or publish them, and never use them to imitate your voice, identify you or advertise. Other donors hear them to check them, without seeing your wallet address. Details: [Privacy Policy].
+Your voice recordings are personal data. We use them, with the dialect you choose, **only to train and test our own Kurdish speech models**. We never sell, share or publish them, and never use them to imitate your voice, identify you or advertise. Other donors hear them to check them, without seeing your wallet address. Details: [Privacy Policy].
 
 - [ ] I am 18 or older.
 - [ ] This is my own voice, and I record only for myself.
-- [ ] I explicitly consent to this use of my recordings and profile.
+- [ ] I explicitly consent to this use of my recordings and the dialect I give.
 - [ ] I can delete my recordings at any time: they are erased and excluded from all future training, but a model already trained on them cannot unlearn them.
 - [ ] Trained models (never my recordings) may be offered as a service or published; a published model cannot be recalled.
 
@@ -35,11 +35,11 @@ Your voice recordings are personal data. We use them, with the profile details y
 
 **Kayda başlamadan önce**
 
-Ses kayıtların kişisel veridir. Onları, verdiğin profil bilgileriyle (lehçe, cinsiyet, yaş aralığı, bölge) birlikte **yalnızca kendi Kürtçe konuşma modellerimizi eğitmek ve test etmek için** kullanırız. Asla satmaz, paylaşmaz, yayımlamayız; sesini taklit etmek, seni tanımlamak veya reklam için kullanmayız. Kayıtlarını kontrol etmek için diğer bağışçılar dinler, ama cüzdan adresini asla görmezler. Ayrıntılar: [Gizlilik Politikası].
+Ses kayıtların kişisel veridir. Onları, seçtiğin lehçeyle birlikte **yalnızca kendi Kürtçe konuşma modellerimizi eğitmek ve test etmek için** kullanırız. Asla satmaz, paylaşmaz, yayımlamayız; sesini taklit etmek, seni tanımlamak veya reklam için kullanmayız. Kayıtlarını kontrol etmek için diğer bağışçılar dinler, ama cüzdan adresini asla görmezler. Ayrıntılar: [Gizlilik Politikası].
 
 - [ ] 18 yaşında veya daha büyüğüm.
 - [ ] Bu ses benim ve yalnızca kendim için kayıt yapıyorum.
-- [ ] Kayıtlarımın ve profil bilgilerimin bu amaçla işlenmesine açıkça rıza veriyorum.
+- [ ] Kayıtlarımın ve seçtiğim lehçenin bu amaçla işlenmesine açıkça rıza veriyorum.
 - [ ] Kayıtlarımı istediğim an silebilirim. Silinince yok edilir ve sonraki hiçbir eğitimde kullanılmaz; ama onlarla daha önce eğitilmiş bir model onları unutamaz.
 - [ ] Eğitilen model — kayıtlarım asla — hizmet olarak sunulabilir veya yayımlanabilir. Yayımlanmış bir model geri çağrılamaz.
 
@@ -51,11 +51,11 @@ Ses kayıtların kişisel veridir. Onları, verdiğin profil bilgileriyle (lehç
 
 **Berî ku tu tomar bikî**
 
-Tomarên dengê te daneyên kesane ne. Em wan, bi agahiyên profîla te re (zarava, zayend, koma temenî, herêm), **tenê ji bo perwerdekirin û ceribandina modelên me yên axaftina Kurdî** bi kar tînin. Em wan qet nafiroşin, bi kesî re parve nakin û naweşînin; ji bo teqlîdkirina dengê te, naskirina te an reklamê bi kar naynin. Bexşkerên din guh didin tomarên te da ku wan kontrol bikin, lê navnîşana cuzdana te qet nabînin. Hûrgilî: [Siyaseta Nepeniyê].
+Tomarên dengê te daneyên kesane ne. Em wan, bi zaravayê ku tu hilbijêrî re, **tenê ji bo perwerdekirin û ceribandina modelên me yên axaftina Kurdî** bi kar tînin. Em wan qet nafiroşin, bi kesî re parve nakin û naweşînin; ji bo teqlîdkirina dengê te, naskirina te an reklamê bi kar naynin. Bexşkerên din guh didin tomarên te da ku wan kontrol bikin, lê navnîşana cuzdana te qet nabînin. Hûrgilî: [Siyaseta Nepeniyê].
 
 - [ ] Ez 18 salî an mezintir im.
 - [ ] Ev deng yê min e, û ez tenê ji bo xwe tomar dikim.
-- [ ] Ez bi eşkereyî razî me ku tomar û profîla min bi vî awayî bên bikaranîn.
+- [ ] Ez bi eşkereyî razî me ku tomar û zaravayê min bi vî awayî bên bikaranîn.
 - [ ] Ez dikarim tomarên xwe her dem jê bibim. Wê demê ew tên jêbirin û di tu perwerdeya pêşerojê de nayên bikaranîn; lê modelek ku berê bi wan hatiye perwerdekirin nikare wan ji bîr bike.
 - [ ] Modela perwerdekirî — qet ne tomarên min — dikare wekî xizmet bê pêşkêşkirin an bê weşandin. Modelek weşandî nayê paşve kişandin.
 
@@ -67,11 +67,11 @@ Tomarên dengê te daneyên kesane ne. Em wan, bi agahiyên profîla te re (zara
 
 **پێش ئەوەی تۆمار بکەیت**
 
-تۆمارەکانی دەنگت داتای کەسین. ئێمە ئەوانە لەگەڵ زانیارییەکانی پرۆفایلەکەت (شێوەزار، ڕەگەز، مەودای تەمەن، ناوچە) **تەنها بۆ ڕاهێنان و تاقیکردنەوەی مۆدێلەکانی قسەکردنی کوردیی خۆمان** بەکار دەهێنین. هەرگیز نایانفرۆشین، لەگەڵ کەس بەشیان ناکەین و بڵاویان ناکەینەوە؛ بۆ لاساییکردنەوەی دەنگت، ناسینەوەت یان ڕیکلام بەکاریان ناهێنین. بەخشەرانی تر گوێ لە تۆمارەکانت دەگرن بۆ پشکنینیان، بەڵام هەرگیز ناونیشانی جزدانەکەت نابینن. وردەکاری: [سیاسەتی تایبەتمەندی].
+تۆمارەکانی دەنگت داتای کەسین. ئێمە ئەوانە لەگەڵ ئەو شێوەزارەی هەڵیدەبژێریت **تەنها بۆ ڕاهێنان و تاقیکردنەوەی مۆدێلەکانی قسەکردنی کوردیی خۆمان** بەکار دەهێنین. هەرگیز نایانفرۆشین، لەگەڵ کەس بەشیان ناکەین و بڵاویان ناکەینەوە؛ بۆ لاساییکردنەوەی دەنگت، ناسینەوەت یان ڕیکلام بەکاریان ناهێنین. بەخشەرانی تر گوێ لە تۆمارەکانت دەگرن بۆ پشکنینیان، بەڵام هەرگیز ناونیشانی جزدانەکەت نابینن. وردەکاری: [سیاسەتی تایبەتمەندی].
 
 - [ ] من ١٨ ساڵ یان زیاترم.
 - [ ] ئەم دەنگە هی خۆمە، و تەنها بۆ خۆم تۆمار دەکەم.
-- [ ] بە ئاشکرا ڕەزامەندم کە تۆمار و پرۆفایلەکەم بەم شێوەیە بەکار بهێنرێن.
+- [ ] بە ئاشکرا ڕەزامەندم کە تۆمار و شێوەزارەکەم بەم شێوەیە بەکار بهێنرێن.
 - [ ] دەتوانم هەر کاتێک تۆمارەکانم بسڕمەوە. ئەوکات دەسڕدرێنەوە و لە هیچ ڕاهێنانێکی داهاتوودا بەکار ناهێنرێن؛ بەڵام مۆدێلێک کە پێشتر پێیان ڕاهێنراوە ناتوانێت لەبیریان بکات.
 - [ ] مۆدێلی ڕاهێنراو — هەرگیز تۆمارەکانم نا — دەکرێت وەک خزمەتگوزاری پێشکەش بکرێت یان بڵاو بکرێتەوە. مۆدێلێکی بڵاوکراوە ناکرێت بگەڕێندرێتەوە.
 
@@ -83,11 +83,11 @@ Tomarên dengê te daneyên kesane ne. Em wan, bi agahiyên profîla te re (zara
 
 **پیش از ضبط**
 
-ضبط‌های صدای شما داده‌های شخصی هستند. ما آن‌ها را همراه با اطلاعات نمایه‌تان (گویش، جنسیت، بازهٔ سنی، منطقه) **فقط برای آموزش و آزمودن مدل‌های گفتار کردیِ خودمان** به کار می‌بریم. هرگز آن‌ها را نمی‌فروشیم، با کسی به اشتراک نمی‌گذاریم و منتشر نمی‌کنیم؛ و برای تقلید صدای شما، شناسایی شما یا تبلیغات از آن‌ها استفاده نمی‌کنیم. اهداکنندگان دیگر برای بررسی، ضبط‌های شما را می‌شنوند، اما هرگز نشانی کیف پول شما را نمی‌بینند. جزئیات: [سیاست حریم خصوصی].
+ضبط‌های صدای شما داده‌های شخصی هستند. ما آن‌ها را همراه با گویشی که انتخاب می‌کنید **فقط برای آموزش و آزمودن مدل‌های گفتار کردیِ خودمان** به کار می‌بریم. هرگز آن‌ها را نمی‌فروشیم، با کسی به اشتراک نمی‌گذاریم و منتشر نمی‌کنیم؛ و برای تقلید صدای شما، شناسایی شما یا تبلیغات از آن‌ها استفاده نمی‌کنیم. اهداکنندگان دیگر برای بررسی، ضبط‌های شما را می‌شنوند، اما هرگز نشانی کیف پول شما را نمی‌بینند. جزئیات: [سیاست حریم خصوصی].
 
 - [ ] من ۱۸ سال یا بیشتر دارم.
 - [ ] این صدای خود من است و فقط برای خودم ضبط می‌کنم.
-- [ ] صریحاً رضایت می‌دهم که ضبط‌ها و نمایه‌ام به این شکل به کار رود.
+- [ ] صریحاً رضایت می‌دهم که ضبط‌ها و گویشم به این شکل به کار رود.
 - [ ] می‌توانم هر زمان ضبط‌هایم را حذف کنم. در آن صورت پاک می‌شوند و در هیچ آموزش بعدی به کار نمی‌روند؛ اما مدلی که پیش‌تر با آن‌ها آموزش دیده نمی‌تواند آن‌ها را فراموش کند.
 - [ ] مدل آموزش‌دیده — و هرگز ضبط‌های من — ممکن است به‌صورت خدمت ارائه یا منتشر شود. مدل منتشرشده را نمی‌توان پس گرفت.
 
@@ -99,11 +99,11 @@ Tomarên dengê te daneyên kesane ne. Em wan, bi agahiyên profîla te re (zara
 
 **قبل أن تسجّل**
 
-تسجيلات صوتك بيانات شخصية. نستخدمها مع بيانات ملفك (اللهجة، الجنس، الفئة العمرية، المنطقة) **فقط لتدريب نماذجنا الخاصة للكلام الكردي واختبارها**. لا نبيعها ولا نشاركها مع أحد ولا ننشرها أبدًا، ولا نستخدمها لتقليد صوتك أو للتعرّف على هويتك أو للإعلان. يستمع متبرعون آخرون إلى تسجيلاتك للتحقق منها، لكنهم لا يرون عنوان محفظتك أبدًا. التفاصيل: [سياسة الخصوصية].
+تسجيلات صوتك بيانات شخصية. نستخدمها مع اللهجة التي تختارها **فقط لتدريب نماذجنا الخاصة للكلام الكردي واختبارها**. لا نبيعها ولا نشاركها مع أحد ولا ننشرها أبدًا، ولا نستخدمها لتقليد صوتك أو للتعرّف على هويتك أو للإعلان. يستمع متبرعون آخرون إلى تسجيلاتك للتحقق منها، لكنهم لا يرون عنوان محفظتك أبدًا. التفاصيل: [سياسة الخصوصية].
 
 - [ ] عمري 18 عامًا أو أكثر.
 - [ ] هذا صوتي أنا، وأسجّل لنفسي فقط.
-- [ ] أوافق صراحةً على استخدام تسجيلاتي وبيانات ملفي على هذا النحو.
+- [ ] أوافق صراحةً على استخدام تسجيلاتي واللهجة التي أختارها على هذا النحو.
 - [ ] يمكنني حذف تسجيلاتي في أي وقت. عندها تُمحى ولا تُستخدم في أي تدريب لاحق، لكن النموذج الذي دُرِّب عليها سابقًا لا يستطيع أن ينساها.
 - [ ] قد يُقدَّم النموذج المدرَّب — وليس تسجيلاتي أبدًا — كخدمة أو يُنشر. النموذج المنشور لا يمكن استرجاعه.
 

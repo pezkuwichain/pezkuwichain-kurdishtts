@@ -54,13 +54,6 @@
                   ar: 'سجّل الدخول بمحفظة Pezkuwi للتسجيل. مفتاحك لا يغادر المحفظة؛ نطلب توقيعًا واحدًا فقط.' },
     profTitle:  { kmr: 'Berî destpêkirinê', ckb: 'پێش دەستپێکردن', tr: 'Başlamadan önce', en: 'Before you start', fa: 'پیش از شروع', ar: 'قبل أن تبدأ' },
     myDialect:  { kmr: 'Tu bi kîjan zaravayê diaxivî?', ckb: 'بە کام زاراوە قسە دەکەیت؟', tr: 'Hangi lehçeyi konuşuyorsun?', en: 'Which dialect do you speak?', fa: 'به کدام گویش صحبت می‌کنید؟', ar: 'بأي لهجة تتحدث؟' },
-    gender:     { kmr: 'Zayend (ne mecbûrî)', ckb: 'ڕەگەز (ئارەزوومەندانە)', tr: 'Cinsiyet (isteğe bağlı)', en: 'Gender (optional)', fa: 'جنسیت (اختیاری)', ar: 'الجنس (اختياري)' },
-    female:     { kmr: 'Jin', ckb: 'ژن', tr: 'Kadın', en: 'Female', fa: 'زن', ar: 'أنثى' },
-    male:       { kmr: 'Mêr', ckb: 'پیاو', tr: 'Erkek', en: 'Male', fa: 'مرد', ar: 'ذكر' },
-    other:      { kmr: 'Din', ckb: 'تر', tr: 'Diğer', en: 'Other', fa: 'دیگر', ar: 'آخر' },
-    none:       { kmr: '—', ckb: '—', tr: '—', en: '—', fa: '—', ar: '—' },
-    age:        { kmr: 'Temen (ne mecbûrî)', ckb: 'تەمەن (ئارەزوومەندانە)', tr: 'Yaş (isteğe bağlı)', en: 'Age (optional)', fa: 'سن (اختیاری)', ar: 'العمر (اختياري)' },
-    region:     { kmr: 'Herêm / bajar (ne mecbûrî)', ckb: 'ناوچە / شار (ئارەزوومەندانە)', tr: 'Bölge / şehir (isteğe bağlı)', en: 'Region / city (optional)', fa: 'منطقه / شهر (اختیاری)', ar: 'المنطقة / المدينة (اختياري)' },
     start:      { kmr: 'Dest pê bike', ckb: 'دەست پێبکە', tr: 'Başla', en: 'Start', fa: 'شروع', ar: 'ابدأ' },
     tabRecord:  { kmr: 'Tomar bike', ckb: 'تۆمار بکە', tr: 'Kaydet', en: 'Record', fa: 'ضبط', ar: 'سجّل' },
     tabReview:  { kmr: 'Guhdarî bike û bipejirîne', ckb: 'گوێ بگرە و پەسەندی بکە', tr: 'Dinle ve doğrula', en: 'Listen and check', fa: 'گوش بده و تأیید کن', ar: 'استمع وتحقّق' },
@@ -401,8 +394,7 @@
     paintConsent();
     check();
     startBtn.addEventListener('click', function () {
-      api('POST', '/api/donate/profile', { dialect: pdialect, gender: document.getElementById('gender').value,
-        age_band: document.getElementById('ageband').value, region: document.getElementById('region').value,
+      api('POST', '/api/donate/profile', { dialect: pdialect,
         boxes: boxes.map(function (b) { return b.checked; }), lang: lang })
         .then(function (r) { if (r.ok) refresh(); });
     });

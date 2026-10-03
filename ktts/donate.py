@@ -31,7 +31,7 @@ CLIPS_DIR = Path(os.environ.get("KTTS_CLIPS", "/opt/kurdishtts/data/clips"))
 # Bumped whenever the consent text changes; a donor who accepted an older text
 # is asked again before recording more. cc0-2026-10 (open data) was withdrawn
 # on 2026-10-03: recordings are for training our own models only.
-CONSENT_VERSION = "train-only-2026-10-03"   # must equal legal/consent.md
+CONSENT_VERSION = "train-only-2026-10-03-dialect"   # must equal legal/consent.md
 DIALECTS = ("kmr", "ckb")
 SR = 48000
 MAX_UPLOAD = 6 * 1024 * 1024
@@ -45,8 +45,6 @@ VOTES_TO_DECIDE = 2
 router = APIRouter()
 STATE: dict = {}   # "store"
 
-GENDERS = ("female", "male", "other", "")
-AGES = ("18-29", "30-44", "45-59", "60+", "")
 
 
 # ── audio ────────────────────────────────────────────────────────────────────
@@ -104,10 +102,10 @@ def write_flac(pcm: np.ndarray, path: Path) -> None:
 
 # ── routes ───────────────────────────────────────────────────────────────────
 class ProfileIn(BaseModel):
+    # The dialect is all we ask: it decides which model a recording trains.
+    # Age, gender and region were asked, used nowhere, and weighed on the
+    # consent a donor had to give -- dropped on 2026-10-03.
     dialect: str
-    gender: str = ""
-    age_band: str = ""
-    region: str = ""
     # The five confirmations of legal/consent.md, in its order: 18+, own voice,
     # explicit consent, deletion and its limit, model service/release. Every
     # one must be true; they are never inferred from a single "I agree".
@@ -118,7 +116,7 @@ class ProfileIn(BaseModel):
 @router.post("/api/donate/profile")
 def profile(body: ProfileIn, kt_ses: str | None = Cookie(None), x_csrf: str | None = Header(None)):
     addr = auth.require(kt_ses, x_csrf)
-    if body.dialect not in DIALECTS or body.gender not in GENDERS or body.age_band not in AGES:
+    if body.dialect not in DIALECTS:
         raise HTTPException(400, "profile")
     if len(body.boxes) != 5 or not all(body.boxes):
         raise HTTPException(400, "consent")
@@ -126,9 +124,8 @@ def profile(body: ProfileIn, kt_ses: str | None = Cookie(None), x_csrf: str | No
     with STATE["store"].db() as db:
         db.execute("INSERT INTO consent_log (addr, version, lang, boxes, at) VALUES (?,?,?,?,?)",
                    (addr, CONSENT_VERSION, body.lang[:5], "".join("1" if b else "0" for b in body.boxes), now))
-        db.execute("UPDATE speaker SET dialect=?, gender=?, age_band=?, region=?, consent_version=?, consent_at=? "
-                   "WHERE addr=?", (body.dialect, body.gender, body.age_band, body.region.strip()[:60],
-                                    CONSENT_VERSION, now, addr))
+        db.execute("UPDATE speaker SET dialect=?, gender=NULL, age_band=NULL, region=NULL, consent_version=?, "
+                   "consent_at=? WHERE addr=?", (body.dialect, CONSENT_VERSION, now, addr))
     return {"ok": True, "consent_version": CONSENT_VERSION}
 
 

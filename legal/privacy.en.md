@@ -13,13 +13,11 @@ KurdishTTS (https://kurdishtts.dks.news) is a non-profit project of the Dijital 
 
 **Controller:** **Pez Kiwi Comp**, Georgia, Sagarejo Region, village Kvemo Lambalo, 4th street N2.
 **Privacy contact:** **privacy@dks.news**. Write "Privacy" in the subject line.
-[**EU representative (GDPR Art. 27):** name and address — Q9.]
-[**Turkey data controller representative (KVKK):** name and address — Q10.]
 
 ## 2. The short version
 
 - **Read-aloud:** we turn the text you type into audio. We do not keep your text. We keep the audio file for a short time so we do not have to generate it again.
-- **Voice donation:** if you donate your voice, we keep your recordings and the profile details you give, linked to your wallet address. **We use them only to train and test our own Kurdish speech models.** We do not sell them, share them with anyone else, publish them, use them to imitate your voice, use them to identify you, or use them for advertising.
+- **Voice donation:** if you donate your voice, we keep your recordings and the dialect you choose, linked to your wallet address. **We use them only to train and test our own Kurdish speech models.** We do not sell them, share them with anyone else, publish them, use them to imitate your voice, use them to identify you, or use them for advertising.
 - You can **delete your recordings at any time** with the "Delete my recordings" button. **A model that has already been trained on them cannot "unlearn" them** (section 7).
 - No ads, no analytics, no tracking cookies. Nothing is written to any blockchain.
 
@@ -35,10 +33,10 @@ GDPR article references are given for visitors in the EU/EEA. Similar rules appl
 | 4 | Read-aloud | The text you type (max. 600 characters) and the dialect you choose; the audio we generate | Providing the service you ask for (Art. 6(1)(b)) | **Text: not stored** — it is processed in memory and discarded. **Audio:** cached for up to **7 days** under a fingerprint (hash) of the text | Nobody |
 | 5 | Voicing dks.news articles (via our API) | The published article text sent by dks.news; the job record (time, dialect, status) | Legitimate interest in making our news audible (Art. 6(1)(f)) | Article text: deleted as soon as the audio is made (or the job finally fails). Job record: **90 days**. Article audio: as long as dks.news offers it | dks.news, run by the same controller |
 | 6 | Signing in with your wallet | Wallet address; a one-time challenge; a session ID and a security (CSRF) token. Your signature is checked and not stored | Providing the donation account you ask for (Art. 6(1)(b)) | Challenge: 10 minutes. Session: until you sign out, or 30 days. Address: until you delete your donor account | Nobody |
-| 7 | Your donor profile | Dialect (required); optionally gender, age band, region/city; your 18+ confirmation | **Your explicit consent** (Art. 6(1)(a) and Art. 9(2)(a)) | Until you delete it, or until we end the project (section 6) | Nobody |
+| 7 | Your donor profile | Your dialect; your 18+ confirmation. We ask for nothing else about you | **Your explicit consent** (Art. 6(1)(a) and Art. 9(2)(a)) | Until you delete it, or until we end the project (section 6) | Nobody |
 | 8 | Your voice recordings | The recording (FLAC), the sentence read, length, loudness measurements, time, check status (pending/valid/invalid) | **Your explicit consent** (Art. 6(1)(a) and Art. 9(2)(a)) | Until you delete them, or until we end the project. Recordings judged invalid: deleted after **90 days** | Other signed-in donors hear them to check them (section 5); compute providers under contract (row 10) |
 | 9 | Checking recordings (peer review) | Your votes: your wallet address, the recording, your vote, time | Legitimate interest in data quality and preventing manipulation (Art. 6(1)(f)) | As long as the recording or your donor account exists, whichever ends first | Nobody |
-| 10 | Training and testing our speech models | Copies of valid recordings with dialect, gender and age band, under a random speaker code — **never your wallet address** | **Your explicit consent** (Art. 6(1)(a) and Art. 9(2)(a)) | Training copies are deleted when the training run ends, at most **30 days** | Compute (GPU) provider acting on our instructions, named here before the first training run |
+| 10 | Training and testing our speech models | Copies of valid recordings with their dialect, under a random speaker code — **never your wallet address** | **Your explicit consent** (Art. 6(1)(a) and Art. 9(2)(a)) | Training copies are deleted when the training run ends, at most **30 days** | Compute (GPU) provider acting on our instructions, named here before the first training run |
 | 11 | Proving consent and deletion | Wallet address (replaced by a one-way hash once you delete your account), consent version and language, which confirmations you gave, times of consent and deletion | Legal obligation to demonstrate consent (Art. 7(1), Art. 6(1)(c)) and legitimate interest in defending legal claims (Art. 6(1)(f)) | **3 years** after you delete your account | Nobody |
 | 12 | Preventing abuse of donation | A "blocked" flag on a wallet address | Legitimate interest (Art. 6(1)(f)) | As long as needed to prevent repeat abuse | Nobody |
 | 13 | Answering your messages and requests | Your e-mail address and message; for donor requests, proof that you control the wallet | Legal obligation (rights requests, Art. 6(1)(c)); legitimate interest (Art. 6(1)(f)) | Until the matter is closed + 1 year | E-mail provider (processor) |
@@ -50,12 +48,12 @@ GDPR article references are given for visitors in the EU/EEA. Similar rules appl
 
 ## 4. Why we treat your voice as sensitive ("special category") data
 
-A recording of your voice identifies you. Under the GDPR, voice becomes "biometric data" when it is processed technically to identify or verify a person. We do **not** do that: training a speech model is not speaker identification. But the question is not settled. A recording together with your Kurdish dialect and region can also reveal your **ethnic origin**. So we take the safe path: we treat your recordings and profile as special-category data and process them **only with your explicit consent** (GDPR Art. 9(2)(a); KVKK Art. 6). You give it with separate confirmations before your first recording, and you can withdraw it at any time.
+A recording of your voice identifies you. Under the GDPR, voice becomes "biometric data" when it is processed technically to identify or verify a person. We do **not** do that: training a speech model is not speaker identification. But the question is not settled. A recording together with your Kurdish dialect can also reveal your **ethnic origin**. So we take the safe path: we treat your recordings and profile as special-category data and process them **only with your explicit consent** (GDPR Art. 9(2)(a); KVKK Art. 6). You give it with separate confirmations before your first recording, and you can withdraw it at any time.
 
 ## 5. Voice donation: what exactly happens
 
 1. **Sign-in.** You sign a one-time message with your Pezkuwi wallet. This proves you control the address. We never see or store your private keys or recovery phrase. **Nothing is written on-chain.** Your wallet address is a pseudonym, but it is still personal data: anyone who can link it to you (for example through public blockchain activity) could connect it to your recordings. That is why we never show or publish it.
-2. **Profile and consent.** You choose your dialect and may add gender, age band and region. *Please give only a city or region in the region field, never an address or other identifying detail.* You confirm the consent text (version **[consent version — C1]**). If we ever change what we do with recordings, we ask you again. Old consent is not stretched to cover new uses.
+2. **Profile and consent.** You choose your dialect. We ask for nothing else about you: no name, age, gender or place. You confirm the consent text (version **train-only-2026-10-03-dialect**). If we ever change what we do with recordings, we ask you again. Old consent is not stretched to cover new uses.
 3. **Recording.** Your browser asks permission to use your microphone. Audio is captured only while you press record. It is sent to our server and stored as FLAC; the browser's own file is converted and discarded.
 4. **Peer review.** Other signed-in donors of the same dialect listen to pending recordings and vote on whether the recording matches the sentence. **They hear your recording but do not see your wallet address.** They are bound by our Terms not to copy or share what they hear. Two agreeing votes decide whether a recording is used.
 5. **Use.** Valid recordings are used **only** to train and test DKS/PezkuwiChain's own Kurdish speech models (section 7).
@@ -66,7 +64,7 @@ A recording of your voice identifies you. Under the GDPR, voice becomes "biometr
 
 ## 6. How long we keep donation data
 
-We keep your recordings and profile until **whichever comes first**:
+We keep your recordings and dialect until **whichever comes first**:
 
 - you delete them, or
 - we stop developing our Kurdish speech models. In that case we delete all recordings within 90 days and announce it on this page.
@@ -78,7 +76,7 @@ Invalid recordings are deleted after 90 days. Sessions expire after 30 days. Aft
 **How:** sign in at `/bexsh` and press **"Delete my recordings"**. Or write to the privacy contact. We will ask you to sign a short message with the same wallet, so that nobody else can delete your data or ask for it.
 
 **What happens at once:**
-- your recordings, measurements, profile, votes and sessions are deleted from our server;
+- your recordings, measurements, dialect, votes and sessions are deleted from our server;
 - your recordings are removed from the master training list, so **no training or testing run that starts after your request uses them**;
 - your votes are removed. Decisions that were already made about other donors' recordings stay as they are.
 
@@ -114,7 +112,7 @@ No analytics, advertising or tracking cookies are used. You can clear all of thi
 
 ## 11. Your rights
 
-You have the right to **access** your data and get a copy; have it **corrected** (you can edit your profile yourself); have it **deleted**; **restrict** processing; **data portability** (your recordings and profile in a common format) (on request to the privacy contact); **object** to processing based on legitimate interest (rows 1–3, 5, 9, 12); and **withdraw consent** at any time with effect for the future (section 7).
+You have the right to **access** your data and get a copy; have it **corrected** (you can change your dialect yourself); have it **deleted**; **restrict** processing; **data portability** (your recordings and dialect in a common format) (on request to the privacy contact); **object** to processing based on legitimate interest (rows 1–3, 5, 9, 12); and **withdraw consent** at any time with effect for the future (section 7).
 
 **How:** use the delete button, or write to **privacy@dks.news**. For donor data, we confirm your identity by asking you to sign a message with your wallet. We do not ask for ID documents. We answer within one month, and may extend that by two months for complex requests, in which case we tell you why.
 
@@ -137,7 +135,7 @@ Voice donation is **for adults (18+) only**. You must confirm this before record
 
 Recordings and the database are stored on our server in a directory the web server process itself cannot read. All traffic is encrypted (HTTPS/TLS). Access to the server is restricted to a small number of administrators using key-based login. Wallet sign-in uses one-time challenges and CSRF protection. If a personal data breach is likely to put you at high risk, we will tell you and the competent authority as the law requires.
 
-**A word of honesty for donors at risk.** Your voice is recognisable. If being linked to a Kurdish-language project could put you in danger where you live, think carefully before donating, leave the optional profile fields empty, and use a wallet that is not linked to your identity. We will disclose data to authorities only where we are legally required to under the law that applies to us. We will challenge requests that are not legally valid, and, where the law allows, we will tell you.
+**A word of honesty for donors at risk.** Your voice is recognisable. If being linked to a Kurdish-language project could put you in danger where you live, think carefully before donating, and use a wallet that is not linked to your identity. We will disclose data to authorities only where we are legally required to under the law that applies to us. We will challenge requests that are not legally valid, and, where the law allows, we will tell you.
 
 ## 14. Changes
 
