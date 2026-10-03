@@ -12,27 +12,18 @@
     <h1 data-t="speakTitle">Nivîsa Kurdî bi deng bixwîne</h1>
     <p data-t="speakLead"></p>
   </section>
-  <section class="card">
-    <div class="row mb-14">
-      <span class="note" data-t="dialect">Zarava</span>
-      <div class="seg" role="radiogroup" data-dialect>
-        <button type="button" role="radio" aria-checked="true" data-v="kmr" data-t="kmr">Kurmancî</button>
-        <button type="button" role="radio" aria-checked="false" data-v="ckb" data-t="ckb">Soranî</button>
-      </div>
-    </div>
-    <label class="sr" for="txt">Text</label>
+  <section class="panel">
+    {% include "_dialects.html" %}
+    <div class="field-head"><label for="txt" data-t="yourText">Nivîsa te</label><span class="note" id="count"></span></div>
     <textarea id="txt" maxlength="600"></textarea>
-    <div class="row mt-12">
-      <span class="note" id="count"></span><span class="spacer"></span>
-      <button type="button" class="btn" id="go" data-t="read">Bixwîne</button>
-    </div>
-    <audio id="out" controls hidden class="audio-full mt-14"></audio>
+    <button type="button" class="btn btn--block mt-16" id="go" data-t="read">Bixwîne</button>
+    <audio id="out" controls hidden></audio>
     <p class="msg msg--bad" id="msg" hidden></p>
   </section>
-  <section class="card mt-18 cta">
-    <p data-t="dLead" class="cta__text"></p>
-    <a class="btn" href="/bexsh" data-t="navDonate">Dengê xwe bexşîne</a>
-  </section>
+  <a class="panel invite" href="/bexsh">
+    <span><b data-t="inviteTitle"></b><span data-t="inviteText"></span></span>
+    <span class="btn btn--ghost" data-t="navDonate">Dengê xwe bexşîne</span>
+  </a>
 </main>
 {% include "_footer.html" %}
 </body>

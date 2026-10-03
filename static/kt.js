@@ -107,6 +107,20 @@
     forgotten:  { kmr: 'Hat jêbirin.', ckb: 'سڕایەوە.', tr: 'Silindi.', en: 'Deleted.', fa: 'حذف شد.', ar: 'تم الحذف.' },
     terms:      { kmr: 'Mercên bikaranînê', ckb: 'مەرجەکانی بەکارهێنان', tr: 'Kullanım Koşulları', en: 'Terms of Use', fa: 'شرایط استفاده', ar: 'شروط الاستخدام' },
     privacy:    { kmr: 'Nepenî', ckb: 'تایبەتمەندی', tr: 'Gizlilik', en: 'Privacy', fa: 'حریم خصوصی', ar: 'الخصوصية' },
+    brandSub:   { kmr: 'Dengê Kurdî', ckb: 'دەنگی کوردی', tr: 'Kurdî ses', en: 'Kurdish voice', fa: 'صدای کردی', ar: 'الصوت الكردي' },
+    yourText:   { kmr: 'Nivîsa te', ckb: 'دەقەکەت', tr: 'Metnin', en: 'Your text', fa: 'متن شما', ar: 'نصّك' },
+    kmrSub:     { kmr: 'Bakur, bi tîpên latînî', ckb: 'باکوور، بە پیتی لاتینی', tr: 'Kuzey, Latin harfleriyle', en: 'Northern, in Latin script', fa: 'شمالی، با خط لاتین', ar: 'الشمالية، بالحروف اللاتينية' },
+    ckbSub:     { kmr: 'Navîn, bi tîpên erebî', ckb: 'ناوەڕاست، بە پیتی عەرەبی', tr: 'Orta, Arap harfleriyle', en: 'Central, in Arabic script', fa: 'مرکزی، با خط عربی', ar: 'الوسطى، بالحروف العربية' },
+    inviteTitle:{ kmr: 'Ev deng dê bibe dengê te', ckb: 'ئەم دەنگە دەبێتە دەنگی تۆ', tr: 'Bu ses senin sesin olacak', en: 'This voice will become yours', fa: 'این صدا صدای تو خواهد شد', ar: 'سيصبح هذا الصوت صوتك' },
+    inviteText: { kmr: 'Çend hevokan bixwîne; dengê Kurdî yê pêşerojê bi dengê te tê perwerdekirin.', ckb: 'چەند ڕستەیەک بخوێنەوە؛ دەنگی کوردیی داهاتوو بە دەنگی تۆ ڕادەهێنرێت.', tr: 'Birkaç cümle oku; geleceğin Kürtçe sesi senin sesinle eğitilsin.', en: 'Read a few sentences; the Kurdish voice of the future is trained on yours.', fa: 'چند جمله بخوان؛ صدای کردیِ آینده با صدای تو آموزش می‌بیند.', ar: 'اقرأ بضع جمل؛ يتدرّب الصوت الكردي القادم على صوتك.' },
+    s2:         { kmr: 'Zarava û razîbûn', ckb: 'زاراوە و ڕەزامەندی', tr: 'Lehçe ve onay', en: 'Dialect and consent', fa: 'گویش و رضایت', ar: 'اللهجة والموافقة' },
+    s3:         { kmr: 'Hevokê bixwîne', ckb: 'ڕستەکە بخوێنەوە', tr: 'Cümleyi oku', en: 'Read the sentence', fa: 'جمله را بخوان', ar: 'اقرأ الجملة' },
+    keyRec:     { kmr: 'tomar', ckb: 'تۆمار', tr: 'kayıt', en: 'record', fa: 'ضبط', ar: 'تسجيل' },
+    keySend:    { kmr: 'bişîne', ckb: 'ناردن', tr: 'gönder', en: 'send', fa: 'ارسال', ar: 'إرسال' },
+    keySkip:    { kmr: 'derbas', ckb: 'تێپەڕاندن', tr: 'geç', en: 'skip', fa: 'رد', ar: 'تخطٍّ' },
+    playSub:    { kmr: 'Ji bo Android, li Google Play', ckb: 'بۆ ئەندرۆید، لە Google Play', tr: 'Android için, Google Play’de', en: 'For Android, on Google Play', fa: 'برای اندروید، در Google Play', ar: 'لأندرويد، على Google Play' },
+    extSub:     { kmr: 'Ji bo Chrome, li Chrome Web Store', ckb: 'بۆ Chrome، لە Chrome Web Store', tr: 'Chrome için, Chrome Web Store’da', en: 'For Chrome, on the Chrome Web Store', fa: 'برای Chrome، در Chrome Web Store', ar: 'لـ Chrome، على Chrome Web Store' },
+    clipsUnit:  { kmr: 'tomar', ckb: 'تۆمار', tr: 'kayıt', en: 'recordings', fa: 'ضبط', ar: 'تسجيل' },
     close:      { kmr: 'Bigire', ckb: 'داخستن', tr: 'Kapat', en: 'Close', fa: 'بستن', ar: 'إغلاق' },
     footer:     { kmr: 'Projeyeke ne-bazirganî ya Dîjîtal Kurdistanê. Deng: MMS (Meta, CC BY-NC 4.0).', ckb: 'پڕۆژەیەکی ناقازانجی کوردستانی دیجیتاڵ. دەنگ: MMS (Meta، CC BY-NC 4.0).', tr: 'Dijital Kurdistan’ın kâr amacı gütmeyen projesi. Ses: MMS (Meta, CC BY-NC 4.0).', en: 'A non-profit project of Digital Kurdistan. Voice: MMS (Meta, CC BY-NC 4.0).', fa: 'پروژه‌ای غیرانتفاعی از کردستان دیجیتال. صدا: MMS (Meta، CC BY-NC 4.0).', ar: 'مشروع غير ربحي من كردستان الرقمية. الصوت: MMS (Meta، CC BY-NC 4.0).' }
   };
@@ -169,16 +183,25 @@
   }
 
   /** "No wallet yet? Get it:" with the two store links, as a block. */
-  function storeLinks() {
-    var box = h('div', 'getwallet');
-    box.appendChild(h('span', 'note', say('getWallet')));
-    var row = h('div', 'row');
-    [['android', 'dlAndroid'], ['extension', 'dlExt']].forEach(function (x) {
-      var a = h('a', 'btn btn--ghost btn--sm', say(x[1]));
-      a.href = STORE[x[0]]; a.target = '_blank'; a.rel = 'noopener';
-      row.appendChild(a);
+  var ICON = {
+    android: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#1DB45F" d="M4 3.2v17.6c0 .5.5.8.9.6l9.4-9.4L4.9 2.6c-.4-.2-.9.1-.9.6z"/><path fill="#F6B930" d="M17.5 8.7 14.3 12l3.2 3.3 3.7-2.1c.8-.5.8-1.7 0-2.2z"/><path fill="#E5322A" d="M14.3 12 4.9 21.4c.2.1.5.1.8 0l11.8-6.1z"/><path fill="#3DA5F4" d="M14.3 12 17.5 8.7 5.7 2.6c-.3-.1-.6-.1-.8 0z"/></svg>',
+    extension: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#1DB45F"/><path fill="#E5322A" d="M12 2a10 10 0 0 1 8.7 5H12a5 5 0 0 0-4.6 3L4.1 5.3A10 10 0 0 1 12 2z"/><path fill="#F6B930" d="M20.7 7A10 10 0 0 1 12 22l4.3-7.5A5 5 0 0 0 17 12a5 5 0 0 0-1-3z"/><circle cx="12" cy="12" r="4" fill="#fff"/><circle cx="12" cy="12" r="3" fill="#3DA5F4"/></svg>'
+  };
+  /** The two ways to get a Pezkuwi wallet, as rows with the store's mark. */
+  function storeRows(into) {
+    into.textContent = '';
+    [['android', 'dlAndroid', 'playSub'], ['extension', 'dlExt', 'extSub']].forEach(function (x) {
+      var a = h('a', 'store'); a.href = STORE[x[0]]; a.target = '_blank'; a.rel = 'noopener';
+      var ic = h('span'); ic.innerHTML = ICON[x[0]]; a.appendChild(ic.firstChild);
+      var t = h('span'); t.appendChild(h('b', null, say(x[1]))); t.appendChild(h('small', null, say(x[2]))); a.appendChild(t);
+      into.appendChild(a);
     });
-    box.appendChild(row);
+    return into;
+  }
+  function storeLinks() {
+    var box = h('div');
+    box.appendChild(h('p', 'stores__lead', say('getWallet')));
+    box.appendChild(storeRows(h('div', 'stores')));
     return box;
   }
 
@@ -290,6 +313,7 @@
     var seg = document.querySelector('[data-dialect]'), dialect = 'kmr';
     var MAX = 600;
     function sample() { ta.value = dialect === 'kmr' ? T.sampleKmr.kmr : T.sampleCkb.kmr; ta.dir = dialect === 'ckb' ? 'rtl' : 'ltr'; upd(); }
+    seg.querySelector('[data-v="kmr"]').setAttribute('aria-checked', 'true');
     function upd() { count.textContent = ta.value.length + ' / ' + MAX + ' ' + say('chars'); go.disabled = !ta.value.trim() || ta.value.length > MAX; }
     seg.querySelectorAll('button').forEach(function (b) {
       b.addEventListener('click', function () {
@@ -323,7 +347,7 @@
           el.querySelector('[data-k="h"]').textContent = s.hours;
           el.querySelector('[data-k="v"]').textContent = s.valid_hours;
           el.querySelector('[data-k="s"]').textContent = s.speakers;
-          el.querySelector('.bar i').style.setProperty('--p', Math.min(100, s.valid_hours / GOAL_H * 100) + '%');
+          el.querySelector('.meter__bar i').style.setProperty('--p', Math.min(100, s.valid_hours / GOAL_H * 100) + '%');
         });
         var me = document.getElementById('me');
         if (r.json.me) { me.hidden = false; me.querySelector('[data-k="c"]').textContent = r.json.me.clips;
@@ -340,6 +364,9 @@
     }
     document.addEventListener('kt-session', show);
     document.getElementById('gateBtn').addEventListener('click', openSheet);
+    var gateStores = document.querySelector('[data-stores]');
+    storeRows(gateStores);
+    document.addEventListener('kt-lang', function () { storeRows(gateStores); });
 
     // profile + consent
     var pdial = prof.querySelector('[data-dialect]'), pdialect = null;
@@ -414,7 +441,7 @@
     var queue = [], current = null, rec = null, chunks = [], blob = null, stream = null, meterRaf = 0;
     var sEl = document.getElementById('sentence'), recBtn = document.getElementById('rec'), play = document.getElementById('play');
     var again = document.getElementById('again'), send = document.getElementById('send'), skip = document.getElementById('skip');
-    var rmsg = document.getElementById('rmsg'), level = document.querySelector('.level i');
+    var rmsg = document.getElementById('rmsg'), wave = document.getElementById('wave'), wctx = wave.getContext('2d');
     function note(text, ok) { rmsg.textContent = text; rmsg.className = 'msg ' + (ok ? 'msg--ok' : 'msg--bad'); rmsg.hidden = !text; }
     function nextSentence() {
       blob = null; play.hidden = true; again.hidden = true; send.hidden = true;
@@ -426,17 +453,38 @@
       for (var i = 0; i < c.length; i++) if (window.MediaRecorder && MediaRecorder.isTypeSupported(c[i])) return c[i];
       return '';
     }
+    // While recording: the voice drawn as a moving line, and the sun's rays
+    // around the button opening with its loudness. It is the donor's own
+    // proof that the microphone hears them.
+    function drawFlat() {
+      wctx.clearRect(0, 0, wave.width, wave.height);
+      wctx.strokeStyle = 'rgba(122,130,153,.45)'; wctx.lineWidth = 3;
+      wctx.beginPath(); wctx.moveTo(0, wave.height / 2); wctx.lineTo(wave.width, wave.height / 2); wctx.stroke();
+    }
     function meter(s) {
       try {
         var ac = new (window.AudioContext || window.webkitAudioContext)(), an = ac.createAnalyser();
-        ac.createMediaStreamSource(s).connect(an); an.fftSize = 512; var buf = new Uint8Array(an.fftSize);
+        ac.createMediaStreamSource(s).connect(an); an.fftSize = 1024; var buf = new Uint8Array(an.fftSize);
         (function loop() {
-          an.getByteTimeDomainData(buf); var m = 0; for (var i = 0; i < buf.length; i++) m = Math.max(m, Math.abs(buf[i] - 128));
-          level.style.width = Math.min(100, m / 128 * 140) + '%'; meterRaf = requestAnimationFrame(loop);
+          an.getByteTimeDomainData(buf);
+          var m = 0, W = wave.width, H = wave.height;
+          wctx.clearRect(0, 0, W, H);
+          var g = wctx.createLinearGradient(0, 0, W, 0);
+          g.addColorStop(0, '#0E8A43'); g.addColorStop(.5, '#1DB45F'); g.addColorStop(1, '#F6B930');
+          wctx.strokeStyle = g; wctx.lineWidth = 4; wctx.lineJoin = 'round'; wctx.beginPath();
+          for (var i = 0; i < buf.length; i++) {
+            var v = (buf[i] - 128) / 128; m = Math.max(m, Math.abs(v));
+            var x = i / (buf.length - 1) * W, y = H / 2 + v * H * .9;
+            if (i) wctx.lineTo(x, y); else wctx.moveTo(x, y);
+          }
+          wctx.stroke();
+          recBtn.style.setProperty('--lvl', Math.min(1, m * 1.6).toFixed(3));
+          meterRaf = requestAnimationFrame(loop);
         })();
         return ac;
       } catch (e) { return null; }
     }
+    drawFlat();
     var ac = null;
     function startRec() {
       note('');
@@ -448,7 +496,8 @@
           rec.onstop = function () {
             blob = new Blob(chunks, { type: rec.mimeType || 'audio/webm' });
             play.src = URL.createObjectURL(blob); play.hidden = false; again.hidden = false; send.hidden = false;
-            stream.getTracks().forEach(function (t) { t.stop(); }); cancelAnimationFrame(meterRaf); level.style.width = 0;
+            stream.getTracks().forEach(function (t) { t.stop(); }); cancelAnimationFrame(meterRaf);
+            recBtn.style.setProperty('--lvl', 0); drawFlat();
             if (ac) ac.close();
           };
           rec.start(); recBtn.setAttribute('aria-pressed', 'true');
