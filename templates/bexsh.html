@@ -3,7 +3,7 @@
 <head>
 {% include "_head.html" %}
 <title>Dengê xwe bexşîne — KurdishTTS</title>
-<meta name="description" content="Hevokên Kurdî bi dengê xwe bixwîne û dengê Kurdî yê pêşîn ê neteweya Kurd ava bike. Donate your voice to the first Kurdish voice built by the Kurdish nation ." />
+<meta name="description" content="Hevokên Kurdî bi dengê xwe bixwîne û dengê Kurdî yê pêşîn ê neteweya Kurd ava bike. Donate your voice to the first Kurdish voice built by the Kurdish nation." />
 </head>
 <body data-page="donate">
 {% include "_header.html" %}
@@ -13,89 +13,86 @@
     <p data-t="dLead"></p>
   </section>
 
-  <section class="grid grid--3" aria-live="polite">
-    {% for d in ['kmr', 'ckb'] %}
-    <div class="card stat" data-stat="{{ d }}">
-      <span data-t="{{ d }}"></span>
-      <b><span data-k="h">0</span> <small class="note" data-t="hours"></small></b>
-      <span><span data-k="v">0</span> <span data-t="validHours"></span> · <span data-k="s">0</span> <span data-t="speakers"></span></span>
-      <div class="bar" title="50h"><i></i></div>
-      <span class="note"><span data-t="goal"></span>: 50 h</span>
+  <section class="panel" aria-live="polite">
+    <div class="goal">
+      {% for d in ['kmr', 'ckb'] %}
+      <div class="meter" data-stat="{{ d }}">
+        <div class="meter__top"><b data-t="{{ d }}"></b><span dir="ltr"><span data-k="v">0</span> / 50 h</span></div>
+        <div class="meter__bar"><i></i></div>
+        <div class="meter__sub"><span data-k="h">0</span> <span data-t="hours"></span>, <span data-k="s">0</span> <span data-t="speakers"></span></div>
+      </div>
+      {% endfor %}
     </div>
-    {% endfor %}
-    <div class="card stat" id="me" hidden>
-      <span data-t="mine"></span>
-      <b data-k="c">0</b>
-      <span><span data-k="m">0</span> <span data-t="minutes"></span> · <span data-k="v">0</span> <span data-t="votes"></span></span>
-    </div>
+    <div class="mine" id="me" hidden><span data-t="mine"></span>: <b data-k="c">0</b> <span data-t="clipsUnit"></span>, <b data-k="m">0</b> <span data-t="minutes"></span>, <b data-k="v">0</b> <span data-t="votes"></span></div>
   </section>
 
-  <section class="card mt-18" id="gate">
-    <p data-t="needSignIn" class="mt-0"></p>
-    <button type="button" class="btn" id="gateBtn" data-t="signIn">Bi cuzdanê têkeve</button>
-    <div class="getwallet mt-16"><span class="note" data-t="getWallet"></span>
-      <div class="row">
-        <a class="btn btn--ghost btn--sm" href="https://play.google.com/store/apps/details?id=io.pezkuwichain.wallet" target="_blank" rel="noopener" data-t="dlAndroid">Pezkuwi Wallet — Android</a>
-        <a class="btn btn--ghost btn--sm" href="https://chromewebstore.google.com/detail/pezkuwi%7Bjs%7D-extension/fbnboicjjeebjhgnapneaeccpgjcdibn" target="_blank" rel="noopener" data-t="dlExt">Pezkuwi Extension — Chrome</a>
-      </div></div>
+  <section class="panel" id="gate">
+    <h2 class="step"><span class="step__n">1</span><span data-t="signIn">Bi cuzdanê têkeve</span></h2>
+    <p class="lede" data-t="needSignIn"></p>
+    <button type="button" class="btn btn--block" id="gateBtn" data-t="signIn">Bi cuzdanê têkeve</button>
+    <p class="stores__lead" data-t="getWallet"></p>
+    <div class="stores" data-stores></div>
   </section>
 
-  <section class="card mt-18" id="profile" data-consent="{{ consent_version }}" hidden>
-    <h2 data-t="profTitle" class="mt-0"></h2>
-    <div class="field-row"><span><span data-t="myDialect"></span> <span class="req" data-t="required"></span></span>
-      <div class="seg" role="radiogroup" data-dialect>
-        <button type="button" role="radio" aria-checked="false" data-v="kmr" data-t="kmr">Kurmancî</button>
-        <button type="button" role="radio" aria-checked="false" data-v="ckb" data-t="ckb">Soranî</button>
-      </div></div>
+  <section class="panel" id="profile" data-consent="{{ consent_version }}" hidden>
+    <h2 class="step"><span class="step__n">2</span><span data-t="s2">Zarava û razîbûn</span></h2>
+    <div class="field-head"><span><span data-t="myDialect"></span><span class="req" data-t="required"></span></span></div>
+    {% include "_dialects.html" %}
     <div class="consent" id="consentBox">
       <h3 id="consentTitle"></h3>
       <p id="consentPara"></p>
       <div id="consentBoxes"></div>
-      <p class="note"><a href="/terms" id="consentTerms"></a></p>
+      <a class="note" href="/terms" id="consentTerms"></a>
     </div>
     <script type="application/json" id="consentData">{{ consent_json | safe }}</script>
-    <div class="row mt-16"><button type="button" class="btn" id="startBtn" disabled data-t="start">Dest pê bike</button>
-      <span class="note" id="startHint" aria-live="polite"></span></div>
+    <div class="start-row">
+      <button type="button" class="btn" id="startBtn" disabled data-t="start">Dest pê bike</button>
+      <span class="note" id="startHint" aria-live="polite"></span>
+    </div>
   </section>
 
-  <section class="card mt-18" id="work" hidden>
+  <section class="panel" id="work" hidden>
+    <h2 class="step"><span class="step__n">3</span><span data-t="s3">Hevokê bixwîne</span></h2>
     <div class="tabs" role="tablist">
       <button type="button" role="tab" aria-selected="true" data-tab="record" data-t="tabRecord">Tomar bike</button>
       <button type="button" role="tab" aria-selected="false" data-tab="review" data-t="tabReview">Guhdarî bike</button>
     </div>
     <div id="panelRecord" role="tabpanel">
-      <div class="sentence" id="sentence" aria-live="polite">…</div>
-      <div class="stack-c">
+      <div class="script" id="sentence" aria-live="polite">…</div>
+      <div class="studio">
         <button type="button" class="rec" id="rec" aria-pressed="false" data-t-aria="tabRecord">
-          <svg width="34" height="34" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 1 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-2.08A7 7 0 0 0 19 12h-2z"/></svg>
+          {% include "_recrays.html" %}
+          <span class="rec__core">
+            <svg class="ic-mic" width="38" height="38" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 1 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-2.08A7 7 0 0 0 19 12h-2z"/></svg>
+            <svg class="ic-stop" width="30" height="30" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2.5"/></svg>
+          </span>
         </button>
-        <div class="level" aria-hidden="true"><i></i></div>
-        <span class="note" data-t="tapRecord"></span>
+        <canvas class="wave" id="wave" width="840" height="112" aria-hidden="true"></canvas>
+        <p class="studio__hint" data-t="tapRecord"></p>
         <audio id="play" controls hidden></audio>
-        <div class="row">
+        <div class="actions">
           <button type="button" class="btn btn--ghost" id="again" hidden data-t="again">Dîsa</button>
           <button type="button" class="btn" id="send" hidden data-t="send">Bişîne</button>
-          <button type="button" class="btn btn--ghost" id="skip" data-t="skip">Derbas bike</button>
+          <button type="button" class="btn btn--quiet" id="skip" data-t="skip">Derbas bike</button>
         </div>
         <p class="msg" id="rmsg" hidden></p>
-        <span class="note">R · Enter · N</span>
+        <p class="keys"><kbd>R</kbd> <span data-t="keyRec"></span> &nbsp; <kbd>Enter</kbd> <span data-t="keySend"></span> &nbsp; <kbd>N</kbd> <span data-t="keySkip"></span></p>
       </div>
     </div>
     <div id="panelReview" role="tabpanel" hidden>
-      <p class="note" data-t="reviewHow"></p>
+      <p class="lede" data-t="reviewHow"></p>
       <p class="note" id="vempty" data-t="nothingToReview" hidden></p>
       <div id="vbox" hidden>
-        <div class="sentence" id="vsentence"></div>
-        <audio id="vaudio" controls class="audio-full mb-16"></audio>
+        <div class="script" id="vsentence"></div>
+        <audio id="vaudio" controls></audio>
         <div class="vote">
           <button type="button" class="btn" id="yes" data-t="matches">Rast e</button>
           <button type="button" class="btn btn--sor" id="no" data-t="noMatch">Ne rast e</button>
-          <button type="button" class="btn btn--ghost" id="vskip" data-t="skip">Derbas bike</button>
         </div>
+        <div class="actions mt-16"><button type="button" class="btn btn--quiet" id="vskip" data-t="skip">Derbas bike</button></div>
       </div>
     </div>
-    <div class="row mt-18"><span class="spacer"></span>
-      <button type="button" class="btn btn--ghost btn--sm" id="forget" data-t="forget">Tomarên min jê bibe</button></div>
+    <div class="forget-row"><button type="button" class="btn btn--quiet" id="forget" data-t="forget">Tomarên min jê bibe</button></div>
   </section>
 </main>
 {% include "_footer.html" %}
