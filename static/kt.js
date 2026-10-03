@@ -121,6 +121,43 @@
     playSub:    { kmr: 'Ji bo Android, li Google Play', ckb: 'بۆ ئەندرۆید، لە Google Play', tr: 'Android için, Google Play’de', en: 'For Android, on Google Play', fa: 'برای اندروید، در Google Play', ar: 'لأندرويد، على Google Play' },
     extSub:     { kmr: 'Ji bo Chrome, li Chrome Web Store', ckb: 'بۆ Chrome، لە Chrome Web Store', tr: 'Chrome için, Chrome Web Store’da', en: 'For Chrome, on the Chrome Web Store', fa: 'برای Chrome، در Chrome Web Store', ar: 'لـ Chrome، على Chrome Web Store' },
     clipsUnit:  { kmr: 'tomar', ckb: 'تۆمار', tr: 'kayıt', en: 'recordings', fa: 'ضبط', ar: 'تسجيل' },
+    aboutTitle: { kmr: 'Ev proje çi ye?', ckb: 'ئەم پڕۆژەیە چییە؟', tr: 'Bu proje nedir?', en: 'What is this project?', fa: 'این پروژه چیست؟', ar: 'ما هذا المشروع؟' },
+    aboutText:  { kmr: 'KurdishTTS projeyeke ne-bazirganî ya Dîjîtal Kurdistanê ye. Armanc ew e ku Kurdî jî, wekî zimanên mezin ên cîhanê, di teknolojiya îro de bi deng bijî: nûçe bi deng bên xwendin, pirtûk bên guhdarîkirin, sepan bi Kurdî biaxivin. Ji bo vê, em modela xwe ya zekaya çêkirî, KurdAI, bi dengên neteweya Kurd perwerde dikin.',
+                  ckb: 'KurdishTTS پڕۆژەیەکی ناقازانجی کوردستانی دیجیتاڵە. ئامانجەکەی ئەوەیە کە کوردیش، وەک زمانە گەورەکانی جیهان، لە تەکنەلۆژیای ئەمڕۆدا بە دەنگ بژی: هەواڵ بە دەنگ بخوێنرێتەوە، کتێب گوێی لێ بگیرێت، ئەپەکان بە کوردی قسە بکەن. بۆ ئەمە، مۆدێلی زیرەکی دەستکردی خۆمان، KurdAI، بە دەنگی نەتەوەی کورد ڕادەهێنین.',
+                  tr: 'KurdishTTS, Dijital Kurdistan’ın kâr amacı gütmeyen bir projesidir. Amacı, Kürtçenin de dünyanın büyük dilleri gibi bugünün teknolojisinde sesiyle yaşaması: haberler sesli okunsun, kitaplar dinlenebilsin, uygulamalar Kürtçe konuşsun. Bunun için kendi yapay zekâ modelimiz KurdAI’yi Kurd ulusunun sesleriyle eğitiyoruz.',
+                  en: 'KurdishTTS is a non-profit project of Digital Kurdistan. Its aim is for Kurdish, like the world’s major languages, to live in today’s technology with a voice: news read aloud, books you can listen to, apps that speak Kurdish. To get there, we are training our own AI model, KurdAI, on the voices of the Kurdish nation.',
+                  fa: 'KurdishTTS پروژه‌ای غیرانتفاعی از کردستان دیجیتال است. هدف آن است که زبان کردی نیز، مانند زبان‌های بزرگ جهان، در فناوری امروز با صدا زنده باشد: اخبار با صدا خوانده شود، کتاب‌ها شنیدنی باشند، برنامه‌ها کردی سخن بگویند. برای این، مدل هوش مصنوعی خودمان، KurdAI، را با صدای ملت کرد آموزش می‌دهیم.',
+                  ar: 'KurdishTTS مشروع غير ربحي من كردستان الرقمية. هدفه أن تحيا الكردية، مثل لغات العالم الكبرى، في تقنيات اليوم بصوتها: أخبار تُقرأ بصوت، وكتب تُسمع، وتطبيقات تتكلم الكردية. ولهذا ندرّب نموذج الذكاء الاصطناعي الخاص بنا، KurdAI، على أصوات الأمة الكردية.' },
+    how1T:      { kmr: 'Deng tên bexşîn', ckb: 'دەنگ دەبەخشرێن', tr: 'Sesler bağışlanır', en: 'Voices are donated', fa: 'صداها اهدا می‌شوند', ar: 'تُتبرَّع الأصوات' },
+    how1D:      { kmr: 'Endamên neteweya Kurd hevokên kurt bi dengê xwe dixwînin.', ckb: 'ئەندامانی نەتەوەی کورد ڕستەی کورت بە دەنگی خۆیان دەخوێننەوە.', tr: 'Kurd ulusunun üyeleri kısa cümleleri kendi sesleriyle okur.', en: 'Members of the Kurdish nation read short sentences in their own voice.', fa: 'اعضای ملت کرد جمله‌های کوتاه را با صدای خود می‌خوانند.', ar: 'يقرأ أبناء الأمة الكردية جملًا قصيرة بأصواتهم.' },
+    how2T:      { kmr: 'KurdAI tê perwerdekirin', ckb: 'KurdAI ڕادەهێنرێت', tr: 'KurdAI eğitilir', en: 'KurdAI is trained', fa: 'KurdAI آموزش می‌بیند', ar: 'يُدرَّب KurdAI' },
+    how2D:      { kmr: 'Bi tomarên pejirandî, modela me Kurdî xwendin û axaftinê hîn dibe.', ckb: 'بە تۆمارە پەسەندکراوەکان، مۆدێلەکەمان خوێندنەوە و قسەکردنی کوردی فێر دەبێت.', tr: 'Doğrulanmış kayıtlarla modelimiz Kürtçe okumayı ve konuşmayı öğrenir.', en: 'From the checked recordings, our model learns to read and speak Kurdish.', fa: 'مدل ما با ضبط‌های تأییدشده خواندن و گفتن کردی را می‌آموزد.', ar: 'من التسجيلات المُتحقَّق منها يتعلّم نموذجنا قراءة الكردية والتحدث بها.' },
+    how3T:      { kmr: 'Kurdî bi deng dibe', ckb: 'کوردی دەنگی دەبێت', tr: 'Kürtçe sese kavuşur', en: 'Kurdish gets a voice', fa: 'کردی صدا پیدا می‌کند', ar: 'تنال الكردية صوتها' },
+    how3D:      { kmr: 'Nûçe, pirtûk, sepan û platformên dîjîtal dikarin Kurdî bi deng bixwînin.', ckb: 'هەواڵ، کتێب، ئەپ و پلاتفۆرمە دیجیتاڵەکان دەتوانن کوردی بە دەنگ بخوێننەوە.', tr: 'Haberler, kitaplar, uygulamalar ve dijital platformlar Kürtçeyi sesli okuyabilir.', en: 'News, books, apps and digital platforms can read Kurdish aloud.', fa: 'اخبار، کتاب‌ها، برنامه‌ها و پلتفرم‌های دیجیتال می‌توانند کردی را با صدا بخوانند.', ar: 'تستطيع الأخبار والكتب والتطبيقات والمنصّات الرقمية قراءة الكردية بصوت.' },
+    kaiDoor:    { kmr: 'Belgeyan bi deng bixwîne, vîdyoyan bike Kurdî, platforma xwe bi Kurdî biaxivîne. Binêre ka çi tê.', ckb: 'بەڵگەنامە بە دەنگ بخوێنەوە، ڤیدیۆ بکە بە کوردی، پلاتفۆرمەکەت بە کوردی بدوێنە. ببینە چی دێت.', tr: 'Belgeleri sesli okut, videoları Kürtçeye çevir, platformunu Kürtçe konuştur. Neler geldiğine bak.', en: 'Read documents aloud, dub videos into Kurdish, make your platform speak Kurdish. See what is coming.', fa: 'اسناد را با صدا بخوان، ویدیوها را کردی کن، پلتفرمت را به کردی به سخن درآور. ببین چه در راه است.', ar: 'اقرأ المستندات بصوت، ودبلج الفيديوهات إلى الكردية، واجعل منصّتك تتكلم الكردية. اطّلع على ما هو قادم.' },
+    kaiOpen:    { kmr: 'KurdAI veke', ckb: 'KurdAI بکەرەوە', tr: 'KurdAI’yi aç', en: 'Open KurdAI', fa: 'KurdAI را باز کن', ar: 'افتح KurdAI' },
+    kaiLead:    { kmr: 'KurdAI zekaya çêkirî ya Kurdî ye, ku bi dengên neteweya Kurd tê perwerdekirin. Dema perwerdeya wê temam bibe, ev amûr dê ji her kesî re vebin.', ckb: 'KurdAI زیرەکی دەستکردی کوردییە کە بە دەنگی نەتەوەی کورد ڕادەهێنرێت. کاتێک ڕاهێنانەکەی تەواو بێت، ئەم ئامرازانە بۆ هەمووان دەکرێنەوە.', tr: 'KurdAI, Kurd ulusunun sesleriyle eğitilen Kürtçe yapay zekâdır. Eğitimi tamamlandığında bu araçlar herkese açılacak.', en: 'KurdAI is the Kurdish artificial intelligence, trained on the voices of the Kurdish nation. When its training is complete, these tools open to everyone.', fa: 'KurdAI هوش مصنوعی کردی است که با صدای ملت کرد آموزش می‌بیند. وقتی آموزشش کامل شود، این ابزارها برای همه باز می‌شوند.', ar: 'KurdAI هو الذكاء الاصطناعي الكردي الذي يتدرّب على أصوات الأمة الكردية. عند اكتمال تدريبه تُفتح هذه الأدوات للجميع.' },
+    kaiTraining:{ kmr: 'Perwerdeya KurdAI', ckb: 'ڕاهێنانی KurdAI', tr: 'KurdAI’nin eğitimi', en: 'KurdAI’s training', fa: 'آموزش KurdAI', ar: 'تدريب KurdAI' },
+    kaiTrainingNote: { kmr: 'Saetên tomarên pejirandî, Kurmancî û Soranî bi hev re. Her deng wê nêzîktir dike.', ckb: 'کاتژمێرەکانی تۆماری پەسەندکراو، کورمانجی و سۆرانی پێکەوە. هەر دەنگێک نزیکتری دەکاتەوە.', tr: 'Doğrulanmış kayıt saatleri, Kurmancî ve Soranî birlikte. Her ses onu yaklaştırır.', en: 'Hours of checked recordings, Kurmancî and Soranî together. Every voice brings it closer.', fa: 'ساعت‌های ضبطِ تأییدشده، کرمانجی و سورانی با هم. هر صدا آن را نزدیک‌تر می‌کند.', ar: 'ساعات التسجيلات المُتحقَّق منها، الكرمانجية والسورانية معًا. كل صوت يقرّبه.' },
+    kaiSoon:    { kmr: 'Di rê de', ckb: 'لە ڕێگادایە', tr: 'Yakında', en: 'Coming', fa: 'به‌زودی', ar: 'قريبًا' },
+    kaiDoc:     { kmr: 'Belgeyekê bi deng bixwîne', ckb: 'بەڵگەنامەیەک بە دەنگ بخوێنەوە', tr: 'Belgeni sesli okut', en: 'Read a document aloud', fa: 'سندی را با صدا بخوان', ar: 'اقرأ مستندًا بصوت' },
+    kaiDocText: { kmr: 'PDF, Word an pelê nivîsê bar bike; KurdAI wê bi Kurmancî an Soranî dixwîne û wekî MP3 dide te.', ckb: 'PDF، Word یان فایلی دەق باربکە؛ KurdAI بە کورمانجی یان سۆرانی دەیخوێنێتەوە و وەک MP3 دەیداتە تۆ.', tr: 'PDF, Word ya da metin dosyası yükle; KurdAI onu Kurmancî ya da Soranî okusun, MP3 olarak indir.', en: 'Upload a PDF, Word or text file; KurdAI reads it in Kurmancî or Soranî and gives you an MP3.', fa: 'فایل PDF، Word یا متنی بارگذاری کن؛ KurdAI آن را به کرمانجی یا سورانی می‌خواند و MP3 به تو می‌دهد.', ar: 'ارفع ملف PDF أو Word أو نص؛ يقرؤه KurdAI بالكرمانجية أو السورانية ويعطيك ملف MP3.' },
+    kaiDocBtn:  { kmr: 'Belge hilbijêre', ckb: 'بەڵگەنامە هەڵبژێرە', tr: 'Belge seç', en: 'Choose a document', fa: 'انتخاب سند', ar: 'اختر مستندًا' },
+    kaiDub:     { kmr: 'Vîdyoyekê bike Kurdî', ckb: 'ڤیدیۆیەک بکە بە کوردی', tr: 'Videoyu Kürtçeye dublajla', en: 'Dub a video into Kurdish', fa: 'ویدیویی را به کردی دوبله کن', ar: 'دبلج فيديو إلى الكردية' },
+    kaiDubText: { kmr: 'Vîdyoyeke bi her zimanî bar bike; KurdAI wê werdigerîne û bi dengê Kurdî dublaj dike.', ckb: 'ڤیدیۆیەک بە هەر زمانێک باربکە؛ KurdAI وەریدەگێڕێت و بە دەنگی کوردی دۆبلاژی دەکات.', tr: 'Herhangi bir dilde video yükle; KurdAI çevirsin ve Kürtçe seslendirsin.', en: 'Upload a video in any language; KurdAI translates it and voices it in Kurdish.', fa: 'ویدیویی به هر زبانی بارگذاری کن؛ KurdAI آن را ترجمه و به کردی دوبله می‌کند.', ar: 'ارفع فيديو بأي لغة؛ يترجمه KurdAI ويدبلجه بالكردية.' },
+    kaiDubBtn:  { kmr: 'Vîdyo bar bike', ckb: 'ڤیدیۆ باربکە', tr: 'Video yükle', en: 'Upload a video', fa: 'بارگذاری ویدیو', ar: 'ارفع فيديو' },
+    kaiVid:     { kmr: 'Ji wêneyê vîdyo çêke', ckb: 'لە وێنەوە ڤیدیۆ دروست بکە', tr: 'Görselden video üret', en: 'Make a video from an image', fa: 'از تصویر ویدیو بساز', ar: 'اصنع فيديو من صورة' },
+    kaiVidText: { kmr: 'Wêneyek û çend peyv bide; KurdAI jê vîdyoyeke kurt çêdike, bi dengê Kurdî.', ckb: 'وێنەیەک و چەند وشەیەک بدە؛ KurdAI ڤیدیۆیەکی کورتی لێ دروست دەکات، بە دەنگی کوردی.', tr: 'Bir görsel ve birkaç kelime ver; KurdAI ondan Kürtçe sesli kısa bir video üretsin.', en: 'Give an image and a few words; KurdAI makes a short video from it, with a Kurdish voice.', fa: 'یک تصویر و چند کلمه بده؛ KurdAI از آن ویدیویی کوتاه با صدای کردی می‌سازد.', ar: 'قدّم صورة وبضع كلمات؛ يصنع منها KurdAI فيديو قصيرًا بصوت كردي.' },
+    kaiVidBtn:  { kmr: 'Wêne bar bike', ckb: 'وێنە باربکە', tr: 'Görsel yükle', en: 'Upload an image', fa: 'بارگذاری تصویر', ar: 'ارفع صورة' },
+    kaiApi:     { kmr: 'Mifteya API ji bo platforma xwe', ckb: 'کلیلی API بۆ پلاتفۆرمەکەت', tr: 'Platformun için API anahtarı', en: 'An API key for your platform', fa: 'کلید API برای پلتفرمت', ar: 'مفتاح API لمنصّتك' },
+    kaiApiText: { kmr: 'Mifteya API şîfreyeke taybet e ku dihêle malper an sepana te bixwe bi KurdAI re biaxive: nûçeyên xwe bi deng bike, bersivan bi Kurdî bide. Wekî Enstîtuya Teknolojiyê ya Kurdistana Dîjîtal, em ê di demeke nêzîk de platformên dîjîtal bi KurdAI piştgirî bikin.',
+                  ckb: 'کلیلی API وشەی نهێنییەکی تایبەتە کە ڕێگە دەدات ماڵپەڕ یان ئەپەکەت خۆی لەگەڵ KurdAI قسە بکات: هەواڵەکانت بە دەنگ بکات، بە کوردی وەڵام بداتەوە. وەک پەیمانگای تەکنەلۆژیای کوردستانی دیجیتاڵ، لە داهاتوویەکی نزیکدا پاڵپشتی پلاتفۆرمە دیجیتاڵەکان دەکەین بە KurdAI.',
+                  tr: 'API anahtarı, web sitenin ya da uygulamanın KurdAI ile kendiliğinden konuşmasını sağlayan özel bir şifredir: haberlerini seslendirir, Kürtçe yanıt verir. Dijital Kurdistan Teknoloji Enstitüsü olarak yakın gelecekte dijital platformları KurdAI ile destekleyeceğiz.',
+                  en: 'An API key is a private code that lets your website or app talk to KurdAI on its own: voice your news, answer in Kurdish. As the Digital Kurdistan Tech Institute, we will support digital platforms with KurdAI in the near future.',
+                  fa: 'کلید API رمزی خصوصی است که به وب‌سایت یا برنامه‌ات اجازه می‌دهد خودکار با KurdAI گفت‌وگو کند: اخبارت را با صدا کند، به کردی پاسخ دهد. به‌عنوان مؤسسه فناوری کردستان دیجیتال، در آینده‌ای نزدیک پلتفرم‌های دیجیتال را با KurdAI پشتیبانی خواهیم کرد.',
+                  ar: 'مفتاح API رمز خاص يتيح لموقعك أو تطبيقك أن يتواصل مع KurdAI تلقائيًا: يحوّل أخبارك إلى صوت ويجيب بالكردية. بصفتنا معهد التقنية في كردستان الرقمية، سندعم المنصّات الرقمية بـ KurdAI في المستقبل القريب.' },
+    kaiApiBtn:  { kmr: 'Mifteyê çêke', ckb: 'کلیل دروست بکە', tr: 'Anahtar oluştur', en: 'Create a key', fa: 'ساخت کلید', ar: 'أنشئ مفتاحًا' },
+    kaiWait:    { kmr: 'Ev amûr dema perwerdeya KurdAI temam bibe dê çalak bibe. Tu dikarî bi bexşa dengê xwe vê zûtir bikî.', ckb: 'ئەم ئامرازە کاتێک ڕاهێنانی KurdAI تەواو بێت چالاک دەبێت. دەتوانیت بە بەخشینی دەنگت خێراتری بکەیت.', tr: 'Bu araç KurdAI’nin eğitimi tamamlandığında etkinleşecek. Sesini bağışlayarak bunu hızlandırabilirsin.', en: 'This tool turns on when KurdAI’s training is complete. You can speed that up by donating your voice.', fa: 'این ابزار وقتی آموزش KurdAI کامل شود فعال می‌شود. می‌توانی با اهدای صدایت آن را جلو بیندازی.', ar: 'تُفعَّل هذه الأداة عند اكتمال تدريب KurdAI. يمكنك تسريع ذلك بالتبرع بصوتك.' },
     close:      { kmr: 'Bigire', ckb: 'داخستن', tr: 'Kapat', en: 'Close', fa: 'بستن', ar: 'إغلاق' },
     footer:     { kmr: 'Projeyeke ne-bazirganî ya Dîjîtal Kurdistanê. Deng: MMS (Meta, CC BY-NC 4.0).', ckb: 'پڕۆژەیەکی ناقازانجی کوردستانی دیجیتاڵ. دەنگ: MMS (Meta، CC BY-NC 4.0).', tr: 'Dijital Kurdistan’ın kâr amacı gütmeyen projesi. Ses: MMS (Meta, CC BY-NC 4.0).', en: 'A non-profit project of Digital Kurdistan. Voice: MMS (Meta, CC BY-NC 4.0).', fa: 'پروژه‌ای غیرانتفاعی از کردستان دیجیتال. صدا: MMS (Meta، CC BY-NC 4.0).', ar: 'مشروع غير ربحي من كردستان الرقمية. الصوت: MMS (Meta، CC BY-NC 4.0).' }
   };
@@ -548,6 +585,32 @@
     show();
   }
 
+  // ── page: KurdAI (what is coming) ───────────────────────────────────────
+  // The tools are shown so people know what their voices are for. None of
+  // them takes a file or makes a key yet: a press says when it will, and how
+  // to bring that day closer. Nothing is uploaded, nothing is collected.
+  function kurdaiPage() {
+    var GOAL_H = 100;
+    api('GET', '/api/donate/stats').then(function (r) {
+      var v = ((r.json.kmr || {}).valid_hours || 0) + ((r.json.ckb || {}).valid_hours || 0);
+      document.querySelector('[data-k="v"]').textContent = Math.round(v * 10) / 10;
+      document.querySelector('[data-k="bar"]').style.setProperty('--p', Math.min(100, v / GOAL_H * 100) + '%');
+    });
+    function wait(box) {
+      box.textContent = say('kaiWait') + ' ';
+      var a = h('a', null, say('navDonate')); a.href = '/bexsh'; box.appendChild(a);
+    }
+    document.querySelectorAll('[data-tool]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var box = document.querySelector('[data-wait="' + b.dataset.tool + '"]');
+        wait(box); box.hidden = false;
+      });
+    });
+    document.addEventListener('kt-lang', function () {
+      document.querySelectorAll('[data-wait]').forEach(function (box) { if (!box.hidden) wait(box); });
+    });
+  }
+
   // ── boot ─────────────────────────────────────────────────────────────────
   var sel = document.querySelector('.langsel');
   if (sel) sel.addEventListener('change', function () { applyLang(sel.value); });
@@ -557,6 +620,7 @@
   var page = document.body.dataset.page;
   if (page === 'speak') speakPage();
   if (page === 'donate') donatePage();
+  if (page === 'kurdai') kurdaiPage();
   refresh();
   document.addEventListener('kt-lang', paintAcct);
 })();

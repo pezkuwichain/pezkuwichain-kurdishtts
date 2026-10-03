@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="kmr" dir="ltr">
+<head>
+{% include "_head.html" %}
+<title>KurdAI — KurdishTTS</title>
+<meta name="description" content="KurdAI: zekaya çêkirî ya Kurdî ku bi dengên neteweya Kurd tê perwerdekirin. KurdAI: the Kurdish AI trained on the voices of the Kurdish nation." />
+</head>
+<body data-page="kurdai">
+{% include "_header.html" %}
+<main class="wrap">
+  <section class="hero hero--ai">
+    <span class="ai-mark" aria-hidden="true">{% include "_sun.html" %}</span>
+    <h1>KurdAI</h1>
+    <p data-t="kaiLead"></p>
+  </section>
+
+  <section class="panel training">
+    <div class="training__top"><b data-t="kaiTraining"></b><span dir="ltr"><span data-k="v">0</span> / 100 h</span></div>
+    <div class="meter__bar"><i data-k="bar"></i></div>
+    <p class="note" data-t="kaiTrainingNote"></p>
+    <a class="btn btn--block mt-16" href="/bexsh" data-t="navDonate">Dengê xwe bexşîne</a>
+  </section>
+
+  <section class="tools" aria-label="KurdAI">
+    {% for f in [('doc', 'kaiDocBtn'), ('dub', 'kaiDubBtn'), ('vid', 'kaiVidBtn'), ('api', 'kaiApiBtn')] %}
+    <article class="tool" id="tool-{{ f[0] }}">
+      <div class="tool__icon" aria-hidden="true">{% include "_icon_" ~ f[0] ~ ".html" %}</div>
+      <div class="tool__body">
+        <h2><span data-t="kai{{ f[0]|capitalize }}"></span><span class="soon" data-t="kaiSoon"></span></h2>
+        <p data-t="kai{{ f[0]|capitalize }}Text"></p>
+        <button type="button" class="btn btn--ghost btn--sm" data-tool="{{ f[0] }}" data-t="{{ f[1] }}"></button>
+        <p class="msg msg--wait" data-wait="{{ f[0] }}" role="status" hidden></p>
+      </div>
+    </article>
+    {% endfor %}
+  </section>
+</main>
+{% include "_footer.html" %}
+</body>
+</html>

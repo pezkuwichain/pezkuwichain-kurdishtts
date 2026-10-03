@@ -20,6 +20,20 @@
     <audio id="out" controls hidden></audio>
     <p class="msg msg--bad" id="msg" hidden></p>
   </section>
+  <section class="about">
+    <h2 data-t="aboutTitle"></h2>
+    <p class="about__lead" data-t="aboutText"></p>
+    <ol class="path">
+      <li><b data-t="how1T"></b><span data-t="how1D"></span></li>
+      <li><b data-t="how2T"></b><span data-t="how2D"></span></li>
+      <li><b data-t="how3T"></b><span data-t="how3D"></span></li>
+    </ol>
+  </section>
+  <a class="panel kurdai-door" href="/kurdai">
+    <span class="kurdai-door__mark" aria-hidden="true">{% include "_sun.html" %}</span>
+    <span class="kurdai-door__text"><b>KurdAI</b><span data-t="kaiDoor"></span></span>
+    <span class="btn" data-t="kaiOpen"></span>
+  </a>
   <a class="panel invite" href="/bexsh">
     <span><b data-t="inviteTitle"></b><span data-t="inviteText"></span></span>
     <span class="btn btn--ghost" data-t="navDonate">Dengê xwe bexşîne</span>
