@@ -1,5 +1,5 @@
 [Unit]
-Description=KurdishTTS — Kurdish speech and voice donation
+Description=KurdAi Voice — Kurdish speech and voice donation
 After=network-online.target
 Wants=network-online.target
 

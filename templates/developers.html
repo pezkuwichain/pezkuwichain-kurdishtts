@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="kmr" dir="ltr">
+<head>
+{% include "_head.html" %}
+<title>API — KurdAi Voice</title>
+<meta name="description" content="KurdAi Voice speech API: Kurmancî and Soranî text-to-speech over HTTP. Short text without a key, long text as queued jobs with an API key." />
+</head>
+<body data-page="developers">
+{% include "_header.html" %}
+<main class="wrap wrap--wide">
+  <section class="hero hero--left">
+    <p class="eyebrow" data-t="devEyebrow"></p>
+    <h1 data-t="devTitle"></h1>
+    <p data-t="devLead"></p>
+  </section>
+
+  <div class="docs">
+    <nav class="docs__toc" aria-label="API">
+      <a href="#quick" data-t="devQuickT"></a>
+      <a href="#jobs" data-t="devJobsT"></a>
+      <a href="#ref" data-t="devRefT"></a>
+      <a href="#limits" data-t="devLimitsT"></a>
+      <a href="#key" data-t="devKeyT"></a>
+      <a href="#licence" data-t="devLicT"></a>
+    </nav>
+    <div class="docs__body">
+      <section class="panel" id="quick">
+        <h2 data-t="devQuickT"></h2>
+        <p data-t="devQuickD"></p>
+        <pre class="code" dir="ltr"><code>curl -X POST https://kurdishtts.dks.news/api/tts \
+  -H 'Content-Type: application/json' \
+  -d '{"text": "Ziman nasnameya me ye.", "dialect": "kmr"}' \
+  -o speech.mp3</code></pre>
+        <pre class="code" dir="ltr"><code>const r = await fetch('https://kurdishtts.dks.news/api/tts', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ text: 'زمان ناسنامەی ئێمەیە.', dialect: 'ckb' }),
+});
+const audio = new Audio(URL.createObjectURL(await r.blob()));
+audio.play();</code></pre>
+      </section>
+
+      <section class="panel" id="jobs">
+        <h2 data-t="devJobsT"></h2>
+        <p data-t="devJobsD"></p>
+        <pre class="code" dir="ltr"><code>import time, requests
+
+API = "https://kurdishtts.dks.news"
+H = {"Authorization": "Bearer YOUR_API_KEY"}
+
+job = requests.post(f"{API}/api/tts/jobs", headers=H,
+                    json={"text": open("article.txt").read(), "dialect": "kmr"}).json()
+while job["status"] in ("queued", "running"):
+    time.sleep(5)
+    job = requests.get(f"{API}/api/tts/jobs/{job['id']}", headers=H).json()
+
+if job["status"] == "done":
+    open("article.mp3", "wb").write(requests.get(API + job["audio_url"]).content)</code></pre>
+      </section>
+
+      <section class="panel" id="ref">
+        <h2 data-t="devRefT"></h2>
+        <div class="table" dir="ltr">
+          <table>
+            <thead><tr><th>Method</th><th>Path</th><th>Body / result</th><th>Auth</th></tr></thead>
+            <tbody>
+              <tr><td>POST</td><td><code>/api/tts</code></td><td><code>{text, dialect}</code> → <code>audio/mpeg</code></td><td>—</td></tr>
+              <tr><td>POST</td><td><code>/api/tts/jobs</code></td><td><code>{text, dialect}</code> → <code>{id, status, …}</code> (202)</td><td>Bearer</td></tr>
+              <tr><td>GET</td><td><code>/api/tts/jobs/{id}</code></td><td><code>{status, ahead, seconds, audio_url, error}</code></td><td>Bearer</td></tr>
+              <tr><td>GET</td><td><code>/api/tts/audio/{key}.mp3</code></td><td><code>audio/mpeg</code></td><td>—</td></tr>
+              <tr><td>GET</td><td><code>/api/tts/health</code></td><td><code>{ok, models, queue}</code></td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note"><code>dialect</code>: <code>kmr</code> (Kurmancî, Latin) · <code>ckb</code> (Soranî, Arabic script). <code>status</code>: <code>queued</code> · <code>running</code> · <code>done</code> · <code>failed</code>.</p>
+      </section>
+
+      <section class="panel" id="limits">
+        <h2 data-t="devLimitsT"></h2>
+        <ul class="facts">
+          <li><b>600</b><span data-t="devLim1"></span></li>
+          <li><b>8 / min</b><span data-t="devLim2"></span></li>
+          <li><b>60 000</b><span data-t="devLim3"></span></li>
+          <li><b>MP3</b><span data-t="devLim4"></span></li>
+        </ul>
+        <p data-t="devErrors"></p>
+        <p class="note" dir="ltr"><code>400</code> bad dialect / empty text · <code>401</code> key missing or unknown · <code>404</code> no such job · <code>413</code> text too long · <code>429</code> too many requests</p>
+      </section>
+
+      <section class="panel" id="key">
+        <h2 data-t="devKeyT"></h2>
+        <p data-t="devKeyD"></p>
+        <a class="btn" href="mailto:privacy@dks.news?subject=API%20key" data-t="devKeyBtn"></a>
+      </section>
+
+      <section class="panel" id="licence">
+        <h2 data-t="devLicT"></h2>
+        <p data-t="devLicD"></p>
+        <pre class="code" dir="ltr"><code>Voice: KurdAi Voice (kurdishtts.dks.news), using MMS-TTS by Meta AI /
+razhan/mms-tts-ckb, licensed CC BY-NC 4.0 (creativecommons.org/licenses/by-nc/4.0)</code></pre>
+        <a href="/terms" data-t="terms">Terms</a>
+      </section>
+    </div>
+  </div>
+</main>
+{% include "_footer.html" %}
+</body>
+</html>

@@ -2,7 +2,7 @@
 <html lang="kmr" dir="ltr">
 <head>
 {% include "_head.html" %}
-<title>KurdishTTS — Dengê Kurdî</title>
+<title>KurdAi Voice — Dengê Kurdî</title>
 <meta name="description" content="Nivîsa Kurmancî û Soranî bi deng bixwîne. Read Kurdish text aloud — and donate your voice to build a Kurdish voice made by the Kurdish nation." />
 </head>
 <body data-page="speak">
@@ -20,25 +20,101 @@
     <audio id="out" controls hidden></audio>
     <p class="msg msg--bad" id="msg" hidden></p>
   </section>
-  <section class="about">
-    <h2 data-t="aboutTitle"></h2>
-    <p class="about__lead" data-t="aboutText"></p>
+</main>
+
+<div class="wrap wrap--wide">
+  <section class="sect" aria-labelledby="feat-t">
+    <p class="eyebrow" data-t="featEyebrow"></p>
+    <h2 id="feat-t" class="sect__title" data-t="featTitle"></h2>
+    <p class="sect__lead" data-t="featLead"></p>
+    <div class="bento">
+      <a class="card card--big" href="#txt">
+        <span class="card__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4V5zM15.5 8.5a5 5 0 0 1 0 7M18.4 5.6a9 9 0 0 1 0 12.8"/></svg></span>
+        <b data-t="f1T"></b><span data-t="f1D"></span><em class="tag" data-t="f1Tag"></em>
+      </a>
+      <a class="card" href="/bexsh">
+        <span class="card__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span>
+        <b data-t="f2T"></b><span data-t="f2D"></span><em class="tag" data-t="f2Tag"></em>
+      </a>
+      <a class="card" href="/developers">
+        <span class="card__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m8 7-5 5 5 5M16 7l5 5-5 5"/></svg></span>
+        <b data-t="f3T"></b><span data-t="f3D"></span><em class="tag">REST</em>
+      </a>
+      <div class="card">
+        <span class="card__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></span>
+        <b data-t="f4T"></b><span data-t="f4D"></span><em class="tag">6</em>
+      </div>
+      <a class="card" href="https://github.com/pezkuwichain/pezkuwichain-kurdishtts" rel="noopener">
+        <span class="card__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3v12M18 9a3 3 0 1 0 0-.01M6 21a3 3 0 1 0 0-.01M18 12c0 4-6 3-12 6"/></svg></span>
+        <b data-t="f5T"></b><span data-t="f5D"></span><em class="tag">GitHub</em>
+      </a>
+      <a class="card" href="/privacy">
+        <span class="card__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3z"/><path d="m9 12 2 2 4-4"/></svg></span>
+        <b data-t="f6T"></b><span data-t="f6D"></span><em class="tag" data-t="f6Tag"></em>
+      </a>
+    </div>
+  </section>
+
+  <section class="sect" aria-labelledby="who-t">
+    <p class="eyebrow" data-t="whoEyebrow"></p>
+    <h2 id="who-t" class="sect__title" data-t="whoTitle"></h2>
+    <div class="uses">
+      <article class="use use--lead"><span class="use__n">01</span><h3 data-t="u1T"></h3><p data-t="u1D"></p></article>
+      <div class="uses__list">
+        <article class="use"><span class="use__n">02</span><div><h3 data-t="u2T"></h3><p data-t="u2D"></p></div></article>
+        <article class="use"><span class="use__n">03</span><div><h3 data-t="u3T"></h3><p data-t="u3D"></p></div></article>
+        <article class="use"><span class="use__n">04</span><div><h3 data-t="u4T"></h3><p data-t="u4D"></p></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sect" aria-labelledby="num-t">
+    <p class="eyebrow" data-t="numEyebrow"></p>
+    <h2 id="num-t" class="sect__title" data-t="numTitle"></h2>
+    <div class="stats">
+      <div class="stat"><b data-s="hours">–</b><span data-t="numHours"></span></div>
+      <div class="stat"><b data-s="valid">–</b><span data-t="numValid"></span></div>
+      <div class="stat"><b data-s="donors">–</b><span data-t="numDonors"></span></div>
+      <div class="stat"><b data-s="sentences">–</b><span data-t="numSentences"></span></div>
+    </div>
+    <p class="note" data-t="numNote"></p>
+  </section>
+
+  <section class="sect" aria-labelledby="about-t">
+    <p class="eyebrow" data-t="howEyebrow"></p>
+    <h2 id="about-t" class="sect__title" data-t="aboutTitle"></h2>
+    <p class="sect__lead" data-t="aboutText"></p>
     <ol class="path">
       <li><b data-t="how1T"></b><span data-t="how1D"></span></li>
       <li><b data-t="how2T"></b><span data-t="how2D"></span></li>
       <li><b data-t="how3T"></b><span data-t="how3D"></span></li>
     </ol>
+    <a class="panel kurdai-door mt-16" href="/kurdai">
+      <span class="kurdai-door__mark" aria-hidden="true">{% include "_sun.html" %}</span>
+      <span class="kurdai-door__text"><b>KurdAi</b><span data-t="kaiDoor"></span></span>
+      <span class="btn" data-t="kaiOpen"></span>
+    </a>
   </section>
-  <a class="panel kurdai-door" href="/kurdai">
-    <span class="kurdai-door__mark" aria-hidden="true">{% include "_sun.html" %}</span>
-    <span class="kurdai-door__text"><b>KurdAI</b><span data-t="kaiDoor"></span></span>
-    <span class="btn" data-t="kaiOpen"></span>
-  </a>
-  <a class="panel invite" href="/bexsh">
-    <span><b data-t="inviteTitle"></b><span data-t="inviteText"></span></span>
-    <span class="btn btn--ghost" data-t="navDonate">Dengê xwe bexşîne</span>
-  </a>
-</main>
+
+  <section class="mission" aria-labelledby="mis-t">
+    <span class="mission__sun" aria-hidden="true">{% include "_sun.html" %}</span>
+    <p class="eyebrow" id="mis-t" data-t="misEyebrow"></p>
+    <blockquote data-t="misText"></blockquote>
+    <p class="mission__by" data-t="misBy"></p>
+  </section>
+
+  <section class="cta" aria-labelledby="cta-t">
+    <div>
+      <h2 id="cta-t" data-t="ctaTitle"></h2>
+      <p data-t="ctaText"></p>
+    </div>
+    <div class="cta__acts">
+      <a class="btn" href="#txt" data-t="ctaTry"></a>
+      <a class="btn btn--ghost" href="/bexsh" data-t="navDonate">Dengê xwe bexşîne</a>
+      <a class="cta__link" href="/developers" data-t="navDevLong"></a>
+    </div>
+  </section>
+</div>
 {% include "_footer.html" %}
 </body>
 </html>

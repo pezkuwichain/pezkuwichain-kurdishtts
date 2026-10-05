@@ -1,15 +1,14 @@
-# KurdishTTS — Privacy Policy
+# KurdAi Voice — Privacy Policy
 
-**Version:** 2026-10-03 (draft) · **Effective:** [date of publication]
+**Version:** 2026-10-06 · **Effective:** 2026-10-06
 **Authoritative language:** English. Translations are for convenience; if they differ, this English text prevails.
 
-> Drafting markers: text in **[square brackets]** is either an open question (`Q#` → `notes.md` §A) or depends on a product change (`C#` → `notes.md` §B). Each must be resolved, and the marker removed, before this page is published.
 
 ---
 
 ## 1. Who is responsible
 
-KurdishTTS (https://kurdishtts.dks.news) is a non-profit project of the Dijital Kurdistan (DKS) / PezkuwiChain initiative and a sister site of dks.news.
+KurdAi Voice (https://kurdishtts.dks.news) is a non-profit project of the Dijital Kurdistan (DKS) / PezkuwiChain initiative and a sister site of dks.news.
 
 **Controller:** **Pez Kiwi Comp**, Georgia, Sagarejo Region, village Kvemo Lambalo, 4th street N2.
 **Privacy contact:** **privacy@dks.news**. Write "Privacy" in the subject line.

@@ -1,7 +1,7 @@
-# KurdishTTS — Gizlilik Politikası ve KVKK Aydınlatma Metni (kısa Türkçe sürüm)
+# KurdAi Voice — Gizlilik Politikası ve KVKK Aydınlatma Metni (kısa Türkçe sürüm)
 
 **Çeviridir. İngilizce metin (`privacy.en.md`) esastır; farklılık olursa İngilizce metin geçerlidir.**
-Sürüm: 2026-10-03 (taslak) · Yürürlük: [yayım tarihi] · Köşeli parantezli işaretler → `notes.md`.
+Sürüm: 2026-10-06 · Yürürlük: 2026-10-06
 
 ## 1. Veri sorumlusu
 **Pez Kiwi Comp**, Georgia, Sagarejo Region, village Kvemo Lambalo, 4th street N2 · **privacy@dks.news**

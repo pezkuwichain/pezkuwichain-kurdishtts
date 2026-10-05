@@ -1,7 +1,8 @@
-"""KurdishTTS — Kurdish speech for everyone, and a voice bank to make it better.
+"""KurdAi Voice — Kurdish speech for everyone, and a voice bank to make it better.
 
   /            read Kurdish text aloud (Kurmancî / Soranî)
   /bexsh       donate your voice: read sentences, check others' recordings
+  /developers  the speech API, documented · /about · /faq
   /api/tts...  the speech API (see ktts/api.py); dks.news uses it for articles
 
 Run:  uvicorn app:app --host 127.0.0.1 --port 8000   (behind nginx)
@@ -57,7 +58,7 @@ async def lifespan(_app: FastAPI):
     engine.close()
 
 
-app = FastAPI(title="KurdishTTS", docs_url=None, redoc_url=None, openapi_url=None, lifespan=lifespan)
+app = FastAPI(title="KurdAi Voice", docs_url=None, redoc_url=None, openapi_url=None, lifespan=lifespan)
 app.mount("/static", StaticFiles(directory=str(BASE / "static")), name="static")
 templates = Jinja2Templates(directory=str(BASE / "templates"))
 
@@ -92,6 +93,21 @@ def bexsh(request: Request):
 @app.get("/kurdai", response_class=HTMLResponse)
 def kurdai(request: Request):
     return templates.TemplateResponse(request, "kurdai.html", {"v": V, "page": "kurdai"})
+
+
+@app.get("/developers", response_class=HTMLResponse)
+def developers(request: Request):
+    return templates.TemplateResponse(request, "developers.html", {"v": V, "page": "developers"})
+
+
+@app.get("/about", response_class=HTMLResponse)
+def about(request: Request):
+    return templates.TemplateResponse(request, "about.html", {"v": V, "page": "about"})
+
+
+@app.get("/faq", response_class=HTMLResponse)
+def faq(request: Request):
+    return templates.TemplateResponse(request, "faq.html", {"v": V, "page": "faq"})
 
 
 LEGAL = BASE / "legal"

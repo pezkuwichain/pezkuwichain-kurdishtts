@@ -1,6 +1,6 @@
-# KurdishTTS — Terms of Use
+# KurdAi Voice — Terms of Use
 
-**Version:** 2026-10-03 (draft) · **Effective:** [date of publication]
+**Version:** 2026-10-06 · **Effective:** 2026-10-06
 **Authoritative language:** English. Translations are for convenience; if they differ, this English text prevails.
 
 
@@ -8,7 +8,7 @@
 
 ## 1. About these terms
 
-KurdishTTS (https://kurdishtts.dks.news, "the service") is a free, non-profit project of the Dijital Kurdistan (DKS) / PezkuwiChain initiative. Its goal is a Kurdish voice for the Kurdish nation. It is operated by **Pez Kiwi Comp**, Georgia, Sagarejo Region, village Kvemo Lambalo, 4th street N2 ("we", "us").
+KurdAi Voice (https://kurdishtts.dks.news, "the service") is a free, non-profit project of the Dijital Kurdistan (DKS) / PezkuwiChain initiative. Its goal is a Kurdish voice for the Kurdish nation. It is operated by **Pez Kiwi Comp**, Georgia, Sagarejo Region, village Kvemo Lambalo, 4th street N2 ("we", "us").
 
 By using the service you agree to these terms. Our **Privacy Policy** explains how we handle personal data; it is not part of this contract. If you do not agree, please do not use the service.
 
@@ -18,7 +18,9 @@ By using the service you agree to these terms. Our **Privacy Policy** explains h
 - **Voice donation (`/bexsh`).** Adults can sign in with a Pezkuwi wallet, read sentences aloud, and check other donors' recordings. This helps us build our own Kurdish voice.
 - **API.** Programmatic access to speech generation is available only with an API key we issue, at our discretion (for example to dks.news).
 
-The service is free. We may change, limit, suspend or stop any part of it at any time, including for maintenance or security.
+The service is free. We may change, limit, suspend or stop any part of it at any time, including for maintenance or security. We aim to keep it available but do not promise uninterrupted service.
+
+**API keys.** An API key is personal to the person or project it was issued to. Keep it secret: requests made with your key are your responsibility. Do not share or publish it. We may revoke a key that is misused, leaked, or used beyond what it was issued for.
 
 ## 3. Non-commercial use and the current voice
 
@@ -29,7 +31,9 @@ Therefore:
 - **You may use audio from the service only for personal, educational, journalistic or other non-commercial purposes.** You may not sell it, use it in advertising, or use it in a product or service offered for money.
 - **We grant no commercial rights in generated audio.** We do not promise that any audio is free of third-party rights. You are responsible for the text you enter and for how you use the result.
 - **When you share generated audio, please credit it**, for example:
-  > Voice: KurdishTTS (kurdishtts.dks.news), using MMS-TTS by Meta AI / razhan/mms-tts-ckb, licensed CC BY-NC 4.0 (creativecommons.org/licenses/by-nc/4.0).
+  > Voice: KurdAi Voice (kurdishtts.dks.news), using MMS-TTS by Meta AI / razhan/mms-tts-ckb, licensed CC BY-NC 4.0 (creativecommons.org/licenses/by-nc/4.0).
+
+**Your text and your audio.** We claim no ownership of the text you enter. Within the limits of this section, you may use the audio you generate; we cannot give you more rights than the licence of the underlying model allows.
 
 When the voice changes (for example, to our own model), we will update this section. The new terms will apply to audio generated after the change.
 
@@ -42,7 +46,9 @@ You must not use the service, and in particular the read-aloud, to:
 3. produce sexual content involving minors, or any content that exploits or endangers children;
 4. mislead people in a way that could cause harm. For example, do not present generated audio as a real recording of events, of authorities or of this project;
 5. overload, scrape or attack the service; get around rate limits or access controls; or use automated means beyond normal use of the public page. To report a security problem, write to **security@pex.mom**; good-faith reports are welcome;
-6. break the law that applies to you or anyone else's rights.
+6. break the law that applies to you or anyone else's rights;
+7. extract, copy, clone or rebuild a voice from audio the service produces, or use that audio to train, fine-tune or evaluate a speech model that imitates the service's voices;
+8. resell or sublicense access to the service or the API, or offer a service that wraps it, without our written permission.
 
 We may refuse a request, remove cached audio, block access or a wallet address, or report clearly illegal content to authorities.
 

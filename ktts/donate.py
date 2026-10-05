@@ -306,6 +306,9 @@ def stats(kt_ses: str | None = Cookie(None)):
                       "valid_clips": r["vn"],
                       "speakers": r["speakers"],
                       "sentences": db.execute("SELECT COUNT(*) FROM sentence WHERE dialect=? AND active=1", (d,)).fetchone()[0]}
+        # One person may donate in both dialects: the sum of the two counts
+        # above would count them twice, so the total is counted on its own.
+        out["donors"] = db.execute("SELECT COUNT(DISTINCT addr) FROM clip").fetchone()[0]
         s = auth.session(kt_ses)
         if s:
             mine = db.execute("SELECT COUNT(*), COALESCE(SUM(seconds),0) FROM clip WHERE addr=?", (s["addr"],)).fetchone()

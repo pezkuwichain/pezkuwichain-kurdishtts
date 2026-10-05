@@ -1,20 +1,24 @@
-# KurdishTTS — Kullanım Koşulları (kısa Türkçe sürüm)
+# KurdAi Voice — Kullanım Koşulları (kısa Türkçe sürüm)
 
 **Çeviridir. İngilizce metin (`terms.en.md`) esastır; farklılık olursa İngilizce metin geçerlidir.**
-Sürüm: 2026-10-03 (taslak) · Yürürlük: [yayım tarihi] · Köşeli parantezli işaretler → `notes.md`.
+Sürüm: 2026-10-06 · Yürürlük: 2026-10-06
 
 ## 1. Hizmet ve işleten
-KurdishTTS (https://kurdishtts.dks.news), Dijital Kurdistan (DKS) / PezkuwiChain girişiminin ücretsiz, kâr amacı gütmeyen projesidir. Amacı Kurd ulusu için bir Kürtçe sestir. İşleten: **Pez Kiwi Comp**, Georgia, Sagarejo Region, village Kvemo Lambalo, 4th street N2. Hizmeti kullanan bu koşulları kabul etmiş olur. Kişisel veriler için Gizlilik Politikası geçerlidir.
+KurdAi Voice (https://kurdishtts.dks.news), Dijital Kurdistan (DKS) / PezkuwiChain girişiminin ücretsiz, kâr amacı gütmeyen projesidir. Amacı Kurd ulusu için bir Kürtçe sestir. İşleten: **Pez Kiwi Comp**, Georgia, Sagarejo Region, village Kvemo Lambalo, 4th street N2. Hizmeti kullanan bu koşulları kabul etmiş olur. Kişisel veriler için Gizlilik Politikası geçerlidir.
 
 ## 2. Ne sunuyoruz
 - **Sesli okuma:** Kurmancî veya Soranî metin (en çok 600 karakter) → ses.
 - **Ses bağışı (`/bexsh`):** 18 yaş ve üstü kişiler Pezkuwi cüzdanıyla giriş yapar, cümle okur ve başkalarının kayıtlarını kontrol eder.
 - **API:** yalnızca bizim verdiğimiz anahtarla (ör. dks.news).
 
-Hizmeti her an değiştirebilir, sınırlayabilir veya durdurabiliriz.
+Hizmeti her an değiştirebilir, sınırlayabilir veya durdurabiliriz. Kesintisiz çalışacağına söz vermiyoruz.
+
+**API anahtarları.** Anahtar, verildiği kişiye veya projeye özeldir. Gizli tut: anahtarınla yapılan istekler senin sorumluluğundadır. Paylaşma, yayımlama. Kötüye kullanılan, sızan veya verildiği amacın dışında kullanılan anahtarı iptal edebiliriz.
 
 ## 3. Ticari olmayan kullanım
-Şu anki sesler Meta'nın **MMS-TTS** modeli (`facebook/mms-tts-kmr-script_latin`) ve **`razhan/mms-tts-ckb`** modelidir. İkisi de **CC BY-NC 4.0** (ticari olmayan) lisanslıdır ve geçici çözümdür. Bu yüzden üretilen sesi **yalnızca kişisel, eğitim, gazetecilik veya başka ticari olmayan amaçlarla** kullanabilirsin: satamazsın, reklamda veya ücretli bir üründe kullanamazsın. Ticari kullanım hakkı vermiyoruz. Paylaşırken şu atıf satırını kullan: *"Ses: KurdishTTS (kurdishtts.dks.news), MMS-TTS (Meta AI) / razhan/mms-tts-ckb, CC BY-NC 4.0."*
+Şu anki sesler Meta'nın **MMS-TTS** modeli (`facebook/mms-tts-kmr-script_latin`) ve **`razhan/mms-tts-ckb`** modelidir. İkisi de **CC BY-NC 4.0** (ticari olmayan) lisanslıdır ve geçici çözümdür. Bu yüzden üretilen sesi **yalnızca kişisel, eğitim, gazetecilik veya başka ticari olmayan amaçlarla** kullanabilirsin: satamazsın, reklamda veya ücretli bir üründe kullanamazsın. Ticari kullanım hakkı vermiyoruz. Paylaşırken şu atıf satırını kullan: *"Ses: KurdAi Voice (kurdishtts.dks.news), MMS-TTS (Meta AI) / razhan/mms-tts-ckb, CC BY-NC 4.0."*
+
+**Metnin ve sesin.** Girdiğin metin üzerinde hak iddia etmiyoruz. Ürettiğin sesi bu bölümün sınırları içinde kullanabilirsin; temel modelin lisansının izin verdiğinden fazlasını sana veremeyiz.
 
 ## 4. Yasak kullanım
 Hizmetle şunları yapamazsın:
@@ -22,7 +26,9 @@ Hizmetle şunları yapamazsın:
 - **gerçek bir kişiyi veya kurumu taklit etmek**, sahte "sesli mesaj", dolandırıcılık;
 - çocukları istismar eden her türlü içerik;
 - üretilmiş sesi gerçek bir kaydın sesi gibi sunarak insanları yanıltmak;
-- hizmete aşırı yük bindirmek, hız sınırlarını veya erişim kontrollerini aşmak, saldırmak.
+- hizmete aşırı yük bindirmek, hız sınırlarını veya erişim kontrollerini aşmak, saldırmak;
+- hizmetin ürettiği sesten bir sesi çıkarmak, kopyalamak, klonlamak ya da bu sesle, hizmetin seslerini taklit eden bir konuşma modelini eğitmek, ince ayarlamak veya değerlendirmek;
+- yazılı iznimiz olmadan hizmete veya API'ye erişimi yeniden satmak, alt lisanslamak ya da onu saran bir hizmet sunmak.
 
 Güvenlik açıklarını security@pex.mom adresine bildir. Aykırı kullanımda isteği reddedebilir, erişimi veya cüzdan adresini engelleyebiliriz.
 
