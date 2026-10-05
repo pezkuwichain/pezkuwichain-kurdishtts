@@ -145,6 +145,7 @@ def test_flow():
     assert r.json()["status"] == "valid"
     st = a.get("/api/donate/stats").json()
     assert st["kmr"]["clips"] == 1 and st["kmr"]["valid_clips"] == 1 and st["me"]["clips"] == 1
+    assert st["donors"] == 1                         # people, not people per dialect
 
     # the right to be forgotten: a's recordings, profile and session go; the
     # file is gone from disk; b's vote on it went with it

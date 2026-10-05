@@ -1,6 +1,6 @@
 <div align="center">
 
-# KurdishTTS — Kurdish speech, and the voice bank to make it ours
+# KurdAi Voice — Kurdish speech, and the voice bank to make it ours
 
 **Read Kurmancî and Soranî aloud · Donate your voice · Speech API for dks.news**
 

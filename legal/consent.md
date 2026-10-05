@@ -1,4 +1,4 @@
-# KurdishTTS — Donor consent text
+# KurdAi Voice — Donor consent text
 
 **Consent version:** `train-only-2026-10-03-dialect` (equals `CONSENT_VERSION` in `ktts/donate.py`)
 **Shown:** on `/bexsh`, before the first recording, and again whenever the version changes.

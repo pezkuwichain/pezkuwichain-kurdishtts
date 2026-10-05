@@ -20,7 +20,7 @@ from pathlib import Path
 from fastapi import APIRouter, Cookie, Header, HTTPException, Response
 from pydantic import BaseModel
 
-APP_NAME = "KurdishTTS · Dijital Kurdistan"
+APP_NAME = "KurdAi Voice · Dijital Kurdistan"
 NONCE_TTL_S = 600
 SESSION_TTL_S = 30 * 24 * 3600
 COOKIE = "kt_ses"
