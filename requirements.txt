@@ -1,9 +1,9 @@
 # KurdishTTS (CPU). torch comes from the CPU index:
 #   pip install torch==2.14.1 --index-url https://download.pytorch.org/whl/cpu
 transformers==4.46.3
-fastapi==0.118.0
-uvicorn[standard]==0.37.0
-python-multipart==0.0.20
+fastapi==0.142.2
+uvicorn[standard]==0.54.0
+python-multipart==0.0.32
 jinja2==3.1.6
 numpy==2.3.3
 markdown==3.9
