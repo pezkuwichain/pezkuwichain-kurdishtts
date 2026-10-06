@@ -297,7 +297,9 @@
     anonSignOutAsk:{ kmr: 'Te kod hilaniye? Bê wê tu nikarî vegerî an tomarên xwe jê bibî.', ckb: 'کۆدەکەت هەڵگرتووە؟ بەبێ ئەو ناتوانیت بگەڕێیتەوە یان تۆمارەکانت بسڕیتەوە.', tr: 'Kodunu sakladın mı? O olmadan geri dönemez, kayıtlarını silemezsin.', en: 'Have you saved your code? Without it you cannot come back or delete your recordings.', fa: 'کدت را ذخیره کرده‌ای؟ بدون آن نمی‌توانی برگردی یا ضبط‌هایت را حذف کنی.', ar: 'هل حفظت رمزك؟ بدونه لا تستطيع العودة أو حذف تسجيلاتك.' },
     CODE:       { kmr: 'Ev kod nayê naskirin. Kontrol bike û dîsa biceribîne.', ckb: 'ئەم کۆدە نەناسرایەوە. بیپشکنە و دووبارە هەوڵ بدەرەوە.', tr: 'Bu kod tanınmadı. Kontrol edip tekrar dene.', en: 'This code is not recognised. Check it and try again.', fa: 'این کد شناخته نشد. بررسی کن و دوباره امتحان کن.', ar: 'لم يُتعرَّف على هذا الرمز. تحقّق منه وحاول مجددًا.' },
     RATE:       { kmr: 'Pir hewl hatin dayîn. Piştî demekê dîsa biceribîne.', ckb: 'هەوڵی زۆر درا. دوای ماوەیەک دووبارە هەوڵ بدەرەوە.', tr: 'Çok fazla deneme yapıldı. Biraz sonra tekrar dene.', en: 'Too many attempts. Try again a little later.', fa: 'تلاش‌های زیادی شد. کمی بعد دوباره امتحان کن.', ar: 'محاولات كثيرة جدًا. حاول مجددًا بعد قليل.' },
-    WALLET_NEEDED:{ kmr: 'Ji bo vê cuzdan pêwîst e.', ckb: 'بۆ ئەمە جزدان پێویستە.', tr: 'Bunun için cüzdan gerekiyor.', en: 'This needs a wallet.', fa: 'این کار کیف پول می‌خواهد.', ar: 'هذا يتطلّب محفظة.' }
+    WALLET_NEEDED:{ kmr: 'Ji bo vê cuzdan pêwîst e.', ckb: 'بۆ ئەمە جزدان پێویستە.', tr: 'Bunun için cüzdan gerekiyor.', en: 'This needs a wallet.', fa: 'این کار کیف پول می‌خواهد.', ar: 'هذا يتطلّب محفظة.' },
+    wPreparing: { kmr: 'Girêdan tê amadekirin…', ckb: 'پەیوەندی ئامادە دەکرێت…', tr: 'Bağlantı hazırlanıyor…', en: 'Preparing the connection…', fa: 'در حال آماده‌سازی اتصال…', ar: 'جارٍ تجهيز الاتصال…' },
+    retry:      { kmr: 'Dîsa biceribîne', ckb: 'دووبارە هەوڵ بدەرەوە', tr: 'Tekrar dene', en: 'Try again', fa: 'دوباره امتحان کن', ar: 'حاول مجددًا' }
   };
 
   // ── language ──────────────────────────────────────────────────────────────
@@ -395,7 +397,13 @@
       document.body.appendChild(sheet);
     }
     sheet.hidden = false;
-    renderSheet('pick');
+    // A phone has no browser extension to offer: it goes straight to the
+    // wallet app, as app.pezkuwichain.io does (WalletModal: !isMobile).
+    if (isPhone()) viaApp(); else renderSheet('pick');
+  }
+  function isPhone() {
+    var ua = navigator.userAgent || '';
+    return /Android|iPhone|iPad|iPod/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
   }
   function closeSheet() { if (sheet) sheet.hidden = true; }
   function frame() {
@@ -431,12 +439,21 @@
       box.appendChild(h('p', 'note', say('wScan')));
       var img = h('img', 'qr'); img.src = data.qrDataUrl; img.alt = 'QR'; box.appendChild(img);
       if (data.deepLink) { var a = h('a', 'btn', say('wOpenApp')); a.href = data.deepLink; box.appendChild(a); }
+    } else if (state === 'prep') {
+      // Before anything has reached the wallet: the code that talks to it is
+      // still loading. Saying "waiting for the wallet" here sent people to
+      // their phone to look for a request that was not there yet.
+      box.appendChild(h('p', 'note', say('wPreparing')));
+      box.appendChild(h('span', 'spin'));
     } else if (state === 'wait') {
       box.appendChild(h('p', null, say('wWaiting')));
     } else if (state === 'error') {
       box.appendChild(h('p', 'msg msg--bad', data.text));
       if (data.install) box.appendChild(storeLinks());
-      var back = h('button', 'btn btn--ghost', '←'); back.onclick = function () { renderSheet('pick'); }; box.appendChild(back);
+      // On a phone there is nothing to go back to choose: try the wallet again.
+      var back = h('button', 'btn btn--ghost', isPhone() ? say('retry') : '←');
+      back.onclick = function () { if (isPhone()) viaApp(); else renderSheet('pick'); };
+      box.appendChild(back);
     }
   }
   function viaExtension() {
@@ -448,14 +465,24 @@
       renderSheet('accounts', r.accounts);
     }).catch(function () { renderSheet('error', { text: say('FAILED') }); });
   }
+  // The WalletConnect bundle is fetched at the same time as the chain one, not
+  // after it: it is asked for by the chain bundle only once that has loaded and
+  // run, and the two downloads used to follow each other.
+  function preloadWC() {
+    if (document.querySelector('link[data-wc]')) return;
+    var l = document.createElement('link');
+    l.rel = 'preload'; l.as = 'script'; l.href = '/static/kt-wc.js'; l.dataset.wc = '1';
+    document.head.appendChild(l);
+  }
   function viaApp() {
-    renderSheet('wait');
+    renderSheet('prep');
+    preloadWC();
     chain().then(function (C) {
       return C.wcRestore().then(function (acc) {
         if (acc.length) return signIn(acc[0]);
         return C.wcStart().then(function (p) {
           if (p.error) return renderSheet('error', { text: say('FAILED') + (p.error === 'WC_TIMEOUT' ? ' (WalletConnect)' : '') });
-          var phone = /Android|iPhone|iPad/i.test(navigator.userAgent);
+          var phone = isPhone();
           if (phone && p.deepLink) { location.href = p.deepLink; renderSheet('wait'); } else renderSheet('qr', p);
           return p.approval().then(function (accs) { renderSheet('wait'); return signIn(accs[0]); });
         });

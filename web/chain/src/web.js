@@ -108,9 +108,17 @@ const WC_ADDRS = new Set();
 
 /** The chain we pair against. The wallet signs for exactly this genesis, so it
  *  is read from the chain rather than written down. */
+/* Asset Hub's genesis hash: what WalletConnect names the chain by. It never
+   changes, so it is written here rather than read from the node. Reading it
+   meant opening the RPC connection and fetching 479 kB of metadata before a QR
+   code could appear -- about two seconds of a sign-in sheet that said it was
+   waiting for the wallet, when nothing had been sent to the wallet yet
+   (measured 2026-10-06: open 0.7 s, metadata 0.8 s, then decoding).
+   tests/test_chain.py checks it against the live node. */
+const AH_GENESIS = '0xe7c15092dcbe3f320260ddbbc685bfceed9125a3b3d8436db2766201dec3b949';
+
 async function genesis() {
-  const a = await api();
-  return a.genesisHash.toHex();
+  return (typeof window !== 'undefined' && window.DKN_AH_GENESIS) || AH_GENESIS;
 }
 
 // ── wallet ───────────────────────────────────────────────────────────────
@@ -237,12 +245,13 @@ async function signMessage(address, message) {
 async function wcStart() {
   try {
     const W = await wc();
-    // A pairing that has not produced a URI in fifteen seconds is not going to.
-    // Without this the relay's refusal arrives as an unhandled socket close and
-    // the sheet waits on a spinner for ever — which is what a reader saw.
+    // A cap, so a refused relay does not leave a spinner for ever -- but a
+    // generous one. Fifteen seconds cut off phones on slow networks mid-handshake
+    // and showed "something went wrong" (2026-10-06); app.pezkuwichain.io, whose
+    // flow works on the same wallet, sets no limit on this step at all.
     const pr = await Promise.race([
       W.startPairing(await genesis()),
-      new Promise((_, rej) => setTimeout(() => rej(new Error('WC_TIMEOUT')), 15000)),
+      new Promise((_, rej) => setTimeout(() => rej(new Error('WC_TIMEOUT')), 60000)),
     ]);
     return {
       qrDataUrl: pr.qrDataUrl,
