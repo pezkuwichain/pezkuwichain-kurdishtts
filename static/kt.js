@@ -42,7 +42,7 @@
                   en: 'Read short sentences in your own voice. Every recording becomes part of the first Kurdish voice made by the Kurdish nation, used only to train our Kurdish voice.',
                   fa: 'جمله‌های کوتاه را با صدای خودت بخوان. هر ضبط بخشی از نخستین صدای کردی می‌شود که ملت کرد خود می‌سازد، و فقط برای آموزش صدای کردی ما به کار می‌رود.',
                   ar: 'اقرأ جملًا قصيرة بصوتك. يصبح كل تسجيل جزءًا من أول صوت كردي تصنعه الأمة الكردية، ويُستخدم فقط لتدريب صوتنا الكردي.' },
-    hours:      { kmr: 'saet hatin tomarkirin', ckb: 'کاتژمێر تۆمارکراوە', tr: 'saat kaydedildi', en: 'hours recorded', fa: 'ساعت ضبط شده', ar: 'ساعة مسجّلة' },
+    hours:      { kmr: 'deqîqe hatin tomarkirin', ckb: 'خولەک تۆمارکراوە', tr: 'dakika kaydedildi', en: 'minutes recorded', fa: 'دقیقه ضبط شده', ar: 'دقيقة مسجّلة' },
     validHours: { kmr: 'saet hatin pejirandin', ckb: 'کاتژمێر پەسەندکراوە', tr: 'saat doğrulandı', en: 'hours validated', fa: 'ساعت تأیید شده', ar: 'ساعة مُتحقَّق منها' },
     speakers:   { kmr: 'bexşkar', ckb: 'بەخشەر', tr: 'bağışçı', en: 'donors', fa: 'اهداکننده', ar: 'متبرّع' },
     goal:       { kmr: 'Armanc', ckb: 'ئامانج', tr: 'Hedef', en: 'Goal', fa: 'هدف', ar: 'الهدف' },
@@ -203,8 +203,8 @@
     // ── home: numbers ──
     numEyebrow: { kmr: 'Bi hejmaran — zindî', ckb: 'بە ژمارە — ڕاستەوخۆ', tr: 'Rakamlarla — canlı', en: 'By the numbers — live', fa: 'به عدد — زنده', ar: 'بالأرقام — مباشرة' },
     numTitle:   { kmr: 'Dengê Kurdî, saet bi saet tê avakirin', ckb: 'دەنگی کوردی، کاتژمێر بە کاتژمێر بنیات دەنرێت', tr: 'Kürtçe ses, saat saat inşa ediliyor', en: 'A Kurdish voice, built hour by hour', fa: 'صدای کردی، ساعت به ساعت ساخته می‌شود', ar: 'صوت كردي يُبنى ساعةً بعد ساعة' },
-    numHours:   { kmr: 'saet deng hatin bexşîn', ckb: 'کاتژمێر دەنگ بەخشراوە', tr: 'saat ses bağışlandı', en: 'hours of voice donated', fa: 'ساعت صدا اهدا شده', ar: 'ساعة من الصوت المتبرَّع به' },
-    numValid:   { kmr: 'saet hatin pejirandin', ckb: 'کاتژمێر پەسەندکراوە', tr: 'saat doğrulandı', en: 'hours checked and valid', fa: 'ساعت بررسی و تأیید شده', ar: 'ساعة تم التحقق منها' },
+    numHours:   { kmr: 'deqîqe deng hatin bexşîn', ckb: 'خولەک دەنگ بەخشراوە', tr: 'dakika ses bağışlandı', en: 'minutes of voice donated', fa: 'دقیقه صدا اهدا شده', ar: 'دقيقة من الصوت المتبرَّع به' },
+    numValid:   { kmr: 'deqîqe hatin pejirandin', ckb: 'خولەک پەسەندکراوە', tr: 'dakika doğrulandı', en: 'minutes checked and valid', fa: 'دقیقه بررسی و تأیید شده', ar: 'دقيقة تم التحقق منها' },
     numDonors:  { kmr: 'bexşkar', ckb: 'بەخشەر', tr: 'bağışçı', en: 'donors', fa: 'اهداکننده', ar: 'متبرّعًا' },
     numSentences:{ kmr: 'hevok amade ne ji bo xwendinê', ckb: 'ڕستە ئامادەن بۆ خوێندنەوە', tr: 'cümle okunmayı bekliyor', en: 'sentences ready to be read', fa: 'جمله آمادهٔ خواندن', ar: 'جملة جاهزة للقراءة' },
     numNote:    { kmr: 'Ji databasa bexşê, di her serdanê de tê hesibandin. Ne texmîn e.', ckb: 'لە داتابەیسی بەخشین، لە هەر سەردانێکدا دەژمێردرێت. خەمڵاندن نییە.', tr: 'Bağış veritabanından, her ziyarette sayılır. Tahmin değil.', en: 'Counted from the donation database on every visit. Not an estimate.', fa: 'در هر بازدید از پایگاه دادهٔ اهدا شمرده می‌شود. تخمین نیست.', ar: 'تُحسب من قاعدة بيانات التبرّع في كل زيارة. ليست تقديرًا.' },
@@ -351,6 +351,9 @@
       document.dispatchEvent(new Event('kt-session'));
     });
   }
+  // Donated voice is shown in minutes: in hours the first weeks all read "0".
+  function sec(o, s, h) { return o[s] != null ? o[s] : (o[h] || 0) * 3600; }
+  function mins(seconds) { return (Math.round(seconds / 6) / 10).toLocaleString('en-US', { maximumFractionDigits: 1 }); }
   function short(a) { return a ? a.slice(0, 6) + '…' + a.slice(-4) : ''; }
   function paintAcct() {
     var b = document.querySelector('.acct');
@@ -524,7 +527,7 @@
         ['kmr', 'ckb'].forEach(function (d) {
           var s = r.json[d]; if (!s) return;
           var el = document.querySelector('[data-stat="' + d + '"]');
-          el.querySelector('[data-k="h"]').textContent = s.hours;
+          el.querySelector('[data-k="h"]').textContent = mins(s.seconds != null ? s.seconds : s.hours * 3600);
           el.querySelector('[data-k="v"]').textContent = s.valid_hours;
           el.querySelector('[data-k="s"]').textContent = s.speakers;
           el.querySelector('.meter__bar i').style.setProperty('--p', Math.min(100, s.valid_hours / GOAL_H * 100) + '%');
@@ -826,8 +829,8 @@
       var k = r.json.kmr || {}, c = r.json.ckb || {};
       function n(x, d) { return Number(x || 0).toLocaleString('en-US', { maximumFractionDigits: d || 0 }); }
       var v = {
-        hours: n((k.hours || 0) + (c.hours || 0), 1),
-        valid: n((k.valid_hours || 0) + (c.valid_hours || 0), 1),
+        hours: mins(sec(k, 'seconds', 'hours') + sec(c, 'seconds', 'hours')),
+        valid: mins(sec(k, 'valid_seconds', 'valid_hours') + sec(c, 'valid_seconds', 'valid_hours')),
         donors: n(r.json.donors != null ? r.json.donors : (k.speakers || 0) + (c.speakers || 0)),
         sentences: n((k.sentences || 0) + (c.sentences || 0))
       };

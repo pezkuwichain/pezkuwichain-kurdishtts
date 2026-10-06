@@ -326,7 +326,10 @@ def stats(kt_ses: str | None = Cookie(None)):
                                      COALESCE(SUM(CASE WHEN status='valid' THEN seconds END),0) v,
                                      COUNT(CASE WHEN status='valid' THEN 1 END) vn,
                                      COUNT(DISTINCT addr) speakers FROM clip WHERE dialect=?""", (d,)).fetchone()
+            # Seconds as well as hours: rounded to hours, the first weeks of a
+            # campaign read as "0", which is true and tells a visitor nothing.
             out[d] = {"clips": r["n"], "hours": round(r["s"] / 3600, 2), "valid_hours": round(r["v"] / 3600, 2),
+                      "seconds": round(r["s"], 1), "valid_seconds": round(r["v"], 1),
                       "valid_clips": r["vn"],
                       "speakers": r["speakers"],
                       "sentences": db.execute("SELECT COUNT(*) FROM sentence WHERE dialect=? AND active=1 AND LENGTH(text) >= ?",
