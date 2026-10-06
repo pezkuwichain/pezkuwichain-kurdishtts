@@ -8,7 +8,7 @@ Sürüm: 2026-10-06 · Yürürlük: 2026-10-06
 
 ## 2. Kısaca
 - **Sesli okuma:** yazdığın metni saklamayız. Üretilen sesi en çok 7 gün önbellekte tutarız.
-- **Ses bağışı:** kayıtlarını ve seçtiğin lehçeyi cüzdan adresine bağlı olarak saklarız. **Yalnızca kendi Kürtçe konuşma modellerimizi eğitmek ve test etmek için** kullanırız. Satmayız, proje dışına vermeyiz, yayımlamayız; sesini taklit etmek, seni tanımlamak veya reklam için kullanmayız.
+- **Ses bağışı:** kayıtlarını ve seçtiğin lehçeyi cüzdan adresine — cüzdansız bağış yaptıysan, yalnızca tek yönlü özetini (hash) sakladığımız bağış koduna — bağlı olarak saklarız. **Yalnızca kendi Kürtçe konuşma modellerimizi eğitmek ve test etmek için** kullanırız. Satmayız, proje dışına vermeyiz, yayımlamayız; sesini taklit etmek, seni tanımlamak veya reklam için kullanmayız.
 - **"Kayıtlarımı sil"** düğmesiyle her an silebilirsin. **Önceden eğitilmiş bir model kayıtlarını "unutamaz"** (bkz. 5. bölüm).
 - Reklam, ölçümleme veya takip çerezi yok. Zincire hiçbir şey yazılmaz.
 
@@ -35,6 +35,8 @@ Ses kaydı seni tanımlar. Ses tanıma için işlenen ses biyometrik veridir. Bi
 
 ## 5. Silme — ve silmenin yapamadığı
 `/bexsh` sayfasında **"Kayıtlarımı sil"** düğmesine bas ya da bize yaz. Kimliğini cüzdanınla imza attırarak doğrularız.
+
+**Kodla bağış yaptıysan:** kodla giriş yapıp aynı düğmeye bas ya da kodu bize gönder. Kodu sakla: kodu bilen herkes senin yerine giriş yapıp kayıtlarını silebilir. Kod yalnızca bir kez gösterilir; biz kodun kendisini değil, tek yönlü özetini saklarız. **Kod kaybolursa silme hakkın devam eder, ama hangi kayıtların senin olduğunu bilmemizin bir yolu kalmaz** — çünkü kim olduğunu bilmiyoruz (KVKK md. 13; GDPR md. 11). Bunu kayıttan önce söylüyor ve kodu sakladığını onaylamanı istiyoruz. Kodla bağış yapanlar kayıt yapabilir ama başkalarının kayıtlarını kontrol edemez; kontrol cüzdanla yapılır.
 - **Hemen:** kayıtların, ölçümler, lehçe bilgin, oyların ve oturumların sunucudan silinir. Talepten sonra başlayan hiçbir eğitim veya testte kullanılmaz.
 - **En çok 35 gün içinde:** yedeklerdeki ve sürmekte olan eğitimdeki kopyalar da silinir.
 - **Silmenin yapamadığı:** bir model, kayıtları dosya olarak içermez. Ama **önceden eğitilmiş bir model bir kaydı pratikte "unutamaz"**; o modelden katkını çıkaramayız. Sonraki modeller kayıtlarını hiç kullanmaz. Bunu kayıttan önce söylüyoruz ki rızan bilgilendirilmiş olsun.
@@ -51,7 +53,7 @@ Eğitilen modeller — kayıtların asla — hizmet olarak sunulabilir veya yay�
 AB dışına aktarımda yeterlilik kararı veya standart sözleşme maddeleri kullanılır.
 
 ## 8. Çerezler
-Yalnızca **`kt_ses`** oturum çerezi kullanılır: girişte kurulur; HttpOnly, Secure, SameSite=Lax özelliklidir; 30 gün sonra veya çıkışta silinir. Tarayıcının yerel deposunda yalnızca **`kt-lang`** (dil seçimi) ve telefonla bağlandıysan WalletConnect oturumu tutulur. Ölçümleme veya reklam çerezi yoktur.
+Yalnızca **`kt_ses`** oturum çerezi kullanılır: girişte kurulur; HttpOnly, Secure, SameSite=Lax özelliklidir; 30 gün sonra veya çıkışta silinir. Tarayıcının yerel deposunda yalnızca **`kt-lang`** (dil seçimi), kodla bağış yaptıysan kolaylık için kodunun bir kopyası (**`kt-anon-code`**; tarayıcı verisini silersen gider, kendi kopyanı sakla) ve telefonla bağlandıysan WalletConnect oturumu tutulur. Kod üretme, kod deneme ve anonim yükleme sayıları kötüye kullanımı önlemek için IP adresine göre en çok 1 saat bellekte tutulur. Ölçümleme veya reklam çerezi yoktur.
 
 ## 9. Hakların (KVKK md. 11 / GDPR)
 Verilerine erişme ve kopyasını alma, düzeltme, silme, işlemeyi kısıtlama, taşınabilirlik (talep üzerine), meşru menfaate itiraz ve rızanı her an geri alma hakkın vardır. Başvuru: silme düğmesi veya **privacy@dks.news**. En geç **30 gün** içinde yanıt veririz.

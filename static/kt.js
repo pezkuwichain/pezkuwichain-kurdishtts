@@ -265,15 +265,39 @@
     q5:         { kmr: 'Nivîsa ku ez dinivîsim tê tomarkirin?', ckb: 'ئەو دەقەی دەینووسم پاشەکەوت دەکرێت؟', tr: 'Yazdığım metin saklanıyor mu?', en: 'Is the text I type stored?', fa: 'آیا متنی که می‌نویسم ذخیره می‌شود؟', ar: 'هل يُحفظ النص الذي أكتبه؟' },
     a5:         { kmr: 'Na. Nivîs di bîrê de tê xebitandin û tê avêtin. Tenê deng heta 7 rojan bi şopa (hash) nivîsê tê girtin, da ku ji nû ve neyê çêkirin.', ckb: 'نا. دەقەکە لە بیرگەدا کاری لەسەر دەکرێت و فڕێ دەدرێت. تەنها دەنگەکە تا ٧ ڕۆژ بە پەنجەمۆری (hash) دەقەکە هەڵدەگیرێت، تا دووبارە دروست نەکرێتەوە.', tr: 'Hayır. Metin bellekte işlenip atılır. Yalnızca ses, yeniden üretilmesin diye metnin parmak iziyle (hash) en fazla 7 gün önbellekte tutulur.', en: 'No. The text is processed in memory and discarded. Only the audio is cached for up to 7 days, under a fingerprint (hash) of the text, so it need not be made again.', fa: 'نه. متن در حافظه پردازش و دور ریخته می‌شود. فقط صدا تا ۷ روز با اثرانگشت (هش) متن نگه داشته می‌شود تا دوباره ساخته نشود.', ar: 'لا. يُعالَج النص في الذاكرة ثم يُتخلّص منه. لا يُخزَّن إلا الصوت حتى 7 أيام ببصمة (hash) النص، كي لا يُعاد توليده.' },
     q6:         { kmr: 'Bexşa deng çawa dixebite?', ckb: 'بەخشینی دەنگ چۆن کار دەکات؟', tr: 'Ses bağışı nasıl işliyor?', en: 'How does voice donation work?', fa: 'اهدای صدا چگونه کار می‌کند؟', ar: 'كيف يعمل التبرّع بالصوت؟' },
-    a6:         { kmr: 'Divê tu 18 salî an mezintir bî. Bi cuzdanê têkeve, razîbûnê bide, hevokên kurt bixwîne. Bexşkarên din tomaran kontrol dikin; du dengên hevgirtî tomarekê derbasdar dikin.', ckb: 'دەبێت تەمەنت ١٨ ساڵ یان زیاتر بێت. بە جزدان بچۆ ژوورەوە، ڕەزامەندی بدە، ڕستەی کورت بخوێنەوە. بەخشەرانی تر تۆمارەکان دەپشکنن؛ دوو دەنگی هاوڕا تۆمارێک پەسەند دەکەن.', tr: '18 yaşında ya da daha büyük olmalısın. Cüzdanla giriş yap, onay ver, kısa cümleler oku. Diğer bağışçılar kayıtları kontrol eder; iki uyuşan oy bir kaydı geçerli kılar.', en: 'You must be 18 or older. Sign in with a wallet, give your consent, read short sentences. Other donors check the recordings; two agreeing votes make a recording valid.', fa: 'باید ۱۸ ساله یا بزرگ‌تر باشی. با کیف پول وارد شو، رضایت بده و جمله‌های کوتاه بخوان. اهداکنندگان دیگر ضبط‌ها را بررسی می‌کنند؛ دو رأی هم‌نظر یک ضبط را معتبر می‌کند.', ar: 'يجب أن تكون في الثامنة عشرة أو أكبر. سجّل الدخول بالمحفظة، وامنح موافقتك، واقرأ جملًا قصيرة. يراجع متبرّعون آخرون التسجيلات؛ وصوتان متوافقان يجعلان التسجيل صالحًا.' },
-    q7:         { kmr: 'Çima cuzdan û ne e-name?', ckb: 'بۆچی جزدان و نەک ئیمەیڵ؟', tr: 'Neden e-posta değil de cüzdan?', en: 'Why a wallet and not e-mail?', fa: 'چرا کیف پول و نه ایمیل؟', ar: 'لماذا المحفظة وليس البريد الإلكتروني؟' },
-    a7:         { kmr: 'Îmzeya cuzdanê îsbat dike ku tu yî, bêyî ku em nav, e-name an telefona te bizanibin. Ji bo bexşkarên ku dengê wan dikare wan nas bike, ev parastineke girîng e.', ckb: 'واژۆی جزدان دەیسەلمێنێت کە تۆیت، بێ ئەوەی ناو، ئیمەیڵ یان ژمارەی تەلەفۆنت بزانین. بۆ بەخشەرانێک کە دەنگیان دەیانناسێنێت، ئەمە پاراستنێکی گرنگە.', tr: 'Cüzdan imzası, adını, e-postanı ya da telefonunu bilmeden senin olduğunu kanıtlar. Sesi kendisini tanıtabilecek bağışçılar için bu önemli bir korumadır.', en: 'A wallet signature proves it is you without us knowing your name, e-mail or phone. For donors whose voice can identify them, that is an important protection.', fa: 'امضای کیف پول ثابت می‌کند که خودت هستی، بی‌آنکه نام، ایمیل یا تلفنت را بدانیم. برای اهداکنندگانی که صدایشان می‌تواند هویتشان را فاش کند، این محافظتی مهم است.', ar: 'يثبت توقيع المحفظة أنك أنت دون أن نعرف اسمك أو بريدك أو هاتفك. وهذه حماية مهمّة لمتبرّعين قد يكشف صوتُهم هويتَهم.' },
+    a6:         { kmr: 'Divê tu 18 salî an mezintir bî. Bê cuzdan bi kodekê an bi cuzdanê dest pê bike, razîbûnê bide, hevokên kurt bixwîne. Bexşkarên bi cuzdan tomaran kontrol dikin; du dengên hevgirtî tomarekê derbasdar dikin.', ckb: 'دەبێت تەمەنت ١٨ ساڵ یان زیاتر بێت. بێ جزدان بە کۆدێک یان بە جزدان دەست پێبکە، ڕەزامەندی بدە، ڕستەی کورت بخوێنەوە. بەخشەرانی خاوەن جزدان تۆمارەکان دەپشکنن؛ دوو دەنگی هاوڕا تۆمارێک پەسەند دەکەن.', tr: '18 yaşında ya da daha büyük olmalısın. Cüzdansız bir kodla ya da cüzdanla başla, onay ver, kısa cümleler oku. Cüzdanlı bağışçılar kayıtları kontrol eder; iki uyuşan oy bir kaydı geçerli kılar.', en: 'You must be 18 or older. Start without a wallet, with a code, or with a wallet; give your consent; read short sentences. Donors with a wallet check the recordings; two agreeing votes make a recording valid.', fa: 'باید ۱۸ ساله یا بزرگ‌تر باشی. بدون کیف پول با یک کد یا با کیف پول شروع کن، رضایت بده و جمله‌های کوتاه بخوان. اهداکنندگان دارای کیف پول ضبط‌ها را بررسی می‌کنند؛ دو رأی هم‌نظر یک ضبط را معتبر می‌کند.', ar: 'يجب أن تكون في الثامنة عشرة أو أكبر. ابدأ بلا محفظة برمز، أو بمحفظة؛ وامنح موافقتك، واقرأ جملًا قصيرة. يراجع المتبرّعون ذوو المحافظ التسجيلات؛ وصوتان متوافقان يجعلان التسجيل صالحًا.' },
+    q7:         { kmr: 'Cuzdan pêwîst e?', ckb: 'جزدان پێویستە؟', tr: 'Cüzdan şart mı?', en: 'Do I need a wallet?', fa: 'آیا کیف پول لازم است؟', ar: 'هل أحتاج إلى محفظة؟' },
+    a7:         { kmr: 'Na. Tu dikarî bi kodekê bexş bikî: ne nav, ne e-name. Kodê hilîne — ew tenê rê ye ku tu vegerî an tomarên xwe jê bibî; em tenê şopa wê digirin, ji ber vê yekê koda windabûyî nayê vegerandin. Ji bo kontrolkirina tomarên kesên din cuzdan pêwîst e, da ku kes nikaribe bi gelek kodan dengan bide.', ckb: 'نا. دەتوانیت بە کۆدێک ببەخشیت: نە ناو، نە ئیمەیڵ. کۆدەکە هەڵبگرە — تاکە ڕێگەیە بۆ گەڕانەوە یان سڕینەوەی تۆمارەکانت؛ تەنها پەنجەمۆرەکەی هەڵدەگرین، بۆیە کۆدی ونبوو ناگەڕێتەوە. بۆ پشکنینی تۆماری کەسانی تر جزدان پێویستە، تا کەس نەتوانێت بە چەندین کۆد دەنگ بدات.', tr: 'Hayır. Bir kodla bağış yapabilirsin: isim de e-posta da gerekmez. Kodu sakla — geri dönmenin ya da kayıtlarını silmenin tek yolu o; biz yalnızca parmak izini tutarız, kaybolan kod geri getirilemez. Başkalarının kayıtlarını kontrol etmek için cüzdan gerekir; böylece kimse çok sayıda kodla oy veremez.', en: 'No. You can donate with a code: no name, no e-mail. Keep the code — it is the only way back in, and the only way to delete your recordings; we keep just its fingerprint, so a lost code cannot be recovered. Checking other people’s recordings needs a wallet, so that nobody can vote with many codes.', fa: 'نه. می‌توانی با یک کد اهدا کنی: بدون نام و ایمیل. کد را نگه دار — تنها راه بازگشت و حذف ضبط‌هایت است؛ ما فقط اثرانگشت آن را نگه می‌داریم، پس کد گم‌شده بازیابی نمی‌شود. بررسی ضبط‌های دیگران کیف پول می‌خواهد تا کسی نتواند با کدهای زیاد رأی بدهد.', ar: 'لا. يمكنك التبرّع برمز: بلا اسم ولا بريد. احفظ الرمز — فهو الطريق الوحيد للعودة ولحذف تسجيلاتك؛ لا نحتفظ إلا ببصمته، فلا يمكن استعادة رمز مفقود. مراجعة تسجيلات الآخرين تتطلّب محفظة، كي لا يصوّت أحد برموز كثيرة.' },
     q8:         { kmr: 'Ez dikarim tomarên xwe jê bibim?', ckb: 'دەتوانم تۆمارەکانم بسڕمەوە؟', tr: 'Kayıtlarımı silebilir miyim?', en: 'Can I delete my recordings?', fa: 'می‌توانم ضبط‌هایم را حذف کنم؟', ar: 'هل يمكنني حذف تسجيلاتي؟' },
     a8:         { kmr: 'Erê, her dem, bi bişkoka “Tomarên min jê bibe”. Modeleke ku berê hatiye perwerdekirin nikare wan “ji bîr bike”; modelên nû êdî wan bikar naynin.', ckb: 'بەڵێ، هەر کاتێک، بە دوگمەی «تۆمارەکانم بسڕەوە». مۆدێلێک کە پێشتر ڕاهێنراوە ناتوانێت «لەبیریان بکات»؛ مۆدێلە نوێکان چیتر بەکاریان ناهێنن.', tr: 'Evet, istediğin zaman “Kayıtlarımı sil” düğmesiyle. Daha önce eğitilmiş bir model onları “unutamaz”; yeni modeller artık kullanmaz.', en: 'Yes, at any time, with the “Delete my recordings” button. A model already trained cannot “unlearn” them; new models will not use them.', fa: 'بله، هر زمان، با دکمهٔ «حذف ضبط‌های من». مدلی که پیش‌تر آموزش دیده نمی‌تواند آن‌ها را «فراموش کند»؛ مدل‌های تازه دیگر از آن‌ها استفاده نمی‌کنند.', ar: 'نعم، في أي وقت، بزر «احذف تسجيلاتي». النموذج المدرَّب سابقًا لا يستطيع «نسيانها»؛ والنماذج الجديدة لن تستخدمها.' },
     q9:         { kmr: 'Ez çawa mifteya API distînim?', ckb: 'چۆن کلیلی API وەردەگرم؟', tr: 'API anahtarını nasıl alırım?', en: 'How do I get an API key?', fa: 'چگونه کلید API بگیرم؟', ar: 'كيف أحصل على مفتاح API؟' },
     a9:         { kmr: 'Ji privacy@dks.news re binivîse (mijar: “API key”) û projeya xwe bi kurtî rave bike. Mifte ji bo karên ne-bazirganî tên dayîn.', ckb: 'بۆ privacy@dks.news بنووسە (بابەت: «API key») و بە کورتی پڕۆژەکەت ڕوون بکەرەوە. کلیل بۆ کاری ناقازانجی دەدرێت.', tr: 'privacy@dks.news adresine “API key” konusuyla yaz ve projeni kısaca anlat. Anahtarlar ticari olmayan kullanım için verilir.', en: 'Write to privacy@dks.news (subject “API key”) and describe your project briefly. Keys are issued for non-commercial use.', fa: 'به privacy@dks.news با موضوع «API key» بنویس و پروژه‌ات را کوتاه توضیح بده. کلیدها برای استفادهٔ غیرتجاری داده می‌شوند.', ar: 'اكتب إلى privacy@dks.news (الموضوع: «API key») وصِف مشروعك باختصار. تُمنح المفاتيح للاستخدام غير التجاري.' },
     faqMoreT:   { kmr: 'Pirsa te li vir nîne?', ckb: 'پرسیارەکەت لێرە نییە؟', tr: 'Sorun burada yok mu?', en: 'Your question is not here?', fa: 'پرسشت اینجا نیست؟', ar: 'سؤالك ليس هنا؟' },
-    faqMoreD:   { kmr: 'Ji me re binivîse; em bi Kurdî, Tirkî an Îngilîzî bersiv didin.', ckb: 'بۆمان بنووسە؛ بە کوردی، تورکی یان ئینگلیزی وەڵام دەدەینەوە.', tr: 'Bize yaz; Kürtçe, Türkçe ya da İngilizce yanıt veririz.', en: 'Write to us; we answer in Kurdish, Turkish or English.', fa: 'برایمان بنویس؛ به کردی، ترکی یا انگلیسی پاسخ می‌دهیم.', ar: 'اكتب لنا؛ نجيب بالكردية أو التركية أو الإنجليزية.' }
+    faqMoreD:   { kmr: 'Ji me re binivîse; em bi Kurdî, Tirkî an Îngilîzî bersiv didin.', ckb: 'بۆمان بنووسە؛ بە کوردی، تورکی یان ئینگلیزی وەڵام دەدەینەوە.', tr: 'Bize yaz; Kürtçe, Türkçe ya da İngilizce yanıt veririz.', en: 'Write to us; we answer in Kurdish, Turkish or English.', fa: 'برایمان بنویس؛ به کردی، ترکی یا انگلیسی پاسخ می‌دهیم.', ar: 'اكتب لنا؛ نجيب بالكردية أو التركية أو الإنجليزية.' },
+    // ── donate: anonymous, with a code (2026-10-06) ──
+    howStart:   { kmr: 'Çawa dest pê dikî?', ckb: 'چۆن دەست پێدەکەیت؟', tr: 'Nasıl başlamak istersin?', en: 'How would you like to start?', fa: 'چگونه می‌خواهی شروع کنی؟', ar: 'كيف تريد أن تبدأ؟' },
+    anonT:      { kmr: 'Bê cuzdan, bi kodekê', ckb: 'بێ جزدان، بە کۆدێک', tr: 'Cüzdansız, bir kodla', en: 'No wallet — with a code', fa: 'بدون کیف پول، با یک کد', ar: 'بلا محفظة — برمز' },
+    anonD:      { kmr: 'Ne nav, ne e-name, ne cuzdan. Em kodekê didin te; bi wê tu dikarî paşê vegerî û tomarên xwe jê bibî.', ckb: 'نە ناو، نە ئیمەیڵ، نە جزدان. کۆدێکت پێدەدەین؛ بەوە دەتوانیت دواتر بگەڕێیتەوە و تۆمارەکانت بسڕیتەوە.', tr: 'İsim, e-posta ya da cüzdan yok. Sana bir kod veriyoruz; onunla sonra geri dönebilir ve kayıtlarını silebilirsin.', en: 'No name, no e-mail, no wallet. We give you a code; with it you can come back later and delete your recordings.', fa: 'نه نام، نه ایمیل، نه کیف پول. یک کد به تو می‌دهیم؛ با آن می‌توانی بعداً برگردی و ضبط‌هایت را حذف کنی.', ar: 'لا اسم ولا بريد ولا محفظة. نعطيك رمزًا؛ تستطيع به العودة لاحقًا وحذف تسجيلاتك.' },
+    anonBtn:    { kmr: 'Bê cuzdan dest pê bike', ckb: 'بێ جزدان دەست پێبکە', tr: 'Cüzdansız başla', en: 'Start without a wallet', fa: 'بدون کیف پول شروع کن', ar: 'ابدأ بلا محفظة' },
+    walletT:    { kmr: 'Bi cuzdana Pezkuwi', ckb: 'بە جزدانی پەزکووی', tr: 'Pezkuwi cüzdanıyla', en: 'With a Pezkuwi wallet', fa: 'با کیف پول پزکووی', ar: 'بمحفظة Pezkuwi' },
+    walletD:    { kmr: 'Bi îmzeyekê têkeve. Wekî din tu dikarî tomarên bexşkarên din jî kontrol bikî.', ckb: 'بە واژۆیەک بچۆ ژوورەوە. هەروەها دەتوانیت تۆماری بەخشەرانی تریش بپشکنیت.', tr: 'Bir imzayla giriş yap. Ayrıca diğer bağışçıların kayıtlarını da kontrol edebilirsin.', en: 'Sign in with one signature. You can also check other donors’ recordings.', fa: 'با یک امضا وارد شو. همچنین می‌توانی ضبط‌های اهداکنندگان دیگر را بررسی کنی.', ar: 'سجّل الدخول بتوقيع واحد. ويمكنك أيضًا مراجعة تسجيلات المتبرّعين الآخرين.' },
+    haveCode:   { kmr: 'Kodeke te heye? Pê vegere:', ckb: 'کۆدت هەیە؟ پێی بگەڕێوە:', tr: 'Kodun var mı? Onunla geri dön:', en: 'Already have a code? Come back with it:', fa: 'کد داری؟ با آن برگرد:', ar: 'لديك رمز؟ عُد به:' },
+    codeGo:     { kmr: 'Bi kodê vegere', ckb: 'بە کۆد بگەڕێوە', tr: 'Kodla devam et', en: 'Continue with code', fa: 'ادامه با کد', ar: 'تابع بالرمز' },
+    codeTitle:  { kmr: 'Koda te ya bexşê', ckb: 'کۆدی بەخشینت', tr: 'Bağış kodun', en: 'Your donation code', fa: 'کد اهدای تو', ar: 'رمز تبرّعك' },
+    codeLead:   { kmr: 'Vê kodê li cihekî ewle hilîne. Ew tenê rê ye ku tu dîsa têkevî an tomarên xwe jê bibî. Em kodê bi xwe nagirin, tenê şopa wê (hash).', ckb: 'ئەم کۆدە لە شوێنێکی پارێزراو هەڵبگرە. تاکە ڕێگەیە بۆ ئەوەی دووبارە بچیتە ژوورەوە یان تۆمارەکانت بسڕیتەوە. خودی کۆدەکە هەڵناگرین، تەنها پەنجەمۆرەکەی (hash).', tr: 'Bu kodu güvenli bir yerde sakla. Tekrar girmenin ya da kayıtlarını silmenin tek yolu bu. Kodun kendisini saklamıyoruz, yalnızca parmak izini (hash).', en: 'Keep this code somewhere safe. It is the only way to sign back in or delete your recordings. We do not keep the code itself, only its fingerprint (hash).', fa: 'این کد را جای امنی نگه دار. تنها راه ورود دوباره یا حذف ضبط‌هایت است. خودِ کد را نگه نمی‌داریم، فقط اثرانگشت (هش) آن را.', ar: 'احفظ هذا الرمز في مكان آمن. إنه الطريق الوحيد للعودة أو لحذف تسجيلاتك. لا نحتفظ بالرمز نفسه، بل ببصمته (hash) فقط.' },
+    codeCopy:   { kmr: 'Kopî bike', ckb: 'لەبەرگرتنەوە', tr: 'Kopyala', en: 'Copy', fa: 'کپی', ar: 'نسخ' },
+    codeCopied: { kmr: 'Hate kopîkirin ✓', ckb: 'لەبەرگیرایەوە ✓', tr: 'Kopyalandı ✓', en: 'Copied ✓', fa: 'کپی شد ✓', ar: 'تم النسخ ✓' },
+    codeDownload:{ kmr: 'Wekî pel daxe', ckb: 'وەک فایل دابەزێنە', tr: 'Dosya olarak indir', en: 'Download as a file', fa: 'دانلود به‌صورت فایل', ar: 'نزّل كملف' },
+    codeWarn:   { kmr: 'Heke tu vê kodê winda bikî, em nikarin bibînin ka kîjan tomar yên te ne — ji ber ku em nizanin tu kî yî. Mafê jêbirinê yê te dimîne, lê bê kod kes nikare tomarên te bibîne.', ckb: 'ئەگەر ئەم کۆدە ون بکەیت، ناتوانین بزانین کام تۆمار هی تۆن — چونکە نازانین تۆ کێیت. مافی سڕینەوەت دەمێنێت، بەڵام بێ کۆد کەس ناتوانێت تۆمارەکانت بدۆزێتەوە.', tr: 'Bu kodu kaybedersen hangi kayıtların senin olduğunu bulamayız — çünkü kim olduğunu bilmiyoruz. Silme hakkın sende kalır, ama kod olmadan kimse kayıtlarını bulamaz.', en: 'If you lose this code we cannot tell which recordings are yours — because we do not know who you are. Your right to delete stays yours, but without the code nobody can find your recordings.', fa: 'اگر این کد را گم کنی، نمی‌توانیم بفهمیم کدام ضبط‌ها از توست — چون نمی‌دانیم تو کیستی. حق حذف برای تو می‌ماند، اما بدون کد هیچ‌کس نمی‌تواند ضبط‌هایت را پیدا کند.', ar: 'إن فقدت هذا الرمز فلن نستطيع معرفة أيّ التسجيلات لك — لأننا لا نعرف من أنت. يبقى حقّك في الحذف قائمًا، لكن بلا الرمز لا يستطيع أحد إيجاد تسجيلاتك.' },
+    codeKept:   { kmr: 'Min kod hilanî.', ckb: 'کۆدەکەم هەڵگرت.', tr: 'Kodu sakladım.', en: 'I have saved the code.', fa: 'کد را ذخیره کردم.', ar: 'حفظتُ الرمز.' },
+    codeNext:   { kmr: 'Berdewam bike', ckb: 'بەردەوام بە', tr: 'Devam et', en: 'Continue', fa: 'ادامه', ar: 'تابع' },
+    showCode:   { kmr: 'Koda min nîşan bide', ckb: 'کۆدەکەم پیشان بدە', tr: 'Kodumu göster', en: 'Show my code', fa: 'کدم را نشان بده', ar: 'اعرض رمزي' },
+    anonAcct:   { kmr: 'Bexşkarê bênav', ckb: 'بەخشەری بێناو', tr: 'Anonim bağışçı', en: 'Anonymous donor', fa: 'اهداکنندهٔ ناشناس', ar: 'متبرّع مجهول' },
+    anonNoReview:{ kmr: 'Kontrolkirina tomaran bi cuzdanê ye: kod bi hêsanî tên çêkirin, deng nabe ku wisa bin. Tu dikarî bi tomarkirinê alîkariyê bidomînî.', ckb: 'پشکنینی تۆمارەکان بە جزدانە: کۆد بە ئاسانی دروست دەکرێت، دەنگدان نابێت وا بێت. دەتوانیت بە تۆمارکردن یارمەتی بدەیت.', tr: 'Kayıtları kontrol etmek cüzdan ister: kodlar kolayca üretilir, oylar öyle olmamalı. Kayıt yaparak katkı vermeye devam edebilirsin.', en: 'Checking recordings needs a wallet: codes are easy to make, votes must not be. You can keep helping by recording.', fa: 'بررسی ضبط‌ها کیف پول می‌خواهد: کد به‌آسانی ساخته می‌شود، رأی نباید چنین باشد. با ضبط کردن می‌توانی همچنان کمک کنی.', ar: 'مراجعة التسجيلات تتطلّب محفظة: الرموز سهلة الإنشاء، والأصوات يجب ألا تكون كذلك. يمكنك مواصلة المساعدة بالتسجيل.' },
+    anonSignOutAsk:{ kmr: 'Te kod hilaniye? Bê wê tu nikarî vegerî an tomarên xwe jê bibî.', ckb: 'کۆدەکەت هەڵگرتووە؟ بەبێ ئەو ناتوانیت بگەڕێیتەوە یان تۆمارەکانت بسڕیتەوە.', tr: 'Kodunu sakladın mı? O olmadan geri dönemez, kayıtlarını silemezsin.', en: 'Have you saved your code? Without it you cannot come back or delete your recordings.', fa: 'کدت را ذخیره کرده‌ای؟ بدون آن نمی‌توانی برگردی یا ضبط‌هایت را حذف کنی.', ar: 'هل حفظت رمزك؟ بدونه لا تستطيع العودة أو حذف تسجيلاتك.' },
+    CODE:       { kmr: 'Ev kod nayê naskirin. Kontrol bike û dîsa biceribîne.', ckb: 'ئەم کۆدە نەناسرایەوە. بیپشکنە و دووبارە هەوڵ بدەرەوە.', tr: 'Bu kod tanınmadı. Kontrol edip tekrar dene.', en: 'This code is not recognised. Check it and try again.', fa: 'این کد شناخته نشد. بررسی کن و دوباره امتحان کن.', ar: 'لم يُتعرَّف على هذا الرمز. تحقّق منه وحاول مجددًا.' },
+    RATE:       { kmr: 'Pir hewl hatin dayîn. Piştî demekê dîsa biceribîne.', ckb: 'هەوڵی زۆر درا. دوای ماوەیەک دووبارە هەوڵ بدەرەوە.', tr: 'Çok fazla deneme yapıldı. Biraz sonra tekrar dene.', en: 'Too many attempts. Try again a little later.', fa: 'تلاش‌های زیادی شد. کمی بعد دوباره امتحان کن.', ar: 'محاولات كثيرة جدًا. حاول مجددًا بعد قليل.' },
+    WALLET_NEEDED:{ kmr: 'Ji bo vê cuzdan pêwîst e.', ckb: 'بۆ ئەمە جزدان پێویستە.', tr: 'Bunun için cüzdan gerekiyor.', en: 'This needs a wallet.', fa: 'این کار کیف پول می‌خواهد.', ar: 'هذا يتطلّب محفظة.' }
   };
 
   // ── language ──────────────────────────────────────────────────────────────
@@ -305,7 +329,10 @@
   }
 
   // ── session and wallet ───────────────────────────────────────────────────
-  var session = { addr: null, csrf: null, speaker: null };
+  var session = { addr: null, csrf: null, speaker: null, anon: false };
+  var CODE_KEY = 'kt-anon-code';
+  function keptCode() { try { return localStorage.getItem(CODE_KEY); } catch (e) { return null; } }
+  function keepCode(c) { try { if (c) localStorage.setItem(CODE_KEY, c); else localStorage.removeItem(CODE_KEY); } catch (e) { /* private mode: the code is still on screen */ } }
   function loadScript(src) {
     return new Promise(function (res, rej) {
       if (document.querySelector('script[data-src="' + src + '"]')) return res();
@@ -319,7 +346,7 @@
   }
   function refresh() {
     return api('GET', '/api/c/me').then(function (r) {
-      session.addr = r.json.addr || null; session.csrf = r.json.csrf || null; session.speaker = r.json.speaker || null;
+      session.addr = r.json.addr || null; session.csrf = r.json.csrf || null; session.speaker = r.json.speaker || null; session.anon = !!r.json.anon;
       paintAcct();
       document.dispatchEvent(new Event('kt-session'));
     });
@@ -329,7 +356,7 @@
     var b = document.querySelector('.acct');
     if (!b) return;
     b.textContent = '';
-    if (session.addr) { b.appendChild(h('code', null, short(session.addr))); b.appendChild(h('span', null, '· ' + say('signOut'))); }
+    if (session.addr) { b.appendChild(session.anon ? h('span', null, say('anonAcct')) : h('code', null, short(session.addr))); b.appendChild(h('span', null, '· ' + say('signOut'))); }
     else b.appendChild(h('span', null, say('signIn')));
   }
 
@@ -451,6 +478,8 @@
     });
   }
   function signOut() {
+    // An anonymous donor who signs out comes back only with the code.
+    if (session.anon && !window.confirm(say('anonSignOutAsk'))) return;
     api('POST', '/api/c/logout').then(function () {
       if (window.DknChain && window.DknChain.wcDisconnect) window.DknChain.wcDisconnect();
       return refresh();
@@ -505,16 +534,72 @@
           me.querySelector('[data-k="m"]').textContent = r.json.me.minutes; me.querySelector('[data-k="v"]').textContent = r.json.me.votes; }
       });
     }
+    var codeCard = document.getElementById('codeCard'), pendingCode = null;
     function show() {
-      gate.hidden = !!session.addr;
+      codeCard.hidden = !pendingCode;
+      gate.hidden = !!session.addr || !!pendingCode;
       var ready = session.speaker && session.speaker.consent_version === prof.dataset.consent && session.speaker.dialect;
-      prof.hidden = !session.addr || !!ready;
-      work.hidden = !ready;
+      prof.hidden = !session.addr || !!ready || !!pendingCode;
+      work.hidden = !ready || !!pendingCode;
+      document.getElementById('showCode').hidden = !(session.anon && keptCode());
       if (ready && !work.dataset.started) { work.dataset.started = '1'; nextSentence(); }
       stats();
     }
     document.addEventListener('kt-session', show);
     document.getElementById('gateBtn').addEventListener('click', openSheet);
+
+    // ── the anonymous way in: a code instead of a wallet ──
+    // The code is shown once by the server and kept in this browser for
+    // convenience only; the donor is asked to keep it themselves, because
+    // a cleared browser forgets it and we only ever had its hash.
+    function codeError(el, r) {
+      el.textContent = say(r.status === 429 ? 'RATE' : (r.json && r.json.detail === 'CODE') ? 'CODE' : 'FAILED');
+      el.hidden = false;
+    }
+    function showCodeCard(code) {
+      pendingCode = code;
+      document.getElementById('codeText').textContent = code;
+      var kept = document.getElementById('codeKept'); kept.checked = false;
+      document.getElementById('codeNext').disabled = true;
+      show();
+      codeCard.scrollIntoView({ block: 'start', behavior: 'smooth' });
+    }
+    document.getElementById('anonBtn').addEventListener('click', function () {
+      var b = this, msg = document.getElementById('anonMsg');
+      b.disabled = true; msg.hidden = true;
+      api('POST', '/api/c/anon/start').then(function (r) {
+        b.disabled = false;
+        if (!r.ok) return codeError(msg, r);
+        keepCode(r.json.code);
+        session.csrf = r.json.csrf;
+        showCodeCard(r.json.code);
+        refresh();
+      });
+    });
+    document.getElementById('codeKept').addEventListener('change', function () {
+      document.getElementById('codeNext').disabled = !this.checked;
+    });
+    document.getElementById('codeNext').addEventListener('click', function () { pendingCode = null; show(); });
+    document.getElementById('codeCopy').addEventListener('click', function () {
+      var b = this, done = function () { b.textContent = say('codeCopied'); setTimeout(function () { b.textContent = say('codeCopy'); }, 2000); };
+      if (navigator.clipboard) navigator.clipboard.writeText(pendingCode).then(done, function () {});
+    });
+    document.getElementById('codeSave').addEventListener('click', function () {
+      var text = 'KurdAi Voice — ' + say('codeTitle') + '\n\n' + pendingCode + '\n\n' + say('codeLead') + '\n\nhttps://kurdishtts.dks.news/bexsh\n';
+      var a = h('a'); a.href = URL.createObjectURL(new Blob([text], { type: 'text/plain;charset=utf-8' }));
+      a.download = 'kurdai-voice-code.txt'; document.body.appendChild(a); a.click(); a.remove();
+    });
+    document.getElementById('showCode').addEventListener('click', function () { if (keptCode()) showCodeCard(keptCode()); });
+    document.getElementById('haveCode').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var input = document.getElementById('codeIn'), msg = document.getElementById('codeMsg');
+      msg.hidden = true;
+      api('POST', '/api/c/anon/login', { code: input.value }).then(function (r) {
+        if (!r.ok) return codeError(msg, r);
+        keepCode(input.value.trim().toUpperCase()); input.value = '';
+        refresh();
+      });
+    });
     var gateStores = document.querySelector('[data-stores]');
     storeRows(gateStores);
     document.addEventListener('kt-lang', function () { storeRows(gateStores); });
@@ -584,7 +669,12 @@
         tabs.forEach(function (x) { x.setAttribute('aria-selected', x === b ? 'true' : 'false'); });
         document.getElementById('panelRecord').hidden = b.dataset.tab !== 'record';
         document.getElementById('panelReview').hidden = b.dataset.tab !== 'review';
-        if (b.dataset.tab === 'review') nextReview();
+        if (b.dataset.tab === 'review') {
+          // Checking needs a wallet: codes are free to make, votes must not be.
+          document.getElementById('anonNoReview').hidden = !session.anon;
+          if (session.anon) { vEmpty.hidden = true; vBox.hidden = true; return; }
+          nextReview();
+        }
       });
     });
 
@@ -693,7 +783,7 @@
     document.getElementById('forget').addEventListener('click', function () {
       if (!window.confirm(say('forgetAsk'))) return;
       api('POST', '/api/donate/forget').then(function (r) {
-        if (r.ok) { window.alert(say('forgotten')); location.reload(); }
+        if (r.ok) { keepCode(null); window.alert(say('forgotten')); location.reload(); }
       });
     });
     show();

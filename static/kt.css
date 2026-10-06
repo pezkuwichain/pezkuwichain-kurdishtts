@@ -437,3 +437,23 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.92em;}
   .nav a{flex:1 0 auto; white-space:nowrap; padding:8px 12px;}
 }
 .bento > .card:last-child .tag{align-self:center;}
+
+/* ── donate: two ways in, and the donation code ─────────────────────────── */
+.ways{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+.way{display:flex; flex-direction:column; gap:10px; padding:20px; border:1px solid var(--line); border-radius:18px; background:var(--ink-2);}
+.way b{font:700 17px/1.3 var(--font);}
+.way p{margin:0 0 4px; color:var(--text-2); font-size:14.5px; flex:1;}
+.way--anon{border-color:rgba(29,180,95,.4); background:linear-gradient(160deg, rgba(29,180,95,.14), var(--ink-2) 65%);}
+.stores-more summary{cursor:pointer; color:var(--text-3); font-size:13.5px; margin-top:4px;}
+.stores-more .stores{margin-top:10px;}
+.have-code{margin-top:18px; padding-top:16px; border-top:1px solid var(--line);}
+.have-code label{display:block; font-size:14px; color:var(--text-2); margin-bottom:8px;}
+.have-code__row{display:flex; gap:10px;}
+.have-code input{flex:1; min-width:0; padding:12px 14px; font:600 15px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.04em; text-transform:uppercase;}
+.codecard{border-color:rgba(246,185,48,.45); background:linear-gradient(160deg, rgba(246,185,48,.12), var(--ink-1) 60%);}
+.code-big{margin:6px 0 16px; padding:18px; border-radius:14px; border:1px dashed rgba(246,185,48,.6); background:#0A0F1C; text-align:center;
+  font:700 clamp(17px,3.2vw,24px)/1.3 ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.06em; color:var(--zer); word-break:break-all; user-select:all;}
+.codecard .actions{justify-content:flex-start;}
+.codecard .msg--wait{margin:16px 0 6px;}
+.forget-row{justify-content:space-between; gap:10px; flex-wrap:wrap;}
+@media (max-width:560px){ .ways{grid-template-columns:1fr;} .have-code__row{flex-direction:column;} }

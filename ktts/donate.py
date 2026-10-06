@@ -1,6 +1,7 @@
 """Voice donation: read a sentence, record it, check others' recordings.
 
-A donor signs in with a wallet, gives the five confirmations of
+A donor signs in with a wallet -- or starts with a donation code (auth.py),
+which records but does not vote -- gives the five confirmations of
 legal/consent.md once (recordings train our own models only), says which
 dialect they speak, and reads sentences from a CC0 corpus (Common Voice's
 sentence collector). Every recording is checked here for what a machine can
@@ -21,7 +22,7 @@ import time
 from pathlib import Path
 
 import numpy as np
-from fastapi import APIRouter, Cookie, File, Form, Header, HTTPException, UploadFile
+from fastapi import APIRouter, Cookie, File, Form, Header, HTTPException, Request, UploadFile
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
 
@@ -40,6 +41,9 @@ MIN_RMS_DB = -42.0           # quieter than this is a silent or far-away recordi
 CLIP_RATIO_MAX = 0.002       # more than 0.2 % of samples at full scale is clipping
 CPS_RANGE = (3.0, 28.0)      # characters per second a human reading aloud can do
 PER_DAY = int(os.environ.get("KTTS_CLIPS_PER_DAY", "400"))
+# Anonymous donors are counted per network address too: one person can make
+# many codes, and each code has its own daily limit.
+ANON_CLIPS_PER_HOUR_PER_IP = int(os.environ.get("KTTS_ANON_CLIPS_PER_HOUR", "150"))
 VOTES_TO_DECIDE = 2
 
 router = APIRouter()
@@ -129,6 +133,14 @@ def profile(body: ProfileIn, kt_ses: str | None = Cookie(None), x_csrf: str | No
     return {"ok": True, "consent_version": CONSENT_VERSION}
 
 
+def _wallet_only(addr: str) -> None:
+    """Checking recordings needs a wallet. Two agreeing votes decide a clip, and
+    anyone can make as many donation codes as they like: if codes could vote,
+    one person could pass their own recordings."""
+    if auth.is_anon(addr):
+        raise HTTPException(403, "WALLET_NEEDED")
+
+
 def _speaker(db, addr: str) -> dict:
     sp = db.execute("SELECT * FROM speaker WHERE addr=?", (addr,)).fetchone()
     if not sp or sp["consent_version"] != CONSENT_VERSION or not sp["dialect"]:
@@ -157,9 +169,11 @@ def next_sentences(kt_ses: str | None = Cookie(None)):
 
 
 @router.post("/api/donate/clip")
-async def upload(sentence_id: int = Form(...), audio: UploadFile = File(...),
+async def upload(request: Request, sentence_id: int = Form(...), audio: UploadFile = File(...),
                  kt_ses: str | None = Cookie(None), x_csrf: str | None = Header(None)):
     addr = auth.require(kt_ses, x_csrf)
+    if auth.is_anon(addr):
+        auth.limit("clip:" + auth.client_ip(request), ANON_CLIPS_PER_HOUR_PER_IP)
     raw = await audio.read(MAX_UPLOAD + 1)
     if len(raw) > MAX_UPLOAD:
         raise HTTPException(413, "TOO_BIG")
@@ -194,6 +208,7 @@ async def upload(sentence_id: int = Form(...), audio: UploadFile = File(...),
 @router.get("/api/donate/review")
 def review(kt_ses: str | None = Cookie(None)):
     addr = auth.require(kt_ses, None, write=False)
+    _wallet_only(addr)
     with STATE["store"].db() as db:
         sp = _speaker(db, addr)
         r = db.execute("""
@@ -214,6 +229,7 @@ def review(kt_ses: str | None = Cookie(None)):
 @router.get("/api/donate/audio/{clip_id}")
 def clip_audio(clip_id: int, kt_ses: str | None = Cookie(None)):
     addr = auth.require(kt_ses, None, write=False)
+    _wallet_only(addr)
     with STATE["store"].db() as db:
         r = db.execute("""SELECT c.file FROM clip c JOIN review_grant g ON g.clip_id = c.id
                           WHERE c.id=? AND g.addr=? AND g.exp > ?""", (clip_id, addr, int(time.time()))).fetchone()
@@ -230,6 +246,7 @@ class VoteIn(BaseModel):
 @router.post("/api/donate/vote")
 def vote(body: VoteIn, kt_ses: str | None = Cookie(None), x_csrf: str | None = Header(None)):
     addr = auth.require(kt_ses, x_csrf)
+    _wallet_only(addr)
     if body.val not in (1, -1):
         raise HTTPException(400, "val")
     with STATE["store"].db() as db:
