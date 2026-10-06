@@ -30,6 +30,14 @@ const PROJECT_ID = (typeof window !== 'undefined' && window.DKN_WC_PROJECT_ID) |
 const SESSION_KEY = 'dkn_wc_session';
 const METHODS = ['polkadot_signTransaction', 'polkadot_signMessage'];
 const EVENTS = ['chainChanged', 'accountsChanged'];
+// The chains app.pezkuwichain.io proposes, the flow the wallet is tested with
+// (pwap web/src/lib/walletconnect-service.ts, REQUIRED_CHAIN_IDS). Proposing
+// the same set means the wallet sees exactly the request it already answers.
+const PEZKUWI_CHAINS = [
+  'polkadot:1aa94987791a5544e9667ec249d2cef1', // Relay
+  'polkadot:e7c15092dcbe3f320260ddbbc685bfce', // Asset Hub
+  'polkadot:69a8d025ab7b63363935d7d9397e0f65', // People Chain
+];
 
 let client = null, initP = null, session = null, activeChainId = null, reqId = 0;
 
@@ -47,7 +55,7 @@ async function init() {
     // privacy policy says this site sends no analytics, and it means it.
     telemetryEnabled: false,
     metadata: {
-      name: 'KurdishTTS',
+      name: 'KurdAi Voice',
       description: 'Dengê Kurdî — bexşa deng',
       url: 'https://kurdishtts.dks.news',
       icons: ['https://kurdishtts.dks.news/static/icon-192.png'],
@@ -130,7 +138,7 @@ const DknWC = {
     const c = await init();
     activeChainId = chainIdFromGenesis(genesisHash);
     const { uri, approval } = await c.connect({
-      requiredNamespaces: { polkadot: { methods: METHODS, chains: [activeChainId], events: EVENTS } },
+      requiredNamespaces: { polkadot: { methods: METHODS, chains: [...new Set([activeChainId, ...PEZKUWI_CHAINS])], events: EVENTS } },
     });
     if (!uri) throw new Error('WC_NO_URI');
     const qrDataUrl = await QRCode.toDataURL(uri, { width: 300, margin: 2, color: { dark: '#04060E', light: '#ffffff' } });

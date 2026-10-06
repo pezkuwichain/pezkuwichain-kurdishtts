@@ -245,12 +245,13 @@ async function signMessage(address, message) {
 async function wcStart() {
   try {
     const W = await wc();
-    // A pairing that has not produced a URI in fifteen seconds is not going to.
-    // Without this the relay's refusal arrives as an unhandled socket close and
-    // the sheet waits on a spinner for ever — which is what a reader saw.
+    // A cap, so a refused relay does not leave a spinner for ever -- but a
+    // generous one. Fifteen seconds cut off phones on slow networks mid-handshake
+    // and showed "something went wrong" (2026-10-06); app.pezkuwichain.io, whose
+    // flow works on the same wallet, sets no limit on this step at all.
     const pr = await Promise.race([
       W.startPairing(await genesis()),
-      new Promise((_, rej) => setTimeout(() => rej(new Error('WC_TIMEOUT')), 15000)),
+      new Promise((_, rej) => setTimeout(() => rej(new Error('WC_TIMEOUT')), 60000)),
     ]);
     return {
       qrDataUrl: pr.qrDataUrl,
