@@ -36,7 +36,14 @@ CONSENT_VERSION = "train-only-2026-10-03-dialect"   # must equal legal/consent.m
 DIALECTS = ("kmr", "ckb")
 SR = 48000
 MAX_UPLOAD = 6 * 1024 * 1024
-MIN_S, MAX_S = 1.0, 15.0
+# The floor follows the sentence: the fastest human pace (CPS_RANGE[1]) sets
+# how short a true reading of it can be, and 0.6 s is the least any clip may
+# be. A fixed one second refused "Ez ê nebiriqînim." read at a normal pace
+# (2026-10-06): three words, fifteen letters, under a second of voice.
+MIN_FLOOR_S, MAX_S = 0.6, 15.0
+# Sentences shorter than this are not offered: two- and three-word lines are
+# the ones a phone clips, and they teach a voice little. 20% of the corpus.
+MIN_SENTENCE_CHARS = int(os.environ.get("KTTS_MIN_SENTENCE_CHARS", "20"))
 MIN_RMS_DB = -42.0           # quieter than this is a silent or far-away recording
 CLIP_RATIO_MAX = 0.002       # more than 0.2 % of samples at full scale is clipping
 CPS_RANGE = (3.0, 28.0)      # characters per second a human reading aloud can do
@@ -83,7 +90,7 @@ def analyse(raw: bytes, text: str) -> tuple[np.ndarray, dict]:
     clipped = float((np.abs(pcm.astype(np.int32)) >= 32700).mean())
     letters = sum(ch.isalpha() for ch in text)
     cps = letters / secs if secs else 0
-    if secs < MIN_S:
+    if secs < max(MIN_FLOOR_S, letters / CPS_RANGE[1]):
         raise Rejected("TOO_SHORT")
     if secs > MAX_S:
         raise Rejected("TOO_LONG")
@@ -160,9 +167,9 @@ def next_sentences(kt_ses: str | None = Cookie(None)):
         rows = db.execute("""
           SELECT s.id, s.text FROM sentence s
           LEFT JOIN clip c ON c.sentence_id = s.id
-          WHERE s.dialect=? AND s.active=1
+          WHERE s.dialect=? AND s.active=1 AND LENGTH(s.text) >= ?
             AND s.id NOT IN (SELECT sentence_id FROM clip WHERE addr=?)
-          GROUP BY s.id ORDER BY COUNT(c.id), RANDOM() LIMIT 40""", (sp["dialect"], addr)).fetchall()
+          GROUP BY s.id ORDER BY COUNT(c.id), RANDOM() LIMIT 40""", (sp["dialect"], MIN_SENTENCE_CHARS, addr)).fetchall()
     rows = [dict(r) for r in rows]
     random.shuffle(rows)
     return {"dialect": sp["dialect"], "sentences": rows[:8]}
@@ -322,7 +329,8 @@ def stats(kt_ses: str | None = Cookie(None)):
             out[d] = {"clips": r["n"], "hours": round(r["s"] / 3600, 2), "valid_hours": round(r["v"] / 3600, 2),
                       "valid_clips": r["vn"],
                       "speakers": r["speakers"],
-                      "sentences": db.execute("SELECT COUNT(*) FROM sentence WHERE dialect=? AND active=1", (d,)).fetchone()[0]}
+                      "sentences": db.execute("SELECT COUNT(*) FROM sentence WHERE dialect=? AND active=1 AND LENGTH(text) >= ?",
+                                             (d, MIN_SENTENCE_CHARS)).fetchone()[0]}
         # One person may donate in both dialects: the sum of the two counts
         # above would count them twice, so the total is counted on its own.
         out["donors"] = db.execute("SELECT COUNT(DISTINCT addr) FROM clip").fetchone()[0]
