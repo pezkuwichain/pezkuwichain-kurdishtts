@@ -457,3 +457,9 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.92em;}
 .codecard .msg--wait{margin:16px 0 6px;}
 .forget-row{justify-content:space-between; gap:10px; flex-wrap:wrap;}
 @media (max-width:560px){ .ways{grid-template-columns:1fr;} .have-code__row{flex-direction:column;} }
+/* A small turning ring under "Preparing the connection…", so a wait reads as
+   work in progress rather than a screen that froze. */
+.spin{display:block; width:28px; height:28px; margin:6px auto 4px; border-radius:50%;
+  border:3px solid var(--line-2); border-top-color:var(--zer); animation:kt-spin .8s linear infinite;}
+@keyframes kt-spin{to{transform:rotate(360deg);}}
+@media (prefers-reduced-motion:reduce){ .spin{animation-duration:2.4s;} }
