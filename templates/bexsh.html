@@ -27,11 +27,42 @@
   </section>
 
   <section class="panel" id="gate">
-    <h2 class="step"><span class="step__n">1</span><span data-t="signIn">Bi cuzdanê têkeve</span></h2>
-    <p class="lede" data-t="needSignIn"></p>
-    <button type="button" class="btn btn--block" id="gateBtn" data-t="signIn">Bi cuzdanê têkeve</button>
-    <p class="stores__lead" data-t="getWallet"></p>
-    <div class="stores" data-stores></div>
+    <h2 class="step"><span class="step__n">1</span><span data-t="howStart">Çawa dest pê dikî?</span></h2>
+    <div class="ways">
+      <div class="way way--anon">
+        <b data-t="anonT"></b>
+        <p data-t="anonD"></p>
+        <button type="button" class="btn btn--block" id="anonBtn" data-t="anonBtn"></button>
+        <p class="msg msg--bad" id="anonMsg" hidden></p>
+      </div>
+      <div class="way">
+        <b data-t="walletT"></b>
+        <p data-t="walletD"></p>
+        <button type="button" class="btn btn--ghost btn--block" id="gateBtn" data-t="signIn">Bi cuzdanê têkeve</button>
+        <details class="stores-more"><summary data-t="getWallet"></summary><div class="stores" data-stores></div></details>
+      </div>
+    </div>
+    <form class="have-code" id="haveCode">
+      <label for="codeIn" data-t="haveCode"></label>
+      <div class="have-code__row">
+        <input type="text" id="codeIn" autocomplete="off" autocapitalize="characters" spellcheck="false" dir="ltr" placeholder="KV-XXXXX-XXXXX-XXXXX-XXXXX" />
+        <button type="submit" class="btn btn--ghost" data-t="codeGo"></button>
+      </div>
+      <p class="msg msg--bad" id="codeMsg" hidden></p>
+    </form>
+  </section>
+
+  <section class="panel codecard" id="codeCard" hidden aria-live="polite">
+    <h2 class="step"><span class="step__n">✓</span><span data-t="codeTitle"></span></h2>
+    <p class="lede" data-t="codeLead"></p>
+    <p class="code-big" id="codeText" dir="ltr"></p>
+    <div class="actions">
+      <button type="button" class="btn btn--ghost" id="codeCopy" data-t="codeCopy"></button>
+      <button type="button" class="btn btn--ghost" id="codeSave" data-t="codeDownload"></button>
+    </div>
+    <p class="msg msg--wait" data-t="codeWarn"></p>
+    <label class="check"><input type="checkbox" id="codeKept" /><span data-t="codeKept"></span></label>
+    <button type="button" class="btn btn--block mt-16" id="codeNext" disabled data-t="codeNext"></button>
   </section>
 
   <section class="panel" id="profile" data-consent="{{ consent_version }}" hidden>
@@ -80,6 +111,7 @@
       </div>
     </div>
     <div id="panelReview" role="tabpanel" hidden>
+      <p class="msg msg--wait" id="anonNoReview" data-t="anonNoReview" hidden></p>
       <p class="lede" data-t="reviewHow"></p>
       <p class="note" id="vempty" data-t="nothingToReview" hidden></p>
       <div id="vbox" hidden>
@@ -92,7 +124,7 @@
         <div class="actions mt-16"><button type="button" class="btn btn--quiet" id="vskip" data-t="skip">Derbas bike</button></div>
       </div>
     </div>
-    <div class="forget-row"><button type="button" class="btn btn--quiet" id="forget" data-t="forget">Tomarên min jê bibe</button></div>
+    <div class="forget-row"><button type="button" class="btn btn--quiet" id="showCode" hidden data-t="showCode"></button><button type="button" class="btn btn--quiet" id="forget" data-t="forget">Tomarên min jê bibe</button></div>
   </section>
 </main>
 {% include "_footer.html" %}

@@ -16,7 +16,7 @@ KurdAi Voice (https://kurdishtts.dks.news) is a non-profit project of the Dijita
 ## 2. The short version
 
 - **Read-aloud:** we turn the text you type into audio. We do not keep your text. We keep the audio file for a short time so we do not have to generate it again.
-- **Voice donation:** if you donate your voice, we keep your recordings and the dialect you choose, linked to your wallet address. **We use them only to train and test our own Kurdish speech models.** We do not sell them, share them with anyone else, publish them, use them to imitate your voice, use them to identify you, or use them for advertising.
+- **Voice donation:** if you donate your voice, we keep your recordings and the dialect you choose, linked to your wallet address — or, if you donate without a wallet, to a donation code of which we keep only a one-way hash. **We use them only to train and test our own Kurdish speech models.** We do not sell them, share them with anyone else, publish them, use them to imitate your voice, use them to identify you, or use them for advertising.
 - You can **delete your recordings at any time** with the "Delete my recordings" button. **A model that has already been trained on them cannot "unlearn" them** (section 7).
 - No ads, no analytics, no tracking cookies. Nothing is written to any blockchain.
 
@@ -28,13 +28,14 @@ GDPR article references are given for visitors in the EU/EEA. Similar rules appl
 |---|---|---|---|---|---|
 | 1 | Delivering the website and keeping it secure (web server logs) | IP address, time, requested address (URL), status code, browser user agent, referring page | Legitimate interest in running and protecting the service (Art. 6(1)(f)) | **14 days**, then deleted by log rotation | Hosting provider (processor) |
 | 2 | Application logs | IP address, time, method, path, status code | Legitimate interest (Art. 6(1)(f)) | **14 days** | Hosting provider (processor) |
-| 3 | Preventing abuse of the free read-aloud (rate limiting) | IP address and request times | Legitimate interest (Art. 6(1)(f)) | In memory only, about 1 minute | Nobody |
+| 3 | Preventing abuse (rate limiting) of the free read-aloud, of donation codes (how many are made and tried) and of anonymous uploads | IP address and request times | Legitimate interest (Art. 6(1)(f)) | In memory only: about 1 minute for read-aloud, up to 1 hour for donation codes and uploads | Nobody |
 | 4 | Read-aloud | The text you type (max. 600 characters) and the dialect you choose; the audio we generate | Providing the service you ask for (Art. 6(1)(b)) | **Text: not stored** — it is processed in memory and discarded. **Audio:** cached for up to **7 days** under a fingerprint (hash) of the text | Nobody |
 | 5 | Voicing dks.news articles (via our API) | The published article text sent by dks.news; the job record (time, dialect, status) | Legitimate interest in making our news audible (Art. 6(1)(f)) | Article text: deleted as soon as the audio is made (or the job finally fails). Job record: **90 days**. Article audio: as long as dks.news offers it | dks.news, run by the same controller |
 | 6 | Signing in with your wallet | Wallet address; a one-time challenge; a session ID and a security (CSRF) token. Your signature is checked and not stored | Providing the donation account you ask for (Art. 6(1)(b)) | Challenge: 10 minutes. Session: until you sign out, or 30 days. Address: until you delete your donor account | Nobody |
+| 6a | Donating without a wallet (donation code) | A one-way hash (SHA-256) of your donation code, which is your pseudonymous donor identity; a session ID and a security (CSRF) token. **The code itself is shown to you once and never stored by us.** Your browser keeps a copy in its local storage, for your convenience | Providing the donation account you ask for (Art. 6(1)(b)) | Hash: until you delete your donor account. Session: until you sign out, or 30 days | Nobody |
 | 7 | Your donor profile | Your dialect; your 18+ confirmation. We ask for nothing else about you | **Your explicit consent** (Art. 6(1)(a) and Art. 9(2)(a)) | Until you delete it, or until we end the project (section 6) | Nobody |
 | 8 | Your voice recordings | The recording (FLAC), the sentence read, length, loudness measurements, time, check status (pending/valid/invalid) | **Your explicit consent** (Art. 6(1)(a) and Art. 9(2)(a)) | Until you delete them, or until we end the project. Recordings judged invalid: deleted after **90 days** | Other signed-in donors hear them to check them (section 5); compute providers under contract (row 10) |
-| 9 | Checking recordings (peer review) | Your votes: your wallet address, the recording, your vote, time | Legitimate interest in data quality and preventing manipulation (Art. 6(1)(f)) | As long as the recording or your donor account exists, whichever ends first | Nobody |
+| 9 | Checking recordings (peer review) — wallet donors only | Your votes: your wallet address, the recording, your vote, time | Legitimate interest in data quality and preventing manipulation (Art. 6(1)(f)) | As long as the recording or your donor account exists, whichever ends first | Nobody |
 | 10 | Training and testing our speech models | Copies of valid recordings with their dialect, under a random speaker code — **never your wallet address** | **Your explicit consent** (Art. 6(1)(a) and Art. 9(2)(a)) | Training copies are deleted when the training run ends, at most **30 days** | Compute (GPU) provider acting on our instructions, named here before the first training run |
 | 11 | Proving consent and deletion | Wallet address (replaced by a one-way hash once you delete your account), consent version and language, which confirmations you gave, times of consent and deletion | Legal obligation to demonstrate consent (Art. 7(1), Art. 6(1)(c)) and legitimate interest in defending legal claims (Art. 6(1)(f)) | **3 years** after you delete your account | Nobody |
 | 12 | Preventing abuse of donation | A "blocked" flag on a wallet address | Legitimate interest (Art. 6(1)(f)) | As long as needed to prevent repeat abuse | Nobody |
@@ -52,6 +53,8 @@ A recording of your voice identifies you. Under the GDPR, voice becomes "biometr
 ## 5. Voice donation: what exactly happens
 
 1. **Sign-in.** You sign a one-time message with your Pezkuwi wallet. This proves you control the address. We never see or store your private keys or recovery phrase. **Nothing is written on-chain.** Your wallet address is a pseudonym, but it is still personal data: anyone who can link it to you (for example through public blockchain activity) could connect it to your recordings. That is why we never show or publish it.
+
+   **Or without a wallet.** You can press "Start without a wallet" instead. We make a random donation code (20 characters), show it to you once, and keep only a one-way hash of it — so we cannot recover the code, and it says nothing about who you are. The code signs you back in on any device and lets you delete what you gave. Donors with a code can record but not check others' recordings: codes are free to make, and votes must not be.
 2. **Profile and consent.** You choose your dialect. We ask for nothing else about you: no name, age, gender or place. You confirm the consent text (version **train-only-2026-10-03-dialect**). If we ever change what we do with recordings, we ask you again. Old consent is not stretched to cover new uses.
 3. **Recording.** Your browser asks permission to use your microphone. Audio is captured only while you press record. It is sent to our server and stored as FLAC; the browser's own file is converted and discarded.
 4. **Peer review.** Other signed-in donors of the same dialect listen to pending recordings and vote on whether the recording matches the sentence. **They hear your recording but do not see your wallet address.** They are bound by our Terms not to copy or share what they hear. Two agreeing votes decide whether a recording is used.
@@ -73,6 +76,8 @@ Invalid recordings are deleted after 90 days. Sessions expire after 30 days. Aft
 ## 7. Deleting your recordings — and what deletion cannot undo
 
 **How:** sign in at `/bexsh` and press **"Delete my recordings"**. Or write to the privacy contact. We will ask you to sign a short message with the same wallet, so that nobody else can delete your data or ask for it.
+
+**If you donated with a code:** sign in with the code and press the same button, or send us the code. Keep the code safe: anyone who holds it can sign in as you and delete your recordings. **If the code is lost, your right to deletion remains — but we have no way to tell which recordings are yours,** because we do not know who you are and keep only a hash of the code (GDPR Art. 11; KVKK Art. 13). We say this before you record, and ask you to confirm that you have saved the code.
 
 **What happens at once:**
 - your recordings, measurements, dialect, votes and sessions are deleted from our server;
@@ -103,8 +108,9 @@ Where data leaves the EU/EEA, we rely on an adequacy decision (such as the EU–
 
 ## 10. Cookies and browser storage
 
-- **`kt_ses`** — a cookie with a random session number. It is set only when you sign in. It is HttpOnly, Secure and SameSite=Lax, and expires after 30 days or when you sign out. It is strictly necessary for the donation account you asked for, so no consent banner is needed.
+- **`kt_ses`** — a cookie with a random session number. It is set only when you sign in (with a wallet or with a donation code). It is HttpOnly, Secure and SameSite=Lax, and expires after 30 days or when you sign out. It is strictly necessary for the donation account you asked for, so no consent banner is needed.
 - **`kt-lang`** (browser local storage) — remembers your interface language. It stays in your browser and is never sent to us.
+- **`kt-anon-code`** (browser local storage) — only if you donate with a code: a copy of your code, so you can see it again on this device. It is sent to us only when you sign in with it. Clearing your browser's data removes it; keep your own copy.
 - **WalletConnect session** (browser local storage) — only if you connect a mobile wallet; remembers that pairing.
 
 No analytics, advertising or tracking cookies are used. You can clear all of this in your browser settings; you will then simply be signed out.

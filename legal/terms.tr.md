@@ -8,7 +8,7 @@ KurdAi Voice (https://kurdishtts.dks.news), Dijital Kurdistan (DKS) / PezkuwiCha
 
 ## 2. Ne sunuyoruz
 - **Sesli okuma:** Kurmancî veya Soranî metin (en çok 600 karakter) → ses.
-- **Ses bağışı (`/bexsh`):** 18 yaş ve üstü kişiler Pezkuwi cüzdanıyla giriş yapar, cümle okur ve başkalarının kayıtlarını kontrol eder.
+- **Ses bağışı (`/bexsh`):** 18 yaş ve üstü kişiler Pezkuwi cüzdanıyla ya da cüzdansız, bir bağış koduyla başlar ve cümle okur. Başkalarının kayıtlarını kontrol etmek cüzdanla giriş gerektirir.
 - **API:** yalnızca bizim verdiğimiz anahtarla (ör. dks.news).
 
 Hizmeti her an değiştirebilir, sınırlayabilir veya durdurabiliriz. Kesintisiz çalışacağına söz vermiyoruz.
@@ -40,10 +40,12 @@ Güvenlik açıklarını security@pex.mom adresine bildir. Aykırı kullanımda 
 - **Başkalarının kayıtlarını dinlerken:** yalnızca kontrol için dinle. Kaydetme, indirme, paylaşma; kimin olduğunu bulmaya çalışma. Dürüst oy ver.
 - Bağış **gönüllü ve ücretsizdir**. Para, token (HEZ/PEZ dahil) veya modelde pay verilmez.
 - Kayıtları reddedebilir veya silebilir, kurallara uymayan adresi engelleyebiliriz.
-- Ayrılmak için **"Kayıtlarımı sil"** düğmesini kullan.
+- Ayrılmak için **"Kayıtlarımı sil"** düğmesini kullan (kodla bağış yaptıysan önce kodla giriş yap).
 
-## 6. Cüzdan
-Giriş, cüzdanınla bir mesaj imzalamaktır. **Kurtarma ifadeni veya özel anahtarını asla istemeyiz.** Zincire hiçbir işlem yazılmaz. Cüzdanının güvenliği senin sorumluluğundadır.
+## 6. Cüzdan veya bağış kodu
+**Bağış kodu.** Cüzdansız bağışta sana bir kez bir kod veririz. Kodu güvenli ve gizli tut: kodu bilen herkes senin yerine giriş yapıp kayıtlarını silebilir. Yalnızca özetini saklarız; **kaybolan kodu geri getiremeyiz**, kod olmadan hangi kayıtların senin olduğunu da bilemeyiz.
+
+**Cüzdan.** Giriş, cüzdanınla bir mesaj imzalamaktır. **Kurtarma ifadeni veya özel anahtarını asla istemeyiz.** Zincire hiçbir işlem yazılmaz. Cüzdanının güvenliği senin sorumluluğundadır.
 
 ## 7. Garanti yok, sorumluluk sınırı
 Hizmet **"olduğu gibi"** sunulur. Sentetik ses hata yapabilir. Tıbbi, hukuki, güvenlik veya acil durum bilgisi için güvenme. Kanunun izin verdiği ölçüde dolaylı zararlardan sorumlu değiliz ve toplam sorumluluğumuz **100 EUR** ile sınırlıdır. Kast, ağır ihmal, ölüm veya yaralanma ile kanunen sınırlanamayan sorumluluklar bu sınırın dışındadır. Veri koruma hakların ve yaşadığın ülkenin emredici tüketici hakları saklıdır.

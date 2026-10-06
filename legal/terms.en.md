@@ -65,7 +65,7 @@ By donating you confirm that:
 - **the voice is your own**, and you read only for yourself. You do not record anyone else, read on someone else's behalf, upload someone else's recording, or use a synthetic or altered voice;
 - no one else can be clearly heard in the background;
 - you read only the sentence shown, and you do not add names, personal information or any other content;
-- you sign in only with a wallet you control.
+- you sign in only with a wallet you control, or with a donation code that was given to you.
 
 ### 5.3 Permission you give us
 
@@ -83,10 +83,10 @@ This permission ends **for the future** when you delete your recordings. It cont
 
 ### 5.4 Checking other donors' recordings
 
-When you review recordings:
+Checking recordings requires signing in with a wallet. When you review recordings:
 
 - **listen only to check them.** Do not record, download, copy, share or publish other donors' recordings, and do not try to find out who made them;
-- vote honestly. Do not coordinate votes or use several wallets.
+- vote honestly. Do not coordinate votes, or use several wallets or donation codes.
 
 Breaking this rule ends your access, and may break the law.
 
@@ -100,11 +100,13 @@ Recordings are checked automatically (length, silence, clipping, reading speed) 
 
 ### 5.7 Leaving
 
-You may stop at any time and delete your recordings with the **"Delete my recordings"** button. The effect is described in the Privacy Policy, section 7.
+You may stop at any time and delete your recordings with the **"Delete my recordings"** button. If you donated with a code, sign in with the code first. The effect is described in the Privacy Policy, section 7.
 
-## 6. Your wallet
+## 6. Your wallet or donation code
 
-You sign in by signing a message with your Pezkuwi wallet. **We never ask for your recovery phrase or private keys — anyone who does is not us.** You are responsible for the security of your wallet. Signing in creates no blockchain transaction and costs nothing.
+**Donation code.** If you donate without a wallet, we give you a donation code once. Keep it safe and private: anyone who has it can sign in as you and delete your recordings. We keep only a hash of it and **cannot recover a lost code**, nor tell which recordings were yours without it.
+
+**Wallet.** You sign in by signing a message with your Pezkuwi wallet. **We never ask for your recovery phrase or private keys — anyone who does is not us.** You are responsible for the security of your wallet. Signing in creates no blockchain transaction and costs nothing.
 
 ## 7. Our content and code
 
