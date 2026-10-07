@@ -86,6 +86,14 @@ CREATE TABLE IF NOT EXISTS vote (
   created INTEGER NOT NULL,
   PRIMARY KEY (clip_id, addr)
 );
+-- How far visitors get on the way to a donation, counted per day and step.
+-- Nothing else: no address, no IP, no session; only how many.
+CREATE TABLE IF NOT EXISTS funnel (
+  day  TEXT NOT NULL,               -- UTC, YYYY-MM-DD
+  step TEXT NOT NULL,
+  n    INTEGER NOT NULL DEFAULT 0,
+  PRIMARY KEY (day, step)
+);
 """
 
 

@@ -167,17 +167,42 @@ label.check input{flex:none; width:20px; height:20px; margin-top:1px; accent-col
   display:grid; place-items:center; text-wrap:balance;}
 .script[dir="rtl"]{font-family:var(--arabic); letter-spacing:0; line-height:1.7;}
 .studio{display:grid; justify-items:center; gap:16px;}
-.rec{position:relative; width:132px; height:132px; border:0; border-radius:50%; cursor:pointer; background:none; padding:0;}
+/* What to do now, in words, above the button. */
+.studio__say{margin:0; max-width:34ch; text-align:center; font:700 17px/1.45 var(--font); color:var(--text);}
+/* The button: the sun disc and, under it, a pill saying what a press does.
+   Green and breathing while it waits; red, with a stop square, while it
+   records. Both parts are one button, so a press anywhere on it counts. */
+.rec{display:grid; justify-items:center; gap:14px; border:0; cursor:pointer; background:none; padding:0; color:var(--text);}
+.rec__disc{position:relative; display:block; width:132px; height:132px;}
 .rec__rays{position:absolute; inset:0; width:100%; height:100%; color:var(--zer); opacity:.35;
   transform:scale(calc(.86 + var(--lvl, 0) * .28)); transition:transform 70ms linear, opacity .2s;}
 .rec__core{position:absolute; inset:28px; border-radius:50%; display:grid; place-items:center;
-  background:var(--sor); color:#fff; box-shadow:0 12px 34px rgba(229,50,42,.35); transition:transform .15s;}
+  background:var(--kesk); color:#04170B; transition:transform .15s; animation:breathe 1.8s ease-out infinite;}
+.rec__label{display:inline-block; padding:13px 26px; border-radius:999px; background:var(--kesk); color:#04170B;
+  font:800 18px/1.1 var(--font); letter-spacing:.01em; text-transform:uppercase; box-shadow:0 10px 30px var(--kesk-glow);}
+[dir="rtl"] .rec__label{text-transform:none;}
 .rec:hover .rec__core{transform:scale(1.04);}
 .rec[aria-pressed="true"] .rec__rays{opacity:1;}
-.rec[aria-pressed="true"] .rec__core{background:#fff; color:var(--sor);}
+.rec[aria-pressed="true"] .rec__core{background:var(--sor); color:#fff; animation:none; box-shadow:0 12px 34px rgba(229,50,42,.45);}
+.rec[aria-pressed="true"] .rec__label{background:var(--sor); color:#fff; box-shadow:0 10px 30px rgba(229,50,42,.35);}
 .rec .ic-stop{display:none;}
 .rec[aria-pressed="true"] .ic-mic{display:none;}
 .rec[aria-pressed="true"] .ic-stop{display:block;}
+@keyframes breathe{0%{box-shadow:0 0 0 0 rgba(29,180,95,.6);} 100%{box-shadow:0 0 0 26px rgba(29,180,95,0);}}
+/* Recording: a red dot and the seconds, so nobody wonders whether it runs. */
+.live{display:none; align-items:center; gap:8px; margin:0; font-weight:800; color:#FF9B95; font-variant-numeric:tabular-nums;}
+.live__dot{width:12px; height:12px; border-radius:50%; background:var(--sor); animation:blink 1s steps(2,start) infinite;}
+@keyframes blink{to{visibility:hidden;}}
+/* Recorded: the big button steps aside for the two choices left. */
+.done{display:none; flex-direction:column; gap:10px; width:min(420px,100%);}
+.done__send{min-height:64px; font-size:20px;}
+.studio[data-state="recording"] .live{display:flex;}
+.studio[data-state="recorded"] .rec,.studio[data-state="sending"] .rec,
+.studio[data-state="recorded"] .wave,.studio[data-state="sending"] .wave{display:none;}
+.studio[data-state="recorded"] .done,.studio[data-state="sending"] .done{display:flex;}
+.linkbtn{border:0; background:none; padding:8px; cursor:pointer; color:var(--text-3); font-size:14px; text-decoration:underline; text-underline-offset:3px;}
+.linkbtn:hover{color:var(--text);}
+.studio:not([data-state="idle"]) .linkbtn{display:none;}
 .wave{width:min(420px,100%); height:56px; display:block;}
 .studio__hint{font-size:14px; color:var(--text-3); text-align:center; margin:0;}
 .actions{display:flex; gap:10px; justify-content:center; flex-wrap:wrap;}
@@ -189,7 +214,44 @@ label.check input{flex:none; width:20px; height:20px; margin-top:1px; accent-col
 .keys kbd{font:600 11.5px/1 ui-monospace,monospace; padding:3px 6px; border:1px solid var(--line-2); border-bottom-width:2px; border-radius:6px; color:var(--text-2);}
 .vote{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:18px;}
 .forget-row{display:flex; justify-content:flex-end; margin-top:22px; padding-top:16px; border-top:1px solid var(--line);}
-@media (prefers-reduced-motion:reduce){.rec__rays{transition:none;}}
+@media (prefers-reduced-motion:reduce){.rec__rays{transition:none;} .rec__core,.live__dot{animation:none;}}
+
+/* ── where am I: the three steps of a donation, always in view ────────── */
+.steps{position:sticky; top:0; z-index:20; display:flex; gap:6px; list-style:none; margin:0 0 16px; padding:6px;
+  border:1px solid var(--line); border-radius:16px; background:rgba(14,20,36,.94); backdrop-filter:blur(8px);}
+.steps li{flex:1; display:flex; align-items:center; justify-content:center; gap:8px; padding:9px 6px; border-radius:11px;
+  color:var(--text-3); font-weight:700; font-size:14px;}
+.steps__n{width:24px; height:24px; flex:none; display:grid; place-items:center; border-radius:50%; background:var(--ink-3); font:800 13px/1 var(--latin);}
+.steps[data-at="1"] li[data-n="1"],.steps[data-at="2"] li[data-n="2"],.steps[data-at="3"] li[data-n="3"]{background:rgba(29,180,95,.16); color:var(--text);}
+.steps[data-at="1"] li[data-n="1"] .steps__n,.steps[data-at="2"] li[data-n="2"] .steps__n,.steps[data-at="3"] li[data-n="3"] .steps__n{background:var(--kesk); color:#04170B;}
+.steps[data-at="2"] li[data-n="1"] .steps__n,.steps[data-at="3"] li[data-n="1"] .steps__n,.steps[data-at="3"] li[data-n="2"] .steps__n{background:var(--kesk-deep); color:#fff;}
+
+/* ── the microphone, asked for under the five boxes ───────────────────── */
+.microw{display:flex; gap:12px; align-items:flex-start; padding:12px 0 4px; border-top:1px solid var(--line); font-size:14.5px; line-height:1.5;}
+.microw__icon{flex:none; width:20px; margin-top:1px; color:var(--zer);}
+.microw__body{display:grid; gap:10px; justify-items:start;}
+.microw__body .msg{margin:0;}
+.microw__ok{display:none; color:#7FE2A6;}
+.microw[data-state="ok"] .microw__icon{color:var(--kesk);}
+.microw[data-state="ok"] .microw__ok{display:block;}
+.microw[data-state="ok"] .microw__btn,.microw[data-state="none"] .microw__btn{display:none;}
+
+/* ── home: the way to donate, first and green; the reader second ──────── */
+.give{display:flex; align-items:center; gap:16px; margin-top:22px; padding:18px 20px; border-radius:20px; text-decoration:none; color:var(--text);
+  background:linear-gradient(110deg, rgba(29,180,95,.30), rgba(29,180,95,.08)); border:2px solid var(--kesk); box-shadow:0 14px 40px var(--kesk-glow);}
+.give:hover{background:linear-gradient(110deg, rgba(29,180,95,.38), rgba(29,180,95,.12));}
+.give__mic{flex:none; width:56px; height:56px; display:grid; place-items:center; border-radius:50%; background:var(--kesk); color:#04170B;}
+.give__text{flex:1; display:grid; gap:4px;}
+.give__text b{font:800 21px/1.2 var(--font);}
+.give__text span{color:var(--text-2); font-size:14.5px; line-height:1.5;}
+.give__go{flex:none;}
+@media (max-width:560px){ .give{flex-wrap:wrap; padding:16px;} .give__go{width:100%;} }
+.hero--tool{padding-block:30px 18px;}
+.hero--tool h1{max-width:22ch; font-size:clamp(26px,4.4vw,38px);}
+.toolnote{margin:0 0 4px; padding:12px 14px; border-radius:12px; font-size:14.5px; line-height:1.55;
+  background:rgba(246,185,48,.10); border:1px solid rgba(246,185,48,.35); color:var(--text);}
+.nav a.nav__give{background:var(--kesk); color:#04170B;}
+.nav a.nav__give:hover{background:#27C86C; color:#04170B;}
 
 /* ── wallet sheet ─────────────────────────────────────────────────────── */
 .sheet{position:fixed; inset:0; z-index:50; display:grid; place-items:center; padding:16px; background:rgba(3,4,8,.72); backdrop-filter:blur(6px);}

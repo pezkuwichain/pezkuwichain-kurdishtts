@@ -13,6 +13,12 @@
     <p data-t="dLead"></p>
   </section>
 
+  <ol class="steps" id="steps" data-at="1">
+    <li data-n="1"><span class="steps__n">1</span><span data-t="stepStart"></span></li>
+    <li data-n="2"><span class="steps__n">2</span><span data-t="stepConsent"></span></li>
+    <li data-n="3"><span class="steps__n">3</span><span data-t="stepRead"></span></li>
+  </ol>
+
   <section class="panel" aria-live="polite">
     <div class="goal">
       {% for d in ['kmr', 'ckb'] %}
@@ -73,6 +79,15 @@
       <h3 id="consentTitle"></h3>
       <p id="consentPara"></p>
       <div id="consentBoxes"></div>
+      <div class="microw" id="micRow" data-state="ask">
+        <span class="microw__icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 1 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-2.08A7 7 0 0 0 19 12h-2z"/></svg></span>
+        <div class="microw__body">
+          <span data-t="micWhy"></span>
+          <button type="button" class="btn btn--sm microw__btn" id="micBtn" data-t="micAllow"></button>
+          <b class="microw__ok" data-t="micReady"></b>
+          <p class="msg msg--bad" id="micHelp" hidden></p>
+        </div>
+      </div>
       <a class="note" href="/terms" id="consentTerms"></a>
     </div>
     <script type="application/json" id="consentData">{{ consent_json | safe }}</script>
@@ -90,23 +105,29 @@
     </div>
     <div id="panelRecord" role="tabpanel">
       <div class="script" id="sentence" aria-live="polite">…</div>
-      <div class="studio">
-        <button type="button" class="rec" id="rec" aria-pressed="false" data-t-aria="tabRecord">
-          {% include "_recrays.html" %}
-          <span class="rec__core">
-            <svg class="ic-mic" width="38" height="38" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 1 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-2.08A7 7 0 0 0 19 12h-2z"/></svg>
-            <svg class="ic-stop" width="30" height="30" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2.5"/></svg>
+      <!-- One big button, four states (idle, recording, recorded, sending):
+           the words on it and around it always say what to do next. -->
+      <div class="studio" id="studio" data-state="idle">
+        <p class="studio__say" id="studioSay" aria-live="polite"></p>
+        <button type="button" class="rec" id="rec" aria-pressed="false">
+          <span class="rec__disc">
+            {% include "_recrays.html" %}
+            <span class="rec__core">
+              <svg class="ic-mic" width="38" height="38" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 1 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-2.08A7 7 0 0 0 19 12h-2z"/></svg>
+              <svg class="ic-stop" width="30" height="30" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2.5"/></svg>
+            </span>
           </span>
+          <span class="rec__label" id="recLabel"></span>
         </button>
+        <p class="live"><i class="live__dot" aria-hidden="true"></i><span data-t="recNow"></span> · <span class="live__t" id="timer" dir="ltr">0:00</span></p>
         <canvas class="wave" id="wave" width="840" height="112" aria-hidden="true"></canvas>
-        <p class="studio__hint" data-t="tapRecord"></p>
         <audio id="play" controls hidden></audio>
-        <div class="actions">
-          <button type="button" class="btn btn--ghost" id="again" hidden data-t="again">Dîsa</button>
-          <button type="button" class="btn" id="send" hidden data-t="send">Bişîne</button>
-          <button type="button" class="btn btn--quiet" id="skip" data-t="skip">Derbas bike</button>
+        <div class="done">
+          <button type="button" class="btn btn--block done__send" id="send" data-t="send">Bişîne</button>
+          <button type="button" class="btn btn--ghost" id="again" data-t="again">Dîsa</button>
         </div>
         <p class="msg" id="rmsg" hidden></p>
+        <button type="button" class="linkbtn" id="skip" data-t="skipSentence">Derbas bike</button>
         <p class="keys"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="2.5" y="6" width="19" height="12" rx="2.5"/><path d="M6.5 10h1M10.5 10h1M14.5 10h1M8 14h8" stroke-linecap="round"/></svg><kbd>R</kbd> <span data-t="keyRec"></span> &nbsp; <kbd>Enter</kbd> <span data-t="keySend"></span> &nbsp; <kbd>N</kbd> <span data-t="keySkip"></span></p>
       </div>
     </div>

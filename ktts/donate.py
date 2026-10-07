@@ -343,3 +343,26 @@ def stats(kt_ses: str | None = Cookie(None)):
             votes = db.execute("SELECT COUNT(*) FROM vote WHERE addr=?", (s["addr"],)).fetchone()[0]
             out["me"] = {"clips": mine[0], "minutes": round(mine[1] / 60, 1), "votes": votes}
     return out
+
+
+# ── the way to a donation, counted ─────────────────────────────────────────
+# Where do people stop? The page sends each step once per browser tab; the
+# server adds one to that day's count. No identity is stored, not even the IP
+# (it only feeds the in-memory rate limit). Read with tools/funnel.py.
+FUNNEL_STEPS = ("visit", "start", "consent", "first_rec", "sent")
+
+
+class FunnelIn(BaseModel):
+    step: str
+
+
+@router.post("/api/funnel")
+def funnel(body: FunnelIn, request: Request):
+    if body.step not in FUNNEL_STEPS:
+        raise HTTPException(400, "STEP")
+    auth.limit("funnel:" + auth.client_ip(request), 60)
+    day = time.strftime("%Y-%m-%d", time.gmtime())
+    with STATE["store"].db() as db:
+        db.execute("INSERT INTO funnel (day, step, n) VALUES (?,?,1) "
+                   "ON CONFLICT(day, step) DO UPDATE SET n = n + 1", (day, body.step))
+    return {"ok": True}
