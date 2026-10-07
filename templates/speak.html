@@ -8,12 +8,18 @@
 <body data-page="speak">
 {% include "_header.html" %}
 <main class="wrap">
-  <section class="hero">
+  <a class="give" href="/bexsh">
+    <span class="give__mic" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 1 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-2.08A7 7 0 0 0 19 12h-2z"/></svg></span>
+    <span class="give__text"><b data-t="giveTitle"></b><span data-t="giveLead"></span></span>
+    <span class="btn give__go" data-t="giveGo"></span>
+  </a>
+  <section class="hero hero--tool">
     <h1 data-t="speakTitle">Nivîsa Kurdî bi deng bixwîne</h1>
     <p data-t="speakLead"></p>
   </section>
   <section class="panel">
     {% include "_dialects.html" %}
+    <p class="toolnote" data-t="toolNote"></p>
     <div class="field-head"><label for="txt" data-t="yourText">Nivîsa te</label><span class="note" id="count"></span></div>
     <textarea id="txt" maxlength="600"></textarea>
     <button type="button" class="btn btn--block mt-16" id="go" data-t="read">Bixwîne</button>
@@ -109,8 +115,8 @@
       <p data-t="ctaText"></p>
     </div>
     <div class="cta__acts">
-      <a class="btn" href="#txt" data-t="ctaTry"></a>
-      <a class="btn btn--ghost" href="/bexsh" data-t="navDonate">Dengê xwe bexşîne</a>
+      <a class="btn" href="/bexsh" data-t="navDonate">Dengê xwe bexşîne</a>
+      <a class="btn btn--ghost" href="#txt" data-t="ctaTry"></a>
       <a class="cta__link" href="/developers" data-t="navDevLong"></a>
     </div>
   </section>

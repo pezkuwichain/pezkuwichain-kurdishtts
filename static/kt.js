@@ -19,7 +19,7 @@
     signIn:     { kmr: 'Bi cuzdanê têkeve', ckb: 'بە جزدان بچۆ ژوورەوە', tr: 'Cüzdanla giriş', en: 'Sign in with wallet', fa: 'ورود با کیف پول', ar: 'الدخول بالمحفظة' },
     signOut:    { kmr: 'Derkeve', ckb: 'چوونەدەرەوە', tr: 'Çıkış', en: 'Sign out', fa: 'خروج', ar: 'خروج' },
     // read aloud
-    speakTitle: { kmr: 'Nivîsa Kurdî bi deng bixwîne', ckb: 'دەقی کوردی بە دەنگ بخوێنەرەوە', tr: 'Kürtçe metni sesli oku', en: 'Read Kurdish text aloud', fa: 'متن کردی را با صدا بخوان', ar: 'اقرأ النص الكردي بصوت عالٍ' },
+    speakTitle:  { kmr: 'Biceribîne: bila zekaya çêkirî nivîsa te bixwîne', ckb: 'تاقی بکەرەوە: با زیرەکی دەستکرد دەقەکەت بخوێنێتەوە', tr: 'Dene: yazdığın metni yapay zekâ seslendirsin', en: 'Try it: let the AI read your text aloud', fa: 'امتحان کن: بگذار هوش مصنوعی متنت را بخواند', ar: 'جرّب: دع الذكاء الاصطناعي يقرأ نصّك' },
     speakLead:  { kmr: 'Kurmancî an Soranî binivîse, em ê bixwînin. Ev deng hîn ne yê me ye: dema ku têra xwe deng bên bexşîn, dengê neteweya Kurd dê bibe dengê vê malperê.',
                   ckb: 'بە کورمانجی یان سۆرانی بنووسە، ئێمە دەیخوێنینەوە. ئەم دەنگە هێشتا هی ئێمە نییە: کاتێک دەنگی پێویست ببەخشرێت، دەنگی نەتەوەی کورد دەبێتە دەنگی ئەم ماڵپەڕە.',
                   tr: 'Kurmancî ya da Soranî yazın, okuyalım. Bu ses henüz bizim değil: yeterince ses bağışlandığında Kurd ulusunun sesi bu sitenin sesi olacak.',
@@ -58,8 +58,8 @@
     tabRecord:  { kmr: 'Tomar bike', ckb: 'تۆمار بکە', tr: 'Kaydet', en: 'Record', fa: 'ضبط', ar: 'سجّل' },
     tabReview:  { kmr: 'Guhdarî bike û bipejirîne', ckb: 'گوێ بگرە و پەسەندی بکە', tr: 'Dinle ve doğrula', en: 'Listen and check', fa: 'گوش بده و تأیید کن', ar: 'استمع وتحقّق' },
     tapRecord:  { kmr: 'Bitikîne, hevokê bixwîne, dîsa bitikîne', ckb: 'دەست لێبدە، ڕستەکە بخوێنەوە، دووبارە دەست لێبدە', tr: 'Bas, cümleyi oku, tekrar bas', en: 'Tap, read the sentence, tap again', fa: 'بزن، جمله را بخوان، دوباره بزن', ar: 'اضغط، اقرأ الجملة، اضغط مجددًا' },
-    again:      { kmr: 'Dîsa', ckb: 'دووبارە', tr: 'Tekrar', en: 'Again', fa: 'دوباره', ar: 'مرة أخرى' },
-    send:       { kmr: 'Bişîne', ckb: 'بینێرە', tr: 'Gönder', en: 'Send', fa: 'ارسال', ar: 'أرسل' },
+    again:       { kmr: '↺ Ji nû ve bixwîne', ckb: '↺ دووبارە بیخوێنەوە', tr: '↺ Yeniden oku', en: '↺ Read it again', fa: '↺ دوباره بخوان', ar: '↺ اقرأها مجددًا' },
+    send:        { kmr: '✓ Bişîne', ckb: '✓ بینێرە', tr: '✓ Gönder', en: '✓ Send', fa: '✓ ارسال', ar: '✓ أرسل' },
     skip:       { kmr: 'Derbas bike', ckb: 'تێپەڕێنە', tr: 'Geç', en: 'Skip', fa: 'رد شو', ar: 'تخطَّ' },
     thanks:     { kmr: 'Spas! Tomar hat wergirtin.', ckb: 'سوپاس! تۆمارەکە وەرگیرا.', tr: 'Teşekkürler! Kayıt alındı.', en: 'Thank you! Recording received.', fa: 'سپاس! ضبط دریافت شد.', ar: 'شكرًا! تم استلام التسجيل.' },
     matches:    { kmr: 'Rast e', ckb: 'ڕاستە', tr: 'Doğru', en: 'It matches', fa: 'درست است', ar: 'مطابق' },
@@ -69,14 +69,14 @@
     mine:       { kmr: 'Tomarên te', ckb: 'تۆمارەکانت', tr: 'Kayıtların', en: 'Your recordings', fa: 'ضبط‌های تو', ar: 'تسجيلاتك' },
     minutes:    { kmr: 'deqîqe', ckb: 'خولەک', tr: 'dakika', en: 'minutes', fa: 'دقیقه', ar: 'دقيقة' },
     votes:      { kmr: 'pejirandin', ckb: 'پەسەندکردن', tr: 'doğrulama', en: 'checks', fa: 'بررسی', ar: 'تحقّق' },
-    micDenied:  { kmr: 'Destûra mîkrofonê nehat dayîn. Di mîhengên gerokê de destûrê bide.', ckb: 'ڕێگەی مایکرۆفۆن نەدرا. لە ڕێکخستنەکانی وێبگەڕدا ڕێگە بدە.', tr: 'Mikrofon izni verilmedi. Tarayıcı ayarlarından izin ver.', en: 'Microphone permission was refused. Allow it in your browser settings.', fa: 'اجازه میکروفون داده نشد. در تنظیمات مرورگر اجازه دهید.', ar: 'رُفض إذن الميكروفون. اسمح به من إعدادات المتصفح.' },
+    micDenied:   { kmr: 'Mîkrofon hat astengkirin. Li kêleka navnîşanê nîşana qeflê (🔒) bitikîne → Mîkrofon → Destûr bide. Paşê rûpelê nû bike.', ckb: 'مایکرۆفۆن بلۆک کراوە. نیشانەی قوفڵ (🔒) لە تەنیشت ناونیشانەکە دابگرە ← مایکرۆفۆن ← ڕێگە بدە. پاشان پەڕەکە نوێ بکەرەوە.', tr: 'Mikrofon engellendi. Adres çubuğundaki kilit (🔒) simgesine bas → Mikrofon → İzin ver. Sonra sayfayı yenile.', en: 'The microphone is blocked. Tap the lock (🔒) next to the address → Microphone → Allow. Then reload the page.', fa: 'میکروفون مسدود است. نماد قفل (🔒) کنار نشانی را بزن ← میکروفون ← اجازه. سپس صفحه را دوباره بارگذاری کن.', ar: 'الميكروفون محظور. اضغط القفل (🔒) بجانب العنوان ← الميكروفون ← سماح. ثم أعد تحميل الصفحة.' },
     // machine checks, by code
-    TOO_SHORT:  { kmr: 'Tomar pir kurt e.', ckb: 'تۆمارەکە زۆر کورتە.', tr: 'Kayıt çok kısa.', en: 'The recording is too short.', fa: 'ضبط خیلی کوتاه است.', ar: 'التسجيل قصير جدًا.' },
-    TOO_LONG:   { kmr: 'Tomar pir dirêj e.', ckb: 'تۆمارەکە زۆر درێژە.', tr: 'Kayıt çok uzun.', en: 'The recording is too long.', fa: 'ضبط خیلی طولانی است.', ar: 'التسجيل طويل جدًا.' },
-    TOO_QUIET:  { kmr: 'Deng pir nizm e — nêzîkî mîkrofonê bibe.', ckb: 'دەنگەکە زۆر نزمە — لە مایکرۆفۆنەکە نزیک ببەوە.', tr: 'Ses çok kısık — mikrofona yaklaş.', en: 'Too quiet — move closer to the microphone.', fa: 'صدا خیلی آرام است — به میکروفون نزدیک‌تر شوید.', ar: 'الصوت خافت جدًا — اقترب من الميكروفون.' },
-    SILENT:     { kmr: 'Tu deng nehat bihîstin.', ckb: 'هیچ دەنگێک نەبیسترا.', tr: 'Ses duyulmadı.', en: 'No voice was heard.', fa: 'صدایی شنیده نشد.', ar: 'لم يُسمع أي صوت.' },
-    CLIPPING:   { kmr: 'Deng pir bilind e û xera bûye — hinekî dûr bikeve.', ckb: 'دەنگەکە زۆر بەرزە و تێکچووە — کەمێک دوور بکەوەوە.', tr: 'Ses çok yüksek ve bozulmuş — biraz uzaklaş.', en: 'Too loud and distorted — move back a little.', fa: 'صدا خیلی بلند و مخدوش است — کمی فاصله بگیرید.', ar: 'الصوت عالٍ ومشوّه — ابتعد قليلًا.' },
-    PACE:       { kmr: 'Dirêjahiya tomarê li gorî hevokê nayê — tenê hevokê bixwîne.', ckb: 'درێژیی تۆمارەکە لەگەڵ ڕستەکە ناگونجێت — تەنها ڕستەکە بخوێنەوە.', tr: 'Kayıt süresi cümleye uymuyor — yalnızca cümleyi oku.', en: 'The length does not fit the sentence — read just the sentence.', fa: 'طول ضبط با جمله جور نیست — فقط جمله را بخوانید.', ar: 'المدة لا تناسب الجملة — اقرأ الجملة فقط.' },
+    TOO_SHORT:   { kmr: 'Pir kurt bû — hevokê hemûyî bixwîne, paşê bitikîne.', ckb: 'زۆر کورت بوو — هەموو ڕستەکە بخوێنەوە، پاشان دابگرە.', tr: 'Çok kısa oldu — cümlenin tamamını oku, sonra bas.', en: 'Too short — read the whole sentence, then tap.', fa: 'خیلی کوتاه بود — کل جمله را بخوان، بعد بزن.', ar: 'قصير جدًا — اقرأ الجملة كاملة ثم اضغط.' },
+    TOO_LONG:    { kmr: 'Pir dirêj bû — gava hevok qediya, yekser bitikîne.', ckb: 'زۆر درێژ بوو — کە ڕستەکە تەواو بوو، یەکسەر دابگرە.', tr: 'Çok uzun oldu — cümle bitince hemen bas.', en: 'Too long — tap as soon as you finish the sentence.', fa: 'خیلی طولانی بود — به محض تمام شدن جمله بزن.', ar: 'طويل جدًا — اضغط فور انتهاء الجملة.' },
+    TOO_QUIET:   { kmr: 'Dengê te pir nizm e — telefonê nêzîkî devê xwe bike û dîsa biceribîne.', ckb: 'دەنگت زۆر نزمە — مۆبایلەکە لە دەمت نزیک بکەرەوە و دووبارە هەوڵ بدەرەوە.', tr: 'Sesin çok kısık — telefonu ağzına yaklaştır ve tekrar dene.', en: 'Too quiet — hold the phone closer to your mouth and try again.', fa: 'صدایت خیلی آرام است — گوشی را به دهانت نزدیک کن و دوباره امتحان کن.', ar: 'صوتك خافت جدًا — قرّب الهاتف من فمك وحاول مجددًا.' },
+    SILENT:      { kmr: 'Tu deng nehat bihîstin — bitikîne û bi dengekî bilind bixwîne.', ckb: 'هیچ دەنگێک نەبیسترا — دابگرە و بە دەنگی بەرز بخوێنەوە.', tr: 'Hiç ses duyulmadı — düğmeye bas ve yüksek sesle oku.', en: 'No voice was heard — tap the button and read out loud.', fa: 'صدایی شنیده نشد — دکمه را بزن و بلند بخوان.', ar: 'لم يُسمع صوت — اضغط الزر واقرأ بصوت عالٍ.' },
+    CLIPPING:    { kmr: 'Deng pir bilind bû û xera bû — telefonê hinekî dûr bike û dîsa biceribîne.', ckb: 'دەنگەکە زۆر بەرز بوو و تێکچوو — مۆبایلەکە کەمێک دوور بخەرەوە و دووبارە هەوڵ بدەرەوە.', tr: 'Ses çok yüksek, bozuldu — telefonu biraz uzaklaştır ve tekrar dene.', en: 'Too loud and distorted — hold the phone a little further away and try again.', fa: 'صدا خیلی بلند و مخدوش شد — گوشی را کمی دورتر بگیر و دوباره امتحان کن.', ar: 'الصوت عالٍ ومشوّه — أبعد الهاتف قليلًا وحاول مجددًا.' },
+    PACE:        { kmr: 'Tomar li hevokê nayê — tenê vê hevokê bixwîne, paşê yekser bitikîne.', ckb: 'تۆمارەکە لەگەڵ ڕستەکە ناگونجێت — تەنها ئەم ڕستەیە بخوێنەوە، پاشان یەکسەر دابگرە.', tr: 'Kayıt cümleye uymuyor — yalnızca bu cümleyi oku, sonra hemen bas.', en: 'The recording does not fit the sentence — read only this sentence, then tap right away.', fa: 'ضبط با جمله جور نیست — فقط همین جمله را بخوان، بعد فوراً بزن.', ar: 'التسجيل لا يناسب الجملة — اقرأ هذه الجملة فقط ثم اضغط فورًا.' },
     DAILY_LIMIT:{ kmr: 'Ji bo îro têra xwe! Sibê dîsa were.', ckb: 'بۆ ئەمڕۆ بەسە! سبەی بگەڕێوە.', tr: 'Bugünlük yeter! Yarın tekrar gel.', en: 'Enough for today! Come back tomorrow.', fa: 'برای امروز کافی است! فردا برگرد.', ar: 'يكفي لليوم! عد غدًا.' },
     FAILED:     { kmr: 'Tiştek xelet çû. Dîsa biceribîne.', ckb: 'هەڵەیەک ڕوویدا. دووبارە هەوڵ بدەرەوە.', tr: 'Bir şeyler ters gitti. Tekrar dene.', en: 'Something went wrong. Try again.', fa: 'مشکلی پیش آمد. دوباره تلاش کنید.', ar: 'حدث خطأ. حاول مجددًا.' },
     // wallet
@@ -299,6 +299,28 @@
     RATE:       { kmr: 'Pir hewl hatin dayîn. Piştî demekê dîsa biceribîne.', ckb: 'هەوڵی زۆر درا. دوای ماوەیەک دووبارە هەوڵ بدەرەوە.', tr: 'Çok fazla deneme yapıldı. Biraz sonra tekrar dene.', en: 'Too many attempts. Try again a little later.', fa: 'تلاش‌های زیادی شد. کمی بعد دوباره امتحان کن.', ar: 'محاولات كثيرة جدًا. حاول مجددًا بعد قليل.' },
     WALLET_NEEDED:{ kmr: 'Ji bo vê cuzdan pêwîst e.', ckb: 'بۆ ئەمە جزدان پێویستە.', tr: 'Bunun için cüzdan gerekiyor.', en: 'This needs a wallet.', fa: 'این کار کیف پول می‌خواهد.', ar: 'هذا يتطلّب محفظة.' },
     wPreparing: { kmr: 'Girêdan tê amadekirin…', ckb: 'پەیوەندی ئامادە دەکرێت…', tr: 'Bağlantı hazırlanıyor…', en: 'Preparing the connection…', fa: 'در حال آماده‌سازی اتصال…', ar: 'جارٍ تجهيز الاتصال…' },
+    // the way in, made plain (2026-10-07)
+    giveTitle:   { kmr: 'Dengê xwe bexşîne', ckb: 'دەنگت ببەخشە', tr: 'Sesini bağışla', en: 'Donate your voice', fa: 'صدایت را اهدا کن', ar: 'تبرّع بصوتك' },
+    giveLead:    { kmr: '3 gav, 2 deqîqe. Çend hevokan bixwîne; em dengê Kurdî yê zekaya çêkirî bi hev re ava bikin.', ckb: '٣ هەنگاو، ٢ خولەک. چەند ڕستەیەک بخوێنەوە؛ پێکەوە دەنگی کوردیی زیرەکی دەستکرد بنیات دەنێین.', tr: '3 adım, 2 dakika. Birkaç cümle oku; Kürtçenin yapay zekâ sesini birlikte kuralım.', en: '3 steps, 2 minutes. Read a few sentences and help build the Kurdish AI voice.', fa: '۳ گام، ۲ دقیقه. چند جمله بخوان؛ با هم صدای کردیِ هوش مصنوعی را بسازیم.', ar: '٣ خطوات، دقيقتان. اقرأ بضع جمل ولنبنِ معًا الصوت الكردي للذكاء الاصطناعي.' },
+    giveGo:      { kmr: 'Dest pê bike →', ckb: 'دەست پێبکە ←', tr: 'Başla →', en: 'Start →', fa: 'شروع ←', ar: 'ابدأ ←' },
+    toolNote:    { kmr: 'Ev amûreke xwendinê ye: tiştê tu dinivîsî zekaya çêkirî dixwîne, li vir tomar nayê kirin. Ji bo bexşandina dengê xwe, bişkoka kesk a li jor bitikîne.', ckb: 'ئەمە ئامرازێکی خوێندنەوەیە: ئەوەی دەینووسیت زیرەکی دەستکرد دەیخوێنێتەوە، لێرە تۆمار ناکرێت. بۆ بەخشینی دەنگت، دوگمە سەوزەکەی سەرەوە دابگرە.', tr: 'Bu bir okuma aracıdır: yazdığını yapay zekâ okur, burada kayıt yapılmaz. Sesini bağışlamak için yukarıdaki yeşil düğmeye bas.', en: 'This is a reading tool: the AI reads what you type, nothing is recorded here. To donate your voice, press the green button above.', fa: 'این یک ابزار خواندن است: هوش مصنوعی آنچه می‌نویسی را می‌خواند و اینجا چیزی ضبط نمی‌شود. برای اهدای صدایت، دکمهٔ سبز بالا را بزن.', ar: 'هذه أداة قراءة: يقرأ الذكاء الاصطناعي ما تكتبه، ولا يُسجَّل شيء هنا. للتبرّع بصوتك اضغط الزر الأخضر في الأعلى.' },
+    stepStart:   { kmr: 'Dest pê bike', ckb: 'دەستپێک', tr: 'Başla', en: 'Start', fa: 'شروع', ar: 'البدء' },
+    stepConsent: { kmr: 'Razîbûn', ckb: 'ڕەزامەندی', tr: 'Onay', en: 'Consent', fa: 'رضایت', ar: 'الموافقة' },
+    stepRead:    { kmr: 'Bixwîne', ckb: 'بخوێنەوە', tr: 'Oku', en: 'Read', fa: 'بخوان', ar: 'اقرأ' },
+    micWhy:      { kmr: 'Ji bo tomarê mîkrofon pêwîst e. Telefon dê destûrê bixwaze: “Destûr bide” bitikîne.', ckb: 'بۆ تۆمارکردن مایکرۆفۆن پێویستە. مۆبایلەکەت ڕێگە داوا دەکات: «ڕێگە بدە» دابگرە.', tr: 'Kayıt için mikrofon gerekiyor. Telefonun izin isteyecek: “İzin ver”e bas.', en: 'Recording needs the microphone. Your phone will ask: press “Allow”.', fa: 'برای ضبط به میکروفون نیاز است. گوشی اجازه می‌خواهد: «اجازه دادن» را بزن.', ar: 'التسجيل يحتاج إلى الميكروفون. سيطلب هاتفك الإذن: اضغط «سماح».' },
+    micAllow:    { kmr: '🎙 Destûra mîkrofonê bide', ckb: '🎙 ڕێگە بە مایکرۆفۆن بدە', tr: '🎙 Mikrofona izin ver', en: '🎙 Allow the microphone', fa: '🎙 اجازه به میکروفون', ar: '🎙 اسمح بالميكروفون' },
+    micReady:    { kmr: '✓ Mîkrofon amade ye', ckb: '✓ مایکرۆفۆن ئامادەیە', tr: '✓ Mikrofon hazır', en: '✓ Microphone ready', fa: '✓ میکروفون آماده است', ar: '✓ الميكروفون جاهز' },
+    needMic:     { kmr: 'Destûra mîkrofonê bide.', ckb: 'ڕێگە بە مایکرۆفۆن بدە.', tr: 'Mikrofona izin ver.', en: 'Allow the microphone.', fa: 'به میکروفون اجازه بده.', ar: 'اسمح بالميكروفون.' },
+    micUnsupported: { kmr: 'Ev gerok nikare tomar bike. Rûpelê di Chrome an Safariyê de veke.', ckb: 'ئەم وێبگەڕە ناتوانێت تۆمار بکات. پەڕەکە لە Chrome یان Safari بکەرەوە.', tr: 'Bu tarayıcı kayıt yapamıyor. Sayfayı Chrome ya da Safari’de aç.', en: 'This browser cannot record. Open the page in Chrome or Safari.', fa: 'این مرورگر نمی‌تواند ضبط کند. صفحه را در Chrome یا Safari باز کن.', ar: 'هذا المتصفح لا يستطيع التسجيل. افتح الصفحة في Chrome أو Safari.' },
+    recNow:      { kmr: 'Tê tomarkirin', ckb: 'تۆمار دەکرێت', tr: 'Kayıt yapılıyor', en: 'Recording', fa: 'در حال ضبط', ar: 'جارٍ التسجيل' },
+    recGo:       { kmr: 'Bitikîne û bixwîne', ckb: 'دابگرە و بخوێنەوە', tr: 'Bas ve konuş', en: 'Tap and speak', fa: 'بزن و بخوان', ar: 'اضغط وتكلّم' },
+    recStop:     { kmr: 'Dema qediya bitikîne', ckb: 'کە تەواو بوو دابگرە', tr: 'Bitince bas', en: 'Tap when done', fa: 'تمام شد؟ بزن', ar: 'اضغط عند الانتهاء' },
+    sayIdle:     { kmr: 'Pêşî bişkokê bitikîne, paşê hevoka li jor bi dengekî bilind bixwîne.', ckb: 'سەرەتا دوگمەکە دابگرە، پاشان ڕستەکەی سەرەوە بە دەنگی بەرز بخوێنەوە.', tr: 'Önce düğmeye bas, sonra yukarıdaki cümleyi yüksek sesle oku.', en: 'First tap the button, then read the sentence above out loud.', fa: 'اول دکمه را بزن، بعد جملهٔ بالا را بلند بخوان.', ar: 'اضغط الزر أولًا، ثم اقرأ الجملة أعلاه بصوت عالٍ.' },
+    sayRec:      { kmr: 'Niha bixwîne. Dema qediya, bişkoka sor bitikîne.', ckb: 'ئێستا بخوێنەوە. کە تەواو بوو، دوگمە سوورەکە دابگرە.', tr: 'Şimdi oku. Bitince kırmızı düğmeye bas.', en: 'Read now. When you finish, tap the red button.', fa: 'حالا بخوان. وقتی تمام شد، دکمهٔ قرمز را بزن.', ar: 'اقرأ الآن. عند الانتهاء اضغط الزر الأحمر.' },
+    sayDone:     { kmr: 'Tomara te amade ye. Guhdarî bike; heke baş e, bişîne.', ckb: 'تۆمارەکەت ئامادەیە. گوێی لێ بگرە؛ ئەگەر باشە، بینێرە.', tr: 'Kaydın hazır. Dinle, beğendiysen gönder.', en: 'Your recording is ready. Listen, and send it if it sounds right.', fa: 'ضبطت آماده است. گوش بده و اگر خوب است بفرست.', ar: 'تسجيلك جاهز. استمع إليه، وأرسله إن كان جيدًا.' },
+    saySending:  { kmr: 'Tê şandin…', ckb: 'دەنێردرێت…', tr: 'Gönderiliyor…', en: 'Sending…', fa: 'در حال ارسال…', ar: 'جارٍ الإرسال…' },
+    thanksN:     { kmr: '✓ Spas! Te {n} hevok xwendin. Ya din li jor e.', ckb: '✓ سوپاس! {n} ڕستەت خوێندەوە. دانەی داهاتوو لە سەرەوەیە.', tr: '✓ Teşekkürler! {n} cümle okudun. Sıradaki yukarıda.', en: '✓ Thank you! You have read {n} sentences. The next one is above.', fa: '✓ سپاس! {n} جمله خواندی. جملهٔ بعدی بالاست.', ar: '✓ شكرًا! قرأت {n} جملة. الجملة التالية في الأعلى.' },
+    skipSentence: { kmr: 'Vê hevokê derbas bike', ckb: 'ئەم ڕستەیە تێپەڕێنە', tr: 'Bu cümleyi atla', en: 'Skip this sentence', fa: 'از این جمله بگذر', ar: 'تخطَّ هذه الجملة' },
     retry:      { kmr: 'Dîsa biceribîne', ckb: 'دووبارە هەوڵ بدەرەوە', tr: 'Tekrar dene', en: 'Try again', fa: 'دوباره امتحان کن', ar: 'حاول مجددًا' }
   };
 
@@ -545,6 +567,17 @@
     sample();
   }
 
+  // ── how far people get, counted per day and step and nothing else ──────
+  // Once per step per tab; see /api/funnel. A lost count is no loss.
+  function track(step) {
+    try { if (sessionStorage.getItem('kt-f-' + step)) return; sessionStorage.setItem('kt-f-' + step, '1'); } catch (e) { /* private mode */ }
+    var body = JSON.stringify({ step: step });
+    try {
+      if (navigator.sendBeacon && navigator.sendBeacon('/api/funnel', new Blob([body], { type: 'application/json' }))) return;
+      fetch('/api/funnel', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: body, keepalive: true }).catch(function () {});
+    } catch (e) { /* never in the way of a donation */ }
+  }
+
   // ── page: donate ─────────────────────────────────────────────────────────
   function donatePage() {
     var GOAL_H = 50;
@@ -564,19 +597,22 @@
           me.querySelector('[data-k="m"]').textContent = r.json.me.minutes; me.querySelector('[data-k="v"]').textContent = r.json.me.votes; }
       });
     }
-    var codeCard = document.getElementById('codeCard'), pendingCode = null;
+    var codeCard = document.getElementById('codeCard'), pendingCode = null, steps = document.getElementById('steps');
+    var canRecord = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia && window.MediaRecorder);
+    track('visit');
     function show() {
       codeCard.hidden = !pendingCode;
       gate.hidden = !!session.addr || !!pendingCode;
       var ready = session.speaker && session.speaker.consent_version === prof.dataset.consent && session.speaker.dialect;
       prof.hidden = !session.addr || !!ready || !!pendingCode;
       work.hidden = !ready || !!pendingCode;
+      steps.dataset.at = ready && !pendingCode ? '3' : session.addr && !pendingCode ? '2' : '1';
       document.getElementById('showCode').hidden = !(session.anon && keptCode());
       if (ready && !work.dataset.started) { work.dataset.started = '1'; nextSentence(); }
       stats();
     }
     document.addEventListener('kt-session', show);
-    document.getElementById('gateBtn').addEventListener('click', openSheet);
+    document.getElementById('gateBtn').addEventListener('click', function () { track('start'); openSheet(); });
 
     // ── the anonymous way in: a code instead of a wallet ──
     // The code is shown once by the server and kept in this browser for
@@ -596,7 +632,7 @@
     }
     document.getElementById('anonBtn').addEventListener('click', function () {
       var b = this, msg = document.getElementById('anonMsg');
-      b.disabled = true; msg.hidden = true;
+      b.disabled = true; msg.hidden = true; track('start');
       api('POST', '/api/c/anon/start').then(function (r) {
         b.disabled = false;
         if (!r.ok) return codeError(msg, r);
@@ -679,17 +715,43 @@
       var missing = [];
       if (!pdialect) missing.push(say('needDialect'));
       if (boxes.length !== 5 || boxes.some(function (b) { return !b.checked; })) missing.push(say('needConsent'));
+      if (!micOk) missing.push(say('needMic'));
       startBtn.disabled = missing.length > 0;
       hint.textContent = missing.join(' ');
       hint.hidden = !missing.length;
     }
-    document.addEventListener('kt-lang', function () { paintConsent(); check(); });
+    // The sixth step under the five boxes: the microphone. Not a box to tick
+    // and not part of the consent record (still five answers), but asked here
+    // so that the first press on the record button records instead of opening
+    // a permission prompt, and so a refusal is explained before step 3.
+    var micRow = document.getElementById('micRow'), micHelp = document.getElementById('micHelp'), micOk = false;
+    function micState(st) {
+      micOk = st === 'ok';
+      micRow.dataset.state = st;
+      micHelp.textContent = say(st === 'none' ? 'micUnsupported' : 'micDenied');
+      micHelp.hidden = st !== 'denied' && st !== 'none';
+      check();
+    }
+    document.getElementById('micBtn').addEventListener('click', function () {
+      if (!canRecord) return micState('none');
+      navigator.mediaDevices.getUserMedia({ audio: true }).then(function (s) {
+        s.getTracks().forEach(function (t) { t.stop(); });
+        micState('ok');
+      }, function () { micState('denied'); });
+    });
+    if (!canRecord) micState('none');
+    else if (navigator.permissions && navigator.permissions.query) {
+      navigator.permissions.query({ name: 'microphone' }).then(function (p) {
+        if (p.state === 'granted') micState('ok'); else if (p.state === 'denied') micState('denied');
+      }, function () { /* not asked yet, or the browser cannot tell */ });
+    }
+    document.addEventListener('kt-lang', function () { paintConsent(); micState(micRow.dataset.state); });
     paintConsent();
     check();
     startBtn.addEventListener('click', function () {
       api('POST', '/api/donate/profile', { dialect: pdialect,
         boxes: boxes.map(function (b) { return b.checked; }), lang: lang })
-        .then(function (r) { if (r.ok) refresh(); });
+        .then(function (r) { if (r.ok) { track('consent'); refresh(); } });
     });
 
     // tabs
@@ -708,14 +770,34 @@
       });
     });
 
-    // recording
-    var queue = [], current = null, rec = null, chunks = [], blob = null, stream = null, meterRaf = 0;
+    // recording: one big button and four states. Every state says on the
+    // button and above it what to do next, because people did not see where
+    // to start and stop. idle → recording → recorded → sending → idle.
+    var queue = [], current = null, rec = null, chunks = [], blob = null, stream = null, meterRaf = 0, clock = 0, cutoff = 0, sent = 0;
     var sEl = document.getElementById('sentence'), recBtn = document.getElementById('rec'), play = document.getElementById('play');
     var again = document.getElementById('again'), send = document.getElementById('send'), skip = document.getElementById('skip');
+    var studio = document.getElementById('studio'), studioSay = document.getElementById('studioSay');
+    var recLabel = document.getElementById('recLabel'), timer = document.getElementById('timer');
     var rmsg = document.getElementById('rmsg'), wave = document.getElementById('wave'), wctx = wave.getContext('2d');
+    var SAY = { idle: 'sayIdle', recording: 'sayRec', recorded: 'sayDone', sending: 'saySending' };
+    // What the server refuses a recording for: the fix is to read it again.
+    var RETAKE = ['TOO_SHORT', 'TOO_LONG', 'TOO_QUIET', 'SILENT', 'CLIPPING', 'PACE'];
     function note(text, ok) { rmsg.textContent = text; rmsg.className = 'msg ' + (ok ? 'msg--ok' : 'msg--bad'); rmsg.hidden = !text; }
+    function setState(st) {
+      studio.dataset.state = st;
+      studioSay.textContent = say(SAY[st]);
+      recLabel.textContent = say(st === 'recording' ? 'recStop' : 'recGo');
+      recBtn.setAttribute('aria-pressed', st === 'recording' ? 'true' : 'false');
+      play.hidden = !(st === 'recorded' || st === 'sending');
+      send.disabled = st === 'sending';
+    }
+    document.addEventListener('kt-lang', function () { setState(studio.dataset.state); });
+    function tick(t0) {
+      var s = Math.floor((Date.now() - t0) / 1000);
+      timer.textContent = Math.floor(s / 60) + ':' + ('0' + s % 60).slice(-2);
+    }
     function nextSentence() {
-      blob = null; play.hidden = true; again.hidden = true; send.hidden = true;
+      blob = null; setState('idle');
       if (queue.length) { current = queue.shift(); sEl.textContent = current.text; sEl.dir = current.text.match(/[؀-ۿ]/) ? 'rtl' : 'ltr'; return; }
       api('GET', '/api/donate/next').then(function (r) { queue = (r.json.sentences || []); if (queue.length) nextSentence(); });
     }
@@ -756,9 +838,11 @@
       } catch (e) { return null; }
     }
     drawFlat();
+    setState('idle');
     var ac = null;
     function startRec() {
       note('');
+      if (!canRecord) return note(say('micUnsupported'));
       navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: false, autoGainControl: true, channelCount: 1 } })
         .then(function (s) {
           stream = s; chunks = []; ac = meter(s);
@@ -766,34 +850,43 @@
           rec.ondataavailable = function (e) { if (e.data.size) chunks.push(e.data); };
           rec.onstop = function () {
             blob = new Blob(chunks, { type: rec.mimeType || 'audio/webm' });
-            play.src = URL.createObjectURL(blob); play.hidden = false; again.hidden = false; send.hidden = false;
+            play.src = URL.createObjectURL(blob);
+            clearInterval(clock); setState('recorded'); track('first_rec');
             stream.getTracks().forEach(function (t) { t.stop(); }); cancelAnimationFrame(meterRaf);
             recBtn.style.setProperty('--lvl', 0); drawFlat();
             if (ac) ac.close();
           };
-          rec.start(); recBtn.setAttribute('aria-pressed', 'true');
-          setTimeout(function () { if (rec && rec.state === 'recording') stopRec(); }, 14500);
+          rec.start(); setState('recording');
+          var t0 = Date.now(); tick(t0); clearInterval(clock); clock = setInterval(function () { tick(t0); }, 250);
+          // The server takes at most 15 s; stop just before. A timer left from an
+          // earlier take must not cut this one short.
+          clearTimeout(cutoff); cutoff = setTimeout(function () { if (rec && rec.state === 'recording') stopRec(); }, 14500);
         })
         .catch(function () { note(say('micDenied')); });
     }
-    function stopRec() { if (rec && rec.state === 'recording') { rec.stop(); recBtn.setAttribute('aria-pressed', 'false'); } }
-    recBtn.addEventListener('click', function () { if (rec && rec.state === 'recording') stopRec(); else startRec(); });
-    again.addEventListener('click', function () { blob = null; play.hidden = true; again.hidden = true; send.hidden = true; startRec(); });
+    function stopRec() { if (rec && rec.state === 'recording') rec.stop(); }
+    recBtn.addEventListener('click', function () {
+      if (studio.dataset.state === 'sending') return;
+      if (rec && rec.state === 'recording') stopRec(); else startRec();
+    });
+    again.addEventListener('click', function () { blob = null; note(''); startRec(); });
     skip.addEventListener('click', function () { note(''); nextSentence(); });
     send.addEventListener('click', function () {
       if (!blob || !current) return;
-      send.disabled = true;
+      setState('sending'); note('');
       var f = new FormData(); f.append('sentence_id', current.id); f.append('audio', blob, 'clip');
       api('POST', '/api/donate/clip', f, true).then(function (r) {
-        send.disabled = false;
-        if (r.ok) { note(say('thanks'), true); stats(); nextSentence(); }
-        else note(say(T[r.json.detail] ? r.json.detail : 'FAILED'));
-      });
+        var d = r.json && r.json.detail;
+        if (r.ok) { sent++; note(say('thanksN').replace('{n}', sent), true); track('sent'); stats(); nextSentence(); }
+        else if (d === 'ALREADY_RECORDED') nextSentence();
+        else if (RETAKE.indexOf(d) >= 0 || d === 'DAILY_LIMIT') { blob = null; setState('idle'); note(say(d)); }
+        else { setState('recorded'); note(say(T[d] ? d : 'FAILED')); }
+      }, function () { setState('recorded'); note(say('FAILED')); });
     });
     document.addEventListener('keydown', function (e) {
       if (work.hidden || document.getElementById('panelRecord').hidden || /INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) return;
       if (e.key === 'r' || e.key === 'R') { e.preventDefault(); recBtn.click(); }
-      else if (e.key === 'Enter' && !send.hidden) { e.preventDefault(); send.click(); }
+      else if (e.key === 'Enter' && studio.dataset.state === 'recorded') { e.preventDefault(); send.click(); }
       else if (e.key === 'n' || e.key === 'N') { e.preventDefault(); skip.click(); }
     });
 

@@ -165,3 +165,16 @@ def test_flow():
     # and a voter who leaves takes their votes back out of the counts
     csrf_b = b.get("/api/c/me").json()["csrf"]
     assert b.post("/api/donate/forget", headers={"X-CSRF": csrf_b}).json()["deleted_recordings"] == 0
+
+
+def test_funnel_counts_steps_and_nothing_else():
+    store = Store(TMP / "funnel.db")
+    c = client(store)
+    for step in ("visit", "visit", "start", "sent"):
+        assert c.post("/api/funnel", json={"step": step}).status_code == 200
+    assert c.post("/api/funnel", json={"step": "anything"}).status_code == 400
+    with store.db() as db:
+        rows = {r["step"]: r["n"] for r in db.execute("SELECT step, n FROM funnel")}
+        cols = [r[1] for r in db.execute("PRAGMA table_info(funnel)")]
+    assert rows == {"visit": 2, "start": 1, "sent": 1}
+    assert cols == ["day", "step", "n"]   # no address, no IP, no session
