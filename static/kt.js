@@ -321,6 +321,15 @@
     saySending:  { kmr: 'Tê şandin…', ckb: 'دەنێردرێت…', tr: 'Gönderiliyor…', en: 'Sending…', fa: 'در حال ارسال…', ar: 'جارٍ الإرسال…' },
     thanksN:     { kmr: '✓ Spas! Te {n} hevok xwendin. Ya din li jor e.', ckb: '✓ سوپاس! {n} ڕستەت خوێندەوە. دانەی داهاتوو لە سەرەوەیە.', tr: '✓ Teşekkürler! {n} cümle okudun. Sıradaki yukarıda.', en: '✓ Thank you! You have read {n} sentences. The next one is above.', fa: '✓ سپاس! {n} جمله خواندی. جملهٔ بعدی بالاست.', ar: '✓ شكرًا! قرأت {n} جملة. الجملة التالية في الأعلى.' },
     skipSentence: { kmr: 'Vê hevokê derbas bike', ckb: 'ئەم ڕستەیە تێپەڕێنە', tr: 'Bu cümleyi atla', en: 'Skip this sentence', fa: 'از این جمله بگذر', ar: 'تخطَّ هذه الجملة' },
+    // campaign and sharing (2026-10-08)
+    campTitle:   { kmr: 'Kampanya: dengê xwe bexşîne', ckb: 'هەڵمەت: دەنگت ببەخشە', tr: 'Kampanya: sesini bağışla', en: 'Campaign: donate your voice', fa: 'کارزار: صدایت را اهدا کن', ar: 'حملة: تبرّع بصوتك' },
+    campLeft:    { kmr: '{n} roj maye', ckb: '{n} ڕۆژ ماوە', tr: '{n} gün kaldı', en: '{n} days left', fa: '{n} روز مانده', ar: 'بقي {n} أيام' },
+    campLast:    { kmr: 'Roja dawî!', ckb: 'دوا ڕۆژ!', tr: 'Son gün!', en: 'Last day!', fa: 'روز آخر!', ar: 'اليوم الأخير!' },
+    campOf:      { kmr: '{x} / {y} saet', ckb: '{x} / {y} کاتژمێر', tr: '{x} / {y} saat', en: '{x} / {y} hours', fa: '{x} / {y} ساعت', ar: '{x} / {y} ساعة' },
+    campDone:    { kmr: 'Armanc hat bidestxistin! Spas.', ckb: 'ئامانج بەدەستهات! سوپاس.', tr: 'Hedefe ulaşıldı! Teşekkürler.', en: 'Goal reached! Thank you.', fa: 'به هدف رسیدیم! سپاس.', ar: 'تحقّق الهدف! شكرًا.' },
+    shareBtn:    { kmr: '📣 Hevalên xwe vexwîne', ckb: '📣 هاوڕێکانت بانگهێشت بکە', tr: '📣 Arkadaşlarını çağır', en: '📣 Invite your friends', fa: '📣 دوستانت را دعوت کن', ar: '📣 ادعُ أصدقاءك' },
+    shareText:   { kmr: 'Min dengê xwe bexşî zimanê xwe. Tu jî çend hevokan bixwîne: em dengê Kurdî yê zekaya çêkirî bi hev re ava dikin.', ckb: 'من دەنگی خۆمم بە زمانەکەم بەخشی. تۆش چەند ڕستەیەک بخوێنەوە: پێکەوە دەنگی کوردیی زیرەکی دەستکرد بنیات دەنێین.', tr: 'Sesimi dilime bağışladım. Sen de birkaç cümle oku: Kürtçenin yapay zekâ sesini birlikte kuruyoruz.', en: 'I gave my voice to my language. Read a few sentences too: together we are building the Kurdish AI voice.', fa: 'من صدایم را به زبانم اهدا کردم. تو هم چند جمله بخوان: با هم صدای کردیِ هوش مصنوعی را می‌سازیم.', ar: 'منحتُ صوتي للغتي. اقرأ أنت أيضًا بضع جمل: معًا نبني الصوت الكردي للذكاء الاصطناعي.' },
+    shareCopied: { kmr: 'Lînk hat kopîkirin', ckb: 'بەستەر لەبەرگیرایەوە', tr: 'Bağlantı kopyalandı', en: 'Link copied', fa: 'پیوند کپی شد', ar: 'تم نسخ الرابط' },
     retry:      { kmr: 'Dîsa biceribîne', ckb: 'دووبارە هەوڵ بدەرەوە', tr: 'Tekrar dene', en: 'Try again', fa: 'دوباره امتحان کن', ar: 'حاول مجددًا' }
   };
 
@@ -568,15 +577,52 @@
   }
 
   // ── how far people get, counted per day and step and nothing else ──────
-  // Once per step per tab; see /api/funnel. A lost count is no loss.
+  // Once per step per tab; see /api/funnel. A lost count is no loss. The ?k=
+  // of a campaign link (k=telegram) is kept for the tab, so the counts can say
+  // which channel brought people who went on to record.
+  var REF = (function () {
+    var ok = /^[a-z0-9-]{1,24}$/, k = (new URLSearchParams(location.search).get('k') || '').toLowerCase();
+    try {
+      if (ok.test(k)) sessionStorage.setItem('kt-ref', k);
+      return sessionStorage.getItem('kt-ref');
+    } catch (e) { return ok.test(k) ? k : null; }
+  })();
   function track(step) {
     try { if (sessionStorage.getItem('kt-f-' + step)) return; sessionStorage.setItem('kt-f-' + step, '1'); } catch (e) { /* private mode */ }
-    var body = JSON.stringify({ step: step });
+    var body = JSON.stringify(REF ? { step: step, ref: REF } : { step: step });
     try {
       if (navigator.sendBeacon && navigator.sendBeacon('/api/funnel', new Blob([body], { type: 'application/json' }))) return;
       fetch('/api/funnel', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: body, keepalive: true }).catch(function () {});
     } catch (e) { /* never in the way of a donation */ }
   }
+
+  // ── a campaign's goal, from /api/donate/stats; nothing shows without one ──
+  var lastStats = null;
+  function paintCampaign(j) {
+    var box = document.getElementById('camp');
+    if (!box) return;
+    lastStats = j;
+    var c = j && j.campaign;
+    if (!c || c.now >= c.ends_at) { box.hidden = true; return; }
+    var days = Math.ceil((c.ends_at - c.now) / 86400);
+    box.querySelector('[data-k="left"]').textContent = days <= 1 ? say('campLast') : say('campLeft').replace('{n}', days);
+    var rows = box.querySelector('.camp__rows');
+    rows.textContent = '';
+    Object.keys(c.goals).forEach(function (d) {
+      var got = (c.seconds[d] || 0) / 3600, goal = c.goals[d];
+      var row = h('div', 'camp__row' + (got >= goal ? ' camp__row--done' : ''));
+      var top = h('div', 'meter__top');
+      top.appendChild(h('b', null, say(d)));
+      top.appendChild(h('span', null, got >= goal ? say('campDone')
+        : say('campOf').replace('{x}', got.toLocaleString('en-US', { maximumFractionDigits: 1, minimumFractionDigits: 1 })).replace('{y}', goal)));
+      var bar = h('div', 'meter__bar'), fill = h('i');
+      fill.style.setProperty('--p', Math.min(100, got / goal * 100) + '%');
+      bar.appendChild(fill);
+      row.appendChild(top); row.appendChild(bar); rows.appendChild(row);
+    });
+    box.hidden = false;
+  }
+  document.addEventListener('kt-lang', function () { if (lastStats) paintCampaign(lastStats); });
 
   // ── page: donate ─────────────────────────────────────────────────────────
   function donatePage() {
@@ -584,6 +630,7 @@
     var gate = document.getElementById('gate'), prof = document.getElementById('profile'), work = document.getElementById('work');
     function stats() {
       api('GET', '/api/donate/stats').then(function (r) {
+        paintCampaign(r.json);
         ['kmr', 'ckb'].forEach(function (d) {
           var s = r.json[d]; if (!s) return;
           var el = document.querySelector('[data-stat="' + d + '"]');
@@ -877,11 +924,25 @@
       var f = new FormData(); f.append('sentence_id', current.id); f.append('audio', blob, 'clip');
       api('POST', '/api/donate/clip', f, true).then(function (r) {
         var d = r.json && r.json.detail;
-        if (r.ok) { sent++; note(say('thanksN').replace('{n}', sent), true); track('sent'); stats(); nextSentence(); }
+        if (r.ok) { sent++; note(say('thanksN').replace('{n}', sent), true); track('sent'); shareBtn.hidden = false; stats(); nextSentence(); }
         else if (d === 'ALREADY_RECORDED') nextSentence();
         else if (RETAKE.indexOf(d) >= 0 || d === 'DAILY_LIMIT') { blob = null; setState('idle'); note(say(d)); }
         else { setState('recorded'); note(say(T[d] ? d : 'FAILED')); }
       }, function () { setState('recorded'); note(say('FAILED')); });
+    });
+    // After a first recording: one press to bring someone else. The link carries
+    // k=paylas, so the counts show how many came this way.
+    var shareBtn = document.getElementById('shareBtn');
+    shareBtn.addEventListener('click', function () {
+      var url = location.origin + '/bexsh?k=paylas', text = say('shareText');
+      track('share');
+      if (navigator.share) { navigator.share({ title: 'KurdAi Voice', text: text, url: url }).catch(function () {}); return; }
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text + ' ' + url).then(function () {
+          shareBtn.textContent = say('shareCopied');
+          setTimeout(function () { shareBtn.textContent = say('shareBtn'); }, 2500);
+        }, function () {});
+      }
     });
     document.addEventListener('keydown', function (e) {
       if (work.hidden || document.getElementById('panelRecord').hidden || /INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) return;
@@ -946,6 +1007,7 @@
     if (!cells.length) return;
     api('GET', '/api/donate/stats').then(function (r) {
       if (!r.ok) return;
+      paintCampaign(r.json);
       var k = r.json.kmr || {}, c = r.json.ckb || {};
       function n(x, d) { return Number(x || 0).toLocaleString('en-US', { maximumFractionDigits: d || 0 }); }
       var v = {

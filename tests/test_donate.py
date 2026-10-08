@@ -178,3 +178,41 @@ def test_funnel_counts_steps_and_nothing_else():
         cols = [r[1] for r in db.execute("PRAGMA table_info(funnel)")]
     assert rows == {"visit": 2, "start": 1, "sent": 1}
     assert cols == ["day", "step", "n"]   # no address, no IP, no session
+
+
+def test_funnel_counts_by_channel_without_trusting_it():
+    store = Store(TMP / "funnel-ref.db")
+    c = client(store)
+    for body in ({"step": "visit", "ref": "telegram"}, {"step": "visit", "ref": "telegram"},
+                 {"step": "sent", "ref": "telegram"}, {"step": "visit", "ref": "BAD ref!"}, {"step": "visit"}):
+        assert c.post("/api/funnel", json=body).status_code == 200
+    with store.db() as db:
+        total = {r["step"]: r["n"] for r in db.execute("SELECT step, n FROM funnel")}
+        refs = {(r["ref"], r["step"]): r["n"] for r in db.execute("SELECT ref, step, n FROM funnel_ref")}
+    assert total == {"visit": 4, "sent": 1}             # every visit counts in the total
+    assert refs == {("telegram", "visit"): 2, ("telegram", "sent"): 1}   # a malformed ref is dropped
+
+
+def test_campaign_goal_and_progress():
+    import time as _t
+    store = Store(TMP / "camp.db")
+    c = client(store)
+    assert "campaign" not in c.get("/api/donate/stats").json()
+    today = _t.strftime("%Y-%m-%d", _t.gmtime())
+    os.environ["KTTS_CAMPAIGN"] = f"{today}/{today}/kmr:10"
+    try:
+        now = int(_t.time())
+        with store.db() as db:
+            db.execute("INSERT INTO sentence (id, dialect, text, source) VALUES (1,'kmr','Roj baş.','t'), (2,'kmr','Şev baş.','t')")
+            db.execute("INSERT INTO speaker (addr, created) VALUES ('5A', ?)", (now,))
+            db.execute("INSERT INTO clip (addr, sentence_id, dialect, file, seconds, created) VALUES ('5A',1,'kmr','a',1800,?)", (now,))
+            db.execute("INSERT INTO clip (addr, sentence_id, dialect, file, seconds, created) VALUES ('5A',2,'kmr','b',900,?)",
+                       (now - 3 * 86400,))   # before the campaign: not counted
+        camp = c.get("/api/donate/stats").json()["campaign"]
+        assert camp["goals"] == {"kmr": 10.0} and camp["seconds"] == {"kmr": 1800.0}
+        assert camp["ends_at"] > camp["now"]
+        os.environ["KTTS_CAMPAIGN"] = "nonsense"
+        assert "campaign" not in c.get("/api/donate/stats").json()
+    finally:
+        os.environ.pop("KTTS_CAMPAIGN", None)
+

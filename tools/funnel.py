@@ -3,6 +3,9 @@
   python tools/funnel.py          # the last 14 days
   python tools/funnel.py 30
 
+Links with ?k=<channel> (kurdishtts.dks.news/bexsh?k=telegram) are also counted
+by channel, so the second table says which channel brought people who recorded.
+
 Database: KTTS_DATA (default /opt/kurdishtts/data)/kurdishtts.db. Counts only;
 the funnel table holds no identity (ktts/donate.py, /api/funnel).
 """
@@ -14,7 +17,7 @@ import sys
 from pathlib import Path
 
 DB = Path(os.environ.get("KTTS_DATA", "/opt/kurdishtts/data")) / "kurdishtts.db"
-STEPS = ("visit", "start", "consent", "first_rec", "sent")
+STEPS = ("visit", "start", "consent", "first_rec", "sent", "share")
 
 
 def main(days: int) -> None:
@@ -33,6 +36,17 @@ def main(days: int) -> None:
     print("total       " + "".join(f"{total[s]:>11}" for s in STEPS))
     if total["visit"]:
         print("of visits   " + "".join(f"{total[s] / total['visit']:>10.0%} " for s in STEPS))
+    # Where they came from: the ?k= of the link they followed, for the same days.
+    refs = db.execute("SELECT ref, step, SUM(n) FROM funnel_ref WHERE day >= date('now', ?) GROUP BY ref, step",
+                      (f"-{days - 1} days",)).fetchall()
+    if refs:
+        by: dict[str, dict[str, int]] = {}
+        for ref, step, n in refs:
+            by.setdefault(ref, {})[step] = n
+        print()
+        print("from        " + "".join(f"{s:>11}" for s in STEPS))
+        for ref in sorted(by, key=lambda r: -by[r].get("sent", 0)):
+            print(f"{ref[:11]:<12}" + "".join(f"{by[ref].get(s, 0):>11}" for s in STEPS))
 
 
 if __name__ == "__main__":
