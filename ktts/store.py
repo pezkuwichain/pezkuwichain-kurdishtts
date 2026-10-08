@@ -94,6 +94,15 @@ CREATE TABLE IF NOT EXISTS funnel (
   n    INTEGER NOT NULL DEFAULT 0,
   PRIMARY KEY (day, step)
 );
+-- The same counts by where people came from: the ?k= of the link they followed
+-- (a channel name the campaign chose, such as "telegram"), never anything more.
+CREATE TABLE IF NOT EXISTS funnel_ref (
+  day  TEXT NOT NULL,
+  step TEXT NOT NULL,
+  ref  TEXT NOT NULL,
+  n    INTEGER NOT NULL DEFAULT 0,
+  PRIMARY KEY (day, step, ref)
+);
 """
 
 

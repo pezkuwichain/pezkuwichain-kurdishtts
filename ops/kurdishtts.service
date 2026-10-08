@@ -14,6 +14,9 @@ Environment=KTTS_CACHE=/opt/kurdishtts/cache
 Environment=KTTS_CLIPS=/opt/kurdishtts/data/clips
 Environment=KTTS_KEYS=/opt/kurdishtts/data/api_keys
 Environment=PYTHONUNBUFFERED=1
+# A campaign: UTC days (both included) and a goal in hours per dialect; shown on
+# the home and donate pages while it runs (ktts/donate.py, campaign()).
+# Environment=KTTS_CAMPAIGN=2026-10-10/2026-10-17/kmr:10,ckb:5
 ExecStart=/opt/kurdishtts/venv/bin/uvicorn app:app --host 127.0.0.1 --port 8000 --proxy-headers --forwarded-allow-ips=127.0.0.1 --no-server-header --no-access-log
 Restart=on-failure
 RestartSec=5

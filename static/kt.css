@@ -525,3 +525,14 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.92em;}
   border:3px solid var(--line-2); border-top-color:var(--zer); animation:kt-spin .8s linear infinite;}
 @keyframes kt-spin{to{transform:rotate(360deg);}}
 @media (prefers-reduced-motion:reduce){ .spin{animation-duration:2.4s;} }
+
+/* ── a campaign: its goal per dialect and the days left ──────────────── */
+.camp{margin:16px 0; padding:16px 18px; border-radius:18px; border:1px solid rgba(246,185,48,.45);
+  background:linear-gradient(110deg, rgba(246,185,48,.14), rgba(29,180,95,.10));}
+.camp__head{display:flex; align-items:baseline; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:12px;}
+.camp__head b{font:800 16px/1.3 var(--font);}
+.camp__left{font-weight:800; color:var(--zer); font-size:14px;}
+.camp__rows{display:grid; gap:12px;}
+.camp__row--done .meter__top span{color:#7FE2A6; font-weight:700;}
+#shareBtn{margin-top:4px;}
+

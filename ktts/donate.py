@@ -15,8 +15,10 @@ decoded by ffmpeg and never stored.
 """
 from __future__ import annotations
 
+import calendar
 import os
 import random
+import re
 import subprocess
 import time
 from pathlib import Path
@@ -337,6 +339,12 @@ def stats(kt_ses: str | None = Cookie(None)):
         # One person may donate in both dialects: the sum of the two counts
         # above would count them twice, so the total is counted on its own.
         out["donors"] = db.execute("SELECT COUNT(DISTINCT addr) FROM clip").fetchone()[0]
+        c = campaign()
+        if c:
+            done = {d: db.execute("SELECT COALESCE(SUM(seconds),0) FROM clip WHERE dialect=? AND created >= ? AND created < ?",
+                                  (d, c["t0"], c["t1"])).fetchone()[0] for d in c["goals"]}
+            out["campaign"] = {"start": c["start"], "end": c["end"], "ends_at": c["t1"], "now": int(time.time()),
+                               "goals": c["goals"], "seconds": {d: round(v, 1) for d, v in done.items()}}
         s = auth.session(kt_ses)
         if s:
             mine = db.execute("SELECT COUNT(*), COALESCE(SUM(seconds),0) FROM clip WHERE addr=?", (s["addr"],)).fetchone()
@@ -349,11 +357,14 @@ def stats(kt_ses: str | None = Cookie(None)):
 # Where do people stop? The page sends each step once per browser tab; the
 # server adds one to that day's count. No identity is stored, not even the IP
 # (it only feeds the in-memory rate limit). Read with tools/funnel.py.
-FUNNEL_STEPS = ("visit", "start", "consent", "first_rec", "sent")
+FUNNEL_STEPS = ("visit", "start", "consent", "first_rec", "sent", "share")
+REF = re.compile(r"[a-z0-9-]{1,24}")
+REFS_PER_DAY = 100          # past this many channels in a day, the rest count as "other"
 
 
 class FunnelIn(BaseModel):
     step: str
+    ref: str | None = None
 
 
 @router.post("/api/funnel")
@@ -365,4 +376,30 @@ def funnel(body: FunnelIn, request: Request):
     with STATE["store"].db() as db:
         db.execute("INSERT INTO funnel (day, step, n) VALUES (?,?,1) "
                    "ON CONFLICT(day, step) DO UPDATE SET n = n + 1", (day, body.step))
+        ref = body.ref if body.ref and REF.fullmatch(body.ref) else None
+        if ref:
+            known = db.execute("SELECT 1 FROM funnel_ref WHERE day=? AND ref=? LIMIT 1", (day, ref)).fetchone()
+            if not known and db.execute("SELECT COUNT(DISTINCT ref) FROM funnel_ref WHERE day=?",
+                                        (day,)).fetchone()[0] >= REFS_PER_DAY:
+                ref = "other"
+            db.execute("INSERT INTO funnel_ref (day, step, ref, n) VALUES (?,?,?,1) "
+                       "ON CONFLICT(day, step, ref) DO UPDATE SET n = n + 1", (day, body.step, ref))
     return {"ok": True}
+
+
+# ── a campaign: a goal in hours per dialect, between two dates ──────────────
+# KTTS_CAMPAIGN="2026-10-10/2026-10-17/kmr:10,ckb:5" (UTC days, both included).
+# Unset or malformed, there is no campaign and the pages show nothing of it.
+def campaign(spec: str | None = None) -> dict | None:
+    spec = os.environ.get("KTTS_CAMPAIGN", "") if spec is None else spec
+    try:
+        start, end, goals = spec.strip().split("/")
+        t0 = calendar.timegm(time.strptime(start, "%Y-%m-%d"))
+        t1 = calendar.timegm(time.strptime(end, "%Y-%m-%d")) + 86400
+        g = {d: float(h) for d, h in (x.split(":") for x in goals.split(","))}
+    except (ValueError, OverflowError):
+        return None
+    if t1 <= t0 or not g or any(d not in DIALECTS or h <= 0 for d, h in g.items()):
+        return None
+    return {"start": start, "end": end, "t0": t0, "t1": t1, "goals": g}
+
