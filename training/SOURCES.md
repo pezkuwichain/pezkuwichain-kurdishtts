@@ -22,6 +22,14 @@ on 2026-10-08.
 | `genc-zza` | Zazakî | 2.5 (measured) | 1 | CC0-1.0 | Genç Zazaki teaching recordings (Hugging Face) |
 | donations | Kurmancî, Soranî | grows | grows | our consent | KurdAi Voice, clips two other donors confirmed |
 
+The two Melbourne sets were each recorded by their own speaker from texts free
+to read: Aso Mahmudi (Soranî; Ahmad Mukhtar Jaff's *Mesele-y Wijdan*, public
+domain, and web texts) and Ako Marani (Hewramî; his own two books). Their cards
+name no licence; the licence is the one their publisher, the University of
+Melbourne, gives on the Data Collective: CC BY 4.0. Hewramî comes in three
+spellings; we train on the first (the speaker's own) and keep the third (the
+nearest to the standard Sorani alphabet) beside it.
+
 Only Common Voice's `validated.tsv` is used: clips other speakers have listened
 to and confirmed. In all, about 430 hours: Soranî about 300, Kurmancî about 80
 validated, Zazakî about 5, Hewramî about 6.
