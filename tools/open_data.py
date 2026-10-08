@@ -62,6 +62,8 @@ class Source:
     files: tuple[str, ...] = ()  # hf: the files to take
     credit: str = ""             # the attribution line the licence asks for
     url: str = ""
+    meta: str = ""               # one-speaker sets: the metadata file pairing audio and text
+    meta_alt: str = ""           # ...and another spelling of the same text, kept as text_alt
 
 
 SOURCES: tuple[Source, ...] = (
@@ -83,12 +85,16 @@ SOURCES: tuple[Source, ...] = (
            url="https://mozilladatacollective.com/datasets/cmu5n57fs00ttmi07bda1eg8r"),
     Source("unimelb-ckb", "Central Kurdish TTS dataset 1.0 (one speaker)", "ckb", "CC-BY-4.0", 2.3,
            "mdc:cmj77njd701ljmb07m97pw1p3",
-           credit="Central Kurdish TTS dataset 1.0, The University of Melbourne (CC BY 4.0)",
-           url="https://mozilladatacollective.com/datasets/cmj77njd701ljmb07m97pw1p3"),
+           credit="Central Kurdish TTS dataset 1.0, read by Aso Mahmudi, The University of Melbourne (CC BY 4.0)",
+           url="https://mozilladatacollective.com/datasets/cmj77njd701ljmb07m97pw1p3",
+           meta="metadata.csv"),
     Source("unimelb-hac", "Hawrami Kurdish TTS dataset 1.0 (one speaker)", "hac", "CC-BY-4.0", 5.25,
            "mdc:cml0wtouz026wno075aq7v201",
-           credit="Hawrami Kurdish TTS dataset 1.0, The University of Melbourne (CC BY 4.0)",
-           url="https://mozilladatacollective.com/datasets/cml0wtouz026wno075aq7v201"),
+           credit="Hawrami Kurdish TTS dataset 1.0, read by Ako Marani, The University of Melbourne (CC BY 4.0)",
+           url="https://mozilladatacollective.com/datasets/cml0wtouz026wno075aq7v201",
+           # Three spellings of Hawrami; the first is the writers' own and the
+           # speaker's, the third the nearest to the standard Sorani alphabet.
+           meta="metadata_var1.csv", meta_alt="metadata_var3.csv"),
     Source("fleurs-ckb", "Google FLEURS — Central Kurdish", "ckb", "CC-BY-4.0", 14.7,
            "hf:datasets/google/fleurs",
            files=tuple(f"data/ckb_iq/{p}" for p in (
@@ -286,30 +292,28 @@ def _common_voice(src: Source, w: Writer) -> None:
 
 
 def _pairs(src: Source, w: Writer) -> None:
-    """A one-speaker TTS set: a metadata file pairing each wav with its text
-    (LJSpeech's `name|text`, or tab/comma separated). Read whichever is there."""
+    """A one-speaker TTS set: `name.wav|text` lines in its metadata file
+    (measured on the downloaded archives, 2026-10-08)."""
     base = TRAIN / "raw" / src.id / "x"
-    wavs = {p.stem: p for p in base.rglob("*") if p.suffix.lower() in (".wav", ".flac", ".mp3")}
-    best: list[tuple[Path, str]] = []
-    for meta in base.rglob("*"):
-        if meta.suffix.lower() not in (".csv", ".tsv", ".txt") or meta.stat().st_size > 50e6:
-            continue
-        found = []
-        for line in meta.read_text(encoding="utf-8", errors="replace").splitlines():
-            for sep in ("|", "\t", ","):
-                parts = [p.strip() for p in line.split(sep)]
-                if len(parts) >= 2:
-                    key = Path(parts[0]).stem
-                    if key in wavs:
-                        found.append((wavs[key], parts[-1]))
-                        break
-        if len(found) > len(best):
-            best = found
-    if not best:
-        raise SystemExit(f"{src.id}: no metadata file pairs the audio with text under {base}; "
-                         "look inside and add a reader")
-    for audio, text in best:
-        w.add(audio, text, anon(src.id, "one"))
+
+    def read(name: str) -> dict[str, str]:
+        found = sorted(base.rglob(name))
+        if not found:
+            raise SystemExit(f"{src.id}: no {name} under {base}")
+        out = {}
+        for line in found[0].read_text(encoding="utf-8").splitlines():
+            key, sep, text = line.partition("|")
+            if sep and text.strip():
+                out[Path(key.strip()).stem] = text.strip()
+        return out
+
+    texts = read(src.meta)
+    alt = read(src.meta_alt) if src.meta_alt else {}
+    wavs = {p.stem: p for p in base.rglob("*.wav")}
+    for key in sorted(texts):
+        if key in wavs:
+            extra = {"text_alt": alt[key]} if key in alt else {}
+            w.add(wavs[key], texts[key], anon(src.id, "one"), **extra)
 
 
 def _fleurs(src: Source, w: Writer) -> None:

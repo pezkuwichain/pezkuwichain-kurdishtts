@@ -71,16 +71,20 @@ def test_common_voice_validated_with_splits_and_no_ids():
     assert out.strip() == "flac,1"
 
 
-def test_one_speaker_set_reads_its_metadata():
+def test_one_speaker_set_reads_the_chosen_spelling():
+    # The layout of the downloaded Hawrami archive: wavs/ and three spellings.
     od.TRAIN = TMP / "pairs"
-    d = od.TRAIN / "raw" / "unimelb-hac" / "x" / "hawrami"
-    tone(d / "wavs" / "h001.wav")
-    tone(d / "wavs" / "h002.wav")
-    (d / "README.txt").write_text("Hawrami TTS, recorded in 2025.\n", encoding="utf-8")
-    (d / "metadata.csv").write_text("h001|Yew wilate ce.\nh002|Pêsaney wenay.\nh003|No audio.\n", encoding="utf-8")
-    assert od.prepare(od.BY_ID["unimelb-hac"]) == 2
+    d = od.TRAIN / "raw" / "unimelb-hac" / "x"
+    tone(d / "wavs" / "A0001.wav")
+    tone(d / "wavs" / "A0002.wav")
+    (d / "card.md").write_text("# Hawrami Kurdish TTS Dataset\n", encoding="utf-8")
+    (d / "metadata_var1.csv").write_text("A0001.wav|ۋەڵام یەک\nA0002.wav|ۋەڵام دوو\nA0003.wav|بێ دەنگ\n", encoding="utf-8")
+    (d / "metadata_var2.csv").write_text("A0001.wav|var2\nA0002.wav|var2\nA0003.wav|var2\n", encoding="utf-8")
+    (d / "metadata_var3.csv").write_text("A0001.wav|وەڵام یەک\nA0002.wav|وەڵام دوو\nA0003.wav|بێ دەنگ\n", encoding="utf-8")
+    assert od.prepare(od.BY_ID["unimelb-hac"]) == 2          # A0003 has no audio
     r = rows("unimelb-hac")
-    assert [x["text"] for x in r] == ["Yew wilate ce.", "Pêsaney wenay."]
+    assert [x["text"] for x in r] == ["ۋەڵام یەک", "ۋەڵام دوو"]
+    assert [x["text_alt"] for x in r] == ["وەڵام یەک", "وەڵام دوو"]
     assert len({x["speaker"] for x in r}) == 1 and r[0]["license"] == "CC-BY-4.0"
 
 
