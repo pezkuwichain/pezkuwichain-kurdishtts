@@ -1,0 +1,2 @@
+# Gathering training data (tools/open_data.py); ffmpeg must be on the PATH.
+pyarrow==21.0.0
