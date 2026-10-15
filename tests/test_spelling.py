@@ -8,6 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "tools"))
 from fix_spelling import correct, fix_db, load_fixes  # noqa: E402
+
 from ktts.store import Store  # noqa: E402
 
 FIXES = load_fixes(ROOT / "corpus" / "kmr-ferheng-fixes.tsv")
