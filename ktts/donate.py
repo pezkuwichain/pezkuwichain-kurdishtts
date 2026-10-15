@@ -334,7 +334,11 @@ def stats(kt_ses: str | None = Cookie(None)):
                       "seconds": round(r["s"], 1), "valid_seconds": round(r["v"], 1),
                       "valid_clips": r["vn"],
                       "speakers": r["speakers"],
-                      "sentences": db.execute("SELECT COUNT(*) FROM sentence WHERE dialect=? AND active=1 AND LENGTH(text) >= ?",
+                      # Sentences on offer that nobody has recorded yet: the page says
+                      # "waiting to be read", so a sentence already read is not counted.
+                      "sentences": db.execute("""SELECT COUNT(*) FROM sentence s WHERE s.dialect=? AND s.active=1
+                                                   AND LENGTH(s.text) >= ?
+                                                   AND NOT EXISTS (SELECT 1 FROM clip c WHERE c.sentence_id=s.id)""",
                                              (d, MIN_SENTENCE_CHARS)).fetchone()[0]}
         # One person may donate in both dialects: the sum of the two counts
         # above would count them twice, so the total is counted on its own.

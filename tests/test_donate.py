@@ -115,6 +115,7 @@ def test_flow():
         assert tuple(db.execute("SELECT gender, age_band, region FROM speaker").fetchone()) == (None, None, None)
     sents = a.get("/api/donate/next").json()["sentences"]
     assert len(sents) == 2
+    waiting = a.get("/api/donate/stats").json()["kmr"]["sentences"]
     sid = next(s["id"] for s in sents if s["text"].startswith("Ziman"))
 
     # machine checks
@@ -147,6 +148,7 @@ def test_flow():
     assert st["kmr"]["clips"] == 1 and st["kmr"]["valid_clips"] == 1 and st["me"]["clips"] == 1
     assert st["donors"] == 1                         # people, not people per dialect
     assert st["kmr"]["seconds"] > 0                  # shown in minutes: in hours it read "0"
+    assert st["kmr"]["sentences"] == waiting - 1     # "waiting to be read": a read sentence is no longer counted
 
     # the right to be forgotten: a's recordings, profile and session go; the
     # file is gone from disk; b's vote on it went with it
@@ -162,6 +164,7 @@ def test_flow():
         assert n == 1 and len(h) == 64 and me["address"] not in h
     st = b.get("/api/donate/stats").json()
     assert st["kmr"]["clips"] == 0 and st["kmr"]["speakers"] == 0
+    assert st["kmr"]["sentences"] == waiting          # the deleted recording leaves its sentence unread again
     # and a voter who leaves takes their votes back out of the counts
     csrf_b = b.get("/api/c/me").json()["csrf"]
     assert b.post("/api/donate/forget", headers={"X-CSRF": csrf_b}).json()["deleted_recordings"] == 0
