@@ -1,6 +1,7 @@
 """Voice donation: read a sentence, record it, check others' recordings.
 
-A donor signs in with a wallet, gives the five confirmations of
+A donor signs in with a wallet -- or starts with a donation code (auth.py),
+which records but does not vote -- gives the five confirmations of
 legal/consent.md once (recordings train our own models only), says which
 dialect they speak, and reads sentences from a CC0 corpus (Common Voice's
 sentence collector). Every recording is checked here for what a machine can
@@ -14,14 +15,16 @@ decoded by ffmpeg and never stored.
 """
 from __future__ import annotations
 
+import calendar
 import os
 import random
+import re
 import subprocess
 import time
 from pathlib import Path
 
 import numpy as np
-from fastapi import APIRouter, Cookie, File, Form, Header, HTTPException, UploadFile
+from fastapi import APIRouter, Cookie, File, Form, Header, HTTPException, Request, UploadFile
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
 
@@ -35,11 +38,21 @@ CONSENT_VERSION = "train-only-2026-10-03-dialect"   # must equal legal/consent.m
 DIALECTS = ("kmr", "ckb")
 SR = 48000
 MAX_UPLOAD = 6 * 1024 * 1024
-MIN_S, MAX_S = 1.0, 15.0
+# The floor follows the sentence: the fastest human pace (CPS_RANGE[1]) sets
+# how short a true reading of it can be, and 0.6 s is the least any clip may
+# be. A fixed one second refused "Ez ê nebiriqînim." read at a normal pace
+# (2026-10-06): three words, fifteen letters, under a second of voice.
+MIN_FLOOR_S, MAX_S = 0.6, 15.0
+# Sentences shorter than this are not offered: two- and three-word lines are
+# the ones a phone clips, and they teach a voice little. 20% of the corpus.
+MIN_SENTENCE_CHARS = int(os.environ.get("KTTS_MIN_SENTENCE_CHARS", "20"))
 MIN_RMS_DB = -42.0           # quieter than this is a silent or far-away recording
 CLIP_RATIO_MAX = 0.002       # more than 0.2 % of samples at full scale is clipping
 CPS_RANGE = (3.0, 28.0)      # characters per second a human reading aloud can do
 PER_DAY = int(os.environ.get("KTTS_CLIPS_PER_DAY", "400"))
+# Anonymous donors are counted per network address too: one person can make
+# many codes, and each code has its own daily limit.
+ANON_CLIPS_PER_HOUR_PER_IP = int(os.environ.get("KTTS_ANON_CLIPS_PER_HOUR", "150"))
 VOTES_TO_DECIDE = 2
 
 router = APIRouter()
@@ -79,7 +92,7 @@ def analyse(raw: bytes, text: str) -> tuple[np.ndarray, dict]:
     clipped = float((np.abs(pcm.astype(np.int32)) >= 32700).mean())
     letters = sum(ch.isalpha() for ch in text)
     cps = letters / secs if secs else 0
-    if secs < MIN_S:
+    if secs < max(MIN_FLOOR_S, letters / CPS_RANGE[1]):
         raise Rejected("TOO_SHORT")
     if secs > MAX_S:
         raise Rejected("TOO_LONG")
@@ -129,6 +142,14 @@ def profile(body: ProfileIn, kt_ses: str | None = Cookie(None), x_csrf: str | No
     return {"ok": True, "consent_version": CONSENT_VERSION}
 
 
+def _wallet_only(addr: str) -> None:
+    """Checking recordings needs a wallet. Two agreeing votes decide a clip, and
+    anyone can make as many donation codes as they like: if codes could vote,
+    one person could pass their own recordings."""
+    if auth.is_anon(addr):
+        raise HTTPException(403, "WALLET_NEEDED")
+
+
 def _speaker(db, addr: str) -> dict:
     sp = db.execute("SELECT * FROM speaker WHERE addr=?", (addr,)).fetchone()
     if not sp or sp["consent_version"] != CONSENT_VERSION or not sp["dialect"]:
@@ -148,18 +169,20 @@ def next_sentences(kt_ses: str | None = Cookie(None)):
         rows = db.execute("""
           SELECT s.id, s.text FROM sentence s
           LEFT JOIN clip c ON c.sentence_id = s.id
-          WHERE s.dialect=? AND s.active=1
+          WHERE s.dialect=? AND s.active=1 AND LENGTH(s.text) >= ?
             AND s.id NOT IN (SELECT sentence_id FROM clip WHERE addr=?)
-          GROUP BY s.id ORDER BY COUNT(c.id), RANDOM() LIMIT 40""", (sp["dialect"], addr)).fetchall()
+          GROUP BY s.id ORDER BY COUNT(c.id), RANDOM() LIMIT 40""", (sp["dialect"], MIN_SENTENCE_CHARS, addr)).fetchall()
     rows = [dict(r) for r in rows]
     random.shuffle(rows)
     return {"dialect": sp["dialect"], "sentences": rows[:8]}
 
 
 @router.post("/api/donate/clip")
-async def upload(sentence_id: int = Form(...), audio: UploadFile = File(...),
+async def upload(request: Request, sentence_id: int = Form(...), audio: UploadFile = File(...),
                  kt_ses: str | None = Cookie(None), x_csrf: str | None = Header(None)):
     addr = auth.require(kt_ses, x_csrf)
+    if auth.is_anon(addr):
+        auth.limit("clip:" + auth.client_ip(request), ANON_CLIPS_PER_HOUR_PER_IP)
     raw = await audio.read(MAX_UPLOAD + 1)
     if len(raw) > MAX_UPLOAD:
         raise HTTPException(413, "TOO_BIG")
@@ -194,6 +217,7 @@ async def upload(sentence_id: int = Form(...), audio: UploadFile = File(...),
 @router.get("/api/donate/review")
 def review(kt_ses: str | None = Cookie(None)):
     addr = auth.require(kt_ses, None, write=False)
+    _wallet_only(addr)
     with STATE["store"].db() as db:
         sp = _speaker(db, addr)
         r = db.execute("""
@@ -214,6 +238,7 @@ def review(kt_ses: str | None = Cookie(None)):
 @router.get("/api/donate/audio/{clip_id}")
 def clip_audio(clip_id: int, kt_ses: str | None = Cookie(None)):
     addr = auth.require(kt_ses, None, write=False)
+    _wallet_only(addr)
     with STATE["store"].db() as db:
         r = db.execute("""SELECT c.file FROM clip c JOIN review_grant g ON g.clip_id = c.id
                           WHERE c.id=? AND g.addr=? AND g.exp > ?""", (clip_id, addr, int(time.time()))).fetchone()
@@ -230,6 +255,7 @@ class VoteIn(BaseModel):
 @router.post("/api/donate/vote")
 def vote(body: VoteIn, kt_ses: str | None = Cookie(None), x_csrf: str | None = Header(None)):
     addr = auth.require(kt_ses, x_csrf)
+    _wallet_only(addr)
     if body.val not in (1, -1):
         raise HTTPException(400, "val")
     with STATE["store"].db() as db:
@@ -302,13 +328,82 @@ def stats(kt_ses: str | None = Cookie(None)):
                                      COALESCE(SUM(CASE WHEN status='valid' THEN seconds END),0) v,
                                      COUNT(CASE WHEN status='valid' THEN 1 END) vn,
                                      COUNT(DISTINCT addr) speakers FROM clip WHERE dialect=?""", (d,)).fetchone()
+            # Seconds as well as hours: rounded to hours, the first weeks of a
+            # campaign read as "0", which is true and tells a visitor nothing.
             out[d] = {"clips": r["n"], "hours": round(r["s"] / 3600, 2), "valid_hours": round(r["v"] / 3600, 2),
+                      "seconds": round(r["s"], 1), "valid_seconds": round(r["v"], 1),
                       "valid_clips": r["vn"],
                       "speakers": r["speakers"],
-                      "sentences": db.execute("SELECT COUNT(*) FROM sentence WHERE dialect=? AND active=1", (d,)).fetchone()[0]}
+                      # Sentences on offer that nobody has recorded yet: the page says
+                      # "waiting to be read", so a sentence already read is not counted.
+                      "sentences": db.execute("""SELECT COUNT(*) FROM sentence s WHERE s.dialect=? AND s.active=1
+                                                   AND LENGTH(s.text) >= ?
+                                                   AND NOT EXISTS (SELECT 1 FROM clip c WHERE c.sentence_id=s.id)""",
+                                             (d, MIN_SENTENCE_CHARS)).fetchone()[0]}
+        # One person may donate in both dialects: the sum of the two counts
+        # above would count them twice, so the total is counted on its own.
+        out["donors"] = db.execute("SELECT COUNT(DISTINCT addr) FROM clip").fetchone()[0]
+        c = campaign()
+        if c:
+            done = {d: db.execute("SELECT COALESCE(SUM(seconds),0) FROM clip WHERE dialect=? AND created >= ? AND created < ?",
+                                  (d, c["t0"], c["t1"])).fetchone()[0] for d in c["goals"]}
+            out["campaign"] = {"start": c["start"], "end": c["end"], "ends_at": c["t1"], "now": int(time.time()),
+                               "goals": c["goals"], "seconds": {d: round(v, 1) for d, v in done.items()}}
         s = auth.session(kt_ses)
         if s:
             mine = db.execute("SELECT COUNT(*), COALESCE(SUM(seconds),0) FROM clip WHERE addr=?", (s["addr"],)).fetchone()
             votes = db.execute("SELECT COUNT(*) FROM vote WHERE addr=?", (s["addr"],)).fetchone()[0]
             out["me"] = {"clips": mine[0], "minutes": round(mine[1] / 60, 1), "votes": votes}
     return out
+
+
+# ── the way to a donation, counted ─────────────────────────────────────────
+# Where do people stop? The page sends each step once per browser tab; the
+# server adds one to that day's count. No identity is stored, not even the IP
+# (it only feeds the in-memory rate limit). Read with tools/funnel.py.
+FUNNEL_STEPS = ("visit", "start", "consent", "first_rec", "sent", "share")
+REF = re.compile(r"[a-z0-9-]{1,24}")
+REFS_PER_DAY = 100          # past this many channels in a day, the rest count as "other"
+
+
+class FunnelIn(BaseModel):
+    step: str
+    ref: str | None = None
+
+
+@router.post("/api/funnel")
+def funnel(body: FunnelIn, request: Request):
+    if body.step not in FUNNEL_STEPS:
+        raise HTTPException(400, "STEP")
+    auth.limit("funnel:" + auth.client_ip(request), 60)
+    day = time.strftime("%Y-%m-%d", time.gmtime())
+    with STATE["store"].db() as db:
+        db.execute("INSERT INTO funnel (day, step, n) VALUES (?,?,1) "
+                   "ON CONFLICT(day, step) DO UPDATE SET n = n + 1", (day, body.step))
+        ref = body.ref if body.ref and REF.fullmatch(body.ref) else None
+        if ref:
+            known = db.execute("SELECT 1 FROM funnel_ref WHERE day=? AND ref=? LIMIT 1", (day, ref)).fetchone()
+            if not known and db.execute("SELECT COUNT(DISTINCT ref) FROM funnel_ref WHERE day=?",
+                                        (day,)).fetchone()[0] >= REFS_PER_DAY:
+                ref = "other"
+            db.execute("INSERT INTO funnel_ref (day, step, ref, n) VALUES (?,?,?,1) "
+                       "ON CONFLICT(day, step, ref) DO UPDATE SET n = n + 1", (day, body.step, ref))
+    return {"ok": True}
+
+
+# ── a campaign: a goal in hours per dialect, between two dates ──────────────
+# KTTS_CAMPAIGN="2026-10-10/2026-10-17/kmr:10,ckb:5" (UTC days, both included).
+# Unset or malformed, there is no campaign and the pages show nothing of it.
+def campaign(spec: str | None = None) -> dict | None:
+    spec = os.environ.get("KTTS_CAMPAIGN", "") if spec is None else spec
+    try:
+        start, end, goals = spec.strip().split("/")
+        t0 = calendar.timegm(time.strptime(start, "%Y-%m-%d"))
+        t1 = calendar.timegm(time.strptime(end, "%Y-%m-%d")) + 86400
+        g = {d: float(h) for d, h in (x.split(":") for x in goals.split(","))}
+    except (ValueError, OverflowError):
+        return None
+    if t1 <= t0 or not g or any(d not in DIALECTS or h <= 0 for d, h in g.items()):
+        return None
+    return {"start": start, "end": end, "t0": t0, "t1": t1, "goals": g}
+

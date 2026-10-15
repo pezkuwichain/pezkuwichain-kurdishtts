@@ -31,7 +31,7 @@ jobs:
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
           pip install -q -r requirements-dev.txt
-          pip install -q fastapi==0.118.0 python-multipart==0.0.20 numpy==2.3.3 httpx pytest
+          pip install -q fastapi==0.118.0 python-multipart==0.0.20 numpy==2.3.3 jinja2==3.1.6 markdown==3.9 httpx pytest
       - name: Ruff
         run: ruff check .
       - name: Syntax
@@ -58,4 +58,4 @@ jobs:
       - run: node --check static/kt.js
       # The CSP allows no inline style; one would silently not apply.
       - name: No inline styles in pages
-        run: "! grep -n 'style=\"' templates/speak.html templates/bexsh.html templates/_*.html"
+        run: "! grep -n 'style=\"' templates/speak.html templates/bexsh.html templates/kurdai.html templates/developers.html templates/about.html templates/faq.html templates/legal.html templates/_*.html"
