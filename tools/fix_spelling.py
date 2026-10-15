@@ -45,9 +45,9 @@ def correct(text: str, fixes: dict[str, str]) -> str:
 
 def fix_file(path: Path, fixes: dict[str, str]) -> int:
     lines = path.read_text(encoding="utf-8").split("\n")
-    out = [correct(l, fixes) for l in lines]
+    out = [correct(line, fixes) for line in lines]
     path.write_text("\n".join(out), encoding="utf-8")
-    return sum(a != b for a, b in zip(lines, out))
+    return sum(a != b for a, b in zip(lines, out, strict=True))
 
 
 def fix_db(db_path: Path, fixes: dict[str, str]) -> tuple[int, int]:
