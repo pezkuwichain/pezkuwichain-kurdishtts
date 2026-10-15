@@ -7,10 +7,11 @@ corpus/kmr-ferheng-fixes.tsv lists whole words that are misspelt against
 Zeynelabidin's Ferheng (Ferheng mizan), each with the spelling it gives. A
 word is replaced only as a whole word, keeping a capital first letter.
 
-In the database a sentence nobody has read yet is corrected in place. A
-sentence someone has read keeps its row, so the recording stays tied to the
-text that was on screen, and is retired; its corrected text is added as a new
-sentence. Running it again changes nothing.
+In the database the sentences on offer are made to match the corrected file:
+a misspelt sentence is retired, never edited, so any recording keeps the text
+that was on screen; its corrected text is offered as its own sentence. The
+server's start-up loader may already have added the corrected lines; the sync
+then only retires the old ones. Running it again changes nothing.
 """
 from __future__ import annotations
 
@@ -50,35 +51,46 @@ def fix_file(path: Path, fixes: dict[str, str]) -> int:
     return sum(a != b for a, b in zip(lines, out, strict=True))
 
 
-def fix_db(db_path: Path, fixes: dict[str, str]) -> tuple[int, int]:
-    in_place = retired = 0
+def fix_db(db_path: Path, corpus_dir: Path) -> tuple[int, int, int]:
+    """Make the live Kurmancî sentences match the corrected corpus file.
+
+    A sentence is on offer exactly when its text is a usable line of the file;
+    every other Common Voice sentence is retired (kept, with any recording that
+    belongs to it), and a usable line the database lacks is added. Running it
+    again, or after the fix list changes, leaves exactly the file on offer.
+    """
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from load_corpus import ok
+
+    lines = (corpus_dir / "cv-kmr.txt").read_text(encoding="utf-8").splitlines()
+    wanted = {t for t in (unicodedata.normalize("NFC", raw.strip()) for raw in lines) if ok(t, "kmr")}
+    activated = retired = added = 0
     db = sqlite3.connect(db_path)
     with db:
-        rows = db.execute("SELECT id, text, source FROM sentence WHERE dialect='kmr' AND active=1").fetchall()
-        for sid, text, source in rows:
-            new = unicodedata.normalize("NFC", correct(text, fixes))
-            if new == text:
-                continue
-            read = db.execute("SELECT 1 FROM clip WHERE sentence_id=? LIMIT 1", (sid,)).fetchone()
-            taken = db.execute("SELECT 1 FROM sentence WHERE dialect='kmr' AND text=?", (new,)).fetchone()
-            if read or taken:
+        have = {}
+        for sid, text, active in db.execute(
+                "SELECT id, text, active FROM sentence WHERE dialect='kmr' AND source='common-voice-cc0'"):
+            have[text] = sid
+            on = text in wanted
+            if on and not active:
+                db.execute("UPDATE sentence SET active=1 WHERE id=?", (sid,))
+                activated += 1
+            elif active and not on:
                 db.execute("UPDATE sentence SET active=0 WHERE id=?", (sid,))
-                db.execute("INSERT OR IGNORE INTO sentence (dialect, text, source) VALUES ('kmr',?,?)", (new, source))
-                db.execute("UPDATE sentence SET active=1 WHERE dialect='kmr' AND text=?", (new,))
                 retired += 1
-            else:
-                db.execute("UPDATE sentence SET text=? WHERE id=?", (new, sid))
-                in_place += 1
+        for text in sorted(wanted - have.keys()):
+            db.execute("INSERT OR IGNORE INTO sentence (dialect, text, source) VALUES ('kmr',?,'common-voice-cc0')", (text,))
+            added += 1
     db.close()
-    return in_place, retired
+    return activated, retired, added
 
 
 def main(corpus_dir: str, db_path: str | None = None) -> None:
     fixes = load_fixes(Path(corpus_dir) / "kmr-ferheng-fixes.tsv")
     print(f"corpus: {fix_file(Path(corpus_dir) / 'cv-kmr.txt', fixes)} lines corrected")
     if db_path:
-        in_place, retired = fix_db(Path(db_path), fixes)
-        print(f"database: {in_place} corrected in place, {retired} read sentences retired and re-added corrected")
+        activated, retired, added = fix_db(Path(db_path), Path(corpus_dir))
+        print(f"database: {retired} retired, {added} added, {activated} brought back")
 
 
 if __name__ == "__main__":
