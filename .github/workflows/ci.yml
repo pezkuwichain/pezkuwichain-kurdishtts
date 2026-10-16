@@ -31,7 +31,7 @@ jobs:
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
           pip install -q -r requirements-dev.txt
-          pip install -q fastapi==0.118.0 python-multipart==0.0.20 numpy==2.3.3 jinja2==3.1.6 markdown==3.9 httpx pytest
+          pip install -q fastapi==0.118.0 python-multipart==0.0.32 numpy==2.3.3 jinja2==3.1.6 markdown==3.9 httpx pytest
       - name: Ruff
         run: ruff check .
       - name: Syntax
