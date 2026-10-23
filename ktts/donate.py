@@ -312,8 +312,12 @@ def forget(kt_ses: str | None = Cookie(None), x_csrf: str | None = Header(None))
         db.execute("DELETE FROM session WHERE addr=?", (addr,))
         db.execute("DELETE FROM speaker WHERE addr=?", (addr,))
         db.execute("DELETE FROM review_grant WHERE addr=?", (addr,))
+        # The consent record stays, as proof (privacy policy, row 11), but no
+        # longer under the address.
+        gone = hashlib.sha256(addr.encode()).hexdigest()
+        db.execute("UPDATE consent_log SET addr=? WHERE addr=?", (gone, addr))
         db.execute("INSERT INTO deletion_log (addr_hash, clips, at) VALUES (?,?,?)",
-                   (hashlib.sha256(addr.encode()).hexdigest(), len(files), int(time.time())))
+                   (gone, len(files), int(time.time())))
     for f in files:
         (CLIPS_DIR / f).unlink(missing_ok=True)
     return {"ok": True, "deleted_recordings": len(files)}

@@ -10,6 +10,7 @@ the address, as proof that it was carried out.
 """
 from __future__ import annotations
 
+import hashlib
 import sqlite3
 import time
 from pathlib import Path
@@ -112,6 +113,23 @@ class Store:
         path.parent.mkdir(parents=True, exist_ok=True)
         with self.db() as db:
             db.executescript(SCHEMA)
+            self._hash_forgotten_consents(db)
+
+    @staticmethod
+    def _hash_forgotten_consents(db: sqlite3.Connection) -> None:
+        """A deleted donor's consent rows name them by hash, not by address.
+
+        The consent record outlives the account (privacy policy, row 11), with
+        the address replaced by its hash. Until 2026-10-23 the deletion left
+        the address in consent_log as it was; this puts right the rows written
+        before then, and finds nothing to do afterwards."""
+        gone = {r[0] for r in db.execute("SELECT addr_hash FROM deletion_log")}
+        if not gone:
+            return
+        for (addr,) in db.execute("SELECT DISTINCT addr FROM consent_log").fetchall():
+            h = hashlib.sha256(addr.encode()).hexdigest()
+            if h in gone:
+                db.execute("UPDATE consent_log SET addr=? WHERE addr=?", (h, addr))
 
     def db(self) -> sqlite3.Connection:
         db = sqlite3.connect(self.path, timeout=30)
