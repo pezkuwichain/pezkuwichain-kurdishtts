@@ -162,6 +162,9 @@ def test_flow():
     with store.db() as db:
         (h, n), = [tuple(r) for r in db.execute("SELECT addr_hash, clips FROM deletion_log")]
         assert n == 1 and len(h) == 64 and me["address"] not in h
+        # the consent record stays as proof, under the hash, never the address
+        consents = [r[0] for r in db.execute("SELECT addr FROM consent_log")]
+        assert h in consents and me["address"] not in consents
     st = b.get("/api/donate/stats").json()
     assert st["kmr"]["clips"] == 0 and st["kmr"]["speakers"] == 0
     assert st["kmr"]["sentences"] == waiting          # the deleted recording leaves its sentence unread again
@@ -219,3 +222,20 @@ def test_campaign_goal_and_progress():
     finally:
         os.environ.pop("KTTS_CAMPAIGN", None)
 
+
+
+def test_consents_of_donors_deleted_before_the_fix_are_hashed_on_open():
+    import hashlib
+    path = TMP / "old-consents.db"
+    store = Store(path)
+    gone, kept = "5GoneDonorAddress", "5KeptDonorAddress"
+    with store.db() as db:
+        for a in (gone, kept):
+            db.execute("INSERT INTO consent_log (addr, version, lang, boxes, at) VALUES (?,?,?,?,?)",
+                       (a, "1", "en", "11111", 1))
+        db.execute("INSERT INTO deletion_log (addr_hash, clips, at) VALUES (?,?,?)",
+                   (hashlib.sha256(gone.encode()).hexdigest(), 0, 2))
+    Store(path)                                       # the service starting again
+    with store.db() as db:
+        addrs = sorted(r[0] for r in db.execute("SELECT addr FROM consent_log"))
+    assert addrs == sorted([hashlib.sha256(gone.encode()).hexdigest(), kept])
