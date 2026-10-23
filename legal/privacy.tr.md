@@ -1,7 +1,7 @@
 # KurdAi Voice — Gizlilik Politikası ve KVKK Aydınlatma Metni (kısa Türkçe sürüm)
 
 **Çeviridir. İngilizce metin (`privacy.en.md`) esastır; farklılık olursa İngilizce metin geçerlidir.**
-Sürüm: 2026-10-06 · Yürürlük: 2026-10-06
+Sürüm: 2026-10-23 · Yürürlük: 2026-10-23
 
 ## 1. Veri sorumlusu
 **Pez Kiwi Comp**, Georgia, Sagarejo Region, village Kvemo Lambalo, 4th street N2 · **privacy@dks.news**
@@ -26,7 +26,7 @@ Sürüm: 2026-10-06 · Yürürlük: 2026-10-06
 | Kayıt kontrolü (oylar) | Adres, kayıt, oy, zaman | Meşru menfaat (veri kalitesi) | Kayıt veya hesap durdukça |
 | Model eğitimi ve testi | Geçerli kayıtların kopyaları ve lehçe; **cüzdan adresi yok**, rastgele kod | **Açık rıza** | Eğitim bitince silinir, en çok 30 gün |
 | Rıza ve silme kanıtı | Adres (silmeden sonra tek yönlü özet), rıza sürümü ve dili, onaylar, zamanlar | Hukuki yükümlülük / meşru menfaat | Hesap silindikten sonra 3 yıl |
-| Yedekler | — | — | **Şu an ayrı yedek tutulmuyor.** Eklenirse şifreli, AB'de ve en çok 35 gün |
+| Yedekler | Veritabanı ve kayıtların kopyaları | Asıl verinin dayanağı | Her gece alınır; sunucumuzdan çıkmadan, iki sunucuda da bulunmayan, çevrimdışı tutulan bir anahtarla şifrelenir; barındırma sağlayıcımızın AB'deki ikinci bir sunucusunda (Lauterbourg, Fransa) tutulur; **30 gün** sonra silinir. Yedeği yalnız bir arızadan kurtulmak için kullanırız; böyle bir durumda yedekten sonra yaptığın silme talebini yinelemen gerekebilir, bunu bu sayfada duyururuz |
 
 ## 4. Sesin neden "özel nitelikli" sayılıyor
 Ses kaydı seni tanımlar. Ses tanıma için işlenen ses biyometrik veridir. Biz bunu yapmıyoruz, ama konu tartışmalıdır. Ayrıca lehçeyle birlikte ses **etnik kökeni** açığa çıkarabilir. Bu yüzden en güvenli yolu seçtik: kayıtları ve profili özel nitelikli veri sayıyoruz ve **yalnızca açık rızanla** işliyoruz. **Diğer bağışçılar kayıtlarını kontrol için dinler, ama cüzdan adresini görmez.** Kayıtları satmayız, vermeyiz, yayımlamayız. Yalnızca sözleşmeyle bağlı barındırma ve hesaplama (GPU) sağlayıcıları bizim adımıza işler.
@@ -38,7 +38,7 @@ Ses kaydı seni tanımlar. Ses tanıma için işlenen ses biyometrik veridir. Bi
 
 **Kodla bağış yaptıysan:** kodla giriş yapıp aynı düğmeye bas ya da kodu bize gönder. Kodu sakla: kodu bilen herkes senin yerine giriş yapıp kayıtlarını silebilir. Kod yalnızca bir kez gösterilir; biz kodun kendisini değil, tek yönlü özetini saklarız. **Kod kaybolursa silme hakkın devam eder, ama hangi kayıtların senin olduğunu bilmemizin bir yolu kalmaz** — çünkü kim olduğunu bilmiyoruz (KVKK md. 13; GDPR md. 11). Bunu kayıttan önce söylüyor ve kodu sakladığını onaylamanı istiyoruz. Kodla bağış yapanlar kayıt yapabilir ama başkalarının kayıtlarını kontrol edemez; kontrol cüzdanla yapılır.
 - **Hemen:** kayıtların, ölçümler, lehçe bilgin, oyların ve oturumların sunucudan silinir. Talepten sonra başlayan hiçbir eğitim veya testte kullanılmaz.
-- **En çok 35 gün içinde:** yedeklerdeki ve sürmekte olan eğitimdeki kopyalar da silinir.
+- **En çok 35 gün içinde:** şifreli yedeklerdeki (30 gün tutulur) ve sürmekte olan eğitimdeki kopyalar da silinir.
 - **Silmenin yapamadığı:** bir model, kayıtları dosya olarak içermez. Ama **önceden eğitilmiş bir model bir kaydı pratikte "unutamaz"**; o modelden katkını çıkaramayız. Sonraki modeller kayıtlarını hiç kullanmaz. Bunu kayıttan önce söylüyoruz ki rızan bilgilendirilmiş olsun.
 
 ## 6. Modeller

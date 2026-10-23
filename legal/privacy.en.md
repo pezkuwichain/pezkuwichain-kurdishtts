@@ -1,6 +1,6 @@
 # KurdAi Voice — Privacy Policy
 
-**Version:** 2026-10-06 · **Effective:** 2026-10-06
+**Version:** 2026-10-23 · **Effective:** 2026-10-23
 **Authoritative language:** English. Translations are for convenience; if they differ, this English text prevails.
 
 
@@ -40,7 +40,7 @@ GDPR article references are given for visitors in the EU/EEA. Similar rules appl
 | 11 | Proving consent and deletion | Wallet address (replaced by a one-way hash once you delete your account), consent version and language, which confirmations you gave, times of consent and deletion | Legal obligation to demonstrate consent (Art. 7(1), Art. 6(1)(c)) and legitimate interest in defending legal claims (Art. 6(1)(f)) | **3 years** after you delete your account | Nobody |
 | 12 | Preventing abuse of donation | A "blocked" flag on a wallet address | Legitimate interest (Art. 6(1)(f)) | As long as needed to prevent repeat abuse | Nobody |
 | 13 | Answering your messages and requests | Your e-mail address and message; for donor requests, proof that you control the wallet | Legal obligation (rights requests, Art. 6(1)(c)); legitimate interest (Art. 6(1)(f)) | Until the matter is closed + 1 year | E-mail provider (processor) |
-| 14 | Backups | Copies of the database and recordings | Same basis as the original data | **No separate backups are kept at present.** If we introduce them they will be encrypted, kept in the EU and rotated within **35 days**, and this row will say so | — |
+| 14 | Backups | Copies of the database and recordings | Same basis as the original data | Taken every night and encrypted before they leave our server, with a key that is kept offline and on neither server; stored on a second server of our hosting provider in the EU (Lauterbourg, France); deleted after **30 days**. We use a backup only to recover from a failure. If we ever have to, a deletion made after that backup was taken may have to be made again, and we will say so on this page | Hosting provider (processor) |
 
 **Public statistics.** The donation page shows totals per dialect (hours recorded, number of donors, number of recordings). These are totals, not information about you. Signed-in donors also see their own counts.
 
@@ -84,7 +84,7 @@ Invalid recordings are deleted after 90 days. Sessions expire after 30 days. Aft
 - your recordings are removed from the master training list, so **no training or testing run that starts after your request uses them**;
 - your votes are removed. Decisions that were already made about other donors' recordings stay as they are.
 
-**Within at most 35 days:** copies in any training run in progress are gone (no separate backups are kept at present).
+**Within at most 35 days:** the copies in our encrypted backups (kept 30 days, row 14) and in any training run in progress are gone.
 
 **What deletion cannot do:** a speech model is not a library of recordings. Training changes millions of numbers inside the model a tiny amount for each recording. A model that has **already been trained** with your recordings cannot practically "unlearn" them, so we cannot remove your contribution from a model that already exists. That model will not contain your recording as a file, and it is not built to reproduce your voice. Future models trained after your deletion will not use your recordings at all. We tell you this before you record so that your consent is informed.
 
@@ -98,7 +98,7 @@ Our models — not your recordings — may be offered as a service (for example,
 
 | Service | When | What they receive | Where / safeguards |
 |---|---|---|---|
-| **Hosting** — Contabo GmbH (Germany) | Always | Everything stored on our server (as processor) | Server in the EU (Contabo data centre, Lauterbourg, France); data processing agreement under Art. 28 |
+| **Hosting** — Contabo GmbH (Germany) | Always | Everything stored on our server (as processor), and our encrypted backups, which it cannot read | Servers in the EU (Contabo data centre, Lauterbourg, France); data processing agreement under Art. 28 |
 | **WalletConnect relay** — Reown | Only if you sign in with a mobile wallet via QR code/link | Your IP address and encrypted pairing messages. Not your keys or our session. The WalletConnect software's own usage reporting is switched off on this site. | Reown (WalletConnect) may process this outside the EU, under its own terms and standard safeguards |
 | **PezkuwiChain RPC node** (`asset-hub-rpc.pezkuwichain.io`) — operated within the PezkuwiChain project | During wallet sign-in | Your IP address (connection) | Operated within the PezkuwiChain project, on a server in the EU (Lauterbourg, France) |
 | **Let's Encrypt** | Never receives visitor data | — (it issues our TLS certificate) | — |

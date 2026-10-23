@@ -1,0 +1,10 @@
+[Unit]
+Description=KurdishTTS voice donations: encrypted off-site backup
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/opt/kurdishtts/app/ops/offsite/kurdishtts-backup.sh
+Nice=10
+IOSchedulingClass=idle
