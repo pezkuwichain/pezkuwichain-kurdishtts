@@ -1,0 +1,6 @@
+[Unit]
+Description=KurdishTTS off-site backups: move finished runs into the root-only vault
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/kurdishtts-offsite-vault
